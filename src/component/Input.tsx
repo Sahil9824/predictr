@@ -1,6 +1,22 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, TextInputProps, View, ViewStyle } from "react-native";
+import {
+  Image,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from "react-native";
 import { Colors } from "../constant";
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { Images } from "../assets/images";
 
 interface InputProps extends TextInputProps {
@@ -21,34 +37,57 @@ export interface Iref {
 }
 
 const Input = forwardRef<Iref, InputProps>((props, ref) => {
-  const { label, style, value, placeholder, error, rightText, password = false, onBlur, extraText } = props;
+  const {
+    label,
+    style,
+    value,
+    placeholder,
+    error,
+    rightText,
+    password = false,
+    onBlur,
+    extraText,
+  } = props;
 
   const [val, setVal] = useState(value || "");
-  const [showText, setShowText] = useState(true);
+  const [showText, setShowText] = useState(password ? false : true);
   const [check, setCheck] = useState(false);
   const textInputRef = useRef<TextInput>(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (check && onBlur) {
       onBlur();
     }
     if (val != "") {
-      setCheck(true)
+      setCheck(true);
     }
-  }, [val])
+  }, [val]);
 
-  useImperativeHandle(ref, () => {
-    return {
-      value: val || "",
-      clear: () => setVal(""),
-      focus: () => textInputRef.current?.focus()
-    }
-  }, [val])
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        value: val || "",
+        clear: () => setVal(""),
+        focus: () => textInputRef.current?.focus(),
+      };
+    },
+    [val]
+  );
+
+  console.log(check, isFocused, error);
 
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
-      <View style={[styles.inputContainer, check && error && { borderColor: Colors.errorRed }, check && rightText && { borderColor: Colors.validGreen }]}>
+      <View
+        style={[
+          styles.inputContainer,
+          check && error && { borderColor: Colors.errorRed },
+          check && rightText && { borderColor: Colors.validGreen },
+        ]}
+      >
         <TextInput
           ref={textInputRef}
           value={val}
@@ -56,16 +95,35 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
           style={styles.input}
           onChangeText={(text) => setVal(text)}
           secureTextEntry={!showText}
-          {...props} />
-        {password && <Pressable onPress={() => setShowText(prev => !prev)}>
-          <Image source={showText ? Images.eyeClosed : Images.eyeClosed} style={{ height: 16, width: 16 }} />
-        </Pressable>}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          {...props}
+        />
+        {password && (
+          <Pressable
+            onPress={() => setShowText((prev) => !prev)}
+            style={styles.iconPress}
+          >
+            <Image
+              source={showText ? Images.eyeClosed : Images.eyeClosed}
+              style={{ height: 16, width: 16 }}
+            />
+          </Pressable>
+        )}
       </View>
-      {extraText && <Text style={{ fontFamily: "Inter", fontWeight: "400", fontSize: 12 }}>{extraText}</Text>}
-      {check && error ? <Text style={styles.error}>{error}</Text> : <Text style={styles.right}>{rightText}</Text>}
+      {extraText && (
+        <Text style={{ fontFamily: "Inter", fontWeight: "400", fontSize: 12 }}>
+          {extraText}
+        </Text>
+      )}
+      {check && error ? (
+        <Text style={styles.error}>{error}</Text>
+      ) : (
+        <Text style={styles.right}>{rightText}</Text>
+      )}
     </View>
-  )
-})
+  );
+});
 
 export default Input;
 
@@ -90,8 +148,10 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    paddingVertical: Platform.OS === "ios" ? 15 : 10,
   },
   error: {
+    marginTop: 5,
     color: Colors.errorRed,
     fontFamily: "Inter",
     fontWeight: "400",
@@ -102,5 +162,11 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
     fontWeight: "400",
     fontSize: 12,
-  }
-})
+  },
+  iconPress: {
+    height: 40,
+    width: 40,
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+});

@@ -1,92 +1,114 @@
-import { Image, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Colors, Device } from "../../constant";
 import { Images } from "../../assets/images";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/MainNavigation";
-import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import changeNavigationBarColor from "react-native-navigation-bar-color";
 import { useFocusEffect } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useCallback } from "react";
 
 interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">
+  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
 }
 
 const Onboarding = ({ navigation }: Props) => {
-
   useFocusEffect(() => {
     changeNavigationBarColor(Colors.primaryBlue, true);
 
     return () => {
       changeNavigationBarColor("black", true);
-    }
-  })
+    };
+  });
 
   const goToCreateAcc = () => {
-    navigation.navigate("CreateAccount")
-  }
+    navigation.navigate("CreateAccount");
+  };
 
   const goToLogin = () => {
-    navigation.navigate("Login");
-  }
-
+    // navigation.navigate("Login");
+  };
+  useFocusEffect(
+    useCallback(() => {
+      // StatusBar.setBarStyle("dark-content"); // 'light-content' is also available
+      StatusBar.setBackgroundColor(Colors.primaryBlue); //add color code
+      // StatusBar.setTranslucent(true);
+    }, [])
+  );
   return (
-    <View style={styles.container}>
+    <>
       <StatusBar backgroundColor={Colors.primaryBlue} />
-      <Text style={styles.header}>
-        <Text style={styles.headerText}>
-          {"Predictr"}
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>
+          <Text style={styles.headerText}>{"Predictr"}</Text>
+          <Text style={styles.dot}>{"."}</Text>
         </Text>
-        <Text style={styles.dot}>
-          {"."}
-        </Text>
-      </Text>
 
-      <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>
-          {"Predict"}
-        </Text>
-        <Text style={styles.titleText}>
-          {"The Stock Market"}
-        </Text>
-      </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>{"Predict"}</Text>
+          <Text style={styles.titleText}>{"The Stock Market"}</Text>
+        </View>
 
-      <View>
+        <View>
+          <Text style={styles.subTitle}>
+            {"A community for all the day-traders to"}
+          </Text>
+          <Text style={styles.subTitle}>
+            {"predict stocks and measure accuracy over"}
+          </Text>
+          <Text style={styles.subTitle}>{"the time."}</Text>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <Image
+            source={Images.trophies}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </View>
+
         <Text style={styles.subTitle}>
-          {'A community for all the day-traders to'}
+          {"Prizes for top three predictors "}
         </Text>
-        <Text style={styles.subTitle}>
-          {'predict stocks and measure accuracy over'}
-        </Text>
-        <Text style={styles.subTitle}>
-          {'the time.'}
-        </Text>
-      </View>
+        <Text style={styles.subTitle}>{"every month."}</Text>
 
-      <View style={styles.imageContainer}>
-        <Image source={Images.trophies} style={styles.image} resizeMode="contain" />
-      </View>
-
-      <Text style={styles.subTitle}>
-        {"Prizes for top three predictors "}
-      </Text>
-      <Text style={styles.subTitle}>
-        {"every month."}
-      </Text>
-
-      <View style={styles.signInContainer}>
-        <Pressable onPress={() => { }} style={({ pressed }) => (pressed && { opacity: 0.75 })}>
-          <Image source={Images.signinWithGoogle} style={styles.googleSignIn} resizeMode="contain" />
-        </Pressable>
-        <Pressable onPress={goToCreateAcc} style={({ pressed }) => (pressed && { opacity: 0.75 })}>
-          <Image source={Images.signinWithEmail} style={styles.emailSignIn} resizeMode="contain" />
-        </Pressable>
-      </View>
-
-      <Pressable style={({ pressed }) => (pressed && { opacity: 0.75 })} onPress={goToLogin}>
-        <Text style={styles.loginText}>{"Login"}</Text>
-      </Pressable>
-    </View>
-  )
-}
+        <View style={styles.signInContainer}>
+          <Pressable
+            onPress={() => {}}
+            style={({ pressed }) => pressed && { opacity: 0.75 }}
+          >
+            <Image
+              source={Images.signinWithGoogle}
+              style={styles.googleSignIn}
+              resizeMode="contain"
+            />
+          </Pressable>
+          <Pressable
+            onPress={goToCreateAcc}
+            style={({ pressed }) => pressed && { opacity: 0.75 }}
+          >
+            <Image
+              source={Images.signinWithEmail}
+              style={styles.emailSignIn}
+              resizeMode="contain"
+            />
+          </Pressable>
+          <TouchableOpacity onPress={goToLogin} activeOpacity={0.75}>
+            <Text style={styles.loginText}>{"Login"}</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </>
+  );
+};
 
 export default Onboarding;
 
@@ -98,13 +120,13 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   header: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   headerText: {
     fontSize: 22,
     fontFamily: "Inter",
     fontWeight: "800",
-    color: Colors.white
+    color: Colors.white,
   },
   dot: {
     fontSize: 22,
@@ -114,7 +136,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: 60,
-    marginBottom: 10
+    marginBottom: 10,
   },
   titleText: {
     fontSize: 34,
@@ -139,10 +161,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 100,
   },
+
   signInContainer: {
-    marginTop: 50,
+    marginTop: "auto",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   signIn: {
     height: 50,
@@ -151,11 +174,11 @@ const styles = StyleSheet.create({
   googleSignIn: {
     height: 60,
     width: Device.width - 60,
-    marginBottom: 4
+    marginBottom: 4,
   },
   emailSignIn: {
     height: 60,
-    width: Device.width - 60
+    width: Device.width - 60,
   },
   loginText: {
     textAlign: "center",
@@ -163,6 +186,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: Colors.white,
     fontSize: 16,
-    marginTop: 20
+    marginTop: 24,
   },
-})
+});
