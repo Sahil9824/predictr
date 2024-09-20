@@ -14,6 +14,7 @@ import { RootStackParamList } from "../../navigation/MainNavigation";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
 import { useFocusEffect } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useCallback } from "react";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -35,67 +36,77 @@ const Onboarding = ({ navigation }: Props) => {
   const goToLogin = () => {
     // navigation.navigate("Login");
   };
-
+  useFocusEffect(
+    useCallback(() => {
+      // StatusBar.setBarStyle("dark-content"); // 'light-content' is also available
+      StatusBar.setBackgroundColor(Colors.primaryBlue); //add color code
+      // StatusBar.setTranslucent(true);
+    }, [])
+  );
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <StatusBar backgroundColor={Colors.primaryBlue} />
-      <Text style={styles.header}>
-        <Text style={styles.headerText}>{"Predictr"}</Text>
-        <Text style={styles.dot}>{"."}</Text>
-      </Text>
-
-      <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{"Predict"}</Text>
-        <Text style={styles.titleText}>{"The Stock Market"}</Text>
-      </View>
-
-      <View>
-        <Text style={styles.subTitle}>
-          {"A community for all the day-traders to"}
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>
+          <Text style={styles.headerText}>{"Predictr"}</Text>
+          <Text style={styles.dot}>{"."}</Text>
         </Text>
-        <Text style={styles.subTitle}>
-          {"predict stocks and measure accuracy over"}
-        </Text>
-        <Text style={styles.subTitle}>{"the time."}</Text>
-      </View>
 
-      <View style={styles.imageContainer}>
-        <Image
-          source={Images.trophies}
-          style={styles.image}
-          resizeMode="contain"
-        />
-      </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>{"Predict"}</Text>
+          <Text style={styles.titleText}>{"The Stock Market"}</Text>
+        </View>
 
-      <Text style={styles.subTitle}>{"Prizes for top three predictors "}</Text>
-      <Text style={styles.subTitle}>{"every month."}</Text>
+        <View>
+          <Text style={styles.subTitle}>
+            {"A community for all the day-traders to"}
+          </Text>
+          <Text style={styles.subTitle}>
+            {"predict stocks and measure accuracy over"}
+          </Text>
+          <Text style={styles.subTitle}>{"the time."}</Text>
+        </View>
 
-      <View style={styles.signInContainer}>
-        <Pressable
-          onPress={() => {}}
-          style={({ pressed }) => pressed && { opacity: 0.75 }}
-        >
+        <View style={styles.imageContainer}>
           <Image
-            source={Images.signinWithGoogle}
-            style={styles.googleSignIn}
+            source={Images.trophies}
+            style={styles.image}
             resizeMode="contain"
           />
-        </Pressable>
-        <Pressable
-          onPress={goToCreateAcc}
-          style={({ pressed }) => pressed && { opacity: 0.75 }}
-        >
-          <Image
-            source={Images.signinWithEmail}
-            style={styles.emailSignIn}
-            resizeMode="contain"
-          />
-        </Pressable>
-        <TouchableOpacity onPress={goToLogin} activeOpacity={0.75}>
-          <Text style={styles.loginText}>{"Login"}</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        </View>
+
+        <Text style={styles.subTitle}>
+          {"Prizes for top three predictors "}
+        </Text>
+        <Text style={styles.subTitle}>{"every month."}</Text>
+
+        <View style={styles.signInContainer}>
+          <Pressable
+            onPress={() => {}}
+            style={({ pressed }) => pressed && { opacity: 0.75 }}
+          >
+            <Image
+              source={Images.signinWithGoogle}
+              style={styles.googleSignIn}
+              resizeMode="contain"
+            />
+          </Pressable>
+          <Pressable
+            onPress={goToCreateAcc}
+            style={({ pressed }) => pressed && { opacity: 0.75 }}
+          >
+            <Image
+              source={Images.signinWithEmail}
+              style={styles.emailSignIn}
+              resizeMode="contain"
+            />
+          </Pressable>
+          <TouchableOpacity onPress={goToLogin} activeOpacity={0.75}>
+            <Text style={styles.loginText}>{"Login"}</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 

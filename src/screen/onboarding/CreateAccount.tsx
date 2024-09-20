@@ -1,5 +1,11 @@
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -18,6 +24,7 @@ import Input, { Iref } from "../../component/Input";
 import { Colors, Device } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useFocusEffect } from "@react-navigation/native";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -123,6 +130,14 @@ const CreateAccount = ({ navigation }: Props) => {
       ),
     });
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      StatusBar.setBarStyle("dark-content");
+      StatusBar.setBackgroundColor(Colors.white);
+      // StatusBar.setTranslucent(true);
+    }, [])
+  );
 
   return (
     <>
