@@ -1,20 +1,20 @@
 {
-  "root": "/Users/apple/Desktop/Misc/predictr",
-  "reactNativePath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native",
+  "root": "/Users/Sahil/Documents/GitHub/predictr",
+  "reactNativePath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native",
   "reactNativeVersion": "0.75",
   "dependencies": {
     "react-native-gesture-handler": {
-      "root": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-gesture-handler",
+      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler",
       "name": "react-native-gesture-handler",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
+          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
           "version": "2.19.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-gesture-handler/android",
+          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler/android",
           "packageImportPath": "import com.swmansion.gesturehandler.RNGestureHandlerPackage;",
           "packageInstance": "new RNGestureHandlerPackage()",
           "buildTypes": [],
@@ -23,7 +23,7 @@
             "RNGestureHandlerButtonComponentDescriptor",
             "RNGestureHandlerRootViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -32,17 +32,17 @@
       }
     },
     "react-native-navigation-bar-color": {
-      "root": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-navigation-bar-color",
+      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color",
       "name": "react-native-navigation-bar-color",
       "platforms": {
         "ios": null,
         "android": {
-          "sourceDir": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-navigation-bar-color/android",
+          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android",
           "packageImportPath": "import com.thebylito.navigationbarcolor.NavigationBarColorPackage;",
           "packageInstance": "new NavigationBarColorPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-navigation-bar-color/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -51,17 +51,17 @@
       }
     },
     "react-native-safe-area-context": {
-      "root": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-safe-area-context",
+      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context",
       "name": "react-native-safe-area-context",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
+          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
           "version": "4.11.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-safe-area-context/android",
+          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/android",
           "packageImportPath": "import com.th3rdwave.safeareacontext.SafeAreaContextPackage;",
           "packageInstance": "new SafeAreaContextPackage()",
           "buildTypes": [],
@@ -70,7 +70,7 @@
             "RNCSafeAreaProviderComponentDescriptor",
             "RNCSafeAreaViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -79,17 +79,17 @@
       }
     },
     "react-native-screens": {
-      "root": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-screens",
+      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens",
       "name": "react-native-screens",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-screens/RNScreens.podspec",
+          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/RNScreens.podspec",
           "version": "3.34.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-screens/android",
+          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/android",
           "packageImportPath": "import com.swmansion.rnscreens.RNScreensPackage;",
           "packageInstance": "new RNScreensPackage()",
           "buildTypes": [],
@@ -105,7 +105,7 @@
             "RNSScreenComponentDescriptor",
             "RNSModalScreenComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/apple/Desktop/Misc/predictr/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -275,7 +275,7 @@
         {
           "name": "--path <path>",
           "description": "Path to the React Native project root.",
-          "default": "/Users/apple/Desktop/Misc/predictr"
+          "default": "/Users/Sahil/Documents/GitHub/predictr"
         },
         {
           "name": "--platform <string>",
@@ -564,17 +564,17 @@
   ],
   "project": {
     "ios": {
-      "sourceDir": "/Users/apple/Desktop/Misc/predictr/ios",
+      "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/ios",
       "xcodeProject": {
-        "name": "predictr.xcodeproj",
+        "name": "predictr.xcworkspace",
         "path": ".",
-        "isWorkspace": false
+        "isWorkspace": true
       },
       "automaticPodsInstallation": false,
       "assets": []
     },
     "android": {
-      "sourceDir": "/Users/apple/Desktop/Misc/predictr/android",
+      "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/android",
       "appName": "app",
       "packageName": "com.predictr",
       "applicationId": "com.predictr",
