@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Pressable, ScrollView, FlatList, KeyboardAvoidingView } from "react-native";
-import { Colors } from "../../constant";
+import { Colors, fonts } from "../../constant";
 import { useCallback, useRef, useState } from "react";
 import { Images } from "../../assets/images";
 import Input, { Iref } from "../../component/Input";
@@ -84,20 +84,20 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
     fontSize: 22,
     color: Colors.primaryBlue,
     textAlign: "center"
   },
   dot: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
     fontSize: 22,
     color: Colors.yellow,
   },
   avatarText: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
     fontSize: 32,
     color: Colors.textBlack,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   avatarSubtitle: {
     fontWeight: "400",
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontSize: 16,
     textAlign: "center",
     marginBottom: 20

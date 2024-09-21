@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { Images } from "../assets/images";
-import { Colors, Device } from "../constant";
+import { Colors, Device, fonts } from "../constant";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../navigation/MainNavigation";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   text: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontSize: 15,
     fontWeight: "600",
     color: Colors.primaryBlue,

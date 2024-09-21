@@ -1,5 +1,5 @@
 import { Pressable, PressableProps, StyleSheet, Text, TextStyle, ViewStyle } from "react-native"
-import { Colors } from "../constant";
+import { Colors, fonts } from "../constant";
 
 interface Props {
   text: string;
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     height: 45,
   },
   text: {
+    fontFamily: fonts.FontFamily,
     color: Colors.white,
   }
 })

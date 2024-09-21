@@ -21,13 +21,10 @@ import {
 import Button from "../../component/ Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
-import { Colors, Device } from "../../constant";
+import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useFocusEffect } from "@react-navigation/native";
 
 interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
 }
 
@@ -37,7 +34,6 @@ const CreateAccount = ({ navigation }: Props) => {
   const [passwordErr, setPasswordErr] = useState("");
   const [cnfPasswordErr, setcnfPasswordErr] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [isKeyboardPresent, setIsKeyboardPresent] = useState(false);
 
   const emailRef = useRef<Iref>(null);
   const passwordRef = useRef<Iref>(null);
@@ -46,57 +42,28 @@ const CreateAccount = ({ navigation }: Props) => {
   const emailValidation = () => {
     if (!emailRef.current?.value) {
       setEmailErr("");
-
       return false;
-    } else if (!/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/.test(emailRef.current?.value)) {
-      setEmailErr("Please enter a valid Email");
+    } else if (!regex.email.test(emailRef.current?.value)) {
+      setEmailErr(errorMsg.email);
       return false;
     }
     setEmailErr("");
-    setEmailErr("");
     return true;
-  };
   };
 
   const passwordValidation = () => {
     if (!passwordRef.current?.value) {
       setPasswordErr("");
-      setPasswordErr("");
       return false;
-    } else if (
-      !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,99}$/.test(
-        passwordRef.current?.value
-      )
-    ) {
-      setPasswordErr(
-        "Password must be at least 8 characters long and include at least one special character."
-      );
-    } else if (
-      !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,99}$/.test(
-        passwordRef.current?.value
-      )
-    ) {
-      setPasswordErr(
-        "Password must be 8+ characters, alphanumeric with 1 sepcial character."
-      );
+    } else if (!regex.password.test(passwordRef.current?.value)) {
+      setPasswordErr(errorMsg.password);
       return false;
     }
     setPasswordErr("");
     return true;
   };
-  };
 
   const cnfPasswordValidation = () => {
-    if (!confirmPasswordRef.current?.value) {
-      setcnfPasswordErr("");
-      setCnfValidText("");
-
-      return;
-    }
-    if (confirmPasswordRef.current?.value != passwordRef.current?.value) {
-      setcnfPasswordErr("Password doesn't match");
-      setCnfValidText("");
-      return false;
     if (!confirmPasswordRef.current?.value) {
       setcnfPasswordErr("");
       setCnfValidText("");
@@ -104,13 +71,18 @@ const CreateAccount = ({ navigation }: Props) => {
     }
     if (confirmPasswordRef.current?.value === passwordRef.current?.value) {
       setcnfPasswordErr("");
-      setCnfValidText("Password matched");
+      setCnfValidText(errorMsg.passwordMatch);
       return true;
     }
-    setcnfPasswordErr("Password doesn't match");
+    setcnfPasswordErr(errorMsg.cnfPassword);
     setCnfValidText("");
     return false;
   };
+
+  const passwordOnBlur = () => {
+    passwordValidation();
+    cnfPasswordValidation();
+  }
 
   const submit = () => {
     if (
@@ -118,15 +90,8 @@ const CreateAccount = ({ navigation }: Props) => {
       !passwordValidation() ||
       !cnfPasswordValidation()
     ) {
-    if (
-      !emailValidation() ||
-      !passwordValidation() ||
-      !cnfPasswordValidation()
-    ) {
       return;
     }
-    // navigation.navigate("SelectAvatar")
-  };
     // navigation.navigate("SelectAvatar")
   };
 
@@ -136,11 +101,6 @@ const CreateAccount = ({ navigation }: Props) => {
     } else {
       setDisabled(true);
     }
-  }, [
-    emailRef.current?.value,
-    passwordRef.current?.value,
-    confirmPasswordRef.current?.value,
-  ]);
   }, [
     emailRef.current?.value,
     passwordRef.current?.value,
@@ -165,12 +125,10 @@ const CreateAccount = ({ navigation }: Props) => {
     useCallback(() => {
       StatusBar.setBarStyle("dark-content");
       StatusBar.setBackgroundColor(Colors.white);
-      // StatusBar.setTranslucent(true);
     }, [])
   );
 
   return (
-    <>
     <>
       <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -202,14 +160,14 @@ const CreateAccount = ({ navigation }: Props) => {
                 ref={passwordRef}
                 onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
                 blurOnSubmit={false}
-                onBlur={() => { passwordValidation(); cnfPasswordValidation(); }}
+                onBlur={passwordOnBlur}
                 password
               />
               <Input
                 label={"Confirm Password"}
                 error={cnfPasswordErr}
                 ref={confirmPasswordRef}
-                onBlur={() => { cnfPasswordValidation(); passwordValidation() }}
+                onBlur={passwordOnBlur}
                 rightText={cnfValidText}
                 password
               />
@@ -236,13 +194,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   title: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontSize: 32,
     fontWeight: "800",
     color: Colors.textBlack,
   },
   inputContainer: {
-    marginVertical: 32,
     marginVertical: 32,
   },
   button: {

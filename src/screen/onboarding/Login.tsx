@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 import AuthHeader from "../../component/AuthHeader";
-import { Colors } from "../../constant";
+import { Colors, errorMsg, fonts, regex } from "../../constant";
 import Input, { Iref } from "../../component/Input";
 import Button from "../../component/ Button";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -22,10 +22,10 @@ const Login = ({ navigation }: Props) => {
 
   const emailValidation = () => {
     if (!emailRef.current?.value) {
-      setEmailErr("Please enter your email");
+      setEmailErr(errorMsg.emailEmpty);
       return false;
-    } else if (!/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/.test(emailRef.current?.value)) {
-      setEmailErr("Please enter valid email");
+    } else if (!regex.email.test(emailRef.current?.value)) {
+      setEmailErr(errorMsg.email);
       return false;
     }
     setEmailErr("")
@@ -34,10 +34,10 @@ const Login = ({ navigation }: Props) => {
 
   const passwordValidation = () => {
     if (!passwordRef.current?.value) {
-      setPasswordErr("Please enter your password");
+      setPasswordErr(errorMsg.passwordEmpty);
       return false;
-    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{12,99}$/.test(passwordRef.current?.value)) {
-      setPasswordErr("The password must be strong and 12 characters long")
+    } else if (!regex.password.test(passwordRef.current?.value)) {
+      setPasswordErr(errorMsg.password)
       return false;
     }
     setPasswordErr("");
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontSize: 32,
     fontWeight: "800",
     color: Colors.textBlack
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     left: 20
   },
   resetPassword: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "600",
     fontSize: 14,
     color: Colors.primaryBlue,

@@ -7,16 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import {
-  Image,
-  Pressable,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { Colors, Device } from "../../constant";
+import { Colors, Device, fonts } from "../../constant";
 import { Images } from "../../assets/images";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/MainNavigation";
@@ -47,9 +38,7 @@ const Onboarding = ({ navigation }: Props) => {
   };
   useFocusEffect(
     useCallback(() => {
-      // StatusBar.setBarStyle("dark-content"); // 'light-content' is also available
-      StatusBar.setBackgroundColor(Colors.primaryBlue); //add color code
-      // StatusBar.setTranslucent(true);
+      StatusBar.setBackgroundColor(Colors.primaryBlue);
     }, [])
   );
   return (
@@ -133,14 +122,14 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 22,
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
     color: Colors.white,
   },
   dot: {
     fontSize: 22,
     color: Colors.yellow,
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
   },
   titleContainer: {
@@ -149,13 +138,13 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 34,
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
     color: Colors.white,
     textAlign: "center",
   },
   subTitle: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "400",
     fontSize: 16,
     textAlign: "center",
@@ -191,7 +180,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     textAlign: "center",
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "600",
     color: Colors.white,
     fontSize: 16,

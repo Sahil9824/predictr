@@ -1,5 +1,15 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, TextInputProps, View, ViewStyle } from "react-native";
-import { Colors } from "../constant";
+import {
+  Image,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from "react-native";
+import { Colors, fonts } from "../constant";
 import {
   forwardRef,
   useEffect,
@@ -54,13 +64,17 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
     }
   }, [val]);
 
-  useImperativeHandle(ref, () => {
-    return {
-      value: val || "",
-      clear: () => setVal(""),
-      focus: () => textInputRef.current?.focus()
-    }
-  }, [val])
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        value: val || "",
+        clear: () => setVal(""),
+        focus: () => textInputRef.current?.focus(),
+      };
+    },
+    [val]
+  );
 
   return (
     <View style={[styles.container, style]}>
@@ -116,7 +130,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
     fontSize: 14,
     color: Colors.textBlack,
@@ -137,13 +151,13 @@ const styles = StyleSheet.create({
   error: {
     marginTop: 5,
     color: Colors.errorRed,
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "400",
     fontSize: 12,
   },
   right: {
     color: Colors.validGreen,
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "400",
     fontSize: 12,
   },

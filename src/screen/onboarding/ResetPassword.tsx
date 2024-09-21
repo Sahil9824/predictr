@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AuthHeader from "../../component/AuthHeader";
-import { Colors } from "../../constant";
+import { Colors, fonts } from "../../constant";
 import Input, { Iref } from "../../component/Input";
 import Button from "../../component/ Button";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontSize: 32,
     fontWeight: "800",
     color: Colors.textBlack
   },
   subTitle: {
     marginTop: 10,
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "400",
     fontSize: 15,
     color: Colors.textBlack

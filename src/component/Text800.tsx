@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextProps } from "react-native"
+import { fonts } from "../constant";
 
 
 const Text800 = (props: TextProps) => {
@@ -13,7 +14,7 @@ export default Text800;
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: "Inter",
+    fontFamily: fonts.FontFamily,
     fontWeight: "800",
   }
 })
