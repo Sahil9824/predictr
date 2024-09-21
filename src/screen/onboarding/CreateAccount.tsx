@@ -1,3 +1,4 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
   useCallback,
@@ -10,13 +11,12 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View,
+  View
 } from "react-native";
 import Button from "../../component/ Button";
 import AuthHeader from "../../component/AuthHeader";
@@ -27,6 +27,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useFocusEffect } from "@react-navigation/native";
 
 interface Props {
+  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
 }
 
@@ -47,20 +48,19 @@ const CreateAccount = ({ navigation }: Props) => {
       setEmailErr("");
 
       return false;
-    } else if (
-      !/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/.test(
-        emailRef.current?.value
-      )
-    ) {
+    } else if (!/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/.test(emailRef.current?.value)) {
       setEmailErr("Please enter a valid Email");
       return false;
     }
     setEmailErr("");
+    setEmailErr("");
     return true;
+  };
   };
 
   const passwordValidation = () => {
     if (!passwordRef.current?.value) {
+      setPasswordErr("");
       setPasswordErr("");
       return false;
     } else if (
@@ -71,10 +71,19 @@ const CreateAccount = ({ navigation }: Props) => {
       setPasswordErr(
         "Password must be at least 8 characters long and include at least one special character."
       );
+    } else if (
+      !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,99}$/.test(
+        passwordRef.current?.value
+      )
+    ) {
+      setPasswordErr(
+        "Password must be 8+ characters, alphanumeric with 1 sepcial character."
+      );
       return false;
     }
     setPasswordErr("");
     return true;
+  };
   };
 
   const cnfPasswordValidation = () => {
@@ -88,13 +97,27 @@ const CreateAccount = ({ navigation }: Props) => {
       setcnfPasswordErr("Password doesn't match");
       setCnfValidText("");
       return false;
+    if (!confirmPasswordRef.current?.value) {
+      setcnfPasswordErr("");
+      setCnfValidText("");
+      return;
     }
-    setcnfPasswordErr("");
-    setCnfValidText("Password matched");
-    return true;
+    if (confirmPasswordRef.current?.value === passwordRef.current?.value) {
+      setcnfPasswordErr("");
+      setCnfValidText("Password matched");
+      return true;
+    }
+    setcnfPasswordErr("Password doesn't match");
+    setCnfValidText("");
+    return false;
   };
 
   const submit = () => {
+    if (
+      !emailValidation() ||
+      !passwordValidation() ||
+      !cnfPasswordValidation()
+    ) {
     if (
       !emailValidation() ||
       !passwordValidation() ||
@@ -104,6 +127,8 @@ const CreateAccount = ({ navigation }: Props) => {
     }
     // navigation.navigate("SelectAvatar")
   };
+    // navigation.navigate("SelectAvatar")
+  };
 
   useEffect(() => {
     if (emailValidation() && passwordValidation() && cnfPasswordValidation()) {
@@ -111,6 +136,11 @@ const CreateAccount = ({ navigation }: Props) => {
     } else {
       setDisabled(true);
     }
+  }, [
+    emailRef.current?.value,
+    passwordRef.current?.value,
+    confirmPasswordRef.current?.value,
+  ]);
   }, [
     emailRef.current?.value,
     passwordRef.current?.value,
@@ -140,6 +170,7 @@ const CreateAccount = ({ navigation }: Props) => {
   );
 
   return (
+    <>
     <>
       <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -171,14 +202,14 @@ const CreateAccount = ({ navigation }: Props) => {
                 ref={passwordRef}
                 onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
                 blurOnSubmit={false}
-                onBlur={passwordValidation}
+                onBlur={() => { passwordValidation(); cnfPasswordValidation(); }}
                 password
               />
               <Input
                 label={"Confirm Password"}
                 error={cnfPasswordErr}
                 ref={confirmPasswordRef}
-                onBlur={cnfPasswordValidation}
+                onBlur={() => { cnfPasswordValidation(); passwordValidation() }}
                 rightText={cnfValidText}
                 password
               />
@@ -211,6 +242,7 @@ const styles = StyleSheet.create({
     color: Colors.textBlack,
   },
   inputContainer: {
+    marginVertical: 32,
     marginVertical: 32,
   },
   button: {

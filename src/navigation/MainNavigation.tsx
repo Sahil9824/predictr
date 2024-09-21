@@ -21,9 +21,36 @@ const Stack = createStackNavigator<RootStackParamList>();
 const MainNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='Onboarding' component={Onboarding} options={{ headerShown: false }} />
-        <Stack.Screen name='CreateAccount' component={CreateAccount} />
+      <Stack.Navigator screenOptions={{
+        transitionSpec: {
+          open: {
+            animation: 'spring',
+            config: {
+              stiffness: 1000,
+              damping: 500,
+              mass: 3,
+              overshootClamping: true,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 0.01,
+            },
+          },
+          close: {
+            animation: 'spring',
+            config: {
+              stiffness: 1000,
+              damping: 500,
+              mass: 3,
+              overshootClamping: true,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 0.01,
+            }
+          }
+        }
+      }
+      }
+      >
+        <Stack.Screen name='Onboarding' component={Onboarding} options={{ headerShown: false, gestureDirection: "horizontal" }} />
+        <Stack.Screen name='CreateAccount' component={CreateAccount} options={{ gestureDirection: "horizontal" }} />
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='ResetPassword' component={ResetPassword} />
         <Stack.Screen name='SetNewPassword' component={SetNewPassword} />

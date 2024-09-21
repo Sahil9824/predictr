@@ -1,14 +1,4 @@
-import {
-  Image,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, TextInput, TextInputProps, View, ViewStyle } from "react-native";
 import { Colors } from "../constant";
 import {
   forwardRef,
@@ -64,19 +54,13 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
     }
   }, [val]);
 
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        value: val || "",
-        clear: () => setVal(""),
-        focus: () => textInputRef.current?.focus(),
-      };
-    },
-    [val]
-  );
-
-  console.log(check, isFocused, error);
+  useImperativeHandle(ref, () => {
+    return {
+      value: val || "",
+      clear: () => setVal(""),
+      focus: () => textInputRef.current?.focus()
+    }
+  }, [val])
 
   return (
     <View style={[styles.container, style]}>

@@ -7,6 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import {
+  Image,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Colors, Device } from "../../constant";
 import { Images } from "../../assets/images";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -82,13 +91,13 @@ const Onboarding = ({ navigation }: Props) => {
 
         <View style={styles.signInContainer}>
           <Pressable
-            onPress={() => {}}
+            onPress={() => { }}
             style={({ pressed }) => pressed && { opacity: 0.75 }}
           >
             <Image
               source={Images.signinWithGoogle}
               style={styles.googleSignIn}
-              resizeMode="contain"
+              resizeMode="stretch"
             />
           </Pressable>
           <Pressable
@@ -172,13 +181,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   googleSignIn: {
-    height: 60,
-    width: Device.width - 60,
-    marginBottom: 4,
+    height: 55,
+    width: Device.width - 30,
+    marginBottom: 12,
   },
   emailSignIn: {
-    height: 60,
-    width: Device.width - 60,
+    height: 65,
+    width: Device.width - 30,
   },
   loginText: {
     textAlign: "center",
