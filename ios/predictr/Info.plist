@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+  <key>NSCameraUsageDescription</key>
+  <string>Predictr would like to access camera for photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+  <string>Predictr would like to access photo library for photos.</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>Predictr would like to access photo library for photos.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -52,6 +58,25 @@
 		<string>Inter_18pt-Bold.ttf</string>
 		<string>Inter_18pt-Medium.ttf</string>
 		<string>Inter_18pt-Regular.ttf</string>
+		<string>Inter_18pt-Black.ttf</string>
+		<string>Inter_18pt-BlackItalic.ttf</string>
+		<string>Inter_18pt-BoldItalic.ttf</string>
+		<string>Inter_18pt-ExtraBold.ttf</string>
+		<string>Inter_18pt-ExtraBoldItalic.ttf</string>
+		<string>Inter_18pt-ExtraLight.ttf</string>
+		<string>Inter_18pt-ExtraLightItalic.ttf</string>
+		<string>Inter_18pt-Italic.ttf</string>
+		<string>Inter_18pt-Light.ttf</string>
+		<string>Inter_18pt-LightItalic.ttf</string>
+		<string>Inter_18pt-MediumItalic.ttf</string>
+		<string>Inter_18pt-SemiBold.ttf</string>
+		<string>Inter_18pt-SemiBoldItalic.ttf</string>
+		<string>Inter_18pt-Thin.ttf</string>
+		<string>Inter_18pt-ThinItalic.ttf</string>
+		<string>SF-Pro-Text-Bold.ttf</string>
+		<string>SF-Pro-Text-Light.ttf</string>
+		<string>SF-Pro-Text-Medium.ttf</string>
+		<string>SF-Pro-Text-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

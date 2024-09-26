@@ -1,5 +1,9 @@
+import { useFocusEffect } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useCallback } from "react";
 import {
   Image,
+  Platform,
   Pressable,
   StatusBar,
   StyleSheet,
@@ -7,14 +11,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Colors, Device, fonts } from "../../constant";
-import { Images } from "../../assets/images";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../navigation/MainNavigation";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
-import { useFocusEffect } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useCallback } from "react";
+import { Images } from "../../assets/images";
+import Text800 from "../../component/Text800";
+import { Colors, Device, fonts } from "../../constant";
+import { RootStackParamList } from "../../navigation/MainNavigation";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -34,11 +36,12 @@ const Onboarding = ({ navigation }: Props) => {
   };
 
   const goToLogin = () => {
-    // navigation.navigate("Login");
+    navigation.navigate("Login");
   };
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBackgroundColor(Colors.primaryBlue);
+      StatusBar.setBarStyle("light-content")
     }, [])
   );
   return (
@@ -46,13 +49,13 @@ const Onboarding = ({ navigation }: Props) => {
       <StatusBar backgroundColor={Colors.primaryBlue} />
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>
-          <Text style={styles.headerText}>{"Predictr"}</Text>
-          <Text style={styles.dot}>{"."}</Text>
+          <Text800 style={styles.headerText}>{"Predictr"}</Text800>
+          <Text800 style={styles.dot}>{"."}</Text800>
         </Text>
 
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>{"Predict"}</Text>
-          <Text style={styles.titleText}>{"The Stock Market"}</Text>
+          <Text800 style={styles.titleText}>{"Predict"}</Text800>
+          <Text800 style={styles.titleText}>{"The Stock Market"}</Text800>
         </View>
 
         <View>
@@ -103,7 +106,7 @@ const Onboarding = ({ navigation }: Props) => {
             <Text style={styles.loginText}>{"Login"}</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </SafeAreaView >
     </>
   );
 };
@@ -122,15 +125,15 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 22,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f800,
+    fontWeight: Platform.select({ ios: "800" }),
     color: Colors.white,
   },
   dot: {
     fontSize: 22,
     color: Colors.yellow,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f800,
+    fontWeight: Platform.select({ ios: "800" }),
   },
   titleContainer: {
     marginTop: 60,
@@ -138,14 +141,15 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 34,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f800,
+    lineHeight: 40,
+    fontWeight: Platform.select({ ios: "800" }),
     color: Colors.white,
     textAlign: "center",
   },
   subTitle: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "400",
+    fontFamily: fonts.f400,
+    fontWeight: Platform.select({ ios: "400" }),
     fontSize: 16,
     textAlign: "center",
     color: Colors.lightBlue,
@@ -159,9 +163,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 100,
   },
-
   signInContainer: {
-    marginTop: "auto",
+    marginTop: 60,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -180,8 +183,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     textAlign: "center",
-    fontFamily: fonts.FontFamily,
-    fontWeight: "600",
+    fontFamily: fonts.f600,
+    fontWeight: Platform.select({ ios: "600" }),
     color: Colors.white,
     fontSize: 16,
     marginTop: 24,

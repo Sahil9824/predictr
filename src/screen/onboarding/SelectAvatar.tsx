@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View, Image, Pressable, ScrollView, FlatList, KeyboardAvoidingView } from "react-native";
-import { Colors, fonts } from "../../constant";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useRef, useState } from "react";
-import { Images } from "../../assets/images";
-import Input, { Iref } from "../../component/Input";
+import { FlatList, Image, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Images } from "../../assets/images";
 import Button from "../../component/ Button";
+import ImagePicker from "../../component/ImagePicker";
+import Input, { Iref } from "../../component/Input";
+import { Colors, fonts } from "../../constant";
+import { RootStackParamList } from "../../navigation/MainNavigation";
 
 const Avatars = [
   { image: Images.avatar1 },
@@ -17,12 +20,22 @@ const Avatars = [
   { image: Images.avatar4 },
 ];
 
-const SelectAvatar = () => {
+interface Props {
+  navigation: StackNavigationProp<RootStackParamList, "SelectAvatar">
+
+}
+
+const SelectAvatar: React.FC<Props> = ({ navigation }) => {
   const [validNameText, setValidNameText] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [image, setImage] = useState(Images.avatarPlaceholder);
+  const [showModal, setShowModal] = useState(false);
 
   const emailRef = useRef<Iref>(null);
+
+  const setPickedImage = (image: string | {}) => {
+    setImage(image)
+  }
 
   const validation = () => {
     if (emailRef.current?.value === "") {
@@ -43,34 +56,48 @@ const SelectAvatar = () => {
     )
   }, [])
 
+  const onSubmit = () => {
+    if (!image || !validation()) {
+      return;
+    }
+
+    navigation.navigate("FeedSetup", { username: emailRef.current?.value, profileImage: image });
+  }
+
   return (
     <KeyboardAwareScrollView style={styles.container} enableOnAndroid >
-      <Text style={styles.title}>{"Predictr"}<Text style={styles.dot}>{"."}</Text></Text>
-      <Text style={styles.avatarText}>{"Select your avatar"}</Text>
-      <Image source={image} style={styles.image} resizeMode="contain" />
-      <Text style={styles.avatarSubtitle}>{"Your Avatar"}</Text>
+      <View style={styles.padding}>
+        <Text style={styles.title}>{"Predictr"}<Text style={styles.dot}>{"."}</Text></Text>
+        <Text style={styles.avatarText}>{"Select your avatar"}</Text>
+        <Image source={image} style={styles.image} resizeMode="contain" />
+        <Text style={styles.avatarSubtitle}>{"Your Avatar"}</Text>
+      </View>
       <View style={styles.imageSelection}>
-        <Image source={Images.camera} style={styles.camera} resizeMode="contain" />
+        <Pressable onPress={() => { setShowModal(true) }}>
+          <Image source={Images.camera} style={styles.camera} resizeMode="stretch" />
+        </Pressable>
         <FlatList
           data={Avatars}
           renderItem={renderItem}
           horizontal={true}
-          contentContainerStyle={{ paddingHorizontal: 4 }}
-          style={{ marginLeft: 4 }}
+          contentContainerStyle={styles.flatlistContent}
+          style={styles.flatlist}
           showsHorizontalScrollIndicator={false}
           keyExtractor={(_, index) => index.toString()}
         />
       </View>
-      <Input
-        label={"Pick an username"}
-        error={emailErr}
-        ref={emailRef}
-        extraText={"The username you create will be visible to other users."}
-        onBlur={validation}
-        rightText={validNameText}
-      />
-
-      {/* <Button text="Save" /> */}
+      <View style={styles.padding}>
+        <Input
+          label={"Pick an username"}
+          error={emailErr}
+          ref={emailRef}
+          extraText={"The username you create will be visible to other users."}
+          onBlur={validation}
+          rightText={validNameText}
+        />
+        <Button text="Save" onPress={onSubmit} style={styles.button} />
+      </View>
+      <ImagePicker visible={showModal} setPickedImage={setPickedImage} hideModal={() => { setShowModal(false) }} />
     </KeyboardAwareScrollView>
   )
 }
@@ -81,28 +108,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    padding: 20,
+    paddingVertical: 20,
+    // paddingHorizontal: 15,
   },
   title: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f800,//900
+    fontWeight: Platform.select({ ios: "800" }),
     fontSize: 22,
     color: Colors.primaryBlue,
     textAlign: "center"
   },
   dot: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f800,
+    fontWeight: Platform.select({ ios: "800" }),
     fontSize: 22,
     color: Colors.yellow,
   },
   avatarText: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f800,
+    fontWeight: Platform.select({ ios: "400" }),
     fontSize: 32,
     color: Colors.textBlack,
     textAlign: "center",
-    marginVertical: 15,
+    marginTop: 30,
+    marginBottom: 10,
   },
   image: {
     height: 150,
@@ -112,15 +141,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   avatarSubtitle: {
-    fontWeight: "400",
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f400,
+    fontWeight: Platform.select({ ios: "400" }),
     fontSize: 16,
     textAlign: "center",
-    marginBottom: 20
+    marginBottom: 30
   },
   imageSelection: {
     flexDirection: "row",
     marginBottom: 30,
+    marginLeft: 15
   },
   camera: {
     height: 54,
@@ -130,5 +160,13 @@ const styles = StyleSheet.create({
     height: 54,
     width: 56,
     marginHorizontal: 4,
-  }
+  },
+  button: {
+    marginTop: 80,
+    alignSelf: "baseline"
+  },
+  padding: { paddingHorizontal: 15 },
+  flatlistContent: { paddingHorizontal: 4 },
+  flatlist: { marginLeft: 4 },
+
 })

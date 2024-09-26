@@ -5,15 +5,20 @@ export const Colors = {
   white: "#FFFFFF",
   yellow: "#FFC803",
   lightBlue: "#9ABFEF",
+  labelBlack: "#101010",
   textBlack: "#151B26",
   lightGrey: "#E7E7E7",
   errorRed: "#DC0000",
   disableGrey: "#B8B8B8",
   validGreen: "#1B9D1B",
+  border: "#0000001A",
 }
 
 export const fonts = {
-  FontFamily: Platform.OS === "ios" ? "system" : "Inter",
+  f800: Platform.OS === "ios" ? "system" : "Inter_18pt-ExtraBold",
+  f700: Platform.OS === "ios" ? "SF-Pro-Text-Bold" : "Inter_18pt-Bold",
+  f600: Platform.OS === "ios" ? "system" : "Inter_18pt-SemiBold",
+  f400: Platform.OS === "ios" ? "SF-Pro-Text-Regular" : "Inter_18pt-Regular",
 }
 
 export const regex = {

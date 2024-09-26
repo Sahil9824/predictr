@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 45,
   },
   text: {
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f600,
     color: Colors.white,
   }
 })

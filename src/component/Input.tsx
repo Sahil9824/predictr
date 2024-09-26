@@ -53,7 +53,7 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
   const [showText, setShowText] = useState(password ? false : true);
   const [check, setCheck] = useState(false);
   const textInputRef = useRef<TextInput>(null);
-  const [isFocused, setIsFocused] = useState(false);
+  // const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (check && onBlur) {
@@ -84,8 +84,7 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
           styles.inputContainer,
           check && error && { borderColor: Colors.errorRed },
           check && rightText && { borderColor: Colors.validGreen },
-        ]}
-      >
+        ]}>
         <TextInput
           ref={textInputRef}
           value={val}
@@ -93,24 +92,23 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
           style={styles.input}
           onChangeText={(text) => setVal(text)}
           secureTextEntry={!showText}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          // onFocus={() => setIsFocused(true)}
+          // onBlur={() => setIsFocused(false)}
           {...props}
         />
         {password && (
           <Pressable
             onPress={() => setShowText((prev) => !prev)}
-            style={styles.iconPress}
-          >
+            style={styles.iconPress}>
             <Image
-              source={showText ? Images.eyeClosed : Images.eyeClosed}
-              style={{ height: 16, width: 16 }}
+              source={showText ? Images.eyeClosed : Images.eyeOpen}
+              style={styles.icon}
             />
           </Pressable>
         )}
       </View>
       {extraText && (
-        <Text style={{ fontFamily: "Inter", fontWeight: "400", fontSize: 12 }}>
+        <Text style={styles.extraText}>
           {extraText}
         </Text>
       )}
@@ -130,10 +128,10 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: fonts.f600,
+    // fontWeight: "800",
     fontSize: 14,
-    color: Colors.textBlack,
+    color: Colors.labelBlack,
     marginBottom: 4,
   },
   inputContainer: {
@@ -151,14 +149,14 @@ const styles = StyleSheet.create({
   error: {
     marginTop: 5,
     color: Colors.errorRed,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "400",
+    fontFamily: fonts.f400,
+    // fontWeight: "400",
     fontSize: 12,
   },
   right: {
     color: Colors.validGreen,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "400",
+    fontFamily: fonts.f400,
+    // fontWeight: "400",
     fontSize: 12,
   },
   iconPress: {
@@ -166,5 +164,15 @@ const styles = StyleSheet.create({
     width: 40,
     alignItems: "flex-end",
     justifyContent: "center",
+  },
+  extraText: {
+    fontFamily: fonts.f400,
+    // fontWeight: "400",
+    fontSize: 12,
+    marginVertical: 4
+  },
+  icon: {
+    height: 16,
+    width: 16
   },
 });

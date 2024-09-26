@@ -1,10 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import AuthHeader from "../../component/AuthHeader";
-import { Colors, fonts } from "../../constant";
-import Input, { Iref } from "../../component/Input";
-import Button from "../../component/ Button";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
+import Button from "../../component/ Button";
+import AuthHeader from "../../component/AuthHeader";
+import Input, { Iref } from "../../component/Input";
+import { Colors, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
 
 interface Props {
@@ -22,7 +22,7 @@ const ResetPassword = ({ navigation }: Props) => {
     if (!emailRef.current?.value) {
       setEmailErr("Please enter your email");
       return false;
-    } else if (!/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/.test(emailRef.current?.value)) {
+    } else if (!regex.email.test(emailRef.current?.value)) {
       setEmailErr("Please enter valid email");
       return false;
     }
@@ -78,15 +78,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f800,
     fontSize: 32,
-    fontWeight: "800",
+    fontWeight: Platform.select({ ios: "800" }),
     color: Colors.textBlack
   },
   subTitle: {
     marginTop: 10,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "400",
+    fontFamily: fonts.f400,
+    fontWeight: Platform.select({ ios: "400" }),
     fontSize: 15,
     color: Colors.textBlack
   },

@@ -1,17 +1,21 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
-import AuthHeader from "../../component/AuthHeader";
-import { Colors, errorMsg, fonts, regex } from "../../constant";
-import Input, { Iref } from "../../component/Input";
-import Button from "../../component/ Button";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
+import Button from "../../component/ Button";
+import AuthHeader from "../../component/AuthHeader";
+import Input, { Iref } from "../../component/Input";
+import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
+// import { success } from "../../utils/toast";
+import { useToast } from 'react-native-toast-notifications';
+
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">
 }
 
 const Login = ({ navigation }: Props) => {
+  const toast = useToast();
 
   const [emailErr, setEmailErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
@@ -56,6 +60,11 @@ const Login = ({ navigation }: Props) => {
     if (!emailValidation() || !passwordValidation()) {
       return;
     }
+    // TODO:toast setup
+    // toast.show("fsdfsfsd", {
+    //   placement: 'top',
+    //   icon: <Image source={Images.avatar1} style={{ width: 10, height: 10 }} />
+    // });
     console.log("called");
   }
 
@@ -104,9 +113,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f400,
     fontSize: 32,
-    fontWeight: "800",
+    fontWeight: Platform.select({ ios: "400" }),
     color: Colors.textBlack
   },
   inputContainer: {
@@ -118,8 +127,8 @@ const styles = StyleSheet.create({
     left: 20
   },
   resetPassword: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "600",
+    fontFamily: fonts.f600,
+    fontWeight: Platform.select({ ios: "600" }),
     fontSize: 14,
     color: Colors.primaryBlue,
     textAlign: "right"

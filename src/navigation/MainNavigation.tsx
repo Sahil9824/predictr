@@ -6,6 +6,8 @@ import Login from '../screen/onboarding/Login';
 import ResetPassword from '../screen/onboarding/ResetPassword';
 import SetNewPassword from '../screen/onboarding/SetNewPassword';
 import SelectAvatar from '../screen/onboarding/SelectAvatar';
+import FeedSetup from '../screen/onboarding/FeedSetup';
+import { ImageProps } from 'react-native';
 
 export type RootStackParamList = {
   Onboarding: undefined,
@@ -14,6 +16,7 @@ export type RootStackParamList = {
   ResetPassword: undefined;
   SetNewPassword: undefined;
   SelectAvatar: undefined;
+  FeedSetup: { username?: string; profileImage: ImageProps };
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -31,6 +34,7 @@ const MainNavigation = () => {
         <Stack.Screen name='ResetPassword' component={ResetPassword} />
         <Stack.Screen name='SetNewPassword' component={SetNewPassword} />
         <Stack.Screen name='SelectAvatar' component={SelectAvatar} options={{ headerShown: false }} />
+        <Stack.Screen name='FeedSetup' component={FeedSetup} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

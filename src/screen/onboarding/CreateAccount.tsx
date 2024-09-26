@@ -9,15 +9,13 @@ import {
 } from "react";
 import {
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Button from "../../component/ Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
@@ -92,7 +90,7 @@ const CreateAccount = ({ navigation }: Props) => {
     ) {
       return;
     }
-    // navigation.navigate("SelectAvatar")
+    navigation.navigate("SelectAvatar")
   };
 
   useEffect(() => {
@@ -114,7 +112,7 @@ const CreateAccount = ({ navigation }: Props) => {
           navigation={navigation}
           rightText={"Login"}
           onRightPress={() => {
-            // navigation.navigate("Login")
+            navigation.navigate("Login")
           }}
         />
       ),
@@ -131,55 +129,44 @@ const CreateAccount = ({ navigation }: Props) => {
   return (
     <>
       <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 60 : undefined}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-          <ScrollView
-            showsVerticalScrollIndicator={true}
-            contentContainerStyle={[styles.container]}
-            bounces={false}
-            keyboardShouldPersistTaps="handled"
-          >
-            <Text style={styles.title}>{"Create Account"}</Text>
-            <View style={styles.inputContainer}>
-              <Input
-                label={"Email"}
-                error={emailErr}
-                ref={emailRef}
-                autoFocus={true}
-                onSubmitEditing={() => passwordRef?.current?.focus()}
-                blurOnSubmit={false}
-                onBlur={emailValidation}
-              />
-              <Input
-                label={"Password"}
-                error={passwordErr}
-                ref={passwordRef}
-                onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
-                blurOnSubmit={false}
-                onBlur={passwordOnBlur}
-                password
-              />
-              <Input
-                label={"Confirm Password"}
-                error={cnfPasswordErr}
-                ref={confirmPasswordRef}
-                onBlur={passwordOnBlur}
-                rightText={cnfValidText}
-                password
-              />
-            </View>
-            <Button
-              text={"Next"}
-              style={styles.button}
-              onPress={submit}
-              inActive={disabled}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{ flex: 1 }}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+          <Text style={styles.title}>{"Create Account"}</Text>
+          <View style={styles.inputContainer}>
+            <Input
+              label={"Email"}
+              error={emailErr}
+              ref={emailRef}
+              autoFocus={true}
+              onSubmitEditing={() => passwordRef?.current?.focus()}
+              blurOnSubmit={false}
+              onBlur={emailValidation}
             />
-          </ScrollView>
-        </KeyboardAvoidingView>
+            <Input
+              label={"Password"}
+              error={passwordErr}
+              ref={passwordRef}
+              onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
+              blurOnSubmit={false}
+              onBlur={passwordOnBlur}
+              password
+            />
+            <Input
+              label={"Confirm Password"}
+              error={cnfPasswordErr}
+              ref={confirmPasswordRef}
+              onBlur={passwordOnBlur}
+              rightText={cnfValidText}
+              password
+            />
+          </View>
+          <Button
+            text={"Create Account"}
+            style={styles.button}
+            onPress={submit}
+            inActive={disabled}
+          />
+        </KeyboardAwareScrollView>
       </TouchableWithoutFeedback>
     </>
   );
@@ -194,16 +181,16 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   title: {
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f800,
     fontSize: 32,
-    fontWeight: "800",
+    // fontWeight: "800",
     color: Colors.textBlack,
   },
   inputContainer: {
-    marginVertical: 32,
+    marginVertical: 22,
   },
   button: {
     marginTop: "auto",
-    marginBottom: 55,
+    marginBottom: 40,
   },
 });

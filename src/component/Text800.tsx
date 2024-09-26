@@ -14,7 +14,6 @@ export default Text800;
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: fonts.FontFamily,
-    fontWeight: "800",
+    fontFamily: "Inter_18pt-ExtraBold",
   }
 })

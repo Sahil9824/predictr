@@ -21,20 +21,18 @@ interface Props {
 const AuthHeader = ({ navigation, rightText, onRightPress }: Props) => {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
-      <>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Image
-            source={Images.back}
-            style={{ height: 20, width: 20 }}
-            resizeMode="contain"
-          />
+      <Pressable onPress={() => navigation.goBack()}>
+        <Image
+          source={Images.back}
+          style={styles.image}
+          resizeMode="contain"
+        />
+      </Pressable>
+      {rightText && (
+        <Pressable onPress={onRightPress}>
+          <Text style={styles.text}>{rightText}</Text>
         </Pressable>
-        {rightText && (
-          <Pressable onPress={onRightPress}>
-            <Text style={styles.text}>{rightText}</Text>
-          </Pressable>
-        )}
-      </>
+      )}
     </SafeAreaView>
   );
 };
@@ -53,9 +51,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   text: {
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f600,
     fontSize: 15,
-    fontWeight: "600",
+    // fontWeight: "600",
     color: Colors.primaryBlue,
   },
+  image: {
+    height: 20,
+    width: 20
+  }
 });

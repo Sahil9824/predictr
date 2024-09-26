@@ -1,10 +1,10 @@
+import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import AuthHeader from "../../component/AuthHeader";
-import { Colors, fonts } from "../../constant";
-import Input, { Iref } from "../../component/Input";
 import Button from "../../component/ Button";
-import { StackNavigationProp } from "@react-navigation/stack";
+import AuthHeader from "../../component/AuthHeader";
+import Input, { Iref } from "../../component/Input";
+import { Colors, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
 
 interface Props {
@@ -24,7 +24,7 @@ const SetNewPassword = ({ navigation }: Props) => {
     if (!passwordRef.current?.value) {
       setPasswordErr("Please enter your password");
       return false;
-    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{12,99}$/.test(passwordRef.current?.value)) {
+    } else if (!regex.password.test(passwordRef.current?.value)) {
       setPasswordErr("The password must be strong and 12 characters long")
       return false;
     }
@@ -102,15 +102,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontFamily: fonts.FontFamily,
+    fontFamily: fonts.f800,
     fontSize: 32,
-    fontWeight: "800",
+    // fontWeight: "800",
     color: Colors.textBlack
   },
   subTitle: {
     marginTop: 10,
-    fontFamily: fonts.FontFamily,
-    fontWeight: "400",
+    fontFamily: fonts.f800,
+    // fontWeight: "400",
     fontSize: 16,
     color: Colors.textBlack
   },
