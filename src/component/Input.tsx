@@ -101,7 +101,7 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
             onPress={() => setShowText((prev) => !prev)}
             style={styles.iconPress}>
             <Image
-              source={showText ? Images.eyeClosed : Images.eyeOpen}
+              source={!showText ? Images.eyeClosed : Images.eyeOpen}
               style={styles.icon}
             />
           </Pressable>

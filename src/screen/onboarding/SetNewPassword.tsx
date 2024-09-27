@@ -1,18 +1,19 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Button from "../../component/ Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">
+  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
 }
 
 const SetNewPassword = ({ navigation }: Props) => {
-  const [cnfValidText, setCnfValidText] = useState("")
+  const [cnfValidText, setCnfValidText] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [cnfPasswordErr, setcnfPasswordErr] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -25,23 +26,23 @@ const SetNewPassword = ({ navigation }: Props) => {
       setPasswordErr("Please enter your password");
       return false;
     } else if (!regex.password.test(passwordRef.current?.value)) {
-      setPasswordErr("The password must be strong and 12 characters long")
+      setPasswordErr("The password must be strong and 12 characters long");
       return false;
     }
     setPasswordErr("");
     return true;
-  }
+  };
 
   const cnfPasswordValidation = () => {
     if (confirmPasswordRef.current?.value != passwordRef.current?.value) {
       setcnfPasswordErr("Password doesn't match");
-      setCnfValidText("")
+      setCnfValidText("");
       return false;
     }
     setcnfPasswordErr("");
-    setCnfValidText("Password matched")
+    setCnfValidText("Password matched");
     return true;
-  }
+  };
 
   useEffect(() => {
     if (passwordValidation() && cnfPasswordValidation()) {
@@ -49,49 +50,60 @@ const SetNewPassword = ({ navigation }: Props) => {
     } else {
       setDisabled(true);
     }
-  }, [passwordRef.current?.value, confirmPasswordRef.current?.value])
+  }, [passwordRef.current?.value, confirmPasswordRef.current?.value]);
 
   const submit = () => {
     if (!passwordValidation() || !cnfPasswordValidation()) {
       return;
     }
     navigation.navigate("Login");
-  }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      header: () => <AuthHeader navigation={navigation} />
-    })
-  }, [])
+      header: () => <AuthHeader navigation={navigation} />,
+    });
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{"Set new password"}</Text>
-      <Text style={styles.subTitle}>{"To secure your account, choose a strong password of 12 characters at least."}</Text>
-      <View style={styles.inputContainer} >
-        <Input
-          label={"Password"}
-          error={passwordErr}
-          ref={passwordRef}
-          autoFocus={true}
-          onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
-          blurOnSubmit={false}
-          onBlur={passwordValidation}
-          password
+    <Pressable style={{ flex: 1 }}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>{"Set new password"}</Text>
+        <Text style={styles.subTitle}>
+          {
+            "To secure your account, choose a strong password of 12 characters at least."
+          }
+        </Text>
+        <View style={styles.inputContainer}>
+          <Input
+            label={"New Password"}
+            error={passwordErr}
+            ref={passwordRef}
+            autoFocus={true}
+            onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
+            blurOnSubmit={false}
+            onBlur={passwordValidation}
+            password
+          />
+          <Input
+            label={"Re-enter New Password"}
+            error={cnfPasswordErr}
+            ref={confirmPasswordRef}
+            onBlur={cnfPasswordValidation}
+            rightText={cnfValidText}
+            password
+          />
+        </View>
+        <Button
+          text={"Reset Password"}
+          style={styles.button}
+          onPress={submit}
+          inActive={disabled}
         />
-        <Input
-          label={"Confirm Password"}
-          error={cnfPasswordErr}
-          ref={confirmPasswordRef}
-          onBlur={cnfPasswordValidation}
-          rightText={cnfValidText}
-          password
-        />
-      </View>
-      <Button text={"Reset Password"} style={styles.button} onPress={submit} inActive={disabled} />
-    </View >
-  )
-}
+      </KeyboardAwareScrollView>
+    </Pressable>
+  );
+};
 
 export default SetNewPassword;
 
@@ -104,22 +116,22 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f800,
     fontSize: 32,
-    // fontWeight: "800",
-    color: Colors.textBlack
+    color: Colors.textBlack,
   },
   subTitle: {
-    marginTop: 10,
-    fontFamily: fonts.f800,
-    // fontWeight: "400",
-    fontSize: 16,
-    color: Colors.textBlack
+    marginTop: 8,
+    fontFamily: fonts.f400,
+    fontSize: 15,
+    color: Colors.textBlack,
   },
   inputContainer: {
     marginVertical: 20,
   },
   button: {
-    bottom: 30,
-    position: "absolute",
-    left: 20
-  }
-})
+    // bottom: 30,
+    // position: "absolute",
+    // left: 20
+    marginTop: "auto",
+    marginBottom: 20,
+  },
+});

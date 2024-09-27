@@ -41,7 +41,7 @@ const Onboarding = ({ navigation }: Props) => {
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBackgroundColor(Colors.primaryBlue);
-      StatusBar.setBarStyle("light-content")
+      StatusBar.setBarStyle("light-content");
     }, [])
   );
   return (
@@ -74,16 +74,15 @@ const Onboarding = ({ navigation }: Props) => {
             style={styles.image}
             resizeMode="contain"
           />
+          <Text style={styles.subTitle}>
+            {"Prizes for top three predictors "}
+          </Text>
+          <Text style={styles.subTitle}>{"every month."}</Text>
         </View>
-
-        <Text style={styles.subTitle}>
-          {"Prizes for top three predictors "}
-        </Text>
-        <Text style={styles.subTitle}>{"every month."}</Text>
 
         <View style={styles.signInContainer}>
           <Pressable
-            onPress={() => { }}
+            onPress={() => {}}
             style={({ pressed }) => pressed && { opacity: 0.75 }}
           >
             <Image
@@ -106,7 +105,7 @@ const Onboarding = ({ navigation }: Props) => {
             <Text style={styles.loginText}>{"Login"}</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView >
+      </SafeAreaView>
     </>
   );
 };
@@ -156,15 +155,15 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     justifyContent: "center",
-    marginTop: 50,
-    marginBottom: 10,
+    marginTop: "auto",
+    marginBottom: "auto",
   },
   image: {
     width: "100%",
     height: 100,
   },
   signInContainer: {
-    marginTop: 60,
+    marginTop: "auto",
     justifyContent: "center",
     alignItems: "center",
   },

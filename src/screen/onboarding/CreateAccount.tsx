@@ -13,7 +13,7 @@ import {
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View
+  View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Button from "../../component/ Button";
@@ -80,7 +80,7 @@ const CreateAccount = ({ navigation }: Props) => {
   const passwordOnBlur = () => {
     passwordValidation();
     cnfPasswordValidation();
-  }
+  };
 
   const submit = () => {
     if (
@@ -90,7 +90,7 @@ const CreateAccount = ({ navigation }: Props) => {
     ) {
       return;
     }
-    navigation.navigate("SelectAvatar")
+    navigation.navigate("SelectAvatar");
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const CreateAccount = ({ navigation }: Props) => {
           navigation={navigation}
           rightText={"Login"}
           onRightPress={() => {
-            navigation.navigate("Login")
+            navigation.navigate("Login");
           }}
         />
       ),
@@ -130,7 +130,10 @@ const CreateAccount = ({ navigation }: Props) => {
     <>
       <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{ flex: 1 }}>
-        <KeyboardAwareScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.container}
+          showsVerticalScrollIndicator={false}
+        >
           <Text style={styles.title}>{"Create Account"}</Text>
           <View style={styles.inputContainer}>
             <Input

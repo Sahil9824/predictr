@@ -1,18 +1,18 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import Button from "../../component/ Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">
+  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
 }
 
 const ResetPassword = ({ navigation }: Props) => {
-
   const [emailErr, setEmailErr] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -26,48 +26,65 @@ const ResetPassword = ({ navigation }: Props) => {
       setEmailErr("Please enter valid email");
       return false;
     }
-    setEmailErr("")
+    setEmailErr("");
     return true;
-  }
+  };
 
   const submit = () => {
     if (!emailValidation()) {
       return;
     }
     navigation.navigate("SetNewPassword");
-  }
+  };
 
   useEffect(() => {
     if (emailValidation()) {
-      setDisabled(false)
+      setDisabled(false);
     } else {
-      setDisabled(true)
+      setDisabled(true);
     }
-  }, [emailRef.current?.value])
+  }, [emailRef.current?.value]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      header: () => <AuthHeader navigation={navigation} />
-    })
-  }, [])
+      header: () => <AuthHeader navigation={navigation} />,
+    });
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{"Reset password"}</Text>
-      <Text style={styles.subTitle}>{"Enter your registered email to receive password reset instructions."}</Text>
-      <View style={styles.inputContainer} >
-        <Input
-          label={"Email"}
-          error={emailErr}
-          ref={emailRef}
-          autoFocus={true}
-          onBlur={emailValidation}
+    <Pressable style={styles.container}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          backgroundColor: Colors.white,
+          paddingHorizontal: 20,
+        }}
+      >
+        <Text style={styles.title}>{"Reset password"}</Text>
+        <Text style={styles.subTitle}>
+          {
+            "Enter your registered email to receive password reset instructions."
+          }
+        </Text>
+        <View style={styles.inputContainer}>
+          <Input
+            label={"Email"}
+            error={emailErr}
+            ref={emailRef}
+            autoFocus={true}
+            onBlur={emailValidation}
+          />
+        </View>
+        <Button
+          text={"Submit"}
+          style={styles.button}
+          onPress={submit}
+          inActive={disabled}
         />
-      </View>
-      <Button text={"Submit"} style={styles.button} onPress={submit} inActive={disabled} />
-    </View >
-  )
-}
+      </KeyboardAwareScrollView>
+    </Pressable>
+  );
+};
 
 export default ResetPassword;
 
@@ -75,27 +92,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
   },
   title: {
     fontFamily: fonts.f800,
     fontSize: 32,
     fontWeight: Platform.select({ ios: "800" }),
-    color: Colors.textBlack
+    color: Colors.textBlack,
   },
   subTitle: {
-    marginTop: 10,
+    marginTop: 8,
     fontFamily: fonts.f400,
     fontWeight: Platform.select({ ios: "400" }),
     fontSize: 15,
-    color: Colors.textBlack
+    color: Colors.textBlack,
   },
   inputContainer: {
     marginVertical: 20,
   },
   button: {
-    bottom: 30,
-    position: "absolute",
-    left: 20
-  }
-})
+    marginTop: "auto",
+    marginBottom: 40,
+  },
+});
