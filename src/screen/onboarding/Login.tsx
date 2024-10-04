@@ -1,13 +1,14 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
-import Button from "../../component/ Button";
+import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
 // import { success } from "../../utils/toast";
 import { useToast } from "react-native-toast-notifications";
+import { scale } from "../../../helper";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -37,10 +38,10 @@ const Login = ({ navigation }: Props) => {
 
   const passwordValidation = () => {
     if (!passwordRef.current?.value) {
-      setPasswordErr(errorMsg.passwordEmpty);
+      setPasswordErr("  ");
       return false;
     } else if (!regex.password.test(passwordRef.current?.value)) {
-      setPasswordErr(errorMsg.password);
+      setPasswordErr(" ");
       return false;
     }
     setPasswordErr("");
@@ -48,7 +49,7 @@ const Login = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
-    if (emailValidation() && passwordValidation()) {
+    if (emailValidation() && passwordRef.current?.value != "") {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -56,15 +57,10 @@ const Login = ({ navigation }: Props) => {
   }, [passwordRef.current?.value, emailRef.current?.value]);
 
   const submit = () => {
-    if (!emailValidation() || !passwordValidation()) {
+    if (!emailValidation()) {
       return;
     }
-    // TODO:toast setup
-    // toast.show("fsdfsfsd", {
-    //   placement: 'top',
-    //   icon: <Image source={Images.avatar1} style={{ width: 10, height: 10 }} />
-    // });
-    console.log("called");
+    navigation.navigate("Dashboard");
   };
 
   useLayoutEffect(() => {
@@ -78,8 +74,6 @@ const Login = ({ navigation }: Props) => {
       ),
     });
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>
@@ -97,7 +91,7 @@ const Login = ({ navigation }: Props) => {
         />
         <Input
           label={"Password"}
-          error={passwordErr}
+          // error={passwordErr}
           ref={passwordRef}
           onBlur={passwordValidation}
           password
@@ -125,26 +119,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 20,
+    paddingHorizontal: scale(20),
   },
   title: {
     fontFamily: fonts.f800,
-    fontSize: 32,
+    fontSize: scale(32),
     fontWeight: Platform.select({ ios: "400" }),
     color: Colors.textBlack,
   },
   inputContainer: {
-    marginVertical: 30,
+    marginVertical: scale(30),
   },
   button: {
-    bottom: 30,
+    bottom: scale(30),
     position: "absolute",
-    left: 20,
+    left: scale(20),
   },
   resetPassword: {
     fontFamily: fonts.f600,
     fontWeight: Platform.select({ ios: "600" }),
-    fontSize: 14,
+    fontSize: scale(14),
     color: Colors.primaryBlue,
     textAlign: "right",
   },

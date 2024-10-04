@@ -16,11 +16,12 @@ import {
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import Button from "../../component/ Button";
+import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
+import { scale } from "../../../helper";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -180,20 +181,19 @@ export default CreateAccount;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    paddingHorizontal: 20,
+    paddingHorizontal: scale(20),
     flexGrow: 1,
   },
   title: {
     fontFamily: fonts.f800,
-    fontSize: 32,
-    // fontWeight: "800",
+    fontSize: scale(32),
     color: Colors.textBlack,
   },
   inputContainer: {
-    marginVertical: 22,
+    marginVertical: scale(22),
   },
   button: {
     marginTop: "auto",
-    marginBottom: 40,
+    marginBottom: scale(40),
   },
 });

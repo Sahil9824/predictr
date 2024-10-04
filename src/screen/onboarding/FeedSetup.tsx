@@ -1,4 +1,4 @@
-import { RouteProp } from "@react-navigation/native";
+import { RouteProp, useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
 import {
@@ -12,9 +12,10 @@ import {
   View,
 } from "react-native";
 import { Images } from "../../assets/images";
-import Button from "../../component/ Button";
+import Button from "../../component/Button";
 import { Colors, fonts } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
+import { scale } from "../../../helper";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "FeedSetup">;
@@ -87,21 +88,70 @@ const data = [
   },
   {
     id: 10,
-    image: Images.avatar1,
+    image: Images.avatar12,
     name: "Anika Kentar",
     percent: "40.3%",
     isFollowed: false,
   },
   {
     id: 11,
-    image: Images.avatar2,
+    image: Images.avatar13,
     name: "Anika Kentar",
     percent: "40.3%",
     isFollowed: false,
   },
   {
     id: 12,
-    image: Images.avatar3,
+    image: Images.avatar14,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 13,
+    image: Images.avatar15,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 14,
+    image: Images.avatar16,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 15,
+    image: Images.avatar17,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 16,
+    image: Images.avatar18,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 17,
+    image: Images.avatar1,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 18,
+    image: Images.avatar2,
+    name: "Anika Kentar",
+    percent: "40.3%",
+    isFollowed: false,
+  },
+  {
+    id: 19,
+    image: Images.avatar4,
     name: "Anika Kentar",
     percent: "40.3%",
     isFollowed: false,
@@ -117,6 +167,7 @@ interface TileProp {
     isFollowed: boolean;
     percent: string;
   };
+  followList: number[];
   addToFollowList: (id: number) => void;
   removeFromFollowList: (id: number) => void;
 }
@@ -125,8 +176,10 @@ const Titles: React.FC<TileProp> = ({
   item,
   addToFollowList,
   removeFromFollowList,
+  followList,
 }) => {
-  const [isFollowed, setIsFollowed] = useState(item.isFollowed);
+  const [isFollowed, setIsFollowed] = useState(followList.includes(item.id));
+  // console.log("is", isFollowed, item.isFollowed);
 
   const onPress = () => {
     if (item.isFollowed) {
@@ -139,8 +192,8 @@ const Titles: React.FC<TileProp> = ({
   };
 
   useEffect(() => {
-    setIsFollowed(item.isFollowed);
-  }, [item.isFollowed]);
+    setIsFollowed(followList.includes(item.id));
+  }, [item.isFollowed, followList]);
 
   return (
     <>
@@ -153,7 +206,10 @@ const Titles: React.FC<TileProp> = ({
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image source={item.image} style={{ height: 40, width: 40 }} />
+          <Image
+            source={item.image}
+            style={{ height: 40, width: 40, borderRadius: 12 }}
+          />
           <View
             style={{
               flexDirection: "row",
@@ -231,6 +287,8 @@ const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
   const [listData, setListData] = useState(data);
   const [followList, setFollowList] = useState<number[]>([]);
 
+  const [searchText, setSearchText] = useState("");
+
   const addToFollowList = (id: number) => {
     setFollowList((prev) => [...prev, id]);
   };
@@ -245,7 +303,6 @@ const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
         if (index < 10) {
           if (!followList.filter((i) => i === item.id)?.at(0)) {
             addToFollowList(item.id);
-          } else {
           }
           item.isFollowed = true;
         }
@@ -253,6 +310,7 @@ const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
       })
     );
   };
+  console.log("ff", followList);
 
   const navigateToLogin = () => {
     navigation.navigate("Login");
@@ -267,6 +325,24 @@ const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
     }
   }, [route.params.username, route.params.profileImage]);
 
+  // useFocusEffect(() => {
+  //   setListData(data);
+
+  //   // setFollowList([])
+  // })
+
+  useEffect(() => {
+    if (searchText) {
+      setListData(
+        data.filter((item) =>
+          item.name.toLowerCase().includes(searchText.toLowerCase())
+        )
+      );
+    } else {
+      setListData(data);
+    }
+  }, [searchText]);
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -279,32 +355,47 @@ const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
           {"Follow minimum 5 predictors to enable My Feed"}
         </Text>
       </View>
+
       <View style={styles.searchContainer}>
         <Image
           source={Images.search}
           style={styles.searchImg}
           resizeMode="contain"
         />
-        <TextInput style={styles.search} placeholder="Search" />
+        <TextInput
+          style={styles.search}
+          placeholder="Search"
+          value={searchText}
+          onChangeText={setSearchText}
+        />
       </View>
+
       <View style={styles.followContainer}>
         <Text
           style={styles.followCount}
         >{`${followList.length} Following`}</Text>
-        <Text onPress={followTop10} style={styles.top10}>
-          {"Follow Top 10"}
-        </Text>
+        {listData.length >= 10 && (
+          <Text onPress={followTop10} style={styles.top10}>
+            {"Follow Top 10"}
+          </Text>
+        )}
       </View>
       <View style={styles.listContainer} />
       <FlatList
         showsVerticalScrollIndicator={false}
         style={styles.list}
+        ListEmptyComponent={
+          <Text style={{ textAlign: "center", marginTop: 20 }}>
+            {"No record found"}
+          </Text>
+        }
         data={listData}
         renderItem={({ item }) => (
           <Titles
             item={item}
             addToFollowList={addToFollowList}
             removeFromFollowList={removeFromFollowList}
+            followList={followList}
           />
         )}
         keyExtractor={(item) => item?.id?.toString()}
@@ -322,71 +413,71 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
+    paddingVertical: scale(20),
+    paddingHorizontal: scale(15),
   },
   profileContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
   profileImg: {
-    width: 32,
-    height: 32,
     borderRadius: 8,
+    width: scale(32),
+    height: scale(32),
     overflow: "hidden",
   },
   text: {
     fontFamily: fonts.f400,
     color: Colors.textBlack,
-    paddingLeft: 10,
+    paddingLeft: scale(10),
   },
   title: {
     fontFamily: fonts.f800,
-    fontSize: 32,
-    lineHeight: 40,
+    fontSize: scale(32),
+    lineHeight: scale(40),
     color: Colors.textBlack,
   },
   subText: {
     marginVertical: 6,
     fontFamily: fonts.f400,
-    fontSize: 15,
+    fontSize: scale(15),
     color: Colors.textBlack,
   },
   header: {
     marginVertical: 10,
   },
   searchContainer: {
-    marginTop: 15,
+    marginTop: scale(15),
     flexDirection: "row",
-    paddingHorizontal: 12,
-    height: 40,
-    borderRadius: 12,
+    paddingHorizontal: scale(12),
+    height: scale(40),
+    borderRadius: scale(12),
     borderWidth: 1,
     borderColor: Colors.border,
     alignItems: "center",
   },
   searchImg: {
-    height: 18,
-    width: 18,
+    height: scale(18),
+    width: scale(18),
   },
   search: {
-    marginHorizontal: 10,
+    marginHorizontal: scale(10),
     width: "90%",
-    paddingTop: 12,
+    paddingTop: scale(12),
   },
   followContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 15,
-    paddingBottom: 12,
+    marginTop: scale(15),
+    paddingBottom: scale(12),
   },
   followCount: {
     fontFamily: fonts.f400,
-    fontSize: 14,
+    fontSize: scale(14),
   },
   top10: {
     fontFamily: fonts.f800,
-    fontSize: 14,
+    fontSize: scale(14),
     color: Colors.primaryBlue,
   },
   listContainer: {
@@ -396,5 +487,5 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   list: { flex: 1 },
-  line: { marginTop: 15 },
+  line: { marginTop: scale(15) },
 });

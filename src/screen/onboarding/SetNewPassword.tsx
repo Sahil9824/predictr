@@ -1,18 +1,23 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import Button from "../../component/ Button";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
-import { Colors, fonts, regex } from "../../constant";
+import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useToast } from "react-native-toast-notifications";
+import { Images } from "../../assets/images";
+import { scale } from "../../../helper";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
 }
 
 const SetNewPassword = ({ navigation }: Props) => {
+  const toast = useToast();
+
   const [cnfValidText, setCnfValidText] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [cnfPasswordErr, setcnfPasswordErr] = useState("");
@@ -23,10 +28,10 @@ const SetNewPassword = ({ navigation }: Props) => {
 
   const passwordValidation = () => {
     if (!passwordRef.current?.value) {
-      setPasswordErr("Please enter your password");
+      setPasswordErr(errorMsg.passwordEmpty);
       return false;
     } else if (!regex.password.test(passwordRef.current?.value)) {
-      setPasswordErr("The password must be strong and 12 characters long");
+      setPasswordErr(errorMsg.password);
       return false;
     }
     setPasswordErr("");
@@ -35,12 +40,12 @@ const SetNewPassword = ({ navigation }: Props) => {
 
   const cnfPasswordValidation = () => {
     if (confirmPasswordRef.current?.value != passwordRef.current?.value) {
-      setcnfPasswordErr("Password doesn't match");
+      setcnfPasswordErr("Password do not match");
       setCnfValidText("");
       return false;
     }
     setcnfPasswordErr("");
-    setCnfValidText("Password matched");
+    setCnfValidText(errorMsg.passwordMatch);
     return true;
   };
 
@@ -56,6 +61,9 @@ const SetNewPassword = ({ navigation }: Props) => {
     if (!passwordValidation() || !cnfPasswordValidation()) {
       return;
     }
+    // TODO:toast setup
+    toast.show("Password updated");
+    // toast.show("Password updated");
     navigation.navigate("Login");
   };
 
@@ -71,7 +79,7 @@ const SetNewPassword = ({ navigation }: Props) => {
         <Text style={styles.title}>{"Set new password"}</Text>
         <Text style={styles.subTitle}>
           {
-            "To secure your account, choose a strong password of 12 characters at least."
+            "To secure your account, choose a strong password of 8 characters at least."
           }
         </Text>
         <View style={styles.inputContainer}>
@@ -111,27 +119,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 20,
+    paddingHorizontal: scale(20),
   },
   title: {
     fontFamily: fonts.f800,
-    fontSize: 32,
+    fontSize: scale(32),
+    // fontWeight: "800",
     color: Colors.textBlack,
   },
   subTitle: {
     marginTop: 8,
     fontFamily: fonts.f400,
-    fontSize: 15,
+    // fontWeight: "400",
+    fontSize: scale(16),
     color: Colors.textBlack,
   },
   inputContainer: {
-    marginVertical: 20,
+    marginVertical: scale(20),
   },
   button: {
     // bottom: 30,
     // position: "absolute",
     // left: 20
     marginTop: "auto",
-    marginBottom: 20,
+    marginBottom: scale(20),
   },
 });

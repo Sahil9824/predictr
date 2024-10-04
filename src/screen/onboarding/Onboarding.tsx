@@ -17,6 +17,7 @@ import { Images } from "../../assets/images";
 import Text800 from "../../component/Text800";
 import { Colors, Device, fonts } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
+import { scale } from "../../../helper";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -74,11 +75,12 @@ const Onboarding = ({ navigation }: Props) => {
             style={styles.image}
             resizeMode="contain"
           />
-          <Text style={styles.subTitle}>
-            {"Prizes for top three predictors "}
-          </Text>
-          <Text style={styles.subTitle}>{"every month."}</Text>
         </View>
+
+        <Text style={styles.subTitle}>
+          {"Prizes for top three predictors "}
+        </Text>
+        <Text style={styles.subTitle}>{"every month."}</Text>
 
         <View style={styles.signInContainer}>
           <Pressable
@@ -116,32 +118,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.primaryBlue,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(20),
   },
   header: {
     alignSelf: "center",
   },
   headerText: {
-    fontSize: 22,
+    fontSize: scale(22),
     fontFamily: fonts.f800,
     fontWeight: Platform.select({ ios: "800" }),
     color: Colors.white,
   },
   dot: {
-    fontSize: 22,
+    fontSize: scale(22),
     color: Colors.yellow,
     fontFamily: fonts.f800,
     fontWeight: Platform.select({ ios: "800" }),
   },
   titleContainer: {
-    marginTop: 60,
-    marginBottom: 10,
+    marginTop: scale(60),
+    marginBottom: scale(10),
   },
   titleText: {
-    fontSize: 34,
+    fontSize: scale(34),
     fontFamily: fonts.f800,
-    lineHeight: 40,
+    lineHeight: scale(40),
     fontWeight: Platform.select({ ios: "800" }),
     color: Colors.white,
     textAlign: "center",
@@ -149,43 +151,43 @@ const styles = StyleSheet.create({
   subTitle: {
     fontFamily: fonts.f400,
     fontWeight: Platform.select({ ios: "400" }),
-    fontSize: 16,
+    fontSize: scale(16),
     textAlign: "center",
     color: Colors.lightBlue,
   },
   imageContainer: {
     justifyContent: "center",
-    marginTop: "auto",
-    marginBottom: "auto",
+    marginTop: "auto", //50,
+    marginBottom: "auto", //10,
   },
   image: {
     width: "100%",
-    height: 100,
+    height: scale(100),
   },
   signInContainer: {
-    marginTop: "auto",
+    marginTop: "auto", //60,
     justifyContent: "center",
     alignItems: "center",
   },
   signIn: {
-    height: 50,
+    height: scale(50),
     width: "100%",
   },
   googleSignIn: {
-    height: 55,
-    width: Device.width - 30,
-    marginBottom: 12,
+    height: scale(55),
+    width: Device.width - scale(30),
+    marginBottom: scale(12),
   },
   emailSignIn: {
-    height: 65,
-    width: Device.width - 30,
+    height: scale(65),
+    width: Device.width - scale(30),
   },
   loginText: {
     textAlign: "center",
     fontFamily: fonts.f600,
     fontWeight: Platform.select({ ios: "600" }),
     color: Colors.white,
-    fontSize: 16,
-    marginTop: 24,
+    fontSize: scale(16),
+    marginTop: scale(24),
   },
 });

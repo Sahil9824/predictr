@@ -1,12 +1,13 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
-import Button from "../../component/ Button";
+import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
-import { Colors, fonts, regex } from "../../constant";
+import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { RootStackParamList } from "../../navigation/MainNavigation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { scale } from "../../../helper";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -20,10 +21,10 @@ const ResetPassword = ({ navigation }: Props) => {
 
   const emailValidation = () => {
     if (!emailRef.current?.value) {
-      setEmailErr("Please enter your email");
+      setEmailErr(errorMsg.emailEmpty);
       return false;
     } else if (!regex.email.test(emailRef.current?.value)) {
-      setEmailErr("Please enter valid email");
+      setEmailErr(errorMsg.email);
       return false;
     }
     setEmailErr("");
@@ -96,22 +97,22 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.f800,
-    fontSize: 32,
+    fontSize: scale(32),
     fontWeight: Platform.select({ ios: "800" }),
     color: Colors.textBlack,
   },
   subTitle: {
-    marginTop: 8,
+    marginTop: scale(8),
     fontFamily: fonts.f400,
     fontWeight: Platform.select({ ios: "400" }),
-    fontSize: 15,
+    fontSize: scale(15),
     color: Colors.textBlack,
   },
   inputContainer: {
-    marginVertical: 20,
+    marginVertical: scale(20),
   },
   button: {
     marginTop: "auto",
-    marginBottom: 40,
+    marginBottom: scale(40),
   },
 });
