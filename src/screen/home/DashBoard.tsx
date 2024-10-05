@@ -5,6 +5,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Colors, fonts } from "../../constant";
@@ -13,10 +14,16 @@ import { useRef, useState } from "react";
 import { scale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
 import WinnerCard from "../../component/WinnerCard";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
+import Icons from "../../component/Icons";
+import { ICONS } from "../../constant/icons.constants";
+import ContestDetails from "../../component/bottomSheets/ContestDetails";
+import Contests from "../../component/Contests";
 
-const HeaderOptions = () => {
-  const [isSelected, setIsSelected] = useState(0);
-
+const HeaderOptions = ({ isSelected, setIsSelected }) => {
   return (
     <View
       style={{
@@ -25,6 +32,7 @@ const HeaderOptions = () => {
         justifyContent: "space-between",
         borderBottomWidth: 1,
         borderBottomColor: Colors.lightGrey,
+        paddingHorizontal: scale(10),
       }}
     >
       <View style={{ flexDirection: "row", height: scale(50) }}>
@@ -122,27 +130,11 @@ const HeaderOptions = () => {
 };
 
 const DashBoard = () => {
-  const scrollY = useRef(new Animated.Value(0)).current;
-  const HEADER_HEIGHT = 50;
-  const RenderHeaderOptions = () => {
-    const translateY = scrollY.interpolate({
-      inputRange: [0, HEADER_HEIGHT],
-      outputRange: [0, 0], // Keeps it pinned at the top
-      extrapolate: "clamp",
-    });
+  const bottomSheetModalRef = useRef(null);
+  const [isSelected, setIsSelected] = useState(0);
 
-    return (
-      <Animated.View
-        style={[
-          styles.headerOptionsContainer,
-          {
-            transform: [{ translateY }],
-          },
-        ]}
-      >
-        <HeaderOptions />
-      </Animated.View>
-    );
+  const openBottomSheet = () => {
+    bottomSheetModalRef.current?.present();
   };
   return (
     <View style={styles.container}>
@@ -152,6 +144,7 @@ const DashBoard = () => {
           alignItems: "center",
           justifyContent: "space-between",
           paddingVertical: scale(10),
+          paddingHorizontal: scale(10),
         }}
       >
         <Text
@@ -172,15 +165,29 @@ const DashBoard = () => {
       <FlatList
         ListHeaderComponent={
           <>
-            <WinnerCard />
-            <HeaderOptions />
+            {isSelected !== 2 && (
+              <WinnerCard openBottomSheet={openBottomSheet} />
+            )}
+            <HeaderOptions
+              isSelected={isSelected}
+              setIsSelected={setIsSelected}
+            />
           </>
         }
-        data={[1, 2, 3, 4]}
-        renderItem={({ item, index }) => <PredictionCard index={index} />}
+        data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
+        renderItem={({ item, index }) => {
+          if (isSelected === 2) {
+            return <Contests openBottomSheet={openBottomSheet} />; // Render your component when isSelected is 2
+          }
+          return <PredictionCard index={index} />; // Render PredictionCard otherwise
+        }}
         keyExtractor={(_, index) => index.toString()}
         scrollEventThrottle={16}
       />
+
+      {/* <Contests /> */}
+
+      <ContestDetails ref={bottomSheetModalRef} />
     </View>
   );
 };
@@ -191,8 +198,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: scale(10),
   },
+
   headerOptionsContainer: {
     position: "absolute",
     top: 0,

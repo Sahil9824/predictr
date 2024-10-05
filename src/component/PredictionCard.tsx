@@ -1,21 +1,33 @@
-import { Image, Pressable, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { scale } from "../../helper";
 import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
+import { useRef, useState } from "react";
+import Tooltip from "react-native-walkthrough-tooltip";
 
 interface IPredictionCard {
   index: number;
 }
 
 const PredictionCard = ({ index }: IPredictionCard) => {
+  const [toolTipVisible, setToolTipVisible] = useState(false);
   return (
     <View
       style={[
         {
           marginVertical: scale(10),
           borderRadius: scale(26),
+          overflow: "hidden",
           borderWidth: 1,
           borderColor: Colors.lightGrey,
+          backgroundColor: "#f0f3f5",
         },
         index === 2 && { borderColor: Colors.textRed },
         index === 3 && { borderColor: Colors.bgGreen },
@@ -24,9 +36,19 @@ const PredictionCard = ({ index }: IPredictionCard) => {
       <View
         style={{
           padding: scale(16),
-          borderRadius: scale(20),
-          borderBottomColor: Colors.lightGrey,
           borderBottomWidth: 1,
+          borderRadius: scale(20),
+          borderBottomColor: "white",
+          backgroundColor: "white",
+          overflow: "hidden",
+          shadowColor: "rgba(0, 0, 0, 0.15)", // Increased shadow color intensity
+          shadowOffset: {
+            width: 0, // Shadow width (0px)
+            height: 5, // Increased shadow height for a more pronounced shadow
+          },
+          shadowOpacity: 0.15, // Increased shadow opacity
+          shadowRadius: 10, // Increased shadow radius for a softer shadow
+          elevation: 10,
         }}
       >
         <View style={{ flexDirection: "row" }}>
@@ -84,25 +106,40 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           >
             {"I think "}
           </Text>
-          <View
-            style={{
-              backgroundColor: Colors.primaryBLueLight,
-              paddingHorizontal: scale(6),
-              paddingVertical: scale(4),
-              borderRadius: scale(6),
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "rgba(0, 0, 0, 0.75)",
+              borderRadius: 4,
             }}
+            backgroundColor={"transparent"}
+            isVisible={toolTipVisible}
+            placement="top"
+            onClose={() => setToolTipVisible(false)}
+            content={
+              <Text style={styles.tootltipText}>Tesla Private Limited</Text>
+            }
           >
-            <Text
+            <Pressable
+              onPress={() => setToolTipVisible(true)}
               style={{
-                fontFamily: fonts.f700,
-                fontSize: scale(15),
-                lineHeight: scale(19),
-                color: Colors.textBlack,
+                backgroundColor: Colors.primaryBLueLight,
+                paddingHorizontal: scale(6),
+                paddingVertical: scale(4),
+                borderRadius: scale(6),
               }}
             >
-              {"TSLA"}
-            </Text>
-          </View>
+              <Text
+                style={{
+                  fontFamily: fonts.f700,
+                  fontSize: scale(15),
+                  lineHeight: scale(19),
+                  color: Colors.textBlack,
+                }}
+              >
+                {"TSLA"}
+              </Text>
+            </Pressable>
+          </Tooltip>
           <Text
             style={{
               fontFamily: fonts.f400,
@@ -267,8 +304,9 @@ const PredictionCard = ({ index }: IPredictionCard) => {
         style={{
           flexDirection: "row",
           padding: scale(16),
-          backgroundColor: Colors.lightGrey + "90",
+          backgroundColor: "#f0f3f5",
           justifyContent: "space-between",
+          overflow: "hidden",
         }}
       >
         <View>
@@ -521,3 +559,15 @@ const PredictionCard = ({ index }: IPredictionCard) => {
 };
 
 export default PredictionCard;
+
+const styles = StyleSheet.create({
+  tooltip: {
+    width: "auto",
+  },
+
+  tootltipText: {
+    color: "white",
+    fontFamily: fonts.f500,
+    fontSize: scale(12),
+  },
+});

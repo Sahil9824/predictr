@@ -13,6 +13,7 @@ MERGED from [:react-native-device-info] /Users/Sahil/Documents/GitHub/predictr/n
 MERGED from [:react-native-image-crop-picker] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-31:12
 MERGED from [:react-native-navigation-bar-color] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-permissions] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-reanimated] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-svg] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:react-android:0.75.3] /Users/Sahil/.gradle/caches/8.8/transforms/73b7edff174c2bc2a9c17a52a73bea25/transformed/react-android-0.75.3-debug/AndroidManifest.xml:2:1-24:12
 MERGED from [com.github.yalantis:ucrop:2.2.6-native] /Users/Sahil/.gradle/caches/8.8/transforms/f4dfd85a47a24d686781a9c6444ff771/transformed/ucrop-2.2.6-native/AndroidManifest.xml:2:1-11:12
@@ -231,6 +232,8 @@ MERGED from [:react-native-navigation-bar-color] /Users/Sahil/Documents/GitHub/p
 MERGED from [:react-native-navigation-bar-color] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-permissions] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-permissions] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-reanimated] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-reanimated] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-svg] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:react-native-svg] /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:react-android:0.75.3] /Users/Sahil/.gradle/caches/8.8/transforms/73b7edff174c2bc2a9c17a52a73bea25/transformed/react-android-0.75.3-debug/AndroidManifest.xml:10:5-44

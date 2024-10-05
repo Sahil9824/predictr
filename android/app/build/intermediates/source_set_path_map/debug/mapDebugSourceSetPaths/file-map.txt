@@ -42,5 +42,7 @@ com.predictr.app-debug-40 /Users/Sahil/Documents/GitHub/predictr/node_modules/re
 com.predictr.app-debug-41 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-image-crop-picker/android/build/intermediates/packaged_res/debug/packageDebugResources
 com.predictr.app-debug-42 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android/build/intermediates/packaged_res/debug/packageDebugResources
 com.predictr.app-debug-43 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/android/build/intermediates/packaged_res/debug/packageDebugResources
-com.predictr.app-debug-44 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug/packageDebugResources
-com.predictr.app-debug-45 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug/packageDebugResources
+com.predictr.app-debug-44 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/android/build/intermediates/packaged_res/debug/packageDebugResources
+com.predictr.app-debug-45 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug/packageDebugResources
+com.predictr.app-debug-46 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug/packageDebugResources
+com.predictr.app-debug-47 /Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/android/build/intermediates/packaged_res/debug/packageDebugResources
