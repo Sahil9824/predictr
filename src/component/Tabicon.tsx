@@ -17,7 +17,7 @@ const TabIcon = ({ focused, route }) => {
   switch (name) {
     case APP_NAVIGATION.HOME_SCREEN:
       return <Icons type={ICONS.HOME} fill={tabIconColor} />;
-    case APP_NAVIGATION.Leaderboard:
+    case APP_NAVIGATION.LEADERBOARD:
       return (
         <Icons type={ICONS.LEADERBOARD} fill={tabIconColor} strokeWidth={2} />
       );
