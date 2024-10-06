@@ -4,6 +4,7 @@ import {
   FlatList,
   Image,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -19,6 +20,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const ContestDetails = forwardRef((props, ref) => {
   const closeBottomSheet = () => {
@@ -43,7 +45,8 @@ const ContestDetails = forwardRef((props, ref) => {
           backgroundColor: "#B3B3B3",
         }}
         style={styles.bottomSheet}
-        snapPoints={["99%"]}
+        snapPoints={["98%"]}
+        enableContentPanningGesture={false}
       >
         <View style={styles.bottomSheetContainer}>
           <View style={styles.header}>
@@ -55,92 +58,103 @@ const ContestDetails = forwardRef((props, ref) => {
               <Icons type={ICONS.CLOSE} />
             </Pressable>
           </View>
-          <View style={styles.bottomPart}>
-            <Text style={styles.headText}>Rules:</Text>
-            <View style={styles.bottomWrap}>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>1.</Text>
-                <Text style={styles.subText}>
-                  Each month we will be running a contest to see who the best
-                  stock predictors are.
-                </Text>
-              </View>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>2.</Text>
-                <Text style={styles.subText}>
-                  The top three predictors for this month will win $500, $300
-                  and $200 respectively.
-                </Text>
-              </View>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>3.</Text>
-                <Text style={styles.subText}>
-                  You need to make at least 3 predictions on 3 different stocks
-                  to be eligible.
-                </Text>
-              </View>
 
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>4.</Text>
-                <Text style={styles.subText}>
-                  Each prediction must expire in the current month. I think x
-                  stock will change by 
-                  <Text style={{ fontFamily: fonts.f700 }}>
-                    {" "}
-                    month of contest.
-                  </Text>{" "}
-                  This means that you can make guesses for future months
-                  starting today.
-                </Text>
-              </View>
-
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>5.</Text>
-                <Text style={styles.subText}>
-                  Stocks that you make your predictions on cannot be acquired or
-                  bankrupt.
-                </Text>
-              </View>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>6.</Text>
-                <Text style={styles.subText}>
-                  Prizes will be distributed in CAD dollars.
-                </Text>
-              </View>
-            </View>
-
-            <Text style={{ ...styles.headText, marginTop: 12 }}>
-              Winner announcements:
-            </Text>
-            <View style={styles.bottomWrap}>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>1.</Text>
-                <Text style={styles.subText}>
-                  The result will be announced at the end of every month.
-                </Text>
-              </View>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>2.</Text>
-                <Text style={styles.subText}>
-                  Winners will be announced on our social media channels.
-                </Text>
-              </View>
-              <View style={styles.headTextSub}>
-                <Text style={styles.noText}>3.</Text>
-                <Text style={styles.subText}>
-                  The winner(s) must have a paypal account or bank account that
-                  can receive e-transfer/wire to accept payment.
-                </Text>
-              </View>
-            </View>
-          </View>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={handleScoringPress}
-            style={styles.bottomBtnBox}
+          <KeyboardAwareScrollView
+            showsVerticalScrollIndicator={false}
+            enableAutomaticScroll
+            enableOnAndroid
+            scrollEnabled
+            keyboardShouldPersistTaps="handled"
+            // style={styles.cardContainer}
+            contentContainerStyle={styles.cardContainer}
           >
-            <Text style={styles.btnText}>View Scoring System</Text>
-          </TouchableOpacity>
+            <View style={styles.bottomPart}>
+              <Text style={styles.headText}>Rules:</Text>
+              <View style={styles.bottomWrap}>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>1.</Text>
+                  <Text style={styles.subText}>
+                    Each month we will be running a contest to see who the best
+                    stock predictors are.
+                  </Text>
+                </View>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>2.</Text>
+                  <Text style={styles.subText}>
+                    The top three predictors for this month will win $500, $300
+                    and $200 respectively.
+                  </Text>
+                </View>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>3.</Text>
+                  <Text style={styles.subText}>
+                    You need to make at least 3 predictions on 3 different
+                    stocks to be eligible.
+                  </Text>
+                </View>
+
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>4.</Text>
+                  <Text style={styles.subText}>
+                    Each prediction must expire in the current month. I think x
+                    stock will change by 
+                    <Text style={{ fontFamily: fonts.f700 }}>
+                      {" "}
+                      month of contest.
+                    </Text>{" "}
+                    This means that you can make guesses for future months
+                    starting today.
+                  </Text>
+                </View>
+
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>5.</Text>
+                  <Text style={styles.subText}>
+                    Stocks that you make your predictions on cannot be acquired
+                    or bankrupt.
+                  </Text>
+                </View>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>6.</Text>
+                  <Text style={styles.subText}>
+                    Prizes will be distributed in CAD dollars.
+                  </Text>
+                </View>
+              </View>
+
+              <Text style={{ ...styles.headText, marginTop: 12 }}>
+                Winner announcements:
+              </Text>
+              <View style={styles.bottomWrap}>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>1.</Text>
+                  <Text style={styles.subText}>
+                    The result will be announced at the end of every month.
+                  </Text>
+                </View>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>2.</Text>
+                  <Text style={styles.subText}>
+                    Winners will be announced on our social media channels.
+                  </Text>
+                </View>
+                <View style={styles.headTextSub}>
+                  <Text style={styles.noText}>3.</Text>
+                  <Text style={styles.subText}>
+                    The winner(s) must have a paypal account or bank account
+                    that can receive e-transfer/wire to accept payment.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleScoringPress}
+              style={styles.bottomBtnBox}
+            >
+              <Text style={styles.btnText}>View Scoring System</Text>
+            </TouchableOpacity>
+          </KeyboardAwareScrollView>
         </View>
       </BottomSheetModal>
     </BottomSheetModalProvider>
@@ -165,7 +179,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "lightgrey",
   },
-
+  cardContainer: {
+    paddingBottom: 50,
+  },
   bottomSheetContainer: {
     flex: 1,
   },

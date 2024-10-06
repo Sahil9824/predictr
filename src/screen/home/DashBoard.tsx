@@ -166,7 +166,9 @@ const DashBoard = () => {
         ListHeaderComponent={
           <>
             {isSelected !== 2 && (
-              <WinnerCard openBottomSheet={openBottomSheet} />
+              <View style={{ paddingHorizontal: 16 }}>
+                <WinnerCard openBottomSheet={openBottomSheet} />
+              </View>
             )}
             <HeaderOptions
               isSelected={isSelected}
@@ -179,7 +181,11 @@ const DashBoard = () => {
           if (isSelected === 2) {
             return <Contests openBottomSheet={openBottomSheet} />; // Render your component when isSelected is 2
           }
-          return <PredictionCard index={index} />; // Render PredictionCard otherwise
+          return (
+            <View style={{ paddingHorizontal: 16 }}>
+              <PredictionCard index={index} />
+            </View>
+          );
         }}
         keyExtractor={(_, index) => index.toString()}
         scrollEventThrottle={16}
