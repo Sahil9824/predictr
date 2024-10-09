@@ -22,8 +22,12 @@ import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import ContestDetails from "../../component/bottomSheets/ContestDetails";
 import Contests from "../../component/Contests";
+import FilterCard from "../../component/FilterCard";
+import CustomDatePicker from "..//../component/CustomDatePicker";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../../constant/navigation.constants";
 
-const HeaderOptions = ({ isSelected, setIsSelected }) => {
+const HeaderOptions = ({ isSelected, setIsSelected, openFilter }) => {
   return (
     <View
       style={{
@@ -36,6 +40,7 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
       }}
     >
       <View style={{ flexDirection: "row", height: scale(50) }}>
+        {/* My Feed Pressable */}
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
@@ -64,6 +69,8 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
             {"My Feed"}
           </Text>
         </Pressable>
+
+        {/* Explore Pressable */}
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
@@ -92,6 +99,7 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
             {"Explore"}
           </Text>
         </Pressable>
+
         <Pressable
           onPress={() => setIsSelected(2)}
           style={[
@@ -121,80 +129,111 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
           </Text>
         </Pressable>
       </View>
-      <Image
-        source={Images.moreOptions}
-        style={{ height: scale(24), width: scale(24) }}
-      />
+
+      {/* More Options Button to open the FilterScreen */}
+      <Pressable onPress={openFilter}>
+        <Image
+          source={Images.moreOptions}
+          style={{ height: scale(24), width: scale(24) }}
+        />
+      </Pressable>
     </View>
   );
 };
 
 const DashBoard = () => {
-  const bottomSheetModalRef = useRef(null);
+  const contestDetailsRef = useRef(null);
+  const filterCardRef = useRef(null);
+  const datePickerRef = useRef(null);
   const [isSelected, setIsSelected] = useState(0);
 
-  const openBottomSheet = () => {
-    bottomSheetModalRef.current?.present();
+  const navigation = useNavigation();
+
+  const onSearchPress = () => {
+    navigation.navigate(SCREENS.SEARCH)
+  }
+  
+
+  const openContestDetails = () => {
+    contestDetailsRef.current?.present();
   };
+
+  const openFilterCard = () => {
+    filterCardRef.current?.present();
+  };
+
+  const openDatePicker = () => {
+    datePickerRef.current?.present(); // Open date picker
+  };
+
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingVertical: scale(10),
-          paddingHorizontal: scale(10),
-        }}
-      >
-        <Text
+    <BottomSheetModalProvider> 
+      <View style={styles.container}>
+        {/* Header */}
+        <View
           style={{
-            fontFamily: fonts.f800,
-            color: Colors.textBlack,
-            fontSize: scale(22),
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingVertical: scale(10),
+            paddingHorizontal: scale(10),
           }}
         >
-          {"Predictr."}
-        </Text>
-        <Image
-          source={Images.headerSearch}
-          style={{ height: scale(22), width: scale(22) }}
-        />
-      </View>
+          <Text
+            style={{
+              fontFamily: fonts.f800,
+              color: Colors.textBlack,
+              fontSize: scale(22),
+            }}
+          >
+            {"Predictr."}
+          </Text>
+          <TouchableOpacity onPress={onSearchPress}>
+          <Image
+            source={Images.headerSearch}
+            style={{ height: scale(22), width: scale(22) }}
+          />
+          </TouchableOpacity>
+         
+        </View>
 
-      <FlatList
-        ListHeaderComponent={
-          <>
-            {isSelected !== 2 && (
-              <View style={{ paddingHorizontal: 16 }}>
-                <WinnerCard openBottomSheet={openBottomSheet} />
-              </View>
-            )}
-            <HeaderOptions
-              isSelected={isSelected}
-              setIsSelected={setIsSelected}
-            />
-          </>
-        }
-        data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
-        renderItem={({ item, index }) => {
-          if (isSelected === 2) {
-            return <Contests openBottomSheet={openBottomSheet} />; // Render your component when isSelected is 2
+        {/* Content */}
+        <FlatList
+          ListHeaderComponent={
+            <>
+              {isSelected !== 2 && (
+                <View style={{ paddingHorizontal: 16 }}>
+                  <WinnerCard openBottomSheet={openContestDetails} />
+                </View>
+              )}
+              <HeaderOptions
+                isSelected={isSelected}
+                setIsSelected={setIsSelected}
+                openFilter={openFilterCard} // Pass the openFilter function
+              />
+            </>
           }
-          return (
-            <View style={{ paddingHorizontal: 16 }}>
-              <PredictionCard index={index} />
-            </View>
-          );
-        }}
-        keyExtractor={(_, index) => index.toString()}
-        scrollEventThrottle={16}
-      />
+          data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
+          renderItem={({ item, index }) => {
+            if (isSelected === 2) {
+              return <Contests openBottomSheet={openContestDetails} />;
+            }
+            return (
+              <View style={{ paddingHorizontal: 16 }}>
+                <PredictionCard index={index} />
+              </View>
+            );
+          }}
+          keyExtractor={(_, index) => index.toString()}
+          scrollEventThrottle={16}
+        />
 
-      {/* <Contests /> */}
+        {/* Bottom Sheets */}
+        <ContestDetails ref={contestDetailsRef} />
+        <FilterCard ref={filterCardRef} />
 
-      <ContestDetails ref={bottomSheetModalRef} />
-    </View>
+      </View>
+    </BottomSheetModalProvider>
   );
 };
 

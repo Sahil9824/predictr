@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabIcon from "../component/Tabicon";
-import { APP_NAVIGATION } from "../constant/navigation.constants";
+import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 import OnboardingStack from "./Onboarding.stack";
 import HomeStack from "./Home.stack";
 import { fonts } from "../constant";

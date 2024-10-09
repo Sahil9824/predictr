@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 // @react-native-async-storage/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+// @react-native-community/datetimepicker
+import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 // react-native-device-info
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-gesture-handler
@@ -20,6 +22,8 @@ import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 // react-native-navigation-bar-color
 import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
+// react-native-pager-view
+import com.reactnativepagerview.PagerViewPackage;
 // react-native-permissions
 import com.zoontek.rnpermissions.RNPermissionsPackage;
 // react-native-reanimated
@@ -76,10 +80,12 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new AsyncStoragePackage(),
+      new RNDateTimePickerPackage(),
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
       new PickerPackage(),
       new NavigationBarColorPackage(),
+      new PagerViewPackage(),
       new RNPermissionsPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
