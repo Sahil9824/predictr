@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     TextInput,
+    Platform,
 } from "react-native";
 import { Colors, fonts } from "../constant";
 import { scale } from "../../helper";
@@ -14,7 +15,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
-import CustomDatePicker from './CustomDatePicker'; 
+import CustomDatePicker from './CustomDatePicker';
 
 const FilterCard = forwardRef((props, ref) => {
     const [selectedAccuracy, setSelectedAccuracy] = useState(null);
@@ -30,41 +31,41 @@ const FilterCard = forwardRef((props, ref) => {
 
     const formatDate = (date) => {
         if (!date || !(date instanceof Date)) return "";
-        const day = String(date.getDate()).padStart(2, '0'); 
-        const month = String(date.getMonth() + 1).padStart(2, '0'); 
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     };
 
 
     const handleCustomDateChange = (selectedDate, type) => {
-        const newDate = new Date(selectedDate); 
+        const newDate = new Date(selectedDate);
         if (!isNaN(newDate)) {
             setDateRange((prev) => ({
                 ...prev,
                 [type]: newDate,
             }));
         }
-        datePickerRef.current?.close(); 
+        datePickerRef.current?.close();
     };
 
 
 
     const openDatePicker = (type) => {
         setShowCustomDatePicker({ ...showCustomDatePicker, [type]: true });
-        datePickerRef.current?.present(); 
+        datePickerRef.current?.present();
     };
 
     const handleManualAccuracyChange = (text) => {
         setManualAccuracy(text);
         if (text) {
-            setSelectedAccuracy(null); 
+            setSelectedAccuracy(null);
         }
     };
 
     const handleAccuracyOptionPress = (range) => {
         setSelectedAccuracy(range);
-        setManualAccuracy(''); 
+        setManualAccuracy('');
     };
 
     const handleSave = () => {
@@ -102,7 +103,7 @@ const FilterCard = forwardRef((props, ref) => {
                     backgroundColor: "#B3B3B3",
                 }}
                 style={styles.bottomSheet}
-                snapPoints={["77%", "90%"]}
+                snapPoints={Platform.OS === 'android' ? ["77%", "90%"] : ["67%", "90%"]}
                 enableContentPanningGesture={false}
             >
                 <View style={styles.bottomSheetContainer}>
@@ -119,10 +120,10 @@ const FilterCard = forwardRef((props, ref) => {
                     <View style={styles.content}>
                         <Text style={styles.sectionTitle}>Accuracy (%)</Text>
                         <TextInput
-                            style={{ borderWidth: 1, borderColor: Colors.lightGrey, borderRadius: 7, paddingStart: 10 }}
+                            style={styles.accuracyInput}
                             placeholder="Enter Manual Accuracy"
                             value={manualAccuracy}
-                            onChangeText={handleManualAccuracyChange} 
+                            onChangeText={handleManualAccuracyChange}
                             keyboardType="numeric"
                         />
 
@@ -134,7 +135,7 @@ const FilterCard = forwardRef((props, ref) => {
                                         styles.accuracyButton,
                                         selectedAccuracy === range && styles.accuracyButtonSelected,
                                     ]}
-                                    onPress={() => handleAccuracyOptionPress(range)} 
+                                    onPress={() => handleAccuracyOptionPress(range)}
                                 >
                                     <Text
                                         style={[
@@ -249,10 +250,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     sectionTitle: {
-        fontFamily: fonts.f600,
         fontSize: scale(15),
         color: Colors.textBlack,
         marginVertical: scale(4),
+        fontWeight: '600'
+    },
+    accuracyInput: {
+        borderWidth: 1,
+        borderColor: Colors.lightGrey,
+        borderRadius: 7,
+        paddingStart: scale(10),
+        height: scale(49)
     },
     accuracyOptions: {
         flexDirection: "row",
@@ -262,7 +270,7 @@ const styles = StyleSheet.create({
     accuracyButton: {
         borderWidth: 1,
         borderColor: Colors.lightGrey,
-        paddingVertical: scale(9),
+        paddingVertical: scale(12),
         paddingHorizontal: scale(26),
         marginHorizontal: scale(2),
         borderRadius: 8,
@@ -305,15 +313,6 @@ const styles = StyleSheet.create({
         height: scale(20),
         tintColor: Colors.textGrey,
     },
-    input: {
-        borderColor: Colors.lightGrey,
-        borderWidth: 1,
-        padding: scale(10),
-        borderRadius: 8,
-        fontFamily: fonts.f400,
-        fontSize: scale(14),
-        color: Colors.textBlack,
-    },
     buttonContainer: {
         paddingBottom: scale(20),
         paddingTop: scale(5),
@@ -354,6 +353,7 @@ const styles = StyleSheet.create({
         fontSize: scale(14),
         color: Colors.textGrey,
         marginLeft: scale(10),
+        height: scale(44)
     },
     hashtagIcon: {
         width: scale(20),
