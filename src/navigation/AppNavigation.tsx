@@ -1,24 +1,32 @@
 import * as React from "react";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TouchableOpacity } from "react-native";
 import TabIcon from "../component/Tabicon";
-import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
+import { APP_NAVIGATION } from "../constant/navigation.constants";
 import OnboardingStack from "./Onboarding.stack";
 import HomeStack from "./Home.stack";
 import { fonts } from "../constant";
-import { Dimensions, TouchableOpacity } from "react-native";
+import LeaderboardScreen from "../screen/Leaderboard/LeaderboardScreen";
+import { Dimensions } from "react-native";
+import { openSettings } from "react-native-permissions";
+import OtherUserProfile from "../screen/Profile/OtherUserProfile";
 
 const Tab = createBottomTabNavigator();
 const numOfTabs = 5;
 const { width } = Dimensions.get("window");
+
 export default function App() {
   const tabWidth = width / numOfTabs - 20;
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused }) => (
-          <TabIcon focused={focused} route={route} />
+        tabBarButton: (props) => (
+          <TouchableOpacity
+            {...props} 
+          />
         ),
+        tabBarIcon: ({ focused }) => <TabIcon focused={focused} route={route} />,
         tabBarShowLabel: true,
         tabBarHideOnKeyboard: true,
         headerShown: false,
@@ -30,7 +38,7 @@ export default function App() {
           justifyContent: "space-between",
         },
         tabBarItemStyle: {
-          width: tabWidth, // Set width dynamically based on screen size
+          width: tabWidth, 
         },
         tabBarLabelStyle: {
           marginTop: 5,
@@ -40,10 +48,10 @@ export default function App() {
       })}
     >
       <Tab.Screen name={APP_NAVIGATION.HOME_SCREEN} component={HomeStack} />
-      <Tab.Screen name={APP_NAVIGATION.LEADERBOARD} component={HomeStack} />
+      <Tab.Screen name={APP_NAVIGATION.LEADERBOARD} component={LeaderboardScreen} />
       <Tab.Screen name={APP_NAVIGATION.PREDICTION} component={HomeStack} />
       <Tab.Screen name={APP_NAVIGATION.NOTIFICATION} component={HomeStack} />
-      <Tab.Screen name={APP_NAVIGATION.PROFILE} component={HomeStack} />
+      <Tab.Screen name={APP_NAVIGATION.PROFILE} component={OtherUserProfile} />
     </Tab.Navigator>
   );
 }

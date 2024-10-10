@@ -16,23 +16,42 @@ const TabIcon = ({ focused, route }) => {
 
   switch (name) {
     case APP_NAVIGATION.HOME_SCREEN:
-      return <Icons type={ICONS.HOME} fill={tabIconColor} />;
+      return (
+        <Icons
+          type={ICONS.HOME}
+          fill={tabIconColor}
+          stroke={tabIconColor}
+          strokeWidth={2}
+        />
+      );
     case APP_NAVIGATION.LEADERBOARD:
       return (
-        <Icons type={ICONS.LEADERBOARD} fill={tabIconColor} strokeWidth={2} />
+        <Icons
+          type={ICONS.LEADERBOARD}
+          fill={tabIconColor}
+          stroke={tabIconColor}
+          strokeWidth={2}
+        />
       );
     case APP_NAVIGATION.PREDICTION:
       return (
         <Icons type={ICONS.PREDICTION} fill={tabIconColor} strokeWidth={2} />
       );
-    case APP_NAVIGATION.PROFILE:
-      return <Icons type={ICONS.PROFILE} fill={tabIconColor} strokeWidth={2} />;
     case APP_NAVIGATION.NOTIFICATION:
       return (
         <Icons
           type={ICONS.NOTIFICATION}
-          stroke={tabIconColor}
           fill={tabIconColor}
+          stroke={tabIconColor}
+          strokeWidth={2}
+        />
+      );
+    case APP_NAVIGATION.PROFILE:
+      return (
+        <Icons
+          type={ICONS.PROFILE}
+          fill={tabIconColor}
+          stroke={tabIconColor}
           strokeWidth={2}
         />
       );

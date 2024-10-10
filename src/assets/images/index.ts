@@ -47,4 +47,7 @@ export const Images = {
   noMovement: require('./NoMovement.png'),
   wrongMark: require('./WrongMark.png'),
   wrongMarkWhite: require('./WrongMarkWhite.png'),
+  Chevron_down: require('./Chevron_down.png'),
+  Chevron_right: require('./Chevron_right.png'),
+  Check: require('./Check.png')
 };
