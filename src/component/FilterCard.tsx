@@ -29,6 +29,7 @@ const FilterCard = forwardRef((props, ref) => {
     const [dateRange, setDateRange] = useState({ from: null, to: null });
     const [showCustomDatePicker, setShowCustomDatePicker] = useState({ from: false, to: false });
     const [hashtag, setHashtag] = useState("");
+    const [isReset, setIsReset] = useState(false);
     const datePickerRef = useRef<BottomSheetModal>(null);
 
     const navigation = useNavigation();
@@ -84,19 +85,22 @@ const FilterCard = forwardRef((props, ref) => {
             to: dateRange.to.toISOString(),
             tags: hashtag || '',
           };
-      
+          setIsReset(false);
           closeBottomSheet(); 
           ref.current?.close();
-          navigation.navigate(SCREENS.HOME, { filteredOptions });
+          navigation.navigate(SCREENS.HOME, { filteredOptions, isReset });
         }
       };
       
       
     const clearStates = () => {
+        setIsReset(true);
         setSelectedAccuracy(null);
         setManualAccuracy("");
         setDateRange({ from: null, to: null });
         setHashtag("");
+        props.onFilterReset && props.onFilterReset();
+        props.isReset
     };
 
     const closeBottomSheet = () => {

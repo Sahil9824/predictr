@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Colors, fonts } from "../../constant";
 import { Images } from "../../assets/images";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { scale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
 import WinnerCard from "../../component/WinnerCard";
@@ -28,7 +28,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 import ShareCard from '../../component/ShareCard';
 
-const HeaderOptions = ({ isSelected, setIsSelected, openFilter }) => {
+const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions }) => {
   return (
     <View
       style={{
@@ -133,10 +133,16 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter }) => {
 
       {/* More Options Button to open the FilterScreen */}
       <Pressable onPress={openFilter}>
-        <Image
-          source={Images.moreOptions}
-          style={{ height: scale(24), width: scale(24) }}
-        />
+        {filteredOptions ?
+          <Image
+            source={Images.FilterSelected}
+            style={{ height: scale(24), width: scale(24) }}
+          /> :
+          <Image
+            source={Images.moreOptions}
+            style={{ height: scale(24), width: scale(24) }}
+          />
+        }
       </Pressable>
     </View>
   );
@@ -145,14 +151,30 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter }) => {
 const DashBoard = () => {
   const contestDetailsRef = useRef(null);
   const filterCardRef = useRef(null);
-  const datePickerRef = useRef(null);
-  const shareCardRef = useRef(null)
   const [isSelected, setIsSelected] = useState(0);
-
+  const [filteredOptions, setFilteredOptions] = useState(null);
   const navigation = useNavigation();
 
   const route = useRoute();
-  const filteredOptions = route.params?.filteredOptions || null;
+  let filteredOptionsRecieved = route.params?.filteredOptions || null;
+
+  const isReset = route.params?.isReset || false;
+
+
+  useEffect(() => {
+    if (filteredOptionsRecieved) {
+      setFilteredOptions(filteredOptionsRecieved);
+    }
+    if (isReset) {
+      handleFilterReset();
+    }
+  }, [isReset, filteredOptionsRecieved]);
+
+
+  const handleFilterReset = () => {
+    console.log("Filter has been reset");
+    setFilteredOptions(null);
+  };
 
   console.log("FilteredOptions:", filteredOptions);
 
@@ -169,13 +191,6 @@ const DashBoard = () => {
     filterCardRef.current?.present();
   };
 
-  const openDatePicker = () => {
-    datePickerRef.current?.present();
-  };
-
-  const openShareCard = () => {
-    shareCardRef.current?.present();
-  }
 
   return (
     <BottomSheetModalProvider>
@@ -221,6 +236,7 @@ const DashBoard = () => {
                 isSelected={isSelected}
                 setIsSelected={setIsSelected}
                 openFilter={openFilterCard}
+                filteredOptions={filteredOptions}
               />
             </>
           }
@@ -241,8 +257,7 @@ const DashBoard = () => {
 
         {/* Bottom Sheets */}
         <ContestDetails ref={contestDetailsRef} />
-        <FilterCard ref={filterCardRef} />
-        <ShareCard ref={shareCardRef} />
+        <FilterCard ref={filterCardRef} onFilterReset={handleFilterReset} isReset={isReset} />
       </View>
     </BottomSheetModalProvider>
   );

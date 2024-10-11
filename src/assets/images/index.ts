@@ -55,5 +55,6 @@ export const Images = {
   Instagram: require('./Instagram.png'),
   Whatsapp: require('./Whatsapp.png'),
   Facebook: require('./Facebook.png'),
-  Messenger: require('./Messenger.png')
+  Messenger: require('./Messenger.png'),
+  FilterSelected: require('./FilterSelected.png')
 };
