@@ -3,6 +3,7 @@ import { StatusBar } from "react-native";
 
 import PreloginStack from "./Prelogin.stack";
 import AppNavigation from "./AppNavigation";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 //TODO: When integration use this
 const Navigation = () => {
@@ -11,7 +12,9 @@ const Navigation = () => {
   return isAuthenticated ? (
     <>
       <StatusBar barStyle="light-content" />
-      <AppNavigation />
+      <BottomSheetModalProvider>
+        <AppNavigation />
+      </BottomSheetModalProvider>
     </>
   ) : (
     <>

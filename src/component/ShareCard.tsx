@@ -28,7 +28,7 @@ const ShareCard = forwardRef((props, ref) => {
                     backgroundColor: "#B3B3B3",
                 }}
                 style={styles.bottomSheet}
-                snapPoints={Platform.OS === "android" ? ["40%", "90%"] : ["30%", "90%"]}
+                snapPoints={Platform.OS === "android" ? ["38%", "90%"] : ["28%", "90%"]}
                 enableContentPanningGesture={false}
             >
                 <View style={styles.content}>
@@ -55,7 +55,7 @@ const ShareCard = forwardRef((props, ref) => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{borderBottomWidth: 0.2, marginHorizontal: scale(3), borderBottomColor: '#000'}}></View>
+                    <View style={{borderBottomWidth: 0.2, marginHorizontal: scale(2), borderBottomColor: '#000'}}></View>
 
                     <View style={styles.socialRow}>
                         <TouchableOpacity style={styles.socialIconContainer}>
