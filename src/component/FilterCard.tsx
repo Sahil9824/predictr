@@ -19,6 +19,8 @@ import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import CustomDatePicker from './CustomDatePicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
+import { useNavigation } from "@react-navigation/native";
+import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 
 
 const FilterCard = forwardRef((props, ref) => {
@@ -28,6 +30,8 @@ const FilterCard = forwardRef((props, ref) => {
     const [showCustomDatePicker, setShowCustomDatePicker] = useState({ from: false, to: false });
     const [hashtag, setHashtag] = useState("");
     const datePickerRef = useRef<BottomSheetModal>(null);
+
+    const navigation = useNavigation();
 
     const renderBackdrop = (props) => (
         <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
@@ -73,14 +77,21 @@ const FilterCard = forwardRef((props, ref) => {
     };
 
     const handleSave = () => {
-        console.log({
+        if (dateRange.from && dateRange.to && (selectedAccuracy || manualAccuracy.trim())) {
+          const filteredOptions = {
             accuracy: selectedAccuracy || manualAccuracy,
-            dateRange,
-            hashtag,
-        });
-        closeBottomSheet();
-    };
-
+            from: dateRange.from.toISOString(),
+            to: dateRange.to.toISOString(),
+            tags: hashtag || '',
+          };
+      
+          closeBottomSheet(); 
+          ref.current?.close();
+          navigation.navigate(SCREENS.HOME, { filteredOptions });
+        }
+      };
+      
+      
     const clearStates = () => {
         setSelectedAccuracy(null);
         setManualAccuracy("");

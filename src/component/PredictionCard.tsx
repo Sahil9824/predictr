@@ -11,6 +11,7 @@ import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
 import { useRef, useState } from "react";
 import Tooltip from "react-native-walkthrough-tooltip";
+import ShareCard from "./ShareCard";
 
 interface IPredictionCard {
   index: number;
@@ -18,6 +19,14 @@ interface IPredictionCard {
 
 const PredictionCard = ({ index }: IPredictionCard) => {
   const [toolTipVisible, setToolTipVisible] = useState(false);
+  const shareCardRef = useRef(null);
+
+  const onSharePress = () => {
+    if (shareCardRef.current) {
+      shareCardRef.current.present();
+    }
+  };
+
   return (
     <View
       style={[
@@ -41,13 +50,13 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           borderBottomColor: "white",
           backgroundColor: "white",
           overflow: "hidden",
-          shadowColor: "rgba(0, 0, 0, 0.15)", // Increased shadow color intensity
+          shadowColor: "rgba(0, 0, 0, 0.15)", 
           shadowOffset: {
-            width: 0, // Shadow width (0px)
-            height: 5, // Increased shadow height for a more pronounced shadow
+            width: 0, 
+            height: 5, 
           },
-          shadowOpacity: 0.15, // Increased shadow opacity
-          shadowRadius: 10, // Increased shadow radius for a softer shadow
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
           elevation: 10,
         }}
       >
@@ -285,18 +294,20 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               </Text>
             </Pressable>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              flexGrow: 1,
-              justifyContent: "flex-end",
-            }}
-          >
-            <Image
-              source={Images.share}
-              style={{ height: scale(16), width: scale(16) }}
-            />
-          </View>
+          <TouchableOpacity onPress={onSharePress}>
+            <View
+              style={{
+                flexDirection: "row",
+                flexGrow: 1,
+                justifyContent: "flex-end",
+              }}
+            >
+              <Image
+                source={Images.share}
+                style={{ height: scale(16), width: scale(16) }}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -554,6 +565,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           {/* <Text>{"Result in 5d"}</Text> */}
         </View>
       )}
+      <ShareCard ref={shareCardRef} />
     </View>
   );
 };

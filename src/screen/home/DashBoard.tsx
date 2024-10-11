@@ -24,8 +24,9 @@ import ContestDetails from "../../component/bottomSheets/ContestDetails";
 import Contests from "../../component/Contests";
 import FilterCard from "../../component/FilterCard";
 import CustomDatePicker from "..//../component/CustomDatePicker";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
+import ShareCard from '../../component/ShareCard';
 
 const HeaderOptions = ({ isSelected, setIsSelected, openFilter }) => {
   return (
@@ -145,14 +146,20 @@ const DashBoard = () => {
   const contestDetailsRef = useRef(null);
   const filterCardRef = useRef(null);
   const datePickerRef = useRef(null);
+  const shareCardRef = useRef(null)
   const [isSelected, setIsSelected] = useState(0);
 
   const navigation = useNavigation();
 
+  const route = useRoute();
+  const filteredOptions = route.params?.filteredOptions || null;
+
+  console.log("FilteredOptions:", filteredOptions);
+
   const onSearchPress = () => {
     navigation.navigate(SCREENS.SEARCH)
   }
-  
+
 
   const openContestDetails = () => {
     contestDetailsRef.current?.present();
@@ -163,11 +170,15 @@ const DashBoard = () => {
   };
 
   const openDatePicker = () => {
-    datePickerRef.current?.present(); // Open date picker
+    datePickerRef.current?.present();
   };
 
+  const openShareCard = () => {
+    shareCardRef.current?.present();
+  }
+
   return (
-    <BottomSheetModalProvider> 
+    <BottomSheetModalProvider>
       <View style={styles.container}>
         {/* Header */}
         <View
@@ -189,12 +200,12 @@ const DashBoard = () => {
             {"Predictr."}
           </Text>
           <TouchableOpacity onPress={onSearchPress}>
-          <Image
-            source={Images.headerSearch}
-            style={{ height: scale(22), width: scale(22) }}
-          />
+            <Image
+              source={Images.headerSearch}
+              style={{ height: scale(22), width: scale(22) }}
+            />
           </TouchableOpacity>
-         
+
         </View>
 
         {/* Content */}
@@ -209,7 +220,7 @@ const DashBoard = () => {
               <HeaderOptions
                 isSelected={isSelected}
                 setIsSelected={setIsSelected}
-                openFilter={openFilterCard} // Pass the openFilter function
+                openFilter={openFilterCard}
               />
             </>
           }
@@ -231,7 +242,7 @@ const DashBoard = () => {
         {/* Bottom Sheets */}
         <ContestDetails ref={contestDetailsRef} />
         <FilterCard ref={filterCardRef} />
-
+        <ShareCard ref={shareCardRef} />
       </View>
     </BottomSheetModalProvider>
   );

@@ -49,5 +49,11 @@ export const Images = {
   wrongMarkWhite: require('./WrongMarkWhite.png'),
   Chevron_down: require('./Chevron_down.png'),
   Chevron_right: require('./Chevron_right.png'),
-  Check: require('./Check.png')
+  Check: require('./Check.png'),
+  ShareVia: require('./ShareVia.png'),
+  CopyLink: require('./CopyLink.png'),
+  Instagram: require('./Instagram.png'),
+  Whatsapp: require('./Whatsapp.png'),
+  Facebook: require('./Facebook.png'),
+  Messenger: require('./Messenger.png')
 };
