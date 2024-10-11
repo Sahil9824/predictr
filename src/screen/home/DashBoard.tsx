@@ -160,6 +160,13 @@ const DashBoard = () => {
 
   const isReset = route.params?.isReset || false;
 
+  const [cardsData, setCardsData] = useState([
+    { id: 1, isFavorited: false },
+    { id: 2, isFavorited: false },
+    { id: 3, isFavorited: false },
+    { id: 4, isFavorited: false }
+  ]);
+
 
   useEffect(() => {
     if (filteredOptionsRecieved) {
@@ -174,6 +181,16 @@ const DashBoard = () => {
   const handleFilterReset = () => {
     console.log("Filter has been reset");
     setFilteredOptions(null);
+  };
+
+  const toggleFavorite = (cardId) => {
+    setCardsData((prevCardsData) =>
+      prevCardsData.map((card) =>
+        card.id === cardId
+          ? { ...card, isFavorited: !card.isFavorited }
+          : card
+      )
+    );
   };
 
   console.log("FilteredOptions:", filteredOptions);
@@ -241,13 +258,18 @@ const DashBoard = () => {
             </>
           }
           data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => {
             if (isSelected === 2) {
               return <Contests openBottomSheet={openContestDetails} />;
             }
             return (
               <View style={{ paddingHorizontal: 16 }}>
-                <PredictionCard index={index} />
+                <PredictionCard
+                  index={item.id}
+                  isFavorited={item.isFavorited}
+                  onFavoritePress={() => toggleFavorite(item.id)}
+                />
               </View>
             );
           }}
