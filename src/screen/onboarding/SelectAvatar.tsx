@@ -17,7 +17,7 @@ import Button from "../../component/Button";
 import ImagePicker from "../../component/ImagePicker";
 import Input, { Iref } from "../../component/Input";
 import { Colors, fonts } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
+// import { RootStackParamList } from "../../navigation/MainNavigation";
 import ImageCropPicker from "react-native-image-crop-picker";
 import {
   PERMISSIONS,
@@ -27,6 +27,7 @@ import {
 } from "react-native-permissions";
 import DeviceInfo from "react-native-device-info";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
 
 const Avatars = [
   { image: Images.avatar1, name: "Bear" },
@@ -49,11 +50,11 @@ const Avatars = [
   { image: Images.avatar18, name: "Eagle" },
 ];
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "SelectAvatar">;
-}
+// interface Props {
+//   navigation: StackNavigationProp<RootStackParamList, "SelectAvatar">;
+// }
 
-const SelectAvatar: React.FC<Props> = ({ navigation }) => {
+const SelectAvatar: React.FC<any> = ({ navigation }) => {
   const [validNameText, setValidNameText] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [image, setImage] = useState<{
@@ -177,7 +178,7 @@ const SelectAvatar: React.FC<Props> = ({ navigation }) => {
       return;
     }
 
-    navigation.navigate("FeedSetup", {
+    navigation.navigate(SCREENS.FEED_SETUP, {
       username: emailRef.current?.value,
       profileImage: image.image,
     });

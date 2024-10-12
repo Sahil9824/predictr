@@ -5,17 +5,18 @@ import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, errorMsg, fonts, regex } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
+// import { RootStackParamList } from "../../navigation/MainNavigation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useToast } from "react-native-toast-notifications";
 import { Images } from "../../assets/images";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
-}
+// interface Props {
+//   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
+// }
 
-const SetNewPassword = ({ navigation }: Props) => {
+const SetNewPassword = ({ navigation }: any) => {
   const toast = useToast();
 
   const [cnfValidText, setCnfValidText] = useState("");
@@ -64,7 +65,7 @@ const SetNewPassword = ({ navigation }: Props) => {
     // TODO:toast setup
     toast.show("Password updated");
     // toast.show("Password updated");
-    navigation.navigate("Login");
+    navigation.navigate(SCREENS.LOGIN);
   };
 
   useLayoutEffect(() => {

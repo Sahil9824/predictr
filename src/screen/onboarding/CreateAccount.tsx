@@ -20,14 +20,15 @@ import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, errorMsg, fonts, regex } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
+import userStore from "../../user.store";
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
-}
+// interface Props {
+//   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
+// }
 
-const CreateAccount = ({ navigation }: Props) => {
+const CreateAccount = ({ navigation }: any) => {
   const [cnfValidText, setCnfValidText] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
@@ -37,6 +38,8 @@ const CreateAccount = ({ navigation }: Props) => {
   const emailRef = useRef<Iref>(null);
   const passwordRef = useRef<Iref>(null);
   const confirmPasswordRef = useRef<Iref>(null);
+
+  const { setIsAuthenticated } = userStore();
 
   const emailValidation = () => {
     if (!emailRef.current?.value) {
@@ -91,7 +94,8 @@ const CreateAccount = ({ navigation }: Props) => {
     ) {
       return;
     }
-    navigation.navigate("SelectAvatar");
+    setIsAuthenticated(true);
+    navigation.navigate(SCREENS.SELECT_AVATAR);
   };
 
   useEffect(() => {
@@ -113,7 +117,7 @@ const CreateAccount = ({ navigation }: Props) => {
           navigation={navigation}
           rightText={"Login"}
           onRightPress={() => {
-            navigation.navigate("Login");
+            navigation.navigate(SCREENS.LOGIN);
           }}
         />
       ),
