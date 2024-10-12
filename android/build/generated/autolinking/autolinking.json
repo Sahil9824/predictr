@@ -1,26 +1,26 @@
 {
-  "root": "/Users/Sahil/Documents/GitHub/predictr",
-  "reactNativePath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native",
+  "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr",
+  "reactNativePath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native",
   "reactNativeVersion": "0.75",
   "dependencies": {
     "@react-native-async-storage/async-storage": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-async-storage/async-storage",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-async-storage/async-storage",
       "name": "@react-native-async-storage/async-storage",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-async-storage/async-storage/RNCAsyncStorage.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-async-storage/async-storage/RNCAsyncStorage.podspec",
           "version": "2.0.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-async-storage/async-storage/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-async-storage/async-storage/android",
           "packageImportPath": "import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;",
           "packageInstance": "new AsyncStoragePackage()",
           "buildTypes": [],
           "libraryName": "rnasyncstorage",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -29,23 +29,23 @@
       }
     },
     "@react-native-community/datetimepicker": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-community/datetimepicker",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-community/datetimepicker",
       "name": "@react-native-community/datetimepicker",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec",
           "version": "8.2.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-community/datetimepicker/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-community/datetimepicker/android",
           "packageImportPath": "import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;",
           "packageInstance": "new RNDateTimePickerPackage()",
           "buildTypes": [],
           "libraryName": "RNDateTimePickerCGen",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/@react-native-community/datetimepicker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/@react-native-community/datetimepicker/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -54,22 +54,22 @@
       }
     },
     "react-native-device-info": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-device-info",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-device-info",
       "name": "react-native-device-info",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-device-info/RNDeviceInfo.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-device-info/RNDeviceInfo.podspec",
           "version": "13.0.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-device-info/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-device-info/android",
           "packageImportPath": "import com.learnium.RNDeviceInfo.RNDeviceInfo;",
           "packageInstance": "new RNDeviceInfo()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-device-info/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-device-info/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -78,17 +78,17 @@
       }
     },
     "react-native-gesture-handler": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-gesture-handler",
       "name": "react-native-gesture-handler",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
           "version": "2.20.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-gesture-handler/android",
           "packageImportPath": "import com.swmansion.gesturehandler.RNGestureHandlerPackage;",
           "packageInstance": "new RNGestureHandlerPackage()",
           "buildTypes": [],
@@ -97,7 +97,7 @@
             "RNGestureHandlerButtonComponentDescriptor",
             "RNGestureHandlerRootViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -106,22 +106,22 @@
       }
     },
     "react-native-image-crop-picker": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-image-crop-picker",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-image-crop-picker",
       "name": "react-native-image-crop-picker",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-image-crop-picker/RNImageCropPicker.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-image-crop-picker/RNImageCropPicker.podspec",
           "version": "0.41.2",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-image-crop-picker/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-image-crop-picker/android",
           "packageImportPath": "import com.reactnative.ivpusic.imagepicker.PickerPackage;",
           "packageInstance": "new PickerPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-image-crop-picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-image-crop-picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -130,17 +130,17 @@
       }
     },
     "react-native-navigation-bar-color": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-navigation-bar-color",
       "name": "react-native-navigation-bar-color",
       "platforms": {
         "ios": null,
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-navigation-bar-color/android",
           "packageImportPath": "import com.thebylito.navigationbarcolor.NavigationBarColorPackage;",
           "packageInstance": "new NavigationBarColorPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-navigation-bar-color/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -149,17 +149,17 @@
       }
     },
     "react-native-pager-view": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-pager-view",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-pager-view",
       "name": "react-native-pager-view",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-pager-view/react-native-pager-view.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-pager-view/react-native-pager-view.podspec",
           "version": "6.4.1",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-pager-view/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-pager-view/android",
           "packageImportPath": "import com.reactnativepagerview.PagerViewPackage;",
           "packageInstance": "new PagerViewPackage()",
           "buildTypes": [],
@@ -168,7 +168,7 @@
             "LEGACY_RNCViewPagerComponentDescriptor",
             "RNCViewPagerComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-pager-view/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-pager-view/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -177,23 +177,23 @@
       }
     },
     "react-native-permissions": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-permissions",
       "name": "react-native-permissions",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/RNPermissions.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-permissions/RNPermissions.podspec",
           "version": "4.1.5",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-permissions/android",
           "packageImportPath": "import com.zoontek.rnpermissions.RNPermissionsPackage;",
           "packageInstance": "new RNPermissionsPackage()",
           "buildTypes": [],
           "libraryName": "RNPermissionsSpec",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-permissions/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-permissions/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -202,23 +202,23 @@
       }
     },
     "react-native-reanimated": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-reanimated",
       "name": "react-native-reanimated",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/RNReanimated.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-reanimated/RNReanimated.podspec",
           "version": "3.15.4",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-reanimated/android",
           "packageImportPath": "import com.swmansion.reanimated.ReanimatedPackage;",
           "packageInstance": "new ReanimatedPackage()",
           "buildTypes": [],
           "libraryName": "rnreanimated",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -227,17 +227,17 @@
       }
     },
     "react-native-safe-area-context": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-safe-area-context",
       "name": "react-native-safe-area-context",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
           "version": "4.11.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-safe-area-context/android",
           "packageImportPath": "import com.th3rdwave.safeareacontext.SafeAreaContextPackage;",
           "packageInstance": "new SafeAreaContextPackage()",
           "buildTypes": [],
@@ -246,7 +246,7 @@
             "RNCSafeAreaProviderComponentDescriptor",
             "RNCSafeAreaViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -255,17 +255,17 @@
       }
     },
     "react-native-screens": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-screens",
       "name": "react-native-screens",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/RNScreens.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-screens/RNScreens.podspec",
           "version": "3.34.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-screens/android",
           "packageImportPath": "import com.swmansion.rnscreens.RNScreensPackage;",
           "packageInstance": "new RNScreensPackage()",
           "buildTypes": [],
@@ -281,7 +281,7 @@
             "RNSScreenComponentDescriptor",
             "RNSModalScreenComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -290,17 +290,17 @@
       }
     },
     "react-native-svg": {
-      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg",
+      "root": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-svg",
       "name": "react-native-svg",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/RNSVG.podspec",
+          "podspecPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-svg/RNSVG.podspec",
           "version": "15.7.1",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/android",
+          "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-svg/android",
           "packageImportPath": "import com.horcrux.svg.SvgPackage;",
           "packageInstance": "new SvgPackage()",
           "buildTypes": [],
@@ -333,7 +333,7 @@
             "RNSVGTSpanComponentDescriptor",
             "RNSVGUseComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/mac/Documents/GenxReactNative/predictr/predictr/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -503,7 +503,7 @@
         {
           "name": "--path <path>",
           "description": "Path to the React Native project root.",
-          "default": "/Users/Sahil/Documents/GitHub/predictr"
+          "default": "/Users/mac/Documents/GenxReactNative/predictr/predictr"
         },
         {
           "name": "--platform <string>",
@@ -792,7 +792,7 @@
   ],
   "project": {
     "ios": {
-      "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/ios",
+      "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/ios",
       "xcodeProject": {
         "name": "predictr.xcworkspace",
         "path": ".",
@@ -802,7 +802,7 @@
       "assets": []
     },
     "android": {
-      "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/android",
+      "sourceDir": "/Users/mac/Documents/GenxReactNative/predictr/predictr/android",
       "appName": "app",
       "packageName": "com.predictr",
       "applicationId": "com.predictr",

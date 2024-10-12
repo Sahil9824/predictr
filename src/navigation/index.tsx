@@ -3,11 +3,8 @@ import { StatusBar } from "react-native";
 
 import PreloginStack from "./Prelogin.stack";
 import AppNavigation from "./AppNavigation";
-<<<<<<< Updated upstream
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-=======
 import userStore from "../user.store";
->>>>>>> Stashed changes
 
 //TODO: When integration use this
 const Navigation = () => {
