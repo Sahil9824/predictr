@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: '#fff',
         margin: 10,
-        marginTop: 25
+        marginTop: 25,
     },
     searchBoxContainer: {
         flexDirection: 'row',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.8,
         backgroundColor: '#fff',
         borderRadius: 12,
-        paddingVertical: 3,
+        paddingVertical: 2,
         paddingHorizontal: 10,
     },
     searchBox: {
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         backgroundColor: '#fff',
         fontSize: 16,
-        color: '#717272'
+        color: '#717272',
     },
     cancelButton: {
         color: '#717272',
@@ -105,19 +105,21 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,
         elevation: 0,
-        paddingHorizontal: 20,
+        paddingHorizontal: 30,  
     },
     labelStyle: {
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '500',
         textTransform: 'none',
     },
     indicatorStyle: {
         backgroundColor: '#024BAC',
         height: 3,
-        width: 200,
-       marginHorizontal: scale(20),
+        width: 180,  
+        marginLeft: 40,  
+        marginRight: 40, 
     },
 });
+
 
 export default SearchScreen;

@@ -23,8 +23,8 @@ const PredictionCard = ({ index }: IPredictionCard) => {
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
-  const [likeCount, setLikeCount] = useState(0); // Count for likes
-  const [dislikeCount, setDislikeCount] = useState(0); // Count for dislikes
+  const [likeCount, setLikeCount] = useState(45); // Count for likes
+  const [dislikeCount, setDislikeCount] = useState(70); // Count for dislikes
   const shareCardRef = useRef(null);
 
   const onSharePress = () => {
@@ -86,10 +86,10 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           borderBottomColor: "white",
           backgroundColor: "white",
           overflow: "hidden",
-          shadowColor: "rgba(0, 0, 0, 0.15)", 
+          shadowColor: "rgba(0, 0, 0, 0.15)",
           shadowOffset: {
-            width: 0, 
-            height: 5, 
+            width: 0,
+            height: 5,
           },
           shadowOpacity: 0.15,
           shadowRadius: 10,
@@ -237,7 +237,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontFamily: fonts.f700,
                 fontSize: scale(15),
                 lineHeight: scale(19),
-                color: Colors.textBlack, 
+                color: Colors.textBlack,
               }}
             >
               {"Apr 5"}
@@ -259,10 +259,10 @@ const PredictionCard = ({ index }: IPredictionCard) => {
         </Text>
 
         <View style={{ flexDirection: "row", marginTop: 10 }}>
-        <View style={{ flexDirection: "row" }}>
-            <Pressable onPress={handleLike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(10) }}>
+          <View style={{ flexDirection: "row" ,}}>
+            <Pressable onPress={handleLike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(35) }}>
               <Image
-                source={liked ? Images.likeFilled : Images.like} 
+                source={liked ? Images.likeFilled : Images.like}
                 style={{ height: scale(16), width: scale(16), marginRight: 4 }}
               />
               <Text
@@ -273,12 +273,12 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   color: Colors.textGrey,
                 }}
               >
-                {likeCount !== 0 ? likeCount : 'Agree'} 
+                {likeCount !== 0 ? likeCount : 'Agree'}
               </Text>
             </Pressable>
-            <Pressable onPress={handleDislike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(10) }}>
+            <Pressable onPress={handleDislike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(45) }}>
               <Image
-                source={disliked ? Images.dislikeFilled : Images.dislike} 
+                source={disliked ? Images.dislikeFilled : Images.dislike}
                 style={{ height: scale(16), width: scale(16), marginRight: 4 }}
               />
               <Text
@@ -293,12 +293,36 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               </Text>
             </Pressable>
           </View>
+          <Pressable
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: scale(10),
+            }}
+          >
+            <Image
+              source={Images.comment}
+              style={{ height: scale(16), width: scale(16), marginRight: 4 }}
+            />
+            <Text
+              style={{
+                fontFamily: fonts.f400,
+                fontSize: scale(13),
+                lineHeight: scale(19),
+                color: Colors.textGrey,
+              }}
+            >
+              {"Comment"}
+            </Text>
+          </Pressable>
           <TouchableOpacity onPress={onSharePress}>
             <View
               style={{
                 flexDirection: "row",
                 flexGrow: 1,
                 justifyContent: "flex-end",
+                marginStart: scale(40)
               }}
             >
               <Image

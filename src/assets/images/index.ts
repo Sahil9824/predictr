@@ -58,5 +58,10 @@ export const Images = {
   Messenger: require('./Messenger.png'),
   FilterSelected: require('./FilterSelected.png'),
   likeFilled: require('./LikeFilled.png'),
-  dislikeFilled: require('./DislikeFilled.png')
+  dislikeFilled: require('./DislikeFilled.png'),
+  think: require('./Think.png'),
+  Calendar: require('./Cal.png'),
+  Chart: require('./Chart.png'),
+  Formula1: require('./Formula1.png'),
+  Formula2: require('./Formula2.png'),
 };

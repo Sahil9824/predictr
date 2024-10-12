@@ -221,7 +221,7 @@ const FilterCard = forwardRef((props, ref) => {
             <BottomSheetModal
                 ref={datePickerRef}
                 index={0}
-                snapPoints={Platform.OS === 'android' ? ["63%"] : ["58%"]}
+                snapPoints={Platform.OS === 'android' ? ["74%"] : ["58%"]}
                 handleIndicatorStyle={{
                     width: 65,
                     height: 5,
@@ -289,8 +289,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.lightGrey,
         paddingVertical: scale(12),
-        paddingHorizontal: scale(25),
-        marginHorizontal: scale(2),
+        paddingHorizontal: scale(25.7),
         borderRadius: 8,
     },
     accuracyButtonSelected: {

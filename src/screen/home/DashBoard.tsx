@@ -136,11 +136,11 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
         {filteredOptions ?
           <Image
             source={Images.FilterSelected}
-            style={{ height: scale(24), width: scale(24) }}
+            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
           /> :
           <Image
             source={Images.moreOptions}
-            style={{ height: scale(24), width: scale(24) }}
+            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
           />
         }
       </Pressable>

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { scale, verticalScale, moderateScale } from '../../../helper';
 import { Images } from '../../assets/images';
-import { Colors } from '../../constant';
+import { Colors, fonts } from '../../constant';
+import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../../constant/navigation.constants';
+import Icons from '../../component/Icons';
+import { ICONS } from '../../constant/icons.constants';
 
 
 interface LeaderboardEntry {
@@ -31,6 +35,11 @@ const leaderboardData: LeaderboardEntry[] = [
 const LeaderboardScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState('All-time');
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
+  const navigation = useNavigation()
+
+  const onSearchPress = () => {
+    navigation.navigate(SCREENS.SEARCH)
+  }
 
   const renderEntry = ({ item }: { item: LeaderboardEntry }) => (
     <View style={[styles.entryContainer, item.isCurrentUser && styles.currentUser]}>
@@ -66,10 +75,12 @@ const LeaderboardScreen = () => {
         <View>
         </View>
         <View style={{ paddingHorizontal: 15 }}>
+          <TouchableOpacity onPress={onSearchPress}>
           <Image
             source={Images.headerSearch}
             style={{ height: scale(18), width: scale(18), justifyContent: "flex-end" }}
           />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 10, alignItems: "center", borderBottomWidth: 1, borderColor: '#e0e0e0', }}>
@@ -101,39 +112,34 @@ const LeaderboardScreen = () => {
         keyExtractor={(item) => item.id.toString()}
       />
 
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isFilterModalVisible}
-        onRequestClose={() => setIsFilterModalVisible(false)}
-      >
-        <Pressable style={styles.modalOverlay} onPress={() => setIsFilterModalVisible(false)}>
-          <View style={styles.modalContainer}>
-            {['All-time', 'Month', 'Week'].map((filter) => (
-              <Pressable
-                key={filter}
-                style={styles.modalOption}
-                onPress={() => {
-                  setSelectedFilter(filter);
-                  setIsFilterModalVisible(false);
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center", }}>
-                  {selectedFilter === filter && <Image
-                    source={Images.Check}
-                    style={{ marginHorizontal: 20 }}
-                  />
-                  }
-                  <Text style={selectedFilter === filter ? styles.selectedOption : styles.optionText}>
-                    {filter}
-                  </Text>
+{isFilterModalVisible && (
+        <View style={styles.dropdown}>
+           {['All-time', 'Month', 'Week'].map((filter) => (
+            <Pressable
+            key={filter}
+              onPress={() => {setSelectedFilter(filter); setIsFilterModalVisible(false)}}
+              style={styles.dropdownItem}
+            >
+              <View style={[styles.optionContent]}>
+                <View style={[styles.box]}>
+                  {selectedFilter === filter && (
+                    <Icons type={ICONS.SELECTED} style={styles.selectedIcon} />
+                  )}
                 </View>
-
-              </Pressable>
-            ))}
-          </View>
-        </Pressable>
-      </Modal>
+                <Text
+                  style={{
+                    color: "#F6F8F9",
+                    fontFamily: fonts.f400,
+                    fontSize: 15,
+                  }}
+                >
+                  {filter}
+                </Text>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      )}
     </View>
   );
 };
@@ -219,40 +225,33 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     fontWeight: '500',
   },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
-    paddingTop: verticalScale(100),
-    paddingRight: moderateScale(14),
+  dropdown: {
+    position: "absolute",
+    top: verticalScale(100),
+    left: scale(204),
+    backgroundColor: "#101010", 
+    borderColor: "#E7E7E7",
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: scale(10),
+    zIndex: 1000,
+    width: scale(165)
   },
-  modalContainer: {
-    backgroundColor: Colors.labelBlack,
-    borderRadius: moderateScale(10),
-    paddingVertical: verticalScale(10),
-    width: moderateScale(170),
-    alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-  },
-  modalOption: {
-    paddingVertical: verticalScale(10),
-    width: '100%',
-    alignItems: 'center',
-  },
-  optionText: {
-    fontSize: scale(16),
-    color: '#fff',
 
+  box: {
+    height: 19,
+    width: 19,
+    marginRight: 8,
   },
-  selectedOption: {
-    fontSize: scale(16),
-    color: '#fff',
-    fontWeight: 'bold',
-    paddingRight: scale(45)
+
+  dropdownItem: {
+    paddingVertical: scale(8),
+    paddingHorizontal: scale(5),
+  },
+
+  optionContent: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

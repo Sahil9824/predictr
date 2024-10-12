@@ -130,8 +130,8 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }} >
         <Text style={styles.title}>Pick a Date</Text>
         <TouchableOpacity style={{ paddingHorizontal: 10}} onPress={closeBottomSheet}>
-          <View style={{ paddingEnd: 15, alignItems: 'center' }}>
-            <Icons type={ICONS.CLOSE} />
+          <View style={{ paddingEnd: 5, alignItems: 'center' }}>
+            <Icons type={ICONS.CLOSE} onClick={closeBottomSheet}/>
           </View>
         </TouchableOpacity>
       </View>
@@ -191,7 +191,7 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: scale(5),
+    paddingVertical: scale(5),
     backgroundColor: '#fff',
   },
   title: {
@@ -200,12 +200,15 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginBottom: scale(10),
     color: Colors.labelBlack,
+    paddingStart: scale(11)
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: scale(10),
     justifyContent: 'space-between',
+    paddingStart: scale(10),
+    marginTop: scale(15)
   },
   monthText: {
     fontSize: scale(15),
@@ -218,41 +221,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   arrow: {
-    padding: scale(8),
+    paddingHorizontal: scale(5),  
     justifyContent: 'center',
   },
   weekDaysContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around', 
     marginBottom: scale(8),
-    paddingHorizontal: scale(10),
   },
   weekDay: {
-    flex: 1,
+    width: scale(35.5),  
     textAlign: 'center',
     fontWeight: '600',
     color: '#8E8E93',
-    fontSize: scale(12),
+    fontSize: scale(13),
   },
   daysContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    paddingHorizontal: scale(10),
+    paddingHorizontal: scale(5),  
   },
   day: {
-    width: scale(38.5),
-    height: scale(38.5),
+    width: scale(41.5),  
+    height: scale(41.5),
     alignItems: 'center',
     justifyContent: 'center',
-    padding: scale(3),
     margin: scale(3),
   },
   selectedDay: {
     backgroundColor: '#e0efff',
-    width: scale(38.5),
-    height: scale(38.5),
-    borderRadius: scale(38.5/2),
+    width: scale(41.5),
+    height: scale(41.5),
+    borderRadius: scale(41.5 / 2),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -269,7 +270,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(10),
     borderRadius: scale(8),
     marginHorizontal: scale(10),
-    marginTop: scale(15), 
+    marginTop: scale(15),
     alignItems: 'center',
   },
   disabledSaveButton: {
@@ -277,7 +278,7 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: 'white',
-    fontSize: scale(14), 
+    fontSize: scale(14),
     fontWeight: '600',
   },
   modalBackground: {
