@@ -14,13 +14,13 @@ import {
 import { Images } from "../../assets/images";
 import Button from "../../component/Button";
 import { Colors, fonts } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "FeedSetup">;
-  route: RouteProp<RootStackParamList, "FeedSetup">;
-}
+// interface Props {
+//   navigation: StackNavigationProp<RootStackParamList, "FeedSetup">;
+//   route: RouteProp<RootStackParamList, "FeedSetup">;
+// }
 
 const data = [
   {
@@ -281,7 +281,7 @@ const Titles: React.FC<TileProp> = ({
   );
 };
 
-const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
+const FeedSetup: React.FC<any> = ({ navigation, route }) => {
   const [username, setUsername] = useState(route.params.username);
   const [profileImage, setProfileImage] = useState(route.params.profileImage);
   const [listData, setListData] = useState(data);
@@ -313,7 +313,7 @@ const FeedSetup: React.FC<Props> = ({ navigation, route }) => {
   console.log("ff", followList);
 
   const navigateToLogin = () => {
-    navigation.navigate("Login");
+    navigation.navigate(SCREENS.LOGIN);
   };
 
   useEffect(() => {
