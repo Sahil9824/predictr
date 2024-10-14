@@ -5,6 +5,8 @@ import { StyleSheet } from "react-native";
 
 import DashBoard from "../screen/home/DashBoard";
 import { SCREENS } from "../constant/navigation.constants";
+import SearchStack from "./Search.stack";
+import { HowToPredictScreen } from "../component/HowItWorks";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +22,13 @@ const HomeStack = () => (
       component={DashBoard}
       options={{ headerShown: false }}
     />
+    <Stack.Screen name={SCREENS.SEARCH}
+      component={SearchStack}
+      options={{ headerShown: false }} />
+
+    <Stack.Screen name={SCREENS.HOW_IT_WORKS}
+      component={HowToPredictScreen}
+      options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 

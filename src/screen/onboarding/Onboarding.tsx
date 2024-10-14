@@ -16,14 +16,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Images } from "../../assets/images";
 import Text800 from "../../component/Text800";
 import { Colors, Device, fonts } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
-}
-
-const Onboarding = ({ navigation }: Props) => {
+const Onboarding = ({ navigation }: any) => {
   useFocusEffect(() => {
     changeNavigationBarColor(Colors.primaryBlue, true);
 
@@ -33,11 +29,11 @@ const Onboarding = ({ navigation }: Props) => {
   });
 
   const goToCreateAcc = () => {
-    navigation.navigate("CreateAccount");
+    navigation.navigate(SCREENS.CREATE_ACCOUNT);
   };
 
   const goToLogin = () => {
-    navigation.navigate("Login");
+    navigation.navigate(SCREENS.LOGIN);
   };
   useFocusEffect(
     useCallback(() => {

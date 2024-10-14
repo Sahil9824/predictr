@@ -11,13 +11,58 @@ import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
 import { useRef, useState } from "react";
 import Tooltip from "react-native-walkthrough-tooltip";
+import ShareCard from "./ShareCard";
 
 interface IPredictionCard {
   index: number;
+  isFavorited: () => void;
+  onFavoritePress: () => void;
 }
 
 const PredictionCard = ({ index }: IPredictionCard) => {
   const [toolTipVisible, setToolTipVisible] = useState(false);
+  const [liked, setLiked] = useState(false); // State to track if liked
+  const [disliked, setDisliked] = useState(false); // State to track if disliked
+  const [likeCount, setLikeCount] = useState(45); // Count for likes
+  const [dislikeCount, setDislikeCount] = useState(70); // Count for dislikes
+  const shareCardRef = useRef(null);
+
+  const onSharePress = () => {
+    if (shareCardRef.current) {
+      shareCardRef.current.present();
+    }
+  };
+
+  // Function to handle like
+  const handleLike = () => {
+    if (liked) {
+      setLiked(false);
+      setLikeCount((prev) => prev - 1); // Decrement like count
+    } else {
+      setLiked(true);
+      setLikeCount((prev) => prev + 1); // Increment like count
+      if (disliked) {
+        setDisliked(false); // Reset dislike if liked
+        setDislikeCount((prev) => prev - 1); // Decrement dislike count
+      }
+    }
+  };
+
+  // Function to handle dislike
+  const handleDislike = () => {
+    if (disliked) {
+      setDisliked(false);
+      setDislikeCount((prev) => prev - 1); // Decrement dislike count
+    } else {
+      setDisliked(true);
+      setDislikeCount((prev) => prev + 1); // Increment dislike count
+      if (liked) {
+        setLiked(false); // Reset like if disliked
+        setLikeCount((prev) => prev - 1); // Decrement like count
+      }
+    }
+  };
+
   return (
     <View
       style={[
@@ -41,13 +86,13 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           borderBottomColor: "white",
           backgroundColor: "white",
           overflow: "hidden",
-          shadowColor: "rgba(0, 0, 0, 0.15)", // Increased shadow color intensity
+          shadowColor: "rgba(0, 0, 0, 0.15)",
           shadowOffset: {
-            width: 0, // Shadow width (0px)
-            height: 5, // Increased shadow height for a more pronounced shadow
+            width: 0,
+            height: 5,
           },
-          shadowOpacity: 0.15, // Increased shadow opacity
-          shadowRadius: 10, // Increased shadow radius for a softer shadow
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
           elevation: 10,
         }}
       >
@@ -214,17 +259,10 @@ const PredictionCard = ({ index }: IPredictionCard) => {
         </Text>
 
         <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <View style={{ flexDirection: "row" }}>
-            <Pressable
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                marginRight: scale(10),
-              }}
-            >
+          <View style={{ flexDirection: "row" ,}}>
+            <Pressable onPress={handleLike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(35) }}>
               <Image
-                source={Images.like}
+                source={liked ? Images.likeFilled : Images.like}
                 style={{ height: scale(16), width: scale(16), marginRight: 4 }}
               />
               <Text
@@ -235,19 +273,12 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   color: Colors.textGrey,
                 }}
               >
-                {"Agree"}
+                {likeCount !== 0 ? likeCount : 'Agree'}
               </Text>
             </Pressable>
-            <Pressable
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                marginRight: scale(10),
-              }}
-            >
+            <Pressable onPress={handleDislike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(45) }}>
               <Image
-                source={Images.dislike}
+                source={disliked ? Images.dislikeFilled : Images.dislike}
                 style={{ height: scale(16), width: scale(16), marginRight: 4 }}
               />
               <Text
@@ -258,45 +289,48 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   color: Colors.textGrey,
                 }}
               >
-                {"Disagree"}
-              </Text>
-            </Pressable>
-            <Pressable
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                marginRight: scale(10),
-              }}
-            >
-              <Image
-                source={Images.comment}
-                style={{ height: scale(16), width: scale(16), marginRight: 4 }}
-              />
-              <Text
-                style={{
-                  fontFamily: fonts.f400,
-                  fontSize: scale(13),
-                  lineHeight: scale(19),
-                  color: Colors.textGrey,
-                }}
-              >
-                {"Comment"}
+                {dislikeCount !== 0 ? dislikeCount : 'Disagree'}
               </Text>
             </Pressable>
           </View>
-          <View
+          <Pressable
             style={{
               flexDirection: "row",
-              flexGrow: 1,
-              justifyContent: "flex-end",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: scale(10),
             }}
           >
             <Image
-              source={Images.share}
-              style={{ height: scale(16), width: scale(16) }}
+              source={Images.comment}
+              style={{ height: scale(16), width: scale(16), marginRight: 4 }}
             />
-          </View>
+            <Text
+              style={{
+                fontFamily: fonts.f400,
+                fontSize: scale(13),
+                lineHeight: scale(19),
+                color: Colors.textGrey,
+              }}
+            >
+              {"Comment"}
+            </Text>
+          </Pressable>
+          <TouchableOpacity onPress={onSharePress}>
+            <View
+              style={{
+                flexDirection: "row",
+                flexGrow: 1,
+                justifyContent: "flex-end",
+                marginStart: scale(40)
+              }}
+            >
+              <Image
+                source={Images.share}
+                style={{ height: scale(16), width: scale(16) }}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -554,6 +588,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           {/* <Text>{"Result in 5d"}</Text> */}
         </View>
       )}
+      <ShareCard ref={shareCardRef} />
     </View>
   );
 };

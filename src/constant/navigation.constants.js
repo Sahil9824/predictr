@@ -16,6 +16,8 @@ export const SCREENS = {
   SELECT_AVATAR: "SelectAvatarScreen",
   FEED_SETUP: "FeedSetupScreen",
   HOME: "HomeScreen",
+  SEARCH: "Search",
+  HOW_IT_WORKS: "HowItWorksScreen"
 };
 
 export const PRE_LOGIN_NAVIGATION = {
@@ -35,3 +37,5 @@ export const HOME_STACK = {
   EXPLORE: "Explore",
   CONTEST: "Contest",
 };
+
+

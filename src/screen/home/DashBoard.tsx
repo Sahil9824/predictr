@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Colors, fonts } from "../../constant";
 import { Images } from "../../assets/images";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { scale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
 import WinnerCard from "../../component/WinnerCard";
@@ -22,8 +22,13 @@ import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import ContestDetails from "../../component/bottomSheets/ContestDetails";
 import Contests from "../../component/Contests";
+import FilterCard from "../../component/FilterCard";
+import CustomDatePicker from "..//../component/CustomDatePicker";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { SCREENS } from "../../constant/navigation.constants";
+import ShareCard from '../../component/ShareCard';
 
-const HeaderOptions = ({ isSelected, setIsSelected }) => {
+const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions }) => {
   return (
     <View
       style={{
@@ -36,6 +41,7 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
       }}
     >
       <View style={{ flexDirection: "row", height: scale(50) }}>
+        {/* My Feed Pressable */}
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
@@ -64,6 +70,8 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
             {"My Feed"}
           </Text>
         </Pressable>
+
+        {/* Explore Pressable */}
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
@@ -92,6 +100,7 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
             {"Explore"}
           </Text>
         </Pressable>
+
         <Pressable
           onPress={() => setIsSelected(2)}
           style={[
@@ -121,80 +130,158 @@ const HeaderOptions = ({ isSelected, setIsSelected }) => {
           </Text>
         </Pressable>
       </View>
-      <Image
-        source={Images.moreOptions}
-        style={{ height: scale(24), width: scale(24) }}
-      />
+
+      {/* More Options Button to open the FilterScreen */}
+      <Pressable onPress={openFilter}>
+        {filteredOptions ?
+          <Image
+            source={Images.FilterSelected}
+            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
+          /> :
+          <Image
+            source={Images.moreOptions}
+            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
+          />
+        }
+      </Pressable>
     </View>
   );
 };
 
 const DashBoard = () => {
-  const bottomSheetModalRef = useRef(null);
+  const contestDetailsRef = useRef(null);
+  const filterCardRef = useRef(null);
   const [isSelected, setIsSelected] = useState(0);
+  const [filteredOptions, setFilteredOptions] = useState(null);
+  const navigation = useNavigation();
 
-  const openBottomSheet = () => {
-    bottomSheetModalRef.current?.present();
+  const route = useRoute();
+  let filteredOptionsRecieved = route.params?.filteredOptions || null;
+
+  const isReset = route.params?.isReset || false;
+
+  const [cardsData, setCardsData] = useState([
+    { id: 1, isFavorited: false },
+    { id: 2, isFavorited: false },
+    { id: 3, isFavorited: false },
+    { id: 4, isFavorited: false }
+  ]);
+
+
+  useEffect(() => {
+    if (filteredOptionsRecieved) {
+      setFilteredOptions(filteredOptionsRecieved);
+    }
+    if (isReset) {
+      handleFilterReset();
+    }
+  }, [isReset, filteredOptionsRecieved]);
+
+
+  const handleFilterReset = () => {
+    console.log("Filter has been reset");
+    setFilteredOptions(null);
   };
+
+  const toggleFavorite = (cardId) => {
+    setCardsData((prevCardsData) =>
+      prevCardsData.map((card) =>
+        card.id === cardId
+          ? { ...card, isFavorited: !card.isFavorited }
+          : card
+      )
+    );
+  };
+
+  console.log("FilteredOptions:", filteredOptions);
+
+  const onSearchPress = () => {
+    navigation.navigate(SCREENS.SEARCH)
+  }
+
+
+  const openContestDetails = () => {
+    contestDetailsRef.current?.present();
+  };
+
+  const openFilterCard = () => {
+    filterCardRef.current?.present();
+  };
+
+
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingVertical: scale(10),
-          paddingHorizontal: scale(10),
-        }}
-      >
-        <Text
+    <BottomSheetModalProvider>
+      <View style={styles.container}>
+        {/* Header */}
+        <View
           style={{
-            fontFamily: fonts.f800,
-            color: Colors.textBlack,
-            fontSize: scale(22),
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingVertical: scale(10),
+            paddingHorizontal: scale(10),
           }}
         >
-          {"Predictr."}
-        </Text>
-        <Image
-          source={Images.headerSearch}
-          style={{ height: scale(22), width: scale(22) }}
-        />
-      </View>
-
-      <FlatList
-        ListHeaderComponent={
-          <>
-            {isSelected !== 2 && (
-              <View style={{ paddingHorizontal: 16 }}>
-                <WinnerCard openBottomSheet={openBottomSheet} />
-              </View>
-            )}
-            <HeaderOptions
-              isSelected={isSelected}
-              setIsSelected={setIsSelected}
+          <Text
+            style={{
+              fontFamily: fonts.f800,
+              color: Colors.textBlack,
+              fontSize: scale(22),
+            }}
+          >
+            {"Predictr."}
+          </Text>
+          <TouchableOpacity onPress={onSearchPress}>
+            <Image
+              source={Images.headerSearch}
+              style={{ height: scale(22), width: scale(22) }}
             />
-          </>
-        }
-        data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
-        renderItem={({ item, index }) => {
-          if (isSelected === 2) {
-            return <Contests openBottomSheet={openBottomSheet} />; // Render your component when isSelected is 2
+          </TouchableOpacity>
+
+        </View>
+
+        {/* Content */}
+        <FlatList
+          ListHeaderComponent={
+            <>
+              {isSelected !== 2 && (
+                <View style={{ paddingHorizontal: 16 }}>
+                  <WinnerCard openBottomSheet={openContestDetails} />
+                </View>
+              )}
+              <HeaderOptions
+                isSelected={isSelected}
+                setIsSelected={setIsSelected}
+                openFilter={openFilterCard}
+                filteredOptions={filteredOptions}
+              />
+            </>
           }
-          return (
-            <View style={{ paddingHorizontal: 16 }}>
-              <PredictionCard index={index} />
-            </View>
-          );
-        }}
-        keyExtractor={(_, index) => index.toString()}
-        scrollEventThrottle={16}
-      />
+          data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item, index }) => {
+            if (isSelected === 2) {
+              return <Contests openBottomSheet={openContestDetails} />;
+            }
+            return (
+              <View style={{ paddingHorizontal: 16 }}>
+                <PredictionCard
+                  index={item.id}
+                  isFavorited={item.isFavorited}
+                  onFavoritePress={() => toggleFavorite(item.id)}
+                />
+              </View>
+            );
+          }}
+          keyExtractor={(_, index) => index.toString()}
+          scrollEventThrottle={16}
+        />
 
-      {/* <Contests /> */}
-
-      <ContestDetails ref={bottomSheetModalRef} />
-    </View>
+        {/* Bottom Sheets */}
+        <ContestDetails ref={contestDetailsRef} />
+        <FilterCard ref={filterCardRef} onFilterReset={handleFilterReset} isReset={isReset} />
+      </View>
+    </BottomSheetModalProvider>
   );
 };
 

@@ -5,16 +5,17 @@ import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, errorMsg, fonts, regex } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
 // import { success } from "../../utils/toast";
 import { useToast } from "react-native-toast-notifications";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
+import userStore from "../../user.store";
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
-}
+// interface Props {
+//   navigation: StackNavigationProp<any, "CreateAccount">;
+// }
 
-const Login = ({ navigation }: Props) => {
+const Login = ({ navigation }: any) => {
   const toast = useToast();
 
   const [emailErr, setEmailErr] = useState("");
@@ -23,6 +24,7 @@ const Login = ({ navigation }: Props) => {
 
   const emailRef = useRef<Iref>(null);
   const passwordRef = useRef<Iref>(null);
+  const { setIsAuthenticated } = userStore();
 
   const emailValidation = () => {
     if (!emailRef.current?.value) {
@@ -60,7 +62,9 @@ const Login = ({ navigation }: Props) => {
     if (!emailValidation()) {
       return;
     }
-    navigation.navigate("Dashboard");
+
+    setIsAuthenticated(true);
+    navigation.navigate(SCREENS.HOME);
   };
 
   useLayoutEffect(() => {
@@ -69,7 +73,7 @@ const Login = ({ navigation }: Props) => {
         <AuthHeader
           navigation={navigation}
           rightText={"Create Account"}
-          onRightPress={() => navigation.navigate("CreateAccount")}
+          onRightPress={() => navigation.navigate(SCREENS.CREATE_ACCOUNT)}
         />
       ),
     });
@@ -98,7 +102,7 @@ const Login = ({ navigation }: Props) => {
         />
         <Text
           style={styles.resetPassword}
-          onPress={() => navigation.navigate("ResetPassword")}
+          onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
         >
           {"Reset Password"}
         </Text>

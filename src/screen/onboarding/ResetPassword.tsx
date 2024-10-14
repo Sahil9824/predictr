@@ -5,15 +5,15 @@ import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
 import { Colors, errorMsg, fonts, regex } from "../../constant";
-import { RootStackParamList } from "../../navigation/MainNavigation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { scale } from "../../../helper";
+import { SCREENS } from "../../constant/navigation.constants";
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
-}
+// interface Props {
+//   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
+// }
 
-const ResetPassword = ({ navigation }: Props) => {
+const ResetPassword = ({ navigation }: any) => {
   const [emailErr, setEmailErr] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -35,7 +35,7 @@ const ResetPassword = ({ navigation }: Props) => {
     if (!emailValidation()) {
       return;
     }
-    navigation.navigate("SetNewPassword");
+    navigation.navigate(SCREENS.SET_NEW_PASSWORD);
   };
 
   useEffect(() => {

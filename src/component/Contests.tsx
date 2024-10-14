@@ -14,10 +14,14 @@ import { ICONS } from "../constant/icons.constants";
 import { fonts } from "../constant";
 import { scale } from "../../helper";
 import { Images } from "../assets/images";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../constant/navigation.constants";
 
 const Contests = ({ openBottomSheet }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("August 24 (OnGoing)");
+
+  const navigation = useNavigation();
 
   const dummyDates = [
     "August 24 (OnGoing)",
@@ -190,7 +194,8 @@ const Contests = ({ openBottomSheet }) => {
   };
 
   const handleHowWorksPress = () => {
-    openBottomSheet();
+    // openBottomSheet();
+    navigation.navigate(SCREENS.HOW_IT_WORKS);
   };
 
   return (
