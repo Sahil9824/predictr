@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Onboarding from "../screen/onboarding/Onboarding";
 import CreateAccount from "../screen/onboarding/CreateAccount";
 import Login from "../screen/onboarding/Login";

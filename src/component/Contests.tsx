@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   Keyboard,
   Image,
+  Platform,
 } from "react-native";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
@@ -16,85 +17,69 @@ import { scale } from "../../helper";
 import { Images } from "../assets/images";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../constant/navigation.constants";
+import RNPickerSelect from "react-native-picker-select";
+
+const dummyDates = [
+  { label: "August 24 (OnGoing)", value: "August 24 (OnGoing)" },
+  { label: "July 30", value: "July 30" },
+  { label: "June 11", value: "June 11" },
+  { label: "June 5", value: "June 5" },
+  { label: "June 21", value: "June 21" },
+  { label: "June 22", value: "June 22" },
+  { label: "June 23", value: "June 23" },
+  { label: "June 24", value: "June 24" },
+  { label: "June 25", value: "June 25" },
+  { label: "June 26", value: "June 26" },
+];
+
+const dummyUsers = [
+  {
+    name: "Edwards Nilson",
+    accuracy: "88%",
+    predictionNos: 10,
+    rank: 1,
+  },
+  {
+    name: "Mandela Nilson",
+    accuracy: "54%",
+    predictionNos: "06",
+    rank: 2,
+  },
+  {
+    name: "Bill Tech",
+    accuracy: "45%",
+    predictionNos: "03",
+    rank: 3,
+  },
+
+  {
+    name: "Kinyle Jam",
+    accuracy: "13%",
+    predictionNos: "02",
+    rank: 4,
+  },
+  {
+    isUser: true,
+    participated: true,
+    name: "Userslef Self",
+    accuracy: "13%",
+    predictionNos: "02",
+    rank: 5,
+  },
+  {
+    isUser: true,
+    participated: false,
+    name: "Userslef Self",
+    accuracy: "13%",
+    predictionNos: "00",
+    rank: 6,
+  },
+];
 
 const Contests = ({ openBottomSheet }) => {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("August 24 (OnGoing)");
 
   const navigation = useNavigation();
-
-  const dummyDates = [
-    "August 24 (OnGoing)",
-    "July 30",
-    "June 11",
-    "June 5",
-    "June 21",
-    "June 22",
-    "June 23",
-    "June 24",
-    "June 25",
-    "June 26",
-  ];
-
-  const dummyUsers = [
-    {
-      name: "Edwards Nilson",
-      accuracy: "88%",
-      predictionNos: 10,
-      rank: 1,
-    },
-    {
-      name: "Mandela Nilson",
-      accuracy: "54%",
-      predictionNos: "06",
-      rank: 2,
-    },
-    {
-      name: "Bill Tech",
-      accuracy: "45%",
-      predictionNos: "03",
-      rank: 3,
-    },
-
-    {
-      name: "Kinyle Jam",
-      accuracy: "13%",
-      predictionNos: "02",
-      rank: 4,
-    },
-    {
-      isUser: true,
-      participated: true,
-      name: "Userslef Self",
-      accuracy: "13%",
-      predictionNos: "02",
-      rank: 5,
-    },
-    {
-      isUser: true,
-      participated: false,
-      name: "Userslef Self",
-      accuracy: "13%",
-      predictionNos: "00",
-      rank: 6,
-    },
-  ];
-
-  const handleToggleDropdown = () => {
-    setDropdownVisible(!isDropdownVisible);
-  };
-
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    setDropdownVisible(false);
-  };
-
-  const handleOutsidePress = () => {
-    Keyboard.dismiss();
-    if (isDropdownVisible) {
-      setDropdownVisible(false); // Close dropdown when clicking outside
-    }
-  };
 
   const UserPredictor = ({ data }) => {
     const { isUser, rank, name, accuracy, predictionNos, participated } = data;
@@ -118,7 +103,8 @@ const Contests = ({ openBottomSheet }) => {
               <Text
                 style={{
                   fontFamily: fonts.f600,
-                  fontSize: 14,
+                  fontWeight: "600",
+                  fontSize: scale(14),
                   color: "#151B26",
                 }}
               >
@@ -131,7 +117,8 @@ const Contests = ({ openBottomSheet }) => {
               <Text
                 style={{
                   fontFamily: fonts.f600,
-                  fontSize: 14,
+                  fontWeight: "600",
+                  fontSize: scale(14),
                   color: "#151B26",
                 }}
               >
@@ -184,7 +171,7 @@ const Contests = ({ openBottomSheet }) => {
                     </Text>
                   ))}
               </View>
-              <Text style={styles.subName}>{accuracy} Accurate</Text>
+              <Text style={styles.subName}>{accuracy}Accurate</Text>
             </View>
             <Text style={styles.no}>{predictionNos}</Text>
           </View>
@@ -202,10 +189,34 @@ const Contests = ({ openBottomSheet }) => {
     // <TouchableWithoutFeedback onPress={handleOutsidePress}>
     <View style={styles.container}>
       <View style={styles.header}>
-        <Pressable onPress={handleToggleDropdown} style={styles.headBox}>
-          <Text style={styles.headText}>{selectedOption}</Text>
-          <Icons type={ICONS.DOWN_ARROW} />
-        </Pressable>
+        <View style={styles.headBox}>
+          <RNPickerSelect
+            onValueChange={setSelectedOption}
+            items={dummyDates}
+            placeholder={{}}
+            style={{
+              viewContainer: {
+                width: "65%",
+              },
+              inputIOS: {
+                color: "#101010",
+                fontFamily: fonts.f600,
+                fontSize: 14,
+                fontWeight: "600",
+              },
+              inputAndroid: {
+                // backgroundColor: "yellow",
+                color: "#101010",
+                fontFamily: fonts.f600,
+                fontWeight: "600",
+                fontSize: 14,
+                width: "100%",
+                padding: 0,
+              },
+            }}
+          />
+          {Platform.OS === "ios" ? <Icons type={ICONS.DOWN_ARROW} /> : <></>}
+        </View>
 
         <Pressable onPress={handleHowWorksPress}>
           <Text style={styles.text2}>How it works?</Text>
@@ -213,34 +224,6 @@ const Contests = ({ openBottomSheet }) => {
       </View>
 
       {/* Dropdown Menu */}
-      {isDropdownVisible && (
-        <View style={styles.dropdown}>
-          {dummyDates.map((option, index) => (
-            <Pressable
-              key={index}
-              onPress={() => handleOptionSelect(option)}
-              style={styles.dropdownItem}
-            >
-              <View style={[styles.optionContent]}>
-                <View style={[styles.box]}>
-                  {selectedOption === option && (
-                    <Icons type={ICONS.SELECTED} style={styles.selectedIcon} />
-                  )}
-                </View>
-                <Text
-                  style={{
-                    color: "#F6F8F9",
-                    fontFamily: fonts.f400,
-                    fontSize: 15,
-                  }}
-                >
-                  {option}
-                </Text>
-              </View>
-            </Pressable>
-          ))}
-        </View>
-      )}
 
       <View style={styles.table}>
         <View style={styles.tableBox}>
@@ -287,15 +270,19 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#F6F6F6",
     padding: 16,
+    paddingVertical: Platform.OS === "ios" ? 16 : 0,
     borderWidth: 1,
     borderColor: "#E7E7E7",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
 
   headBox: {
     flexDirection: "row",
     alignItems: "center",
+    paddingLeft: 5,
+    // backgroundColor: "blue",
   },
 
   headText: {
@@ -303,12 +290,14 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     color: "#101010",
     marginRight: 4,
+    fontWeight: "600",
   },
 
   text2: {
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: "#717272",
+    fontWeight: "400",
   },
 
   table: {
@@ -331,6 +320,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: 16,
+    fontWeight: "700",
   },
 
   noWinText2: {
@@ -339,6 +329,7 @@ const styles = StyleSheet.create({
     color: "#717272",
     textAlign: "center",
     marginTop: 4,
+    fontWeight: "400",
   },
 
   tableBox: {
@@ -360,6 +351,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: "#717272",
+    fontWeight: "400",
   },
 
   userBox: {
@@ -382,6 +374,7 @@ const styles = StyleSheet.create({
     fontSize: scale(13),
     color: "#151B26",
     marginTop: 11,
+    fontWeight: "600",
   },
 
   nameBox: {
@@ -400,12 +393,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f700,
     fontSize: scale(14),
     color: "#151B26",
+    fontWeight: "700",
   },
 
   subName: {
     fontFamily: fonts.f500,
     fontSize: scale(12),
     color: "#717272",
+    fontWeight: "500",
   },
 
   dropdown: {

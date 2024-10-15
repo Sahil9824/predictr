@@ -26,9 +26,14 @@ import FilterCard from "../../component/FilterCard";
 import CustomDatePicker from "..//../component/CustomDatePicker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
-import ShareCard from '../../component/ShareCard';
+import ShareCard from "../../component/ShareCard";
 
-const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions }) => {
+const HeaderOptions = ({
+  isSelected,
+  setIsSelected,
+  openFilter,
+  filteredOptions,
+}) => {
   return (
     <View
       style={{
@@ -45,7 +50,7 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
-            { width: 85, justifyContent: "center" },
+            { width: scale(100), justifyContent: "center" },
             isSelected === 0 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
@@ -60,10 +65,12 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
+                fontWeight: "400",
               },
               isSelected === 0 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
+                fontWeight: "800",
               },
             ]}
           >
@@ -75,7 +82,7 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
-            { width: scale(85), justifyContent: "center" },
+            { width: scale(90), justifyContent: "center" },
             isSelected === 1 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
@@ -90,10 +97,12 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
+                fontWeight: "400",
               },
               isSelected === 1 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
+                fontWeight: "800",
               },
             ]}
           >
@@ -104,7 +113,7 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
         <Pressable
           onPress={() => setIsSelected(2)}
           style={[
-            { width: 85, justifyContent: "center" },
+            { width: scale(95), justifyContent: "center" },
             isSelected === 2 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: 3,
@@ -119,10 +128,12 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
+                fontWeight: "400",
               },
               isSelected === 2 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
+                fontWeight: "800",
               },
             ]}
           >
@@ -133,16 +144,17 @@ const HeaderOptions = ({ isSelected, setIsSelected, openFilter, filteredOptions 
 
       {/* More Options Button to open the FilterScreen */}
       <Pressable onPress={openFilter}>
-        {filteredOptions ?
+        {filteredOptions ? (
           <Image
             source={Images.FilterSelected}
             style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
-          /> :
+          />
+        ) : (
           <Image
             source={Images.moreOptions}
             style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
           />
-        }
+        )}
       </Pressable>
     </View>
   );
@@ -164,9 +176,8 @@ const DashBoard = () => {
     { id: 1, isFavorited: false },
     { id: 2, isFavorited: false },
     { id: 3, isFavorited: false },
-    { id: 4, isFavorited: false }
+    { id: 4, isFavorited: false },
   ]);
-
 
   useEffect(() => {
     if (filteredOptionsRecieved) {
@@ -177,7 +188,6 @@ const DashBoard = () => {
     }
   }, [isReset, filteredOptionsRecieved]);
 
-
   const handleFilterReset = () => {
     console.log("Filter has been reset");
     setFilteredOptions(null);
@@ -186,9 +196,7 @@ const DashBoard = () => {
   const toggleFavorite = (cardId) => {
     setCardsData((prevCardsData) =>
       prevCardsData.map((card) =>
-        card.id === cardId
-          ? { ...card, isFavorited: !card.isFavorited }
-          : card
+        card.id === cardId ? { ...card, isFavorited: !card.isFavorited } : card
       )
     );
   };
@@ -196,9 +204,8 @@ const DashBoard = () => {
   console.log("FilteredOptions:", filteredOptions);
 
   const onSearchPress = () => {
-    navigation.navigate(SCREENS.SEARCH)
-  }
-
+    navigation.navigate(SCREENS.SEARCH);
+  };
 
   const openContestDetails = () => {
     contestDetailsRef.current?.present();
@@ -207,7 +214,6 @@ const DashBoard = () => {
   const openFilterCard = () => {
     filterCardRef.current?.present();
   };
-
 
   return (
     <BottomSheetModalProvider>
@@ -227,6 +233,7 @@ const DashBoard = () => {
               fontFamily: fonts.f800,
               color: Colors.textBlack,
               fontSize: scale(22),
+              fontWeight: "800",
             }}
           >
             {"Predictr."}
@@ -237,18 +244,15 @@ const DashBoard = () => {
               style={{ height: scale(22), width: scale(22) }}
             />
           </TouchableOpacity>
-
         </View>
 
         {/* Content */}
         <FlatList
           ListHeaderComponent={
             <>
-              {isSelected !== 2 && (
-                <View style={{ paddingHorizontal: 16 }}>
-                  <WinnerCard openBottomSheet={openContestDetails} />
-                </View>
-              )}
+              <View style={{ paddingHorizontal: 16 }}>
+                <WinnerCard openBottomSheet={openContestDetails} />
+              </View>
               <HeaderOptions
                 isSelected={isSelected}
                 setIsSelected={setIsSelected}
@@ -279,7 +283,11 @@ const DashBoard = () => {
 
         {/* Bottom Sheets */}
         <ContestDetails ref={contestDetailsRef} />
-        <FilterCard ref={filterCardRef} onFilterReset={handleFilterReset} isReset={isReset} />
+        <FilterCard
+          ref={filterCardRef}
+          onFilterReset={handleFilterReset}
+          isReset={isReset}
+        />
       </View>
     </BottomSheetModalProvider>
   );

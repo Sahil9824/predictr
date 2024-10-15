@@ -22,11 +22,7 @@ const AuthHeader = ({ navigation, rightText, onRightPress }: Props) => {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <Pressable onPress={() => navigation.goBack()}>
-        <Image
-          source={Images.back}
-          style={styles.image}
-          resizeMode="contain"
-        />
+        <Image source={Images.back} style={styles.image} resizeMode="contain" />
       </Pressable>
       {rightText && (
         <Pressable onPress={onRightPress}>
@@ -53,11 +49,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f600,
     fontSize: 15,
-    // fontWeight: "600",
+    fontWeight: "600",
     color: Colors.primaryBlue,
   },
   image: {
     height: 20,
-    width: 20
-  }
+    width: 20,
+  },
 });
