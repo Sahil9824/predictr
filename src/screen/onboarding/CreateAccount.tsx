@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f800,
     fontSize: scale(32),
     color: Colors.textBlack,
+    fontWeight: "800",
   },
   inputContainer: {
     marginVertical: scale(22),

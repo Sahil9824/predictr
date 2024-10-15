@@ -98,13 +98,13 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f800,
     fontSize: scale(32),
-    fontWeight: Platform.select({ ios: "800" }),
+    fontWeight: "800",
     color: Colors.textBlack,
   },
   subTitle: {
     marginTop: scale(8),
     fontFamily: fonts.f400,
-    fontWeight: Platform.select({ ios: "400" }),
+    fontWeight: "400",
     fontSize: scale(15),
     color: Colors.textBlack,
   },

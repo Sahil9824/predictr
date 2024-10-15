@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f800,
     fontSize: scale(32),
-    // fontWeight: "800",
+    fontWeight: "800",
     color: Colors.textBlack,
   },
   subTitle: {
     marginTop: 8,
     fontFamily: fonts.f400,
-    // fontWeight: "400",
+    fontWeight: "400",
     fontSize: scale(16),
     color: Colors.textBlack,
   },

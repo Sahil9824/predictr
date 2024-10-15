@@ -7,7 +7,7 @@
 import React from "react";
 import type { PropsWithChildren } from "react";
 import {
-  SafeAreaView,
+  // SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -15,6 +15,7 @@ import {
   useColorScheme,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
   Colors,

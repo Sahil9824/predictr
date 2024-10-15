@@ -84,7 +84,8 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
           styles.inputContainer,
           check && error && { borderColor: Colors.errorRed },
           check && rightText && { borderColor: Colors.validGreen },
-        ]}>
+        ]}
+      >
         <TextInput
           ref={textInputRef}
           value={val}
@@ -99,7 +100,8 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
         {password && (
           <Pressable
             onPress={() => setShowText((prev) => !prev)}
-            style={styles.iconPress}>
+            style={styles.iconPress}
+          >
             <Image
               source={!showText ? Images.eyeClosed : Images.eyeOpen}
               style={styles.icon}
@@ -107,11 +109,7 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
           </Pressable>
         )}
       </View>
-      {extraText && (
-        <Text style={styles.extraText}>
-          {extraText}
-        </Text>
-      )}
+      {extraText && <Text style={styles.extraText}>{extraText}</Text>}
       {check && error ? (
         <Text style={styles.error}>{error}</Text>
       ) : (
@@ -129,10 +127,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: fonts.f600,
-    // fontWeight: "800",
     fontSize: 14,
     color: Colors.labelBlack,
     marginBottom: 4,
+    fontWeight: "600",
   },
   inputContainer: {
     flexDirection: "row",
@@ -150,13 +148,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: Colors.errorRed,
     fontFamily: fonts.f400,
-    // fontWeight: "400",
+    fontWeight: "400",
     fontSize: 12,
   },
   right: {
     color: Colors.validGreen,
     fontFamily: fonts.f400,
-    // fontWeight: "400",
+    fontWeight: "400",
     fontSize: 12,
   },
   iconPress: {
@@ -167,12 +165,12 @@ const styles = StyleSheet.create({
   },
   extraText: {
     fontFamily: fonts.f400,
-    // fontWeight: "400",
+    fontWeight: "400",
     fontSize: 12,
-    marginVertical: 4
+    marginVertical: 4,
   },
   icon: {
     height: 16,
-    width: 16
+    width: 16,
   },
 });

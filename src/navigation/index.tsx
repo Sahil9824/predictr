@@ -10,16 +10,14 @@ import userStore from "../user.store";
 const Navigation = () => {
   const { isAuthenticated } = userStore();
 
-  return isAuthenticated ? (
+  return true ? (
     <>
-      <StatusBar barStyle="light-content" />
       <BottomSheetModalProvider>
         <AppNavigation />
       </BottomSheetModalProvider>
     </>
   ) : (
     <>
-      <StatusBar barStyle="light-content" />
       <PreloginStack />
     </>
   );

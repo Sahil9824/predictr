@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f800,
     fontSize: scale(32),
-    fontWeight: Platform.select({ ios: "400" }),
     color: Colors.textBlack,
+    fontWeight: "800",
   },
   inputContainer: {
     marginVertical: scale(30),
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   resetPassword: {
     fontFamily: fonts.f600,
-    fontWeight: Platform.select({ ios: "600" }),
+    fontWeight: "600",
     fontSize: scale(14),
     color: Colors.primaryBlue,
     textAlign: "right",

@@ -1,4 +1,11 @@
-import { Pressable, PressableProps, StyleSheet, Text, TextStyle, ViewStyle } from "react-native"
+import {
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import { Colors, fonts } from "../constant";
 
 interface Props {
@@ -9,20 +16,33 @@ interface Props {
   inActive?: boolean;
 }
 
-const Button: React.FC<Props> = ({ text, style, textStyle, onPress, inActive }) => {
-
+const Button: React.FC<Props> = ({
+  text,
+  style,
+  textStyle,
+  onPress,
+  inActive,
+}) => {
   const onButtonPress = () => {
     if (!inActive) {
-      onPress()
+      onPress();
     }
-  }
+  };
 
   return (
-    <Pressable style={({ pressed }) => [styles.container, style, inActive && { backgroundColor: Colors.disableGrey }, pressed && { opacity: 0.75 }]} onPress={onButtonPress}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.container,
+        style,
+        inActive && { backgroundColor: Colors.disableGrey },
+        pressed && { opacity: 0.75 },
+      ]}
+      onPress={onButtonPress}
+    >
       <Text style={[styles.text, textStyle]}>{text}</Text>
     </Pressable>
-  )
-}
+  );
+};
 
 export default Button;
 
@@ -38,5 +58,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f600,
     color: Colors.white,
-  }
-})
+    fontWeight: "600",
+  },
+});

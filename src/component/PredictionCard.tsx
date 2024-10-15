@@ -114,6 +114,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   fontSize: scale(15),
                   lineHeight: scale(19),
                   color: Colors.textBlack,
+                  fontWeight: "800",
                 }}
               >
                 {"Nikunj Maniya"}{" "}
@@ -121,6 +122,8 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               <Text
                 style={{
                   fontFamily: fonts.f400,
+                  fontWeight: "400",
+
                   fontSize: scale(12),
                   lineHeight: scale(15),
                 }}
@@ -147,6 +150,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(15),
               lineHeight: scale(21),
               color: Colors.textBlack,
+              fontWeight: "400",
             }}
           >
             {"I think "}
@@ -179,6 +183,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   fontSize: scale(15),
                   lineHeight: scale(19),
                   color: Colors.textBlack,
+                  fontWeight: "700",
                 }}
               >
                 {"TSLA"}
@@ -189,6 +194,8 @@ const PredictionCard = ({ index }: IPredictionCard) => {
             style={{
               fontFamily: fonts.f400,
               fontSize: scale(15),
+              fontWeight: "400",
+
               lineHeight: scale(21),
               color: Colors.textBlack,
             }}
@@ -209,6 +216,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontSize: scale(15),
                 lineHeight: scale(19),
                 color: Colors.textBlack,
+                fontWeight: "700",
               }}
             >
               {" Up 4% "}
@@ -220,6 +228,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(15),
               lineHeight: scale(21),
               color: Colors.textBlack,
+              fontWeight: "400",
             }}
           >
             {" by "}
@@ -238,6 +247,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontSize: scale(15),
                 lineHeight: scale(19),
                 color: Colors.textBlack,
+                fontWeight: "700",
               }}
             >
               {"Apr 5"}
@@ -251,6 +261,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
             fontSize: scale(15),
             lineHeight: scale(21),
             color: Colors.textBlack,
+            fontWeight: "400",
           }}
         >
           {
@@ -259,8 +270,16 @@ const PredictionCard = ({ index }: IPredictionCard) => {
         </Text>
 
         <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <View style={{ flexDirection: "row" ,}}>
-            <Pressable onPress={handleLike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(35) }}>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              onPress={handleLike}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: scale(35),
+              }}
+            >
               <Image
                 source={liked ? Images.likeFilled : Images.like}
                 style={{ height: scale(16), width: scale(16), marginRight: 4 }}
@@ -271,12 +290,21 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   fontSize: scale(13),
                   lineHeight: scale(19),
                   color: Colors.textGrey,
+                  fontWeight: "400",
                 }}
               >
-                {likeCount !== 0 ? likeCount : 'Agree'}
+                {likeCount !== 0 ? likeCount : "Agree"}
               </Text>
             </Pressable>
-            <Pressable onPress={handleDislike} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginRight: scale(45) }}>
+            <Pressable
+              onPress={handleDislike}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: scale(45),
+              }}
+            >
               <Image
                 source={disliked ? Images.dislikeFilled : Images.dislike}
                 style={{ height: scale(16), width: scale(16), marginRight: 4 }}
@@ -287,9 +315,10 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                   fontSize: scale(13),
                   lineHeight: scale(19),
                   color: Colors.textGrey,
+                  fontWeight: "400",
                 }}
               >
-                {dislikeCount !== 0 ? dislikeCount : 'Disagree'}
+                {dislikeCount !== 0 ? dislikeCount : "Disagree"}
               </Text>
             </Pressable>
           </View>
@@ -311,6 +340,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontSize: scale(13),
                 lineHeight: scale(19),
                 color: Colors.textGrey,
+                fontWeight: "400",
               }}
             >
               {"Comment"}
@@ -322,7 +352,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 flexDirection: "row",
                 flexGrow: 1,
                 justifyContent: "flex-end",
-                marginStart: scale(40)
+                marginStart: scale(40),
               }}
             >
               <Image
@@ -350,6 +380,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(12),
               color: Colors.textGrey,
               lineHeight: scale(19),
+              fontWeight: "400",
             }}
           >
             {"When Guessed"}
@@ -360,6 +391,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(15),
               lineHeight: scale(19),
               color: Colors.textBlack,
+              fontWeight: "700",
             }}
           >
             {"228.52 USD"}
@@ -369,6 +401,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontFamily: fonts.f400,
               fontSize: scale(12),
               color: Colors.textGrey,
+              fontWeight: "400",
             }}
           >
             {"24 Oct, 7:59 pm"}
@@ -381,6 +414,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(12),
               color: Colors.textGrey,
               lineHeight: scale(19),
+              fontWeight: "400",
             }}
           >
             {"Last Updated"}
@@ -391,6 +425,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(15),
               lineHeight: 19,
               color: Colors.textBlack,
+              fontWeight: "700",
             }}
           >
             {"221.20 USD"}
@@ -400,6 +435,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontFamily: fonts.f400,
               fontSize: scale(12),
               color: Colors.textGrey,
+              fontWeight: "400",
             }}
           >
             {"28 Oct, 2:59 pm"}
@@ -412,6 +448,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               fontSize: scale(12),
               color: Colors.textGrey,
               lineHeight: scale(19),
+              fontWeight: "400",
             }}
           >
             {"Movement"}
@@ -429,6 +466,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontSize: scale(15),
                 lineHeight: scale(19),
                 color: Colors.textRed,
+                fontWeight: "700",
               }}
             >
               {"-3.2%"}
@@ -467,6 +505,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontFamily: fonts.f700,
                 fontSize: scale(14),
                 color: Colors.textBlack,
+                fontWeight: "700",
               }}
             >
               {"No movement yet"}
@@ -501,6 +540,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontFamily: fonts.f700,
                 fontSize: scale(14),
                 color: Colors.textRed,
+                fontWeight: "700",
               }}
             >
               {"Inaccuracy"}
@@ -512,6 +552,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 lineHeight: scale(12),
                 marginLeft: scale(4),
                 marginTop: scale(3),
+                fontWeight: "700",
               }}
             >
               {"LIVE TRACKING"}
@@ -580,6 +621,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
                 fontFamily: fonts.f700,
                 fontSize: scale(14),
                 color: Colors.white,
+                fontWeight: "700",
               }}
             >
               {"30% Accurate"}
@@ -604,5 +646,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: fonts.f500,
     fontSize: scale(12),
+    fontWeight: "500",
   },
 });

@@ -12,7 +12,6 @@ import {
   View,
 } from "react-native";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Images } from "../../assets/images";
 import Text800 from "../../component/Text800";
 import { Colors, Device, fonts } from "../../constant";
@@ -44,7 +43,7 @@ const Onboarding = ({ navigation }: any) => {
   return (
     <>
       <StatusBar backgroundColor={Colors.primaryBlue} />
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.header}>
           <Text800 style={styles.headerText}>{"Predictr"}</Text800>
           <Text800 style={styles.dot}>{"."}</Text800>
@@ -103,7 +102,7 @@ const Onboarding = ({ navigation }: any) => {
             <Text style={styles.loginText}>{"Login"}</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </View>
     </>
   );
 };
@@ -123,14 +122,14 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: scale(22),
     fontFamily: fonts.f800,
-    fontWeight: Platform.select({ ios: "800" }),
     color: Colors.white,
+    fontWeight: "800",
   },
   dot: {
     fontSize: scale(22),
     color: Colors.yellow,
     fontFamily: fonts.f800,
-    fontWeight: Platform.select({ ios: "800" }),
+    fontWeight: "800",
   },
   titleContainer: {
     marginTop: scale(60),
@@ -140,13 +139,13 @@ const styles = StyleSheet.create({
     fontSize: scale(34),
     fontFamily: fonts.f800,
     lineHeight: scale(40),
-    fontWeight: Platform.select({ ios: "800" }),
+    fontWeight: "800",
     color: Colors.white,
     textAlign: "center",
   },
   subTitle: {
     fontFamily: fonts.f400,
-    fontWeight: Platform.select({ ios: "400" }),
+    fontWeight: "400",
     fontSize: scale(16),
     textAlign: "center",
     color: Colors.lightBlue,
@@ -181,7 +180,7 @@ const styles = StyleSheet.create({
   loginText: {
     textAlign: "center",
     fontFamily: fonts.f600,
-    fontWeight: Platform.select({ ios: "600" }),
+    fontWeight: "600",
     color: Colors.white,
     fontSize: scale(16),
     marginTop: scale(24),

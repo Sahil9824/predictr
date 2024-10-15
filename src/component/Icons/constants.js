@@ -11,10 +11,12 @@ import Silver from "./Silver";
 import Bronze from "./Bronze";
 import Selected from "./Selected";
 import NotFound from "./NotFound";
-import Calender from './Calender';
-import Search from './Search';
-import Previous from './Previous';
-import Next from './Next';
+import Calender from "./Calender";
+import Search from "./Search";
+import Previous from "./Previous";
+import Next from "./Next";
+import Sandwich from "./Sandwich";
+import Edit from "./Edit";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -36,4 +38,6 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.SEARCH]: Search,
   [ICONS.PREVIOUS]: Previous,
   [ICONS.NEXT]: Next,
+  [ICONS.SANDWICH]: Sandwich,
+  [ICONS.EDIT]: Edit,
 };
