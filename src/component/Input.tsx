@@ -77,7 +77,7 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
   );
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={{ ...styles.container, ...style }}>
       <Text style={styles.label}>{label}</Text>
       <View
         style={[
@@ -113,7 +113,7 @@ const Input = forwardRef<Iref, InputProps>((props, ref) => {
       {check && error ? (
         <Text style={styles.error}>{error}</Text>
       ) : (
-        <Text style={styles.right}>{rightText}</Text>
+        rightText && <Text style={styles.right}>{rightText}</Text>
       )}
     </View>
   );

@@ -17,7 +17,16 @@ export const SCREENS = {
   FEED_SETUP: "FeedSetupScreen",
   HOME: "HomeScreen",
   SEARCH: "Search",
-  HOW_IT_WORKS: "HowItWorksScreen"
+  HOW_IT_WORKS: "HowItWorksScreen",
+  MENU: "Menu",
+  PROFILE: "PROFILE",
+  FAQS: "FaqsScreen",
+  TERMS: "TermsScreen",
+  PRIVACY: "Privacy",
+  FEEDBACK: "FeedbackScreen",
+  CHANGE_PASSWORD: "ChangePassword",
+  NOTIFICATION_SETTINGS: "NotiSetScreen",
+  GENERAL_SCREEN: "GeneralScreen",
 };
 
 export const PRE_LOGIN_NAVIGATION = {
@@ -37,5 +46,3 @@ export const HOME_STACK = {
   EXPLORE: "Explore",
   CONTEST: "Contest",
 };
-
-

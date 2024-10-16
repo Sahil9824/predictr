@@ -16,13 +16,11 @@ const App = () => {
     <GestureHandlerRootView>
       <SafeAreaProvider>
         <NavigationContainer>
-          <SafeAreaView style={backgroundStyle}>
-            <StatusBar
-              barStyle={"dark-content"}
-              backgroundColor={backgroundStyle.backgroundColor}
-            />
-            <Navigation />
-          </SafeAreaView>
+          <StatusBar
+            barStyle={"light-content"}
+            backgroundColor={backgroundStyle.backgroundColor}
+          />
+          <Navigation />
         </NavigationContainer>
       </SafeAreaProvider>
     </GestureHandlerRootView>

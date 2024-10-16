@@ -128,7 +128,7 @@ const FilterCard = forwardRef((props, ref) => {
           backgroundColor: "#B3B3B3",
         }}
         style={styles.bottomSheet}
-        snapPoints={Platform.OS === "android" ? ["77%", "90%"] : ["67%", "90%"]}
+        snapPoints={["77%", "90%"]}
       >
         <KeyboardAwareScrollView
           contentContainerStyle={{ flexGrow: 1 }}

@@ -13,8 +13,9 @@ import FeedScreen from "../screen/search/FeedScreen";
 import PredictorsScreen from "../screen/search/PredictorsScreen";
 import { Images } from "../assets/images";
 import { scale } from "../../helper";
+import { SCREENS } from "../constant/navigation.constants";
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -43,7 +44,7 @@ const SearchScreen = () => {
             onChangeText={(text) => setSearchQuery(text)}
           />
         </View>
-        <TouchableOpacity onPress={() => setSearchQuery("")}>
+        <TouchableOpacity onPress={() => navigation.navigate(SCREENS.HOME)}>
           <Text style={styles.cancelButton}>Cancel</Text>
         </TouchableOpacity>
       </View>
@@ -52,6 +53,7 @@ const SearchScreen = () => {
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
+        style={{ backgroundColor: "white" }}
         onIndexChange={setIndex}
         initialLayout={{ width: Dimensions.get("window").width }}
         renderTabBar={(props) => (
@@ -80,8 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 10,
     backgroundColor: "#fff",
-    margin: 10,
-    marginTop: 25,
+    paddingTop: 12,
   },
   searchBoxContainer: {
     flexDirection: "row",
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ddd",
     borderBottomWidth: 1,
     elevation: 0,
-    paddingHorizontal: 30,
   },
   labelStyle: {
     fontSize: 16,
@@ -122,9 +122,6 @@ const styles = StyleSheet.create({
   indicatorStyle: {
     backgroundColor: "#024BAC",
     height: 3,
-    width: 180,
-    marginLeft: 40,
-    marginRight: 40,
   },
 });
 

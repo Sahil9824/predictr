@@ -17,6 +17,17 @@ import Previous from "./Previous";
 import Next from "./Next";
 import Sandwich from "./Sandwich";
 import Edit from "./Edit";
+import Pnotification from "./Pnotification";
+import Faqs from "./Faqs";
+import Feedback from "./Feedback";
+import Key from "./Key";
+import Privacy from "./Privacy";
+import Logout from "./Logout";
+import Terms from "./Terms";
+import RightArrow from "./RightArrow";
+import BackArrow from "./BackArrow";
+import Bookmark from "./Bookmark";
+import ChangePass from "./ChangePass";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -40,4 +51,15 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.NEXT]: Next,
   [ICONS.SANDWICH]: Sandwich,
   [ICONS.EDIT]: Edit,
+  [ICONS.TERMS]: Terms,
+  [ICONS.LOGOUT]: Logout,
+  [ICONS.PRIVACY]: Privacy,
+  [ICONS.KEY]: Key,
+  [ICONS.FEEDBACK]: Feedback,
+  [ICONS.FAQS]: Faqs,
+  [ICONS.PNOTI]: Pnotification,
+  [ICONS.RIGHTARR]: RightArrow,
+  [ICONS.BACKARR]: BackArrow,
+  [ICONS.BOOKMARK]: Bookmark,
+  [ICONS.CHANGE_PASS]: ChangePass,
 };

@@ -29,7 +29,7 @@ const ShareCard = forwardRef((props, ref) => {
           backgroundColor: "#B3B3B3",
         }}
         style={styles.bottomSheet}
-        snapPoints={Platform.OS === "android" ? ["38%", "90%"] : ["28%", "90%"]}
+        snapPoints={Platform.OS === "android" ? ["40%", "90%"] : ["40%", "90%"]}
         enableContentPanningGesture={false}
         enableHandlePanningGesture={true}
       >

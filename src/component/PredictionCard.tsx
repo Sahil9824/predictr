@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { scale } from "../../helper";
@@ -12,6 +13,8 @@ import { Images } from "../assets/images";
 import { useRef, useState } from "react";
 import Tooltip from "react-native-walkthrough-tooltip";
 import ShareCard from "./ShareCard";
+import Icons from "./Icons";
+import { ICONS } from "../constant/icons.constants";
 
 interface IPredictionCard {
   index: number;
@@ -26,6 +29,11 @@ const PredictionCard = ({ index }: IPredictionCard) => {
   const [likeCount, setLikeCount] = useState(45); // Count for likes
   const [dislikeCount, setDislikeCount] = useState(70); // Count for dislikes
   const shareCardRef = useRef(null);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleToggleSave = () => {
+    setIsSaved((p) => !p);
+  };
 
   const onSharePress = () => {
     if (shareCardRef.current) {
@@ -67,7 +75,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
     <View
       style={[
         {
-          marginVertical: scale(10),
+          marginVertical: 5,
           borderRadius: scale(26),
           overflow: "hidden",
           borderWidth: 1,
@@ -96,7 +104,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           elevation: 10,
         }}
       >
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", marginBottom: 12 }}>
           <Image
             source={Images.avatar6}
             style={{
@@ -133,14 +141,25 @@ const PredictionCard = ({ index }: IPredictionCard) => {
             </View>
             <Text>{"2 hours ago"}</Text>
           </View>
-          <Image
+
+          <TouchableWithoutFeedback
+            onPress={handleToggleSave}
+            style={{ padding: 10 }}
+          >
+            {isSaved ? (
+              <Icons type={ICONS.BOOKMARK} fill="#024BAC" stroke="#024BAC" />
+            ) : (
+              <Icons type={ICONS.BOOKMARK} />
+            )}
+          </TouchableWithoutFeedback>
+          {/* <Image
             source={Images.save}
             style={{
               height: scale(20),
               width: scale(20),
               alignSelf: "baseline",
             }}
-          />
+          /> */}
         </View>
 
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -274,10 +293,10 @@ const PredictionCard = ({ index }: IPredictionCard) => {
             <Pressable
               onPress={handleLike}
               style={{
+                width: 56,
                 flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "center",
-                marginRight: scale(35),
+                marginRight: scale(20),
               }}
             >
               <Image
@@ -286,23 +305,23 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               />
               <Text
                 style={{
-                  fontFamily: fonts.f400,
+                  fontFamily: liked ? fonts.f700 : fonts.f500,
                   fontSize: scale(13),
                   lineHeight: scale(19),
-                  color: Colors.textGrey,
-                  fontWeight: "400",
+                  color: liked ? "#024BAC" : Colors.textGrey,
+                  fontWeight: liked ? "700" : "500",
                 }}
               >
-                {likeCount !== 0 ? likeCount : "Agree"}
+                {disliked || liked ? likeCount : "Agree"}
               </Text>
             </Pressable>
             <Pressable
               onPress={handleDislike}
               style={{
+                width: 73,
                 flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "center",
-                marginRight: scale(45),
+                marginRight: scale(20),
               }}
             >
               <Image
@@ -311,14 +330,14 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               />
               <Text
                 style={{
-                  fontFamily: fonts.f400,
+                  fontFamily: disliked ? fonts.f700 : fonts.f500,
                   fontSize: scale(13),
                   lineHeight: scale(19),
-                  color: Colors.textGrey,
-                  fontWeight: "400",
+                  color: disliked ? "#E33F3F" : Colors.textGrey,
+                  fontWeight: disliked ? "700" : "500",
                 }}
               >
-                {dislikeCount !== 0 ? dislikeCount : "Disagree"}
+                {disliked || liked ? dislikeCount : "Disagree"}
               </Text>
             </Pressable>
           </View>

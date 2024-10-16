@@ -20,7 +20,7 @@ import { SCREENS } from "../constant/navigation.constants";
 import RNPickerSelect from "react-native-picker-select";
 
 const dummyDates = [
-  { label: "August 24 (OnGoing)", value: "August 24 (OnGoing)" },
+  { label: "August 24", value: "August 24" },
   { label: "July 30", value: "July 30" },
   { label: "June 11", value: "June 11" },
   { label: "June 5", value: "June 5" },
@@ -196,16 +196,17 @@ const Contests = ({ openBottomSheet }) => {
             placeholder={{}}
             style={{
               viewContainer: {
-                width: "65%",
+                width: Platform.OS === "ios" ? "auto" : "65%",
+                marginRight: 4,
               },
               inputIOS: {
                 color: "#101010",
                 fontFamily: fonts.f600,
                 fontSize: 14,
                 fontWeight: "600",
+                width: "100%",
               },
               inputAndroid: {
-                // backgroundColor: "yellow",
                 color: "#101010",
                 fontFamily: fonts.f600,
                 fontWeight: "600",

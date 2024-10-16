@@ -8,6 +8,15 @@ import { SCREENS } from "../constant/navigation.constants";
 import SearchStack from "./Search.stack";
 import { HowToPredictScreen } from "../component/HowItWorks";
 import UserProfile from "../screen/Profile/UserProfile";
+import MenuScreen from "../screen/Profile/Menu";
+import FAQScreen from "../screen/Profile/Faq";
+import SelectAvatar from "../screen/onboarding/SelectAvatar";
+import GeneralList from "../screen/GeneralList";
+import NotificationSettings from "../screen/Profile/NotificationSettings";
+import GiveFeedback from "../screen/Profile/Feedback";
+import ChangePassword from "../screen/Profile/ChangePassword";
+import Privacy from "../screen/Profile/Privacy";
+import TermsAndConditions from "../screen/Profile/Terms";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,17 +28,55 @@ const ProfileStack = () => (
     }}
   >
     <Stack.Screen
-      name={SCREENS.HOME}
+      name={SCREENS.PROFILE}
       component={UserProfile}
       options={{ headerShown: false }}
     />
-    {/* <Stack.Screen name={SCREENS.SEARCH}
-      component={SearchStack}
-      options={{ headerShown: false }} />
-
-    <Stack.Screen name={SCREENS.HOW_IT_WORKS}
-      component={HowToPredictScreen}
-      options={{ headerShown: false }} /> */}
+    <Stack.Screen
+      name={SCREENS.GENERAL_SCREEN}
+      component={GeneralList}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.SELECT_AVATAR}
+      component={SelectAvatar}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.MENU}
+      component={MenuScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.FAQS}
+      component={FAQScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.NOTIFICATION_SETTINGS}
+      component={NotificationSettings}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.FEEDBACK}
+      component={GiveFeedback}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.CHANGE_PASSWORD}
+      component={ChangePassword}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.PRIVACY}
+      component={Privacy}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.TERMS}
+      component={TermsAndConditions}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

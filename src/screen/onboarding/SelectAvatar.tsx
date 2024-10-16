@@ -9,6 +9,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -28,6 +29,9 @@ import {
 import DeviceInfo from "react-native-device-info";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
+import { useRoute } from "@react-navigation/native";
+import Icons from "../../component/Icons";
+import { ICONS } from "../../constant/icons.constants";
 
 const Avatars = [
   { image: Images.avatar1, name: "Bear" },
@@ -63,6 +67,10 @@ const SelectAvatar: React.FC<any> = ({ navigation }) => {
   }>({ image: Images.avatarPlaceholder });
   const [showModal, setShowModal] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  const route = useRoute();
+
+  const { isEdit = false } = route.params || {};
 
   const emailRef = useRef<Iref>(null);
 
@@ -194,13 +202,42 @@ const SelectAvatar: React.FC<any> = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+      <KeyboardAwareScrollView
+        bounces={false}
+        contentContainerStyle={styles.container}
+      >
         <View style={styles.padding}>
-          <Text style={styles.title}>
-            {"Predictr"}
-            <Text style={styles.dot}>{"."}</Text>
-          </Text>
-          <Text style={styles.avatarText}>{"Select your avatar"}</Text>
+          {!isEdit ? (
+            <Text style={styles.title}>
+              {"Predictr"}
+              <Text style={styles.dot}>{"."}</Text>
+            </Text>
+          ) : (
+            <TouchableWithoutFeedback
+              style={{ padding: 10, backgroundColor: "red" }}
+              onPress={() => navigation.navigate(SCREENS.PROFILE)}
+            >
+              <Icons type={ICONS.BACKARR} />
+            </TouchableWithoutFeedback>
+          )}
+          {!isEdit ? (
+            <Text style={styles.avatarText}>{"Select your avatar"}</Text>
+          ) : (
+            <>
+              <Text
+                style={{
+                  ...styles.avatarText,
+                  textAlign: "left",
+                  marginTop: scale(12),
+                }}
+              >
+                {"Edit your profile"}
+              </Text>
+              <Text style={styles.subHeadText}>
+                Customize your profile by updating your avatar and name.
+              </Text>
+            </>
+          )}
           <Image source={image?.image} style={styles.image} />
           {image?.image?.uri ? (
             <Text onPress={capturePhoto} style={styles.edit}>
@@ -302,6 +339,14 @@ const styles = StyleSheet.create({
     marginTop: scale(30),
     marginBottom: scale(10),
   },
+
+  subHeadText: {
+    fontFamily: fonts.f400,
+    fontWeight: "400",
+    fontSize: 15,
+    color: "#151B26",
+  },
+
   image: {
     height: scale(150),
     width: scale(150),
@@ -333,9 +378,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   button: {
-    // backgroundColor: "red",
     marginTop: "auto",
-    marginBottom: scale(40),
+    marginBottom: scale(20),
     // alignSelf: "baseline"
   },
   padding: {

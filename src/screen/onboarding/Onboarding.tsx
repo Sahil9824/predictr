@@ -42,7 +42,7 @@ const Onboarding = ({ navigation }: any) => {
   );
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryBlue} />
+      {/* <StatusBar barStyle={"dark-content"} backgroundColor={"#024BAC"} /> */}
       <View style={styles.container}>
         <Text style={styles.header}>
           <Text800 style={styles.headerText}>{"Predictr"}</Text800>

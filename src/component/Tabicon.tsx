@@ -11,6 +11,7 @@ const TabIcon = ({ focused, route }) => {
     () => (focused ? TAB_ICON_COLORS.ACTIVE : TAB_ICON_COLORS.DEFAULT),
     [focused]
   );
+  console.log(name, focused, "kyaa");
 
   switch (name) {
     case APP_NAVIGATION.HOME_SCREEN:

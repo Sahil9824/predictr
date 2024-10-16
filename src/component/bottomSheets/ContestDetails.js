@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { Colors, fonts } from "../../constant";
@@ -53,12 +54,12 @@ const ContestDetails = forwardRef((props, ref) => {
         <View style={styles.bottomSheetContainer}>
           <View style={styles.header}>
             <Text style={styles.contestText}>Contest Details</Text>
-            <Pressable
+            <TouchableWithoutFeedback
               // style={{ backgroundColor: "red" }}
               onPress={closeBottomSheet}
             >
               <Icons type={ICONS.CLOSE} />
-            </Pressable>
+            </TouchableWithoutFeedback>
           </View>
 
           <KeyboardAwareScrollView
