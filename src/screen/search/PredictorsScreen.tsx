@@ -1,20 +1,28 @@
-import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { Images } from '../../assets/images';
-import { scale } from '../../../helper';
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { Images } from "../../assets/images";
+import { scale } from "../../../helper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const mockData = [
-  { id: '1', name: 'Jacob Jones', accuracy: '78.90%' },
-  { id: '2', name: 'Jacob Jones', accuracy: '78.90%' },
-  { id: '3', name: 'Jacob Jones', accuracy: '78.90%' },
-  { id: '4', name: 'Jacob Jones', accuracy: '78.90%' },
-  { id: '5', name: 'Jacob Jones', accuracy: '78.90%' },
+  { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "2", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "3", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "4", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "5", name: "Jacob Jones", accuracy: "78.90%" },
 ];
 
 const PredictorsScreen = () => {
   const renderItem = ({ item }) => {
     return (
-      <View>
+      <>
         <View style={styles.itemContainer}>
           {/* Avatar */}
           <Image
@@ -38,7 +46,7 @@ const PredictorsScreen = () => {
         </View>
         {/* Divider */}
         <View style={styles.divider} />
-      </View>
+      </>
     );
   };
 
@@ -57,8 +65,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 10,
   },
   detailsContainer: {
@@ -66,23 +74,23 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
   },
   accuracy: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
     marginTop: 4,
   },
   followButtonText: {
-    color: '#024BAC',
-    fontWeight: '800',
+    color: "#024BAC",
+    fontWeight: "800",
     fontSize: 14,
   },
   divider: {
     height: 1,
-    backgroundColor: '#ddd',
-    marginLeft: scale(48), 
+    backgroundColor: "#ddd",
+    marginLeft: scale(48),
   },
 });
 

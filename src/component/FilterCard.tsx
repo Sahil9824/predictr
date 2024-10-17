@@ -34,7 +34,12 @@ const FilterCard = forwardRef((props, ref) => {
   const navigation = useNavigation();
 
   const renderBackdrop = (props) => (
-    <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
+    <BottomSheetBackdrop
+      style={{ zIndex: 100 }}
+      {...props}
+      disappearsOnIndex={-1}
+      appearsOnIndex={0}
+    />
   );
 
   const formatDate = (date) => {

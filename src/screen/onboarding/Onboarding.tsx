@@ -17,6 +17,7 @@ import Text800 from "../../component/Text800";
 import { Colors, Device, fonts } from "../../constant";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Onboarding = ({ navigation }: any) => {
   useFocusEffect(() => {
@@ -41,8 +42,10 @@ const Onboarding = ({ navigation }: any) => {
     }, [])
   );
   return (
-    <>
-      {/* <StatusBar barStyle={"dark-content"} backgroundColor={"#024BAC"} /> */}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
       <View style={styles.container}>
         <Text style={styles.header}>
           <Text800 style={styles.headerText}>{"Predictr"}</Text800>
@@ -103,7 +106,7 @@ const Onboarding = ({ navigation }: any) => {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </SafeAreaView>
   );
 };
 

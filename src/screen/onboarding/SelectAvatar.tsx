@@ -32,6 +32,7 @@ import { SCREENS } from "../../constant/navigation.constants";
 import { useRoute } from "@react-navigation/native";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Avatars = [
   { image: Images.avatar1, name: "Bear" },
@@ -201,108 +202,113 @@ const SelectAvatar: React.FC<any> = ({ navigation }) => {
   }, [image, emailRef.current?.value]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <KeyboardAwareScrollView
-        bounces={false}
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.padding}>
-          {!isEdit ? (
-            <Text style={styles.title}>
-              {"Predictr"}
-              <Text style={styles.dot}>{"."}</Text>
-            </Text>
-          ) : (
-            <TouchableWithoutFeedback
-              style={{ padding: 10, backgroundColor: "red" }}
-              onPress={() => navigation.navigate(SCREENS.PROFILE)}
-            >
-              <Icons type={ICONS.BACKARR} />
-            </TouchableWithoutFeedback>
-          )}
-          {!isEdit ? (
-            <Text style={styles.avatarText}>{"Select your avatar"}</Text>
-          ) : (
-            <>
-              <Text
-                style={{
-                  ...styles.avatarText,
-                  textAlign: "left",
-                  marginTop: scale(12),
-                }}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          bounces={false}
+          contentContainerStyle={styles.container}
+        >
+          <View style={styles.padding}>
+            {!isEdit ? (
+              <Text style={styles.title}>
+                {"Predictr"}
+                <Text style={styles.dot}>{"."}</Text>
+              </Text>
+            ) : (
+              <TouchableWithoutFeedback
+                style={{ padding: 10, backgroundColor: "red" }}
+                onPress={() => navigation.navigate(SCREENS.PROFILE)}
               >
-                {"Edit your profile"}
+                <Icons type={ICONS.BACKARR} />
+              </TouchableWithoutFeedback>
+            )}
+            {!isEdit ? (
+              <Text style={styles.avatarText}>{"Select your avatar"}</Text>
+            ) : (
+              <>
+                <Text
+                  style={{
+                    ...styles.avatarText,
+                    textAlign: "left",
+                    marginTop: scale(12),
+                  }}
+                >
+                  {"Edit your profile"}
+                </Text>
+                <Text style={styles.subHeadText}>
+                  Customize your profile by updating your avatar and name.
+                </Text>
+              </>
+            )}
+            <Image source={image?.image} style={styles.image} />
+            {image?.image?.uri ? (
+              <Text onPress={capturePhoto} style={styles.edit}>
+                {"Edit"}
               </Text>
-              <Text style={styles.subHeadText}>
-                Customize your profile by updating your avatar and name.
+            ) : (
+              <Text style={styles.avatarSubtitle}>
+                {image?.name ?? "Your Avatar"}
               </Text>
-            </>
-          )}
-          <Image source={image?.image} style={styles.image} />
-          {image?.image?.uri ? (
-            <Text onPress={capturePhoto} style={styles.edit}>
-              {"Edit"}
-            </Text>
-          ) : (
-            <Text style={styles.avatarSubtitle}>
-              {image?.name ?? "Your Avatar"}
-            </Text>
-          )}
-        </View>
-        <View style={styles.imageSelection}>
-          <Pressable
-            onPress={() => {
-              setShowModal(true);
-            }}
-            style={{
-              height: 56,
-              width: 56,
-              borderRadius: 12,
-              backgroundColor: Colors.lightGrey,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image source={Images.cameraGrey} style={styles.camera} />
-          </Pressable>
-          <View style={styles.border} />
-          <FlatList
-            data={Avatars}
-            renderItem={renderItem}
-            horizontal={true}
-            contentContainerStyle={styles.flatlistContent}
-            style={styles.flatlist}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(_, index) => index.toString()}
-          />
-        </View>
-        <View style={[styles.padding, { flexGrow: 1 }]}>
-          <Input
-            label={"Pick an username"}
-            error={emailErr}
-            ref={emailRef}
-            extraText={
-              "The username you create will be visible to other users."
-            }
-            onBlur={validation}
-            rightText={validNameText}
-          />
-          <Button
-            text="Save"
-            onPress={onSubmit}
-            style={styles.button}
-            inActive={disabled}
-          />
-        </View>
-      </KeyboardAwareScrollView>
-      <ImagePicker
-        visible={showModal}
-        setPickedImage={setPickedImage}
-        hideModal={() => {
-          setShowModal(false);
-        }}
-      />
-    </View>
+            )}
+          </View>
+          <View style={styles.imageSelection}>
+            <Pressable
+              onPress={() => {
+                setShowModal(true);
+              }}
+              style={{
+                height: 56,
+                width: 56,
+                borderRadius: 12,
+                backgroundColor: Colors.lightGrey,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image source={Images.cameraGrey} style={styles.camera} />
+            </Pressable>
+            <View style={styles.border} />
+            <FlatList
+              data={Avatars}
+              renderItem={renderItem}
+              horizontal={true}
+              contentContainerStyle={styles.flatlistContent}
+              style={styles.flatlist}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(_, index) => index.toString()}
+            />
+          </View>
+          <View style={[styles.padding, { flexGrow: 1 }]}>
+            <Input
+              label={"Pick an username"}
+              error={emailErr}
+              ref={emailRef}
+              extraText={
+                "The username you create will be visible to other users."
+              }
+              onBlur={validation}
+              rightText={validNameText}
+            />
+            <Button
+              text="Save"
+              onPress={onSubmit}
+              style={styles.button}
+              inActive={disabled}
+            />
+          </View>
+        </KeyboardAwareScrollView>
+        <ImagePicker
+          visible={showModal}
+          setPickedImage={setPickedImage}
+          hideModal={() => {
+            setShowModal(false);
+          }}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

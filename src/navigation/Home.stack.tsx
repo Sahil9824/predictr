@@ -7,6 +7,9 @@ import DashBoard from "../screen/home/DashBoard";
 import { SCREENS } from "../constant/navigation.constants";
 import SearchStack from "./Search.stack";
 import { HowToPredictScreen } from "../component/HowItWorks";
+import Post from "../screen/home/Post";
+import GeneralList from "../screen/GeneralList";
+import OtherUserProfile from "../screen/Profile/OtherUserProfile";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,13 +25,33 @@ const HomeStack = () => (
       component={DashBoard}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name={SCREENS.SEARCH}
+    <Stack.Screen
+      name={SCREENS.SEARCH}
       component={SearchStack}
-      options={{ headerShown: false }} />
+      options={{ headerShown: false }}
+    />
 
-    <Stack.Screen name={SCREENS.HOW_IT_WORKS}
+    <Stack.Screen
+      name={SCREENS.HOW_IT_WORKS}
       component={HowToPredictScreen}
-      options={{ headerShown: false }} />
+      options={{ headerShown: false }}
+    />
+
+    <Stack.Screen
+      name={SCREENS.POST}
+      component={Post}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.GENERAL_SCREEN}
+      component={GeneralList}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={SCREENS.OTHER_USER_PROFILE}
+      component={OtherUserProfile}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

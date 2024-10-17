@@ -16,6 +16,7 @@ import Button from "../../component/Button";
 import { Colors, fonts } from "../../constant";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "FeedSetup">;
@@ -348,66 +349,71 @@ const FeedSetup: React.FC<any> = ({ navigation, route }) => {
   }, [searchText]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.profileContainer}>
-        <Image source={profileImage} style={styles.profileImg} />
-        <Text style={styles.text}>{username}</Text>
-      </View>
-      <View style={styles.header}>
-        <Text style={styles.title}>{"Setup your feed"}</Text>
-        <Text style={styles.subText}>
-          {"Follow minimum 5 predictors to enable My Feed"}
-        </Text>
-      </View>
-
-      <View style={styles.searchContainer}>
-        <Image
-          source={Images.search}
-          style={styles.searchImg}
-          resizeMode="contain"
-        />
-        <TextInput
-          style={styles.search}
-          placeholder="Search"
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-      </View>
-
-      <View style={styles.followContainer}>
-        <Text
-          style={styles.followCount}
-        >{`${followList.length} Following`}</Text>
-        {listData.length >= 10 && (
-          <Text onPress={followTop10} style={styles.top10}>
-            {"Follow Top 10"}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={styles.container}>
+        <View style={styles.profileContainer}>
+          <Image source={profileImage} style={styles.profileImg} />
+          <Text style={styles.text}>{username}</Text>
+        </View>
+        <View style={styles.header}>
+          <Text style={styles.title}>{"Setup your feed"}</Text>
+          <Text style={styles.subText}>
+            {"Follow minimum 5 predictors to enable My Feed"}
           </Text>
-        )}
-      </View>
-      <View style={styles.listContainer} />
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        style={styles.list}
-        ListEmptyComponent={
-          <Text style={{ textAlign: "center", marginTop: 20 }}>
-            {"No record found"}
-          </Text>
-        }
-        data={listData}
-        renderItem={({ item }) => (
-          <Titles
-            item={item}
-            addToFollowList={addToFollowList}
-            removeFromFollowList={removeFromFollowList}
-            followList={followList}
+        </View>
+
+        <View style={styles.searchContainer}>
+          <Image
+            source={Images.search}
+            style={styles.searchImg}
+            resizeMode="contain"
           />
+          <TextInput
+            style={styles.search}
+            placeholder="Search"
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+        </View>
+
+        <View style={styles.followContainer}>
+          <Text
+            style={styles.followCount}
+          >{`${followList.length} Following`}</Text>
+          {listData.length >= 10 && (
+            <Text onPress={followTop10} style={styles.top10}>
+              {"Follow Top 10"}
+            </Text>
+          )}
+        </View>
+        <View style={styles.listContainer} />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          style={styles.list}
+          ListEmptyComponent={
+            <Text style={{ textAlign: "center", marginTop: 20 }}>
+              {"No record found"}
+            </Text>
+          }
+          data={listData}
+          renderItem={({ item }) => (
+            <Titles
+              item={item}
+              addToFollowList={addToFollowList}
+              removeFromFollowList={removeFromFollowList}
+              followList={followList}
+            />
+          )}
+          keyExtractor={(item) => item?.id?.toString()}
+        />
+        {followList.length > 0 && (
+          <Button text="Done" onPress={navigateToLogin} style={styles.line} />
         )}
-        keyExtractor={(item) => item?.id?.toString()}
-      />
-      {followList.length > 0 && (
-        <Button text="Done" onPress={navigateToLogin} style={styles.line} />
-      )}
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

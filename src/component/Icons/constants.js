@@ -28,6 +28,9 @@ import RightArrow from "./RightArrow";
 import BackArrow from "./BackArrow";
 import Bookmark from "./Bookmark";
 import ChangePass from "./ChangePass";
+import CommentEnt from "./CommentEnt";
+import MultiAva from "./MultiAva";
+import Pin from "./Pin";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -62,4 +65,7 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.BACKARR]: BackArrow,
   [ICONS.BOOKMARK]: Bookmark,
   [ICONS.CHANGE_PASS]: ChangePass,
+  [ICONS.CMNT_ENTER]: CommentEnt,
+  [ICONS.MULTI_AVA]: MultiAva,
+  [ICONS.PIN]: Pin,
 };

@@ -2,7 +2,9 @@ import {
   Animated,
   FlatList,
   Image,
+  Platform,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -27,15 +29,19 @@ import CustomDatePicker from "..//../component/CustomDatePicker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 import ShareCard from "../../component/ShareCard";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HeaderOptions = ({
   isSelected,
   setIsSelected,
   openFilter,
   filteredOptions,
+  handleLayout,
+  style,
 }) => {
   return (
     <View
+      onLayout={handleLayout}
       style={{
         flexDirection: "row",
         alignItems: "center",
@@ -43,6 +49,7 @@ const HeaderOptions = ({
         borderBottomWidth: 1,
         borderBottomColor: Colors.lightGrey,
         paddingHorizontal: scale(10),
+        ...style,
       }}
     >
       <View style={{ flexDirection: "row", height: scale(50) }}>
@@ -166,8 +173,29 @@ const DashBoard = () => {
   const [isSelected, setIsSelected] = useState(0);
   const [filteredOptions, setFilteredOptions] = useState(null);
   const navigation = useNavigation();
+  const scrollY = new Animated.Value(0);
+  const stickyTop = scrollY.interpolate({
+    outputRange: [-56, 0],
+    inputRange: [150, 500],
+    extrapolate: "clamp",
+  });
+  const animatedOpac = scrollY.interpolate({
+    outputRange: [0, 1],
+    inputRange: [495, 500],
+    extrapolate: "clamp",
+  });
+
+  const [viewHeight, setViewHeight] = useState(0);
+
+  console.log(viewHeight, "nice");
+
+  const handleLayout = (event) => {
+    const { height } = event.nativeEvent.layout;
+    setViewHeight(height); // Store the height of the view
+  };
 
   const route = useRoute();
+  const { isSpecial } = route.params || {};
   let filteredOptionsRecieved = route.params?.filteredOptions || null;
 
   const isReset = route.params?.isReset || false;
@@ -178,6 +206,11 @@ const DashBoard = () => {
     { id: 3, isFavorited: false },
     { id: 4, isFavorited: false },
   ]);
+
+  useEffect(() => {
+    if (!isSpecial) return;
+    setIsSelected(2);
+  }, [isSpecial]);
 
   useEffect(() => {
     if (filteredOptionsRecieved) {
@@ -216,80 +249,106 @@ const DashBoard = () => {
   };
 
   return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        {/* Header */}
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingVertical: scale(10),
-            paddingHorizontal: scale(10),
-          }}
-        >
-          <Text
+    <>
+      <SafeAreaView
+        style={{ flex: 1, backgroundColor: "white" }}
+        edges={["top", "left", "right"]}
+      >
+        <View style={styles.container}>
+          <View
             style={{
-              fontFamily: fonts.f800,
-              color: Colors.textBlack,
-              fontSize: scale(22),
-              fontWeight: "800",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingVertical: scale(10),
+              paddingHorizontal: scale(10),
             }}
           >
-            {"Predictr."}
-          </Text>
-          <TouchableOpacity onPress={onSearchPress}>
-            <Image
-              source={Images.headerSearch}
-              style={{ height: scale(22), width: scale(22) }}
+            <Text
+              style={{
+                fontFamily: fonts.f800,
+                color: Colors.textBlack,
+                fontSize: scale(22),
+                fontWeight: "800",
+              }}
+            >
+              {"Predictr."}
+            </Text>
+            <TouchableOpacity onPress={onSearchPress}>
+              <Image
+                source={Images.headerSearch}
+                style={{ height: scale(22), width: scale(22) }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+              {
+                useNativeDriver: false,
+              }
+            )}
+          >
+            <View style={{ paddingHorizontal: 16 }}>
+              <WinnerCard
+                openBottomSheet={openContestDetails}
+                setIsSelected={setIsSelected}
+              />
+            </View>
+
+            <HeaderOptions
+              isSelected={isSelected}
+              setIsSelected={setIsSelected}
+              openFilter={openFilterCard}
+              filteredOptions={filteredOptions}
+              handleLayout={handleLayout}
             />
-          </TouchableOpacity>
+
+            {(isSelected === 1 || isSelected === 0) &&
+              [1, 2, 3, 4].map((item) => (
+                <View style={{ paddingHorizontal: 16 }}>
+                  <PredictionCard
+                    index={item}
+                    // isFavorited={item.isFavorited}
+                    // onFavoritePress={() => toggleFavorite(item.id)}
+                  />
+                </View>
+              ))}
+
+            {isSelected === 2 && (
+              <Contests openBottomSheet={openContestDetails} />
+            )}
+          </ScrollView>
+
+          <ContestDetails ref={contestDetailsRef} />
         </View>
 
-        {/* Content */}
-        <FlatList
-          ListHeaderComponent={
-            <>
-              <View style={{ paddingHorizontal: 16 }}>
-                <WinnerCard openBottomSheet={openContestDetails} />
-              </View>
-              <HeaderOptions
-                isSelected={isSelected}
-                setIsSelected={setIsSelected}
-                openFilter={openFilterCard}
-                filteredOptions={filteredOptions}
-              />
-            </>
-          }
-          data={isSelected === 2 ? [1] : [1, 2, 3, 4]}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item, index }) => {
-            if (isSelected === 2) {
-              return <Contests openBottomSheet={openContestDetails} />;
-            }
-            return (
-              <View style={{ paddingHorizontal: 16 }}>
-                <PredictionCard
-                  index={item.id}
-                  isFavorited={item.isFavorited}
-                  onFavoritePress={() => toggleFavorite(item.id)}
-                />
-              </View>
-            );
+        <Animated.View
+          style={{
+            ...styles.stickyHead,
+            marginTop:
+              Platform.OS === "android" ? viewHeight - 1 : viewHeight * 2,
+            top: stickyTop,
+            opacity: animatedOpac,
           }}
-          keyExtractor={(_, index) => index.toString()}
-          scrollEventThrottle={16}
-        />
-
-        {/* Bottom Sheets */}
-        <ContestDetails ref={contestDetailsRef} />
-        <FilterCard
-          ref={filterCardRef}
-          onFilterReset={handleFilterReset}
-          isReset={isReset}
-        />
-      </View>
-    </BottomSheetModalProvider>
+        >
+          <HeaderOptions
+            isSelected={isSelected}
+            setIsSelected={setIsSelected}
+            openFilter={openFilterCard}
+            filteredOptions={filteredOptions}
+            style={styles.shadow}
+          />
+        </Animated.View>
+      </SafeAreaView>
+      <FilterCard
+        ref={filterCardRef}
+        onFilterReset={handleFilterReset}
+        isReset={isReset}
+      />
+    </>
   );
 };
 
@@ -301,6 +360,37 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 
+  stickyHead: {
+    width: "100%",
+    position: "absolute",
+    height: 55,
+    top: -55,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    opacity: 1,
+    overflow: "hidden",
+    paddingBottom: 2,
+  },
+
+  shadow: {
+    width: "100%",
+    backgroundColor: "white",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
+        shadowOpacity: 0.2,
+        shadowRadius: 3, // You can adjust this for more blur effect
+      },
+      android: {
+        elevation: 5, // This will create shadow, but not just at the bottom
+      },
+    }),
+  },
   headerOptionsContainer: {
     position: "absolute",
     top: 0,

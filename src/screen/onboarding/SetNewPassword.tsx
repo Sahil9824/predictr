@@ -11,6 +11,7 @@ import { useToast } from "react-native-toast-notifications";
 import { Images } from "../../assets/images";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -75,42 +76,47 @@ const SetNewPassword = ({ navigation }: any) => {
   }, []);
 
   return (
-    <Pressable style={{ flex: 1 }}>
-      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>{"Set new password"}</Text>
-        <Text style={styles.subTitle}>
-          {
-            "To secure your account, choose a strong password of 8 characters at least."
-          }
-        </Text>
-        <View style={styles.inputContainer}>
-          <Input
-            label={"New Password"}
-            error={passwordErr}
-            ref={passwordRef}
-            autoFocus={true}
-            onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
-            blurOnSubmit={false}
-            onBlur={passwordValidation}
-            password
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <Pressable style={{ flex: 1 }}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.title}>{"Set new password"}</Text>
+          <Text style={styles.subTitle}>
+            {
+              "To secure your account, choose a strong password of 8 characters at least."
+            }
+          </Text>
+          <View style={styles.inputContainer}>
+            <Input
+              label={"New Password"}
+              error={passwordErr}
+              ref={passwordRef}
+              autoFocus={true}
+              onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
+              blurOnSubmit={false}
+              onBlur={passwordValidation}
+              password
+            />
+            <Input
+              label={"Re-enter New Password"}
+              error={cnfPasswordErr}
+              ref={confirmPasswordRef}
+              onBlur={cnfPasswordValidation}
+              rightText={cnfValidText}
+              password
+            />
+          </View>
+          <Button
+            text={"Reset Password"}
+            style={styles.button}
+            onPress={submit}
+            inActive={disabled}
           />
-          <Input
-            label={"Re-enter New Password"}
-            error={cnfPasswordErr}
-            ref={confirmPasswordRef}
-            onBlur={cnfPasswordValidation}
-            rightText={cnfValidText}
-            password
-          />
-        </View>
-        <Button
-          text={"Reset Password"}
-          style={styles.button}
-          onPress={submit}
-          inActive={disabled}
-        />
-      </KeyboardAwareScrollView>
-    </Pressable>
+        </KeyboardAwareScrollView>
+      </Pressable>
+    </SafeAreaView>
   );
 };
 

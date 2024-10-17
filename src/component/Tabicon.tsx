@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
-import { APP_NAVIGATION } from "../constant/navigation.constants";
+import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 import { TAB_ICON_COLORS } from "../constant";
 
 const TabIcon = ({ focused, route }) => {
@@ -26,7 +26,7 @@ const TabIcon = ({ focused, route }) => {
       );
     case APP_NAVIGATION.PROFILE:
       return <Icons type={ICONS.PROFILE} fill={tabIconColor} strokeWidth={2} />;
-    case APP_NAVIGATION.NOTIFICATION:
+    case SCREENS.NOTIFICATION:
       return (
         <Icons
           type={ICONS.NOTIFICATION}

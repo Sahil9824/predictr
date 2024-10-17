@@ -12,6 +12,7 @@ import { errorMsg, fonts, regex } from "../../constant";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import Input from "../../component/Input";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ChangePassword = ({ navigation }) => {
   const [cnfValidText, setCnfValidText] = useState("");
@@ -85,58 +86,63 @@ const ChangePassword = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate(SCREENS.MENU)}
-        >
-          <Icons type={ICONS.BACKARR} />
-        </TouchableWithoutFeedback>
-        <Text style={styles.menuText}>Change Password</Text>
-      </View>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate(SCREENS.MENU)}
+          >
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+          <Text style={styles.menuText}>Change Password</Text>
+        </View>
 
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <View style={styles.containerBox}>
-          <Icons type={ICONS.CHANGE_PASS} />
-          <View style={{ marginTop: 50, width: "100%" }}>
-            <Input
-              label="Current password"
-              password={true}
-              error={passwordErr}
-              ref={passwordRef}
-              onSubmitEditing={() => passwordRef?.current?.focus()}
-              blurOnSubmit={false}
-              onBlur={passwordOnBlur}
-            />
-            <Input
-              label="New password"
-              password={true}
-              error={newPasswordErr}
-              ref={newPasswordRef}
-              onSubmitEditing={() => newPasswordRef?.current?.focus()}
-              blurOnSubmit={false}
-              onBlur={passwordOnBlur}
-            />
-            <Input
-              label="Re-enter new password"
-              password={true}
-              error={cnfPasswordErr}
-              ref={confirmPasswordRef}
-              onBlur={passwordOnBlur}
-              rightText={cnfValidText}
+        <ScrollView contentContainerStyle={{ flex: 1 }}>
+          <View style={styles.containerBox}>
+            <Icons type={ICONS.CHANGE_PASS} />
+            <View style={{ marginTop: 50, width: "100%" }}>
+              <Input
+                label="Current password"
+                password={true}
+                error={passwordErr}
+                ref={passwordRef}
+                onSubmitEditing={() => passwordRef?.current?.focus()}
+                blurOnSubmit={false}
+                onBlur={passwordOnBlur}
+              />
+              <Input
+                label="New password"
+                password={true}
+                error={newPasswordErr}
+                ref={newPasswordRef}
+                onSubmitEditing={() => newPasswordRef?.current?.focus()}
+                blurOnSubmit={false}
+                onBlur={passwordOnBlur}
+              />
+              <Input
+                label="Re-enter new password"
+                password={true}
+                error={cnfPasswordErr}
+                ref={confirmPasswordRef}
+                onBlur={passwordOnBlur}
+                rightText={cnfValidText}
+              />
+            </View>
+            <Button
+              onPress={() => {
+                navigation.navigate(SCREENS.MENU);
+              }}
+              style={{ marginTop: "auto" }}
+              text="Save Changes"
+              inActive={disabled}
             />
           </View>
-          <Button
-            onPress={() => {
-              navigation.navigate(SCREENS.MENU);
-            }}
-            style={{ marginTop: "auto" }}
-            text="Save Changes"
-            inActive={disabled}
-          />
-        </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 

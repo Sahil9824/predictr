@@ -11,6 +11,7 @@ import Collapsible from "react-native-collapsible";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import { fonts } from "../../constant";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const FAQScreen = ({ navigation }) => {
   const [activeSections, setActiveSections] = useState([]);
@@ -45,47 +46,52 @@ const FAQScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-          <Icons type={ICONS.BACKARR} />
-        </TouchableWithoutFeedback>
-        <Text style={styles.headerText}>FAQ's</Text>
-      </View>
-      <ScrollView>
-        {faqItems.map((item, index) => (
-          <View key={index}>
-            <TouchableOpacity
-              style={styles.faqItem}
-              onPress={() => toggleSection(index)}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+          <Text style={styles.headerText}>FAQ's</Text>
+        </View>
+        <ScrollView>
+          {faqItems.map((item, index) => (
+            <View key={index}>
+              <TouchableOpacity
+                style={styles.faqItem}
+                onPress={() => toggleSection(index)}
               >
-                <Text style={styles.questionText}>{item.question}</Text>
-                {!activeSections.includes(index) ? (
-                  <Icons type={ICONS.DOWN_ARROW} />
-                ) : (
-                  <View style={{ transform: [{ rotate: "180deg" }] }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={styles.questionText}>{item.question}</Text>
+                  {!activeSections.includes(index) ? (
                     <Icons type={ICONS.DOWN_ARROW} />
-                  </View>
-                )}
-              </View>
-
-              <Collapsible collapsed={!activeSections.includes(index)}>
-                <View style={styles.answerContainer}>
-                  <Text style={styles.answerText}>{item.answer}</Text>
+                  ) : (
+                    <View style={{ transform: [{ rotate: "180deg" }] }}>
+                      <Icons type={ICONS.DOWN_ARROW} />
+                    </View>
+                  )}
                 </View>
-              </Collapsible>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+
+                <Collapsible collapsed={!activeSections.includes(index)}>
+                  <View style={styles.answerContainer}>
+                    <Text style={styles.answerText}>{item.answer}</Text>
+                  </View>
+                </Collapsible>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 

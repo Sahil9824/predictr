@@ -21,6 +21,7 @@ import { ICONS } from "../../constant/icons.constants";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { SCREENS } from "../../constant/navigation.constants";
 import FilterCard from "../../component/FilterCard";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const data = [
   { id: "1", index: 0 },
@@ -166,8 +167,10 @@ const UserProfile = () => {
   };
 
   return (
-    <>
-      {/* Profile Header */}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
       <View style={styles.mainHeader}>
         <Text
           style={{
@@ -220,7 +223,11 @@ const UserProfile = () => {
                 }
               >
                 <View
-                  style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
                 >
                   <Text
                     style={{
@@ -254,7 +261,11 @@ const UserProfile = () => {
                 }
               >
                 <View
-                  style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
                 >
                   <Text
                     style={{
@@ -380,7 +391,7 @@ const UserProfile = () => {
           isReset={isReset}
         />
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 };
 

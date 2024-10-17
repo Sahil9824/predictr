@@ -56,7 +56,25 @@ const dummyUsers = [
     name: "Kinyle Jam",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 4,
+    rank: 10,
+  },
+  {
+    name: "Kinyle Jam",
+    accuracy: "13%",
+    predictionNos: "02",
+    rank: 11,
+  },
+  {
+    name: "Kinyle Jam",
+    accuracy: "13%",
+    predictionNos: "02",
+    rank: 12,
+  },
+  {
+    name: "Kinyle Jam",
+    accuracy: "13%",
+    predictionNos: "02",
+    rank: 13,
   },
   {
     isUser: true,
@@ -64,7 +82,7 @@ const dummyUsers = [
     name: "Userslef Self",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 5,
+    rank: 14,
   },
   {
     isUser: true,
@@ -72,7 +90,23 @@ const dummyUsers = [
     name: "Userslef Self",
     accuracy: "13%",
     predictionNos: "00",
-    rank: 6,
+    rank: 15,
+  },
+  {
+    isUser: false,
+    participated: false,
+    name: "Userslef Self",
+    accuracy: "13%",
+    predictionNos: "00",
+    rank: 16,
+  },
+  {
+    isUser: false,
+    participated: false,
+    name: "Userslef Self",
+    accuracy: "13%",
+    predictionNos: "00",
+    rank: 17,
   },
 ];
 

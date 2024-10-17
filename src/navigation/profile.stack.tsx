@@ -17,6 +17,8 @@ import GiveFeedback from "../screen/Profile/Feedback";
 import ChangePassword from "../screen/Profile/ChangePassword";
 import Privacy from "../screen/Profile/Privacy";
 import TermsAndConditions from "../screen/Profile/Terms";
+import OtherUserProfile from "../screen/Profile/OtherUserProfile";
+import Post from "../screen/home/Post";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,18 @@ const ProfileStack = () => (
     <Stack.Screen
       name={SCREENS.PROFILE}
       component={UserProfile}
+      options={{ headerShown: false }}
+    />
+
+    <Stack.Screen
+      name={SCREENS.POST}
+      component={Post}
+      options={{ headerShown: false }}
+    />
+
+    <Stack.Screen
+      name={SCREENS.OTHER_USER_PROFILE}
+      component={OtherUserProfile}
       options={{ headerShown: false }}
     />
     <Stack.Screen

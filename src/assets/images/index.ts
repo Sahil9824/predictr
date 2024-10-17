@@ -69,4 +69,8 @@ export const Images = {
   Eavg: require("./Eavg.png"),
   Eexelent: require("./Eexelent.png"),
   Epoor: require("./Epoor.png"),
+  Econfused: require("./Econfused.png"),
+  PCalendar: require("./PCalendar.png"),
+  DateCal: require("./DateCal.png"),
+  CheckmarkBlue: require("./CheckmarkBlue.png"),
 };

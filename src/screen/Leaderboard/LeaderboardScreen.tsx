@@ -17,6 +17,7 @@ import { SCREENS } from "../../constant/navigation.constants";
 import RNPickerSelect from "react-native-picker-select";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface LeaderboardEntry {
   id: number;
@@ -151,74 +152,78 @@ const LeaderboardScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderBottomWidth: 1,
-          borderColor: "#e0e0e0",
-        }}
-      >
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Leaderboard</Text>
-          <View style={styles.rankLabel}>
-            <Text style={styles.rankNumber}>#7</Text>
-            <Text style={styles.rankText}>You</Text>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={styles.container}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderBottomWidth: 1,
+            borderColor: "#e0e0e0",
+          }}
+        >
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>Leaderboard</Text>
+            <View style={styles.rankLabel}>
+              <Text style={styles.rankNumber}>#7</Text>
+              <Text style={styles.rankText}>You</Text>
+            </View>
+          </View>
+          <View></View>
+          <View style={{ paddingHorizontal: 15 }}>
+            <TouchableOpacity onPress={onSearchPress}>
+              <Image
+                source={Images.headerSearch}
+                style={{
+                  height: scale(18),
+                  width: scale(18),
+                  justifyContent: "flex-end",
+                }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
-        <View></View>
-        <View style={{ paddingHorizontal: 15 }}>
-          <TouchableOpacity onPress={onSearchPress}>
-            <Image
-              source={Images.headerSearch}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingVertical: 10,
+            alignItems: "center",
+            borderBottomWidth: 1,
+            borderColor: "#e0e0e0",
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
+            <Text
               style={{
-                height: scale(18),
-                width: scale(18),
-                justifyContent: "flex-end",
+                paddingHorizontal: 7,
+                fontSize: scale(16),
+                marginLeft: moderateScale(10),
+                color: "#717272",
+                fontWeight: "500",
               }}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingVertical: 10,
-          alignItems: "center",
-          borderBottomWidth: 1,
-          borderColor: "#e0e0e0",
-        }}
-      >
-        <View style={{ flexDirection: "row" }}>
-          <Text
-            style={{
-              paddingHorizontal: 7,
-              fontSize: scale(16),
-              marginLeft: moderateScale(10),
-              color: "#717272",
-              fontWeight: "500",
-            }}
-          >
-            #
-          </Text>
-          <Text
-            style={{
-              paddingHorizontal: 7,
-              fontSize: scale(16),
-              marginLeft: moderateScale(4),
-              color: "#717272",
-              fontWeight: "400",
-            }}
-          >
-            Predictors
-          </Text>
-        </View>
-        <View style={{ marginEnd: 15 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* <RNPickerSelect
+            >
+              #
+            </Text>
+            <Text
+              style={{
+                paddingHorizontal: 7,
+                fontSize: scale(16),
+                marginLeft: moderateScale(4),
+                color: "#717272",
+                fontWeight: "400",
+              }}
+            >
+              Predictors
+            </Text>
+          </View>
+          <View style={{ marginEnd: 15 }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {/* <RNPickerSelect
               onValueChange={setSelectedOption}
               items={dummyDates}
               placeholder={{}}
@@ -238,17 +243,18 @@ const LeaderboardScreen = () => {
                 },
               }}
             /> */}
-            <Image source={Images.Chevron_down} />
+              <Image source={Images.Chevron_down} />
+            </View>
           </View>
         </View>
-      </View>
 
-      <FlatList
-        data={leaderboardData}
-        renderItem={renderEntry}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </View>
+        <FlatList
+          data={leaderboardData}
+          renderItem={renderEntry}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

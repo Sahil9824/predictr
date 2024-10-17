@@ -14,6 +14,7 @@ import PredictorsScreen from "../screen/search/PredictorsScreen";
 import { Images } from "../assets/images";
 import { scale } from "../../helper";
 import { SCREENS } from "../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,42 +32,47 @@ const SearchScreen = ({ navigation }) => {
   return (
     <>
       {/* Search Box with Icon and Cancel Button */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBoxContainer}>
-          <Image
-            source={Images.headerSearch}
-            style={{ height: scale(18), width: scale(18), marginLeft: 10 }}
-          />
-          <TextInput
-            style={styles.searchBox}
-            placeholder=""
-            value={searchQuery}
-            onChangeText={(text) => setSearchQuery(text)}
-          />
+      <SafeAreaView
+        style={{ flex: 1, backgroundColor: "white" }}
+        edges={["left", "right", "top"]}
+      >
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBoxContainer}>
+            <Image
+              source={Images.headerSearch}
+              style={{ height: scale(18), width: scale(18), marginLeft: 10 }}
+            />
+            <TextInput
+              style={styles.searchBox}
+              placeholder=""
+              value={searchQuery}
+              onChangeText={(text) => setSearchQuery(text)}
+            />
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate(SCREENS.HOME)}>
+            <Text style={styles.cancelButton}>Cancel</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate(SCREENS.HOME)}>
-          <Text style={styles.cancelButton}>Cancel</Text>
-        </TouchableOpacity>
-      </View>
 
-      {/* Tab View */}
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        style={{ backgroundColor: "white" }}
-        onIndexChange={setIndex}
-        initialLayout={{ width: Dimensions.get("window").width }}
-        renderTabBar={(props) => (
-          <TabBar
-            {...props}
-            indicatorStyle={styles.indicatorStyle}
-            style={styles.tabBar}
-            labelStyle={styles.labelStyle}
-            activeColor="#024BAC"
-            inactiveColor="#999"
-          />
-        )}
-      />
+        {/* Tab View */}
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          style={{ backgroundColor: "white" }}
+          onIndexChange={setIndex}
+          initialLayout={{ width: Dimensions.get("window").width }}
+          renderTabBar={(props) => (
+            <TabBar
+              {...props}
+              indicatorStyle={styles.indicatorStyle}
+              style={styles.tabBar}
+              labelStyle={styles.labelStyle}
+              activeColor="#024BAC"
+              inactiveColor="#999"
+            />
+          )}
+        />
+      </SafeAreaView>
     </>
   );
 };

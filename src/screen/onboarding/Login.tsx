@@ -10,6 +10,7 @@ import { useToast } from "react-native-toast-notifications";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import userStore from "../../user.store";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // interface Props {
 //   navigation: StackNavigationProp<any, "CreateAccount">;
@@ -80,40 +81,45 @@ const Login = ({ navigation }: any) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
-      <Text style={styles.title}>{"Login"}</Text>
-      <View style={styles.inputContainer}>
-        <Input
-          label={"Email"}
-          error={emailErr}
-          ref={emailRef}
-          autoFocus={true}
-          onSubmitEditing={() => passwordRef?.current?.focus()}
-          blurOnSubmit={false}
-          onBlur={emailValidation}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={styles.container}>
+        <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
+        <Text style={styles.title}>{"Login"}</Text>
+        <View style={styles.inputContainer}>
+          <Input
+            label={"Email"}
+            error={emailErr}
+            ref={emailRef}
+            autoFocus={true}
+            onSubmitEditing={() => passwordRef?.current?.focus()}
+            blurOnSubmit={false}
+            onBlur={emailValidation}
+          />
+          <Input
+            label={"Password"}
+            // error={passwordErr}
+            ref={passwordRef}
+            onBlur={passwordValidation}
+            password
+          />
+          <Text
+            style={styles.resetPassword}
+            onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
+          >
+            {"Reset Password"}
+          </Text>
+        </View>
+        <Button
+          text={"Login"}
+          style={styles.button}
+          onPress={submit}
+          inActive={disabled}
         />
-        <Input
-          label={"Password"}
-          // error={passwordErr}
-          ref={passwordRef}
-          onBlur={passwordValidation}
-          password
-        />
-        <Text
-          style={styles.resetPassword}
-          onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
-        >
-          {"Reset Password"}
-        </Text>
       </View>
-      <Button
-        text={"Login"}
-        style={styles.button}
-        onPress={submit}
-        inActive={disabled}
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -2,8 +2,11 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { scale } from "../../helper";
 import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
+import { SCREENS } from "../constant/navigation.constants";
+import { useNavigation } from "@react-navigation/native";
 
-const WinnerCard = ({ openBottomSheet }) => {
+const WinnerCard = ({ setIsSelected }) => {
+  const navigation = useNavigation();
   return (
     <>
       <View
@@ -256,7 +259,9 @@ const WinnerCard = ({ openBottomSheet }) => {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={openBottomSheet}
+          onPress={() => {
+            setIsSelected(2);
+          }}
           style={{
             width: scale(255),
             borderRadius: scale(8),

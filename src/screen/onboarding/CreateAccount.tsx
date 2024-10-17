@@ -23,6 +23,7 @@ import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import userStore from "../../user.store";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -132,7 +133,10 @@ const CreateAccount = ({ navigation }: any) => {
   );
 
   return (
-    <>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
       <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{ flex: 1 }}>
         <KeyboardAwareScrollView
@@ -176,7 +180,7 @@ const CreateAccount = ({ navigation }: any) => {
           />
         </KeyboardAwareScrollView>
       </TouchableWithoutFeedback>
-    </>
+    </SafeAreaView>
   );
 };
 

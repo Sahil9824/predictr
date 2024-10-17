@@ -8,6 +8,7 @@ import { Colors, errorMsg, fonts, regex } from "../../constant";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -53,37 +54,42 @@ const ResetPassword = ({ navigation }: any) => {
   }, []);
 
   return (
-    <Pressable style={styles.container}>
-      <KeyboardAwareScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: Colors.white,
-          paddingHorizontal: 20,
-        }}
-      >
-        <Text style={styles.title}>{"Reset password"}</Text>
-        <Text style={styles.subTitle}>
-          {
-            "Enter your registered email to receive password reset instructions."
-          }
-        </Text>
-        <View style={styles.inputContainer}>
-          <Input
-            label={"Email"}
-            error={emailErr}
-            ref={emailRef}
-            autoFocus={true}
-            onBlur={emailValidation}
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <Pressable style={styles.container}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            backgroundColor: Colors.white,
+            paddingHorizontal: 20,
+          }}
+        >
+          <Text style={styles.title}>{"Reset password"}</Text>
+          <Text style={styles.subTitle}>
+            {
+              "Enter your registered email to receive password reset instructions."
+            }
+          </Text>
+          <View style={styles.inputContainer}>
+            <Input
+              label={"Email"}
+              error={emailErr}
+              ref={emailRef}
+              autoFocus={true}
+              onBlur={emailValidation}
+            />
+          </View>
+          <Button
+            text={"Submit"}
+            style={styles.button}
+            onPress={submit}
+            inActive={disabled}
           />
-        </View>
-        <Button
-          text={"Submit"}
-          style={styles.button}
-          onPress={submit}
-          inActive={disabled}
-        />
-      </KeyboardAwareScrollView>
-    </Pressable>
+        </KeyboardAwareScrollView>
+      </Pressable>
+    </SafeAreaView>
   );
 };
 

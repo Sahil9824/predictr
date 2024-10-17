@@ -27,6 +27,10 @@ export const SCREENS = {
   CHANGE_PASSWORD: "ChangePassword",
   NOTIFICATION_SETTINGS: "NotiSetScreen",
   GENERAL_SCREEN: "GeneralScreen",
+  POST: "PostScreen",
+  OTHER_USER_PROFILE: "OtherUserProfile",
+  PREDICTION: "PREDICTION",
+  NOTIFICATION: "NOTIFICATION",
 };
 
 export const PRE_LOGIN_NAVIGATION = {

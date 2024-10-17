@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
 import { Images } from "../assets/images";
 import { scale } from "../../helper";
@@ -14,6 +15,8 @@ import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import { useRoute } from "@react-navigation/native";
 import { fonts } from "../constant";
+import { SCREENS } from "../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const mockData = [
   { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
@@ -51,22 +54,30 @@ const GeneralList = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate(backscreen)}
-        >
-          <Icons type={ICONS.BACKARR} />
-        </TouchableWithoutFeedback>
-        <Text style={styles.headerText}>{title}</Text>
-      </View>
-      <FlatList
-        data={mockData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContainer}
-      />
-    </View>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <Pressable
+        style={styles.container}
+        onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
+      >
+        <View style={styles.header}>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate(backscreen)}
+          >
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+          <Text style={styles.headerText}>{title}</Text>
+        </View>
+        <FlatList
+          data={mockData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.listContainer}
+        />
+      </Pressable>
+    </SafeAreaView>
   );
 };
 

@@ -14,6 +14,7 @@ const SVGComponent = (props) => (
       stroke="#717272"
       strokeWidth={1.5}
       strokeLinecap="round"
+      {...props}
     />
   </Svg>
 );

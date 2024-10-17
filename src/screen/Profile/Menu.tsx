@@ -13,6 +13,7 @@ import { ICONS } from "../../constant/icons.constants";
 import Icons from "../../component/Icons";
 import { fonts } from "../../constant";
 import { SCREENS } from "../../constant/navigation.constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MenuScreen = ({ navigation }) => {
   const menuItems = [
@@ -61,30 +62,35 @@ const MenuScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate(SCREENS.PROFILE)}
-        >
-          <Icons type={ICONS.BACKARR} />
-        </TouchableWithoutFeedback>
-        <Text style={styles.menuText}>Menu</Text>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "left", "right"]}
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate(SCREENS.PROFILE)}
+          >
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+          <Text style={styles.menuText}>Menu</Text>
+        </View>
+        {menuItems.map((item, index) => (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.main}
+            key={index}
+            onPress={item.onPress}
+          >
+            <View>{item.icon}</View>
+            <View style={styles.main2}>
+              <Text style={styles.label}>{item.title}</Text>
+              {index !== 6 ? <Icons type={ICONS.RIGHTARR} /> : <></>}
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
-      {menuItems.map((item, index) => (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.main}
-          key={index}
-          onPress={item.onPress}
-        >
-          <View>{item.icon}</View>
-          <View style={styles.main2}>
-            <Text style={styles.label}>{item.title}</Text>
-            {index !== 6 ? <Icons type={ICONS.RIGHTARR} /> : <></>}
-          </View>
-        </TouchableOpacity>
-      ))}
-    </View>
+    </SafeAreaView>
   );
 };
 

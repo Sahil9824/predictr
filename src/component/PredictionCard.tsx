@@ -15,6 +15,8 @@ import Tooltip from "react-native-walkthrough-tooltip";
 import ShareCard from "./ShareCard";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
+import { SCREENS } from "../constant/navigation.constants";
+import { useNavigation } from "@react-navigation/native";
 
 interface IPredictionCard {
   index: number;
@@ -22,7 +24,7 @@ interface IPredictionCard {
   onFavoritePress: () => void;
 }
 
-const PredictionCard = ({ index }: IPredictionCard) => {
+const PredictionCard = ({ index, imgSrc }: IPredictionCard) => {
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
@@ -30,6 +32,8 @@ const PredictionCard = ({ index }: IPredictionCard) => {
   const [dislikeCount, setDislikeCount] = useState(70); // Count for dislikes
   const shareCardRef = useRef(null);
   const [isSaved, setIsSaved] = useState(false);
+
+  const navigation = useNavigation();
 
   const handleToggleSave = () => {
     setIsSaved((p) => !p);
@@ -288,6 +292,13 @@ const PredictionCard = ({ index }: IPredictionCard) => {
           }
         </Text>
 
+        {imgSrc && (
+          <Image
+            source={{ uri: imgSrc }}
+            style={{ width: "100%", height: 190, marginBottom: 12 }}
+          />
+        )}
+
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <View style={{ flexDirection: "row" }}>
             <Pressable
@@ -348,6 +359,7 @@ const PredictionCard = ({ index }: IPredictionCard) => {
               justifyContent: "center",
               marginRight: scale(10),
             }}
+            onPress={() => navigation.navigate(SCREENS.POST)}
           >
             <Image
               source={Images.comment}
