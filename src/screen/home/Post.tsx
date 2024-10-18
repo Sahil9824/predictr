@@ -29,7 +29,7 @@ const Post = ({ navigation }) => {
   const { imgSrc, date, selectedStock, movement, reason, previousScreen } =
     useRoute().params || {};
 
-  console.log(useRoute().params, "wwo");
+  console.log(imgSrc, "WHAHAHAH");
 
   useEffect(() => {
     if (!selectedStock) return;

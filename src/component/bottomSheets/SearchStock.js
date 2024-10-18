@@ -173,8 +173,6 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalVal, setModalVal] = useState("");
 
-  console.log(modalVal, "woww");
-
   const handleSavePress = () => {
     searchBottomRef.current.dismiss();
     setSelectedStock({ symbol: modalVal, name: "" });

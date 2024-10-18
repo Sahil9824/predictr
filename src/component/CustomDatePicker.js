@@ -1,36 +1,58 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal, TouchableWithoutFeedback } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
-import moment from 'moment';
-import { Colors } from '../constant';
-import { ICONS } from '../constant/icons.constants';
-import Icons from './Icons';
-import { scale } from '../../helper';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import moment from "moment";
+import { Colors } from "../constant";
+import { ICONS } from "../constant/icons.constants";
+import Icons from "./Icons";
+import { scale } from "../../helper";
 
 const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
-  const [currentDate, setCurrentDate] = useState(moment(initialDate || new Date()));
-  const [currentMonth, setCurrentMonth] = useState(moment(initialDate || new Date()).format('YYYY-MM-DD'));
-  const [selectedYear, setSelectedYear] = useState(moment(initialDate || new Date()).year());
+  const [currentDate, setCurrentDate] = useState(
+    moment(initialDate || new Date())
+  );
+  const [currentMonth, setCurrentMonth] = useState(
+    moment(initialDate || new Date()).format("YYYY-MM-DD")
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    moment(initialDate || new Date()).year()
+  );
   const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
   const [isYearPickerVisible, setIsYearPickerVisible] = useState(false);
 
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
-  const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const getDaysInMonth = (month, year) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
   const changeMonth = (increment) => {
-    const newDate = currentDate.clone().add(increment, 'months');
+    const newDate = currentDate.clone().add(increment, "months");
     setCurrentDate(newDate);
     setSelectedYear(newDate.year());
   };
-
 
   const renderDays = () => {
     const year = currentDate.year();
@@ -44,7 +66,10 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      const isSelected = selectedDate?.getDate() === day && selectedDate?.getMonth() === month && selectedDate?.getFullYear() === year;
+      const isSelected =
+        selectedDate?.getDate() === day &&
+        selectedDate?.getMonth() === month &&
+        selectedDate?.getFullYear() === year;
 
       days.push(
         <TouchableOpacity
@@ -52,7 +77,9 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
           key={day}
           onPress={() => setSelectedDate(new Date(year, month, day))}
         >
-          <Text style={[styles.dayText, isSelected ? styles.selectedDayText : null]}>
+          <Text
+            style={[styles.dayText, isSelected ? styles.selectedDayText : null]}
+          >
             {day}
           </Text>
         </TouchableOpacity>
@@ -62,11 +89,10 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
     return days;
   };
 
-
   const handleSave = () => {
     const yearToUse = selectedYear || currentDate.year();
-    const monthToUse = currentDate.month(); 
-    const dayToUse = selectedDate ? selectedDate.getDate() : 1; 
+    const monthToUse = currentDate.month();
+    const dayToUse = selectedDate ? selectedDate.getDate() : 1;
 
     const updatedDate = new Date(yearToUse, monthToUse, dayToUse);
 
@@ -78,7 +104,10 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
   };
 
   const renderYearPicker = () => {
-    const years = Array.from({ length: 50 }, (_, i) => moment().year() - 25 + i);
+    const years = Array.from(
+      { length: 50 },
+      (_, i) => moment().year() - 25 + i
+    );
 
     return (
       <Modal
@@ -110,9 +139,11 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
                     </TouchableOpacity>
                   )}
                   initialScrollIndex={years.indexOf(selectedYear)}
-                  getItemLayout={(data, index) => (
-                    { length: 40, offset: 40 * index, index }
-                  )}
+                  getItemLayout={(data, index) => ({
+                    length: 40,
+                    offset: 40 * index,
+                    index,
+                  })}
                   onScrollToIndexFailed={(info) => {
                     console.warn(`Failed to scroll to index: ${info.index}`);
                   }}
@@ -127,11 +158,20 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }} >
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Text style={styles.title}>Pick a Date</Text>
-        <TouchableOpacity style={{ paddingHorizontal: 10}} onPress={closeBottomSheet}>
-          <View style={{ paddingEnd: 5, alignItems: 'center' }}>
-            <Icons type={ICONS.CLOSE} onClick={closeBottomSheet}/>
+        <TouchableOpacity
+          style={{ paddingHorizontal: 10 }}
+          onPress={closeBottomSheet}
+        >
+          <View style={{ paddingEnd: 5, alignItems: "center" }}>
+            <Icons type={ICONS.CLOSE} onClick={closeBottomSheet} />
           </View>
         </TouchableOpacity>
       </View>
@@ -139,7 +179,7 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
       <View style={styles.header}>
         {/* Month and Year Text */}
         <TouchableOpacity
-          style={{ flexDirection: "row", }}
+          style={{ flexDirection: "row" }}
           onPress={() => setIsYearPickerVisible(true)}
         >
           <Text style={styles.monthText}>
@@ -150,13 +190,19 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
 
         {/* Month Navigation Arrows */}
         <View style={styles.arrowContainer}>
-          <TouchableOpacity onPress={() => changeMonth(-1)} style={styles.arrow}>
+          <TouchableWithoutFeedback
+            onPress={() => changeMonth(-1)}
+            style={styles.arrow}
+          >
             <Icons type={ICONS.PREVIOUS} />
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
 
-          <TouchableOpacity onPress={() => changeMonth(1)} style={styles.arrow}>
+          <TouchableWithoutFeedback
+            onPress={() => changeMonth(1)}
+            style={styles.arrow}
+          >
             <Icons type={ICONS.NEXT} />
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
         </View>
       </View>
 
@@ -170,14 +216,12 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
       </View>
 
       {/* Days */}
-      <View style={styles.daysContainer}>
-        {renderDays()}
-      </View>
+      <View style={styles.daysContainer}>{renderDays()}</View>
 
       <TouchableOpacity
         style={[
           styles.saveButton,
-          !selectedDate ? styles.disabledSaveButton : null
+          !selectedDate ? styles.disabledSaveButton : null,
         ]}
         onPress={handleSave}
         disabled={!selectedDate}
@@ -191,79 +235,79 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: scale(5),
-    backgroundColor: '#fff',
+    paddingVertical: 5,
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: scale(16),
-    fontWeight: '600',
-    textAlign: 'left',
-    marginBottom: scale(10),
+    fontWeight: "600",
+    textAlign: "left",
+    marginBottom: 10,
     color: Colors.labelBlack,
-    paddingStart: scale(11)
+    paddingStart: 11,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: scale(10),
-    justifyContent: 'space-between',
-    paddingStart: scale(10),
-    marginTop: scale(15)
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+    justifyContent: "space-between",
+    paddingStart: 10,
+    marginTop: 15,
   },
   monthText: {
     fontSize: scale(15),
-    fontWeight: '600',
-    marginEnd: scale(8),
-    color: '#000000',
+    fontWeight: "600",
+    marginEnd: 8,
+    color: "#000000",
   },
   arrowContainer: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
   },
   arrow: {
-    paddingHorizontal: scale(5),  
-    justifyContent: 'center',
+    paddingHorizontal: 5,
+    justifyContent: "center",
   },
   weekDaysContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around', 
-    marginBottom: scale(8),
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 8,
   },
   weekDay: {
-    width: scale(35.5),  
-    textAlign: 'center',
-    fontWeight: '600',
-    color: '#8E8E93',
+    width: 35.5,
+    textAlign: "center",
+    fontWeight: "600",
+    color: "#8E8E93",
     fontSize: scale(13),
   },
   daysContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    paddingHorizontal: scale(5),  
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    paddingHorizontal: 5,
   },
   day: {
-    width: scale(41.5),  
+    width: scale(41.5),
     height: scale(41.5),
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     margin: scale(3),
   },
   selectedDay: {
-    backgroundColor: '#e0efff',
+    backgroundColor: "#e0efff",
     width: scale(41.5),
     height: scale(41.5),
     borderRadius: scale(41.5 / 2),
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   dayText: {
-    color: '#000',
+    color: "#000",
     fontSize: scale(14),
   },
   selectedDayText: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: "#007AFF",
+    fontWeight: "bold",
   },
   saveButton: {
     backgroundColor: Colors.primaryBlue,
@@ -271,43 +315,40 @@ const styles = StyleSheet.create({
     borderRadius: scale(8),
     marginHorizontal: scale(10),
     marginTop: scale(15),
-    alignItems: 'center',
+    alignItems: "center",
   },
   disabledSaveButton: {
-    backgroundColor: '#B0B0B0',
+    backgroundColor: "#B0B0B0",
   },
   saveButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: scale(14),
-    fontWeight: '600',
+    fontWeight: "600",
   },
   modalBackground: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   yearPickerContainer: {
-    backgroundColor: 'white',
-    marginTop: scale(150),
+    backgroundColor: "white",
     marginHorizontal: scale(70),
     borderRadius: scale(10),
     padding: scale(20),
-    maxHeight: '40%',
+    maxHeight: "40%",
   },
   yearItem: {
     paddingVertical: scale(10),
-    alignItems: 'center',
+    alignItems: "center",
   },
   selectedYearItem: {
-    backgroundColor: '#e0efff',
+    backgroundColor: "#e0efff",
     borderRadius: scale(10),
   },
   yearText: {
     fontSize: scale(18),
-    color: '#000',
+    color: "#000",
   },
 });
-
-
 
 export default CustomDatePicker;

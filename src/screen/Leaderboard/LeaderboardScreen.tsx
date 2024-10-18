@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   Text,
@@ -8,16 +8,19 @@ import {
   TouchableOpacity,
   Modal,
   Pressable,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "../../../helper";
 import { Images } from "../../assets/images";
 import { Colors, fonts } from "../../constant";
 import { useNavigation } from "@react-navigation/native";
-import { SCREENS } from "../../constant/navigation.constants";
+import { APP_NAVIGATION, SCREENS } from "../../constant/navigation.constants";
 import RNPickerSelect from "react-native-picker-select";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView } from "react-native";
+import AnimatedSearch from "../../component/SearchBar";
 
 interface LeaderboardEntry {
   id: number;
@@ -125,6 +128,7 @@ const dummyDates = [
 const LeaderboardScreen = () => {
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("August 24 (OnGoing)");
+  const pickerRef = useRef();
 
   const navigation = useNavigation();
 
@@ -132,23 +136,38 @@ const LeaderboardScreen = () => {
     navigation.navigate(SCREENS.SEARCH);
   };
 
-  const renderEntry = ({ item }: { item: LeaderboardEntry }) => (
-    <View
-      style={[styles.entryContainer, item.isCurrentUser && styles.currentUser]}
+  const openPicker = () => {
+    pickerRef.current.togglePicker(); // Toggle the picker
+  };
+
+  const RenderEntry = ({ item }: { item: LeaderboardEntry }) => (
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate(SCREENS.OTHER_USER_PROFILE, {
+          previousScreen: SCREENS.LEADERBOARD,
+        })
+      }
     >
-      <View style={styles.rankContainer}>
-        <Text style={styles.id}>{item.id}</Text>
-        <Image source={Images.avatar6} style={styles.avatar} />
-        <View>
-          <Text style={styles.name}>
-            {item.name}{" "}
-            {item.isCurrentUser && <Text style={styles.youText}>You</Text>}
-          </Text>
-          <Text style={styles.accuracy}>{item.accuracy}</Text>
+      <View
+        style={[
+          styles.entryContainer,
+          item.isCurrentUser && styles.currentUser,
+        ]}
+      >
+        <View style={styles.rankContainer}>
+          <Text style={styles.id}>{item.id}</Text>
+          <Image source={Images.avatar6} style={styles.avatar} />
+          <View>
+            <Text style={styles.name}>
+              {item.name}{" "}
+              {item.isCurrentUser && <Text style={styles.youText}>You</Text>}
+            </Text>
+            <Text style={styles.accuracy}>{item.accuracy}</Text>
+          </View>
         </View>
+        <Image source={Images.Chevron_right} />
       </View>
-      <Image source={Images.Chevron_right} />
-    </View>
+    </TouchableWithoutFeedback>
   );
 
   return (
@@ -173,7 +192,7 @@ const LeaderboardScreen = () => {
               <Text style={styles.rankText}>You</Text>
             </View>
           </View>
-          <View></View>
+
           <View style={{ paddingHorizontal: 15 }}>
             <TouchableOpacity onPress={onSearchPress}>
               <Image
@@ -222,37 +241,61 @@ const LeaderboardScreen = () => {
             </Text>
           </View>
           <View style={{ marginEnd: 15 }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              {/* <RNPickerSelect
-              onValueChange={setSelectedOption}
-              items={dummyDates}
-              placeholder={{}}
+            <View
               style={{
-                viewContainer: { marginRight: 8 },
-                inputIOS: {
-                  color: "#717272",
-                  fontFamily: fonts.f400,
-                  fontSize: 14,
-                  fontWeight: "400",
-                },
-                inputAndroid: {
-                  color: "#717272",
-                  fontFamily: fonts.f400,
-                  fontSize: 14,
-                  fontWeight: "400",
-                },
+                flexDirection: "row",
+                alignItems: "center",
               }}
-            /> */}
-              <Image source={Images.Chevron_down} />
+            >
+              <RNPickerSelect
+                ref={pickerRef}
+                onValueChange={setSelectedOption}
+                items={dummyDates}
+                placeholder={{}}
+                useNativeAndroidPickerStyle={false}
+                style={{
+                  viewContainer: {
+                    // width: Platform.OS === "ios" ? "auto" : "65%",
+                  },
+                  inputIOS: {
+                    color: "#717272",
+                    fontFamily: fonts.f400,
+                    fontSize: 15,
+                    fontWeight: "400",
+                    width: "100%",
+                  },
+                  inputAndroid: {
+                    color: "#717272",
+                    fontFamily: fonts.f400,
+                    fontWeight: "400",
+                    fontSize: 15,
+                    width: "100%",
+                    padding: 0,
+                  },
+                }}
+              />
+              <Pressable
+                style={{
+                  marginTop: 2,
+                  paddingLeft: 4,
+                  height: 17,
+                  width: 17,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onPress={openPicker}
+              >
+                <Image source={Images.Chevron_down} />
+              </Pressable>
             </View>
           </View>
         </View>
 
-        <FlatList
-          data={leaderboardData}
-          renderItem={renderEntry}
-          keyExtractor={(item) => item.id.toString()}
-        />
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          {leaderboardData.map((item, index) => (
+            <RenderEntry item={item} key={index} />
+          ))}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -328,8 +371,9 @@ const styles = StyleSheet.create({
   id: {
     fontSize: scale(16),
     fontWeight: "500",
-    marginRight: 15,
+    marginRight: 12,
     color: Colors.textBlack,
+    width: 28,
   },
   youText: {
     color: "#024BAC",

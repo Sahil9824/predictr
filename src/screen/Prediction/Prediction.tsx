@@ -1,7 +1,9 @@
 import {
   Image,
+  Platform,
   Pressable,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -22,6 +24,7 @@ import CustomCalSheet from "../../component/bottomSheets/CustomCalSheet";
 import ImagePicker from "../../component/ImagePicker";
 import Button from "../../component/Button";
 import { SCREENS } from "../../constant/navigation.constants";
+import { useRoute } from "@react-navigation/native";
 
 const Prediction = ({ navigation }) => {
   const [selectedStock, setSelectedStock] = useState("");
@@ -69,205 +72,209 @@ const Prediction = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView
-      style={styles.container}
-      edges={["left", "right", "bottom", "top"]}
-    >
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
-        showsVerticalScrollIndicator={false}
+    <>
+      {Platform.OS === "ios" && <StatusBar backgroundColor="#EFF0F1" />}
+
+      <SafeAreaView
+        style={styles.container}
+        edges={["left", "right", "bottom", "top"]}
       >
-        <View style={{ width: "100%", alignItems: "flex-end" }}>
-          <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-            <Icons type={ICONS.CLOSE} />
-          </TouchableWithoutFeedback>
-
-          <Text style={styles.text1}>Make a prediction</Text>
-          <Text style={styles.text2}>Predict stock, movement, and date.</Text>
-        </View>
-        <View style={styles.box}>
-          <Pressable onPress={openStockPicker}>
-            <View style={styles.boxMain}>
-              <View style={styles.box2}>
-                <Image
-                  source={Images.Econfused}
-                  style={{ height: 24, width: 24 }}
-                />
-                <Text style={styles.text3}>I think</Text>
-              </View>
-              <View style={styles.box2}>
-                {!selectedStock ? (
-                  <Text style={styles.text4}>Select Stock</Text>
-                ) : (
-                  <Text
-                    style={{
-                      ...styles.text4,
-                      fontFamily: fonts.f500,
-                      fontWeight: "500",
-                      color: "#151B26",
-                    }}
-                  >
-                    {selectedStock?.symbol}
-                  </Text>
-                )}
-                {!selectedStock ? (
-                  <Icons type={ICONS.DOWN_ARROW} />
-                ) : (
-                  <Image
-                    source={Images.CheckmarkBlue}
-                    style={{ height: 17, width: 17 }}
-                  />
-                )}
-              </View>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => movementBottomRef.current.present()}>
-            <View style={styles.boxMain}>
-              <View style={styles.box2}>
-                <Image
-                  source={Images.DateCal}
-                  style={{ height: 24, width: 24 }}
-                />
-                <Text style={styles.text3}>Will go</Text>
-              </View>
-              <View style={styles.box2}>
-                {!movement ? (
-                  <Text style={styles.text4}>Set Movement</Text>
-                ) : (
-                  <Text
-                    style={{
-                      ...styles.text4,
-                      fontFamily: fonts.f500,
-                      fontWeight: "500",
-                      color: "#151B26",
-                    }}
-                  >
-                    {`${movement?.movement} ${movement?.percentage}`}
-                  </Text>
-                )}
-                {!movement ? (
-                  <Icons type={ICONS.DOWN_ARROW} />
-                ) : (
-                  <Image
-                    source={Images.CheckmarkBlue}
-                    style={{ height: 17, width: 17 }}
-                  />
-                )}
-              </View>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => calBottomRef.current.present()}>
-            <View style={styles.boxMain}>
-              <View style={styles.box2}>
-                <Image
-                  source={Images.PCalendar}
-                  style={{ height: 24, width: 24 }}
-                />
-                <Text style={styles.text3}>By</Text>
-              </View>
-              <View style={styles.box2}>
-                {!date ? (
-                  <Text style={styles.text4}>Pick a Date</Text>
-                ) : (
-                  <Text
-                    style={{
-                      ...styles.text4,
-                      fontFamily: fonts.f500,
-                      fontWeight: "500",
-                      color: "#151B26",
-                    }}
-                  >
-                    {date}
-                  </Text>
-                )}
-                {!date ? (
-                  <Icons type={ICONS.DOWN_ARROW} />
-                ) : (
-                  <Image
-                    source={Images.CheckmarkBlue}
-                    style={{ height: 17, width: 17 }}
-                  />
-                )}
-              </View>
-            </View>
-          </Pressable>
-        </View>
-
-        <TextInput
-          value={reason}
-          onChange={setReason}
-          style={styles.input}
-          placeholder="Reason..."
-          placeholderTextColor="#717272"
-          multiline
-        />
-
-        {!imgSrc ? (
-          <Pressable
-            style={{ width: "99%" }}
-            onPress={!imgSrc ? handlePicImage : () => {}}
-          >
-            <View style={styles.box3}>
-              <Icons type={ICONS.PIN} />
-              <Text style={styles.text5}>Upload</Text>
-            </View>
-          </Pressable>
-        ) : (
-          <View
-            style={{
-              width: "100%",
-              height: scale(190),
-              borderRadius: 16,
-              overflow: "hidden",
-              marginTop: 16,
-              position: "relative",
-              marginBottom: 30,
-            }}
-          >
-            <Image
-              source={{ uri: imgSrc.uri }}
-              style={{ width: "100%", height: "100%" }}
-            />
-
-            <View style={{ position: "absolute", left: 10, top: 10 }}>
-              <Icons type={ICONS.PIN} stroke="#FFFFFF" />
-            </View>
-
-            <TouchableWithoutFeedback onPress={() => setImgSrc(null)}>
-              <View style={{ position: "absolute", right: 10, top: 10 }}>
-                <Icons type={ICONS.CLOSE} stroke="#fff" />
-              </View>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={{ width: "100%", alignItems: "flex-end" }}>
+            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+              <Icons type={ICONS.CLOSE} />
             </TouchableWithoutFeedback>
+
+            <Text style={styles.text1}>Make a prediction</Text>
+            <Text style={styles.text2}>Predict stock, movement, and date.</Text>
           </View>
-        )}
+          <View style={styles.box}>
+            <Pressable onPress={openStockPicker}>
+              <View style={styles.boxMain}>
+                <View style={styles.box2}>
+                  <Image
+                    source={Images.Econfused}
+                    style={{ height: 24, width: 24 }}
+                  />
+                  <Text style={styles.text3}>I think</Text>
+                </View>
+                <View style={styles.box2}>
+                  {!selectedStock ? (
+                    <Text style={styles.text4}>Select Stock</Text>
+                  ) : (
+                    <Text
+                      style={{
+                        ...styles.text4,
+                        fontFamily: fonts.f500,
+                        fontWeight: "500",
+                        color: "#151B26",
+                      }}
+                    >
+                      {selectedStock?.symbol}
+                    </Text>
+                  )}
+                  {!selectedStock ? (
+                    <Icons type={ICONS.DOWN_ARROW} />
+                  ) : (
+                    <Image
+                      source={Images.CheckmarkBlue}
+                      style={{ height: 17, width: 17 }}
+                    />
+                  )}
+                </View>
+              </View>
+            </Pressable>
+            <Pressable onPress={() => movementBottomRef.current.present()}>
+              <View style={styles.boxMain}>
+                <View style={styles.box2}>
+                  <Image
+                    source={Images.DateCal}
+                    style={{ height: 24, width: 24 }}
+                  />
+                  <Text style={styles.text3}>Will go</Text>
+                </View>
+                <View style={styles.box2}>
+                  {!movement ? (
+                    <Text style={styles.text4}>Set Movement</Text>
+                  ) : (
+                    <Text
+                      style={{
+                        ...styles.text4,
+                        fontFamily: fonts.f500,
+                        fontWeight: "500",
+                        color: "#151B26",
+                      }}
+                    >
+                      {`${movement?.movement} ${movement?.percentage}`}
+                    </Text>
+                  )}
+                  {!movement ? (
+                    <Icons type={ICONS.DOWN_ARROW} />
+                  ) : (
+                    <Image
+                      source={Images.CheckmarkBlue}
+                      style={{ height: 17, width: 17 }}
+                    />
+                  )}
+                </View>
+              </View>
+            </Pressable>
+            <Pressable onPress={() => calBottomRef.current.present()}>
+              <View style={styles.boxMain}>
+                <View style={styles.box2}>
+                  <Image
+                    source={Images.PCalendar}
+                    style={{ height: 24, width: 24 }}
+                  />
+                  <Text style={styles.text3}>By</Text>
+                </View>
+                <View style={styles.box2}>
+                  {!date ? (
+                    <Text style={styles.text4}>Pick a Date</Text>
+                  ) : (
+                    <Text
+                      style={{
+                        ...styles.text4,
+                        fontFamily: fonts.f500,
+                        fontWeight: "500",
+                        color: "#151B26",
+                      }}
+                    >
+                      {date}
+                    </Text>
+                  )}
+                  {!date ? (
+                    <Icons type={ICONS.DOWN_ARROW} />
+                  ) : (
+                    <Image
+                      source={Images.CheckmarkBlue}
+                      style={{ height: 17, width: 17 }}
+                    />
+                  )}
+                </View>
+              </View>
+            </Pressable>
+          </View>
 
-        <Button
-          text="Post Prediction"
-          inActive={!selectedStock || !date || !movement}
-          style={{ marginTop: "auto", marginBottom: 30, width: "99%" }}
-          onPress={handlePostPredict}
+          <TextInput
+            value={reason}
+            onChange={setReason}
+            style={styles.input}
+            placeholder="Reason..."
+            placeholderTextColor="#717272"
+            multiline
+          />
+
+          {!imgSrc ? (
+            <Pressable
+              style={{ width: "99%" }}
+              onPress={!imgSrc ? handlePicImage : () => {}}
+            >
+              <View style={styles.box3}>
+                <Icons type={ICONS.PIN} />
+                <Text style={styles.text5}>Upload</Text>
+              </View>
+            </Pressable>
+          ) : (
+            <View
+              style={{
+                width: "100%",
+                height: scale(190),
+                borderRadius: 16,
+                overflow: "hidden",
+                marginTop: 16,
+                position: "relative",
+                marginBottom: 30,
+              }}
+            >
+              <Image
+                source={{ uri: imgSrc.uri }}
+                style={{ width: "100%", height: "100%" }}
+              />
+
+              <View style={{ position: "absolute", left: 10, top: 10 }}>
+                <Icons type={ICONS.PIN} stroke="#FFFFFF" />
+              </View>
+
+              <TouchableWithoutFeedback onPress={() => setImgSrc(null)}>
+                <View style={{ position: "absolute", right: 10, top: 10 }}>
+                  <Icons type={ICONS.CLOSE} stroke="#fff" />
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          )}
+
+          <Button
+            text="Post Prediction"
+            inActive={!selectedStock || !date || !movement}
+            style={{ marginTop: "auto", marginBottom: 30, width: "99%" }}
+            onPress={handlePostPredict}
+          />
+        </ScrollView>
+
+        <ImagePicker
+          visible={isPick}
+          setPickedImage={setImgSrc}
+          hideModal={() => {
+            setIsPick(false);
+          }}
         />
-      </ScrollView>
 
-      <ImagePicker
-        visible={isPick}
-        setPickedImage={setImgSrc}
-        hideModal={() => {
-          setIsPick(false);
-        }}
-      />
+        <SearchStock
+          searchBottomRef={searchBottomRef}
+          setSelectedStock={setSelectedStock}
+        />
+        <MovementSheet
+          movementBottomRef={movementBottomRef}
+          setMovement={setMovement}
+        />
 
-      <SearchStock
-        searchBottomRef={searchBottomRef}
-        setSelectedStock={setSelectedStock}
-      />
-      <MovementSheet
-        movementBottomRef={movementBottomRef}
-        setMovement={setMovement}
-      />
-
-      <CustomCalSheet datePickerRef={calBottomRef} setDate={setDate} />
-    </SafeAreaView>
+        <CustomCalSheet datePickerRef={calBottomRef} setDate={setDate} />
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -345,9 +352,8 @@ const styles = StyleSheet.create({
 
   input: {
     width: "99%",
-
     padding: 16,
-    paddingVertical: 18,
+    paddingVertical: Platform.OS === "ios" ? 20 : 16,
     backgroundColor: "white",
     borderRadius: 16,
     marginTop: 16,

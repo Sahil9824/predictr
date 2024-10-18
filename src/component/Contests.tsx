@@ -9,6 +9,7 @@ import {
   Keyboard,
   Image,
   Platform,
+  TextInput,
 } from "react-native";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
@@ -112,6 +113,12 @@ const dummyUsers = [
 
 const Contests = ({ openBottomSheet }) => {
   const [selectedOption, setSelectedOption] = useState("August 24 (OnGoing)");
+  const pickerRef = useRef();
+  const inputRef = useRef(null);
+
+  const openPicker = () => {
+    pickerRef.current.togglePicker(); // Toggle the picker
+  };
 
   const navigation = useNavigation();
 
@@ -225,12 +232,14 @@ const Contests = ({ openBottomSheet }) => {
       <View style={styles.header}>
         <View style={styles.headBox}>
           <RNPickerSelect
+            fixAndroidTouchableBug
+            ref={pickerRef}
             onValueChange={setSelectedOption}
             items={dummyDates}
+            useNativeAndroidPickerStyle={false}
             placeholder={{}}
             style={{
               viewContainer: {
-                width: Platform.OS === "ios" ? "auto" : "65%",
                 marginRight: 4,
               },
               inputIOS: {
@@ -246,11 +255,12 @@ const Contests = ({ openBottomSheet }) => {
                 fontWeight: "600",
                 fontSize: 14,
                 width: "100%",
-                padding: 0,
               },
             }}
           />
-          {Platform.OS === "ios" ? <Icons type={ICONS.DOWN_ARROW} /> : <></>}
+          <TouchableWithoutFeedback onPress={openPicker}>
+            <Image source={Images.Chevron_down} />
+          </TouchableWithoutFeedback>
         </View>
 
         <Pressable onPress={handleHowWorksPress}>

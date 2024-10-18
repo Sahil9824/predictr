@@ -5,6 +5,7 @@ import {
   Platform,
   Pressable,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,6 +13,7 @@ import {
 } from "react-native";
 import { Colors, fonts } from "../../constant";
 import { Images } from "../../assets/images";
+
 import { useEffect, useRef, useState } from "react";
 import { scale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
@@ -46,8 +48,6 @@ const HeaderOptions = ({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.lightGrey,
         paddingHorizontal: scale(10),
         ...style,
       }}
@@ -175,7 +175,7 @@ const DashBoard = () => {
   const navigation = useNavigation();
   const scrollY = new Animated.Value(0);
   const stickyTop = scrollY.interpolate({
-    outputRange: [-56, 0],
+    outputRange: [-56 * 3, 0],
     inputRange: [150, 500],
     extrapolate: "clamp",
   });
@@ -186,8 +186,6 @@ const DashBoard = () => {
   });
 
   const [viewHeight, setViewHeight] = useState(0);
-
-  console.log(viewHeight, "nice");
 
   const handleLayout = (event) => {
     const { height } = event.nativeEvent.layout;
@@ -234,8 +232,6 @@ const DashBoard = () => {
     );
   };
 
-  console.log("FilteredOptions:", filteredOptions);
-
   const onSearchPress = () => {
     navigation.navigate(SCREENS.SEARCH);
   };
@@ -250,6 +246,7 @@ const DashBoard = () => {
 
   return (
     <>
+      <StatusBar backgroundColor="white" />
       <SafeAreaView
         style={{ flex: 1, backgroundColor: "white" }}
         edges={["top", "left", "right"]}
@@ -308,7 +305,7 @@ const DashBoard = () => {
 
             {(isSelected === 1 || isSelected === 0) &&
               [1, 2, 3, 4].map((item) => (
-                <View style={{ paddingHorizontal: 16 }}>
+                <View style={{ paddingHorizontal: 16 }} key={item}>
                   <PredictionCard
                     index={item}
                     // isFavorited={item.isFavorited}
@@ -321,8 +318,6 @@ const DashBoard = () => {
               <Contests openBottomSheet={openContestDetails} />
             )}
           </ScrollView>
-
-          <ContestDetails ref={contestDetailsRef} />
         </View>
 
         <Animated.View
@@ -343,6 +338,8 @@ const DashBoard = () => {
           />
         </Animated.View>
       </SafeAreaView>
+      <ContestDetails ref={contestDetailsRef} />
+
       <FilterCard
         ref={filterCardRef}
         onFilterReset={handleFilterReset}

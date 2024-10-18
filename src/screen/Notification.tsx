@@ -172,15 +172,15 @@ const NotificationScreen = () => {
 
         {notifications
           .filter((item) => item.unread)
-          .map((item) => (
-            <NotificationItem item={item} />
+          .map((item, index) => (
+            <NotificationItem item={item} key={index} />
           ))}
 
         <Text style={styles.sectionHeader}>All</Text>
         {notifications
           .filter((item) => !item.unread)
-          .map((item) => (
-            <NotificationItem item={item} />
+          .map((item, index) => (
+            <NotificationItem key={index} item={item} />
           ))}
       </ScrollView>
     </SafeAreaView>

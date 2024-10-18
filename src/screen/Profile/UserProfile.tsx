@@ -10,6 +10,8 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   ScrollView,
+  Animated,
+  Platform,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
@@ -49,9 +51,12 @@ const HeaderOptions = ({
   setIsSelected,
   openFilter,
   filteredOptions,
+  style,
+  handleLayout,
 }) => {
   return (
     <View
+      onLayout={handleLayout}
       style={{
         flexDirection: "row",
         alignItems: "center",
@@ -59,6 +64,7 @@ const HeaderOptions = ({
         borderBottomWidth: 1,
         borderBottomColor: Colors.lightGrey,
         paddingHorizontal: scale(10),
+        ...style,
       }}
     >
       <View style={{ flexDirection: "row", height: scale(50) }}>
@@ -151,6 +157,27 @@ const UserProfile = () => {
   const [isSelected, setIsSelected] = useState(0);
   const [filteredOptions, setFilteredOptions] = useState(null);
   const filterCardRef = useRef(null);
+  const [viewHeight, setViewHeight] = useState(0);
+  const handleLayout = (event) => {
+    const { height } = event.nativeEvent.layout;
+    setViewHeight(height); // Store the height of the view
+  };
+
+  const scrollY = new Animated.Value(0);
+
+  const stickyTop = scrollY.interpolate({
+    outputRange: [-56 * 3, 0],
+    inputRange: [150, Platform.OS === "ios" ? 415 : 450],
+    extrapolate: "clamp",
+  });
+  const animatedOpac = scrollY.interpolate({
+    outputRange: [0, 1],
+    inputRange: [
+      Platform.OS === "ios" ? 414 : 449,
+      Platform.OS === "ios" ? 415 : 450,
+    ],
+    extrapolate: "clamp",
+  });
 
   const route = useRoute();
   const isReset = route.params?.isReset || false;
@@ -167,231 +194,257 @@ const UserProfile = () => {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white" }}
-      edges={["top", "left", "right"]}
-    >
-      <View style={styles.mainHeader}>
-        <Text
-          style={{
-            fontFamily: fonts.f800,
-            fontSize: scale(22),
-            color: Colors.labelBlack,
-            fontWeight: "800",
-          }}
+    <>
+      <SafeAreaView
+        style={{ flex: 1, backgroundColor: "white" }}
+        edges={["top", "left", "right"]}
+      >
+        <View style={styles.mainHeader}>
+          <Text
+            style={{
+              fontFamily: fonts.f800,
+              fontSize: scale(22),
+              color: Colors.labelBlack,
+              fontWeight: "800",
+            }}
+          >
+            Profile
+          </Text>
+          <TouchableWithoutFeedback
+            style={{ backgroundColor: "red" }}
+            onPress={() => navigation.navigate(SCREENS.MENU)}
+          >
+            <Icons type={ICONS.SANDWICH} />
+          </TouchableWithoutFeedback>
+        </View>
+        <ScrollView
+          contentContainerStyle={styles.container}
+          // contentContainerStyle={{ flexGrow: 1 }}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            {
+              useNativeDriver: false,
+            }
+          )}
         >
-          Profile
-        </Text>
-        <TouchableWithoutFeedback
-          style={{ backgroundColor: "red" }}
-          onPress={() => navigation.navigate(SCREENS.MENU)}
-        >
-          <Icons type={ICONS.SANDWICH} />
-        </TouchableWithoutFeedback>
-      </View>
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.profileHeader}>
-          <Image source={Images.avatar17} style={styles.profileImage} />
-          <View style={styles.profileInfo}>
-            <View style={styles.headText}>
-              <Text style={styles.profileName}>Lincoln Philips</Text>
-              <TouchableWithoutFeedback
-                onPress={() =>
-                  navigation.navigate(SCREENS.SELECT_AVATAR, {
-                    isEdit: true,
-                  })
-                }
-              >
-                <Icons type={ICONS.EDIT} />
-              </TouchableWithoutFeedback>
-            </View>
-            <Text style={styles.emailStyle}>writetonikunj98@gmail.com</Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: scale(10),
-                justifyContent: "space-between",
-              }}
-            >
-              <TouchableWithoutFeedback
-                onPress={() =>
-                  navigation.navigate(SCREENS.GENERAL_SCREEN, {
-                    title: "Followers",
-                    data: null,
-                    backscreen: SCREENS.PROFILE,
-                  })
-                }
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    gap: 4,
-                  }}
+          <View style={styles.profileHeader}>
+            <Image source={Images.avatar17} style={styles.profileImage} />
+            <View style={styles.profileInfo}>
+              <View style={styles.headText}>
+                <Text style={styles.profileName}>Lincoln Philips</Text>
+                <TouchableWithoutFeedback
+                  onPress={() =>
+                    navigation.navigate(SCREENS.SELECT_AVATAR, {
+                      isEdit: true,
+                    })
+                  }
                 >
-                  <Text
-                    style={{
-                      fontWeight: "700",
-                      fontSize: scale(14),
-                      color: "#505050",
-                      fontFamily: fonts.f700,
-                    }}
-                  >
-                    88
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: fonts.f400,
-                      fontWeight: "400",
-                      fontSize: scale(14),
-                      color: "#505050",
-                    }}
-                  >
-                    followers
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback
-                onPress={() =>
-                  navigation.navigate(SCREENS.GENERAL_SCREEN, {
-                    title: "Followings",
-                    data: null,
-                    backscreen: SCREENS.PROFILE,
-                  })
-                }
+                  <Icons type={ICONS.EDIT} />
+                </TouchableWithoutFeedback>
+              </View>
+              <Text style={styles.emailStyle}>writetonikunj98@gmail.com</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: scale(10),
+                  justifyContent: "space-between",
+                }}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    gap: 4,
-                  }}
+                <TouchableWithoutFeedback
+                  onPress={() =>
+                    navigation.navigate(SCREENS.GENERAL_SCREEN, {
+                      title: "Followers",
+                      data: null,
+                      backscreen: SCREENS.PROFILE,
+                    })
+                  }
                 >
-                  <Text
+                  <View
                     style={{
-                      fontWeight: "700",
-                      fontSize: scale(14),
-                      color: "#505050",
-                      fontFamily: fonts.f700,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 4,
                     }}
                   >
-                    55
-                  </Text>
-                  <Text
+                    <Text
+                      style={{
+                        fontWeight: "700",
+                        fontSize: scale(14),
+                        color: "#505050",
+                        fontFamily: fonts.f700,
+                      }}
+                    >
+                      88
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: fonts.f400,
+                        fontWeight: "400",
+                        fontSize: scale(14),
+                        color: "#505050",
+                      }}
+                    >
+                      followers
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback
+                  onPress={() =>
+                    navigation.navigate(SCREENS.GENERAL_SCREEN, {
+                      title: "Followings",
+                      data: null,
+                      backscreen: SCREENS.PROFILE,
+                    })
+                  }
+                >
+                  <View
                     style={{
-                      fontFamily: fonts.f400,
-                      fontWeight: "400",
-                      fontSize: scale(14),
-                      color: "#505050",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 4,
                     }}
                   >
-                    following
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
+                    <Text
+                      style={{
+                        fontWeight: "700",
+                        fontSize: scale(14),
+                        color: "#505050",
+                        fontFamily: fonts.f700,
+                      }}
+                    >
+                      55
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: fonts.f400,
+                        fontWeight: "400",
+                        fontSize: scale(14),
+                        color: "#505050",
+                      }}
+                    >
+                      following
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
             </View>
           </View>
-        </View>
 
-        {/* Tabs */}
-        <View style={styles.tabs}>
-          <TouchableOpacity
-            style={[
-              styles.tabItem,
-              selectedTab === "All" && styles.selectedTabItem,
-            ]}
-            onPress={() => setSelectedTab("All")}
-          >
-            <Text
+          {/* Tabs */}
+          <View style={styles.tabs}>
+            <TouchableOpacity
               style={[
-                styles.tabText,
-                selectedTab === "All" && styles.selectedTabText,
+                styles.tabItem,
+                selectedTab === "All" && styles.selectedTabItem,
               ]}
+              onPress={() => setSelectedTab("All")}
             >
-              All
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.tabItem,
-              selectedTab === "Week" && styles.selectedTabItem,
-            ]}
-            onPress={() => setSelectedTab("Week")}
-          >
-            <Text
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === "All" && styles.selectedTabText,
+                ]}
+              >
+                All
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={[
-                styles.tabText,
-                selectedTab === "Week" && styles.selectedTabText,
+                styles.tabItem,
+                selectedTab === "Week" && styles.selectedTabItem,
               ]}
+              onPress={() => setSelectedTab("Week")}
             >
-              Week
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.tabItem,
-              selectedTab === "Month" && styles.selectedTabItem,
-            ]}
-            onPress={() => setSelectedTab("Month")}
-          >
-            <Text
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === "Week" && styles.selectedTabText,
+                ]}
+              >
+                Week
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={[
-                styles.tabText,
-                selectedTab === "Month" && styles.selectedTabText,
+                styles.tabItem,
+                selectedTab === "Month" && styles.selectedTabItem,
               ]}
+              onPress={() => setSelectedTab("Month")}
             >
-              Month
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Stats */}
-        <View style={styles.stats}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>114</Text>
-            <Text style={styles.statLabel}>Rank</Text>
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === "Month" && styles.selectedTabText,
+                ]}
+              >
+                Month
+              </Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>23</Text>
-            <Text style={styles.statLabel}>Predictions #</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>43%</Text>
-            <Text style={styles.statLabel}>Accuracy %</Text>
-          </View>
-        </View>
 
-        {/* FlatList for Predictions */}
-        <HeaderOptions
-          isSelected={isSelected}
-          setIsSelected={setIsSelected}
-          openFilter={openFilterCard}
-          filteredOptions={filteredOptions}
-        />
+          {/* Stats */}
+          <View style={styles.stats}>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>114</Text>
+              <Text style={styles.statLabel}>Rank</Text>
+            </View>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>23</Text>
+              <Text style={styles.statLabel}>Predictions #</Text>
+            </View>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>43%</Text>
+              <Text style={styles.statLabel}>Accuracy %</Text>
+            </View>
+          </View>
 
-        {/* FlatList for Predictions */}
-        <FlatList
-          data={data}
-          renderItem={({ item }) =>
-            data.length ? (
-              <View style={styles.cardContainer}>
+          {/* FlatList for Predictions */}
+          <HeaderOptions
+            isSelected={isSelected}
+            setIsSelected={setIsSelected}
+            openFilter={openFilterCard}
+            filteredOptions={filteredOptions}
+            handleLayout={handleLayout}
+          />
+
+          {/* FlatList for Predictions */}
+
+          {data.length ? (
+            data.map((item, index) => (
+              <View style={styles.cardContainer} key={index}>
                 <PredictionCard index={item.index} />
               </View>
-            ) : (
-              <NoData />
-            )
-          }
-          keyExtractor={(item) => item.id.toString()}
-          scrollEventThrottle={16}
-        />
+            ))
+          ) : (
+            <NoData />
+          )}
+        </ScrollView>
 
-        <FilterCard
-          ref={filterCardRef}
-          onFilterReset={handleFilterReset}
-          isReset={isReset}
-        />
-      </ScrollView>
-    </SafeAreaView>
+        <Animated.View
+          style={{
+            ...styles.stickyHead,
+            marginTop:
+              Platform.OS === "android" ? viewHeight - 1 : viewHeight * 2,
+            top: stickyTop,
+            opacity: animatedOpac,
+          }}
+        >
+          <HeaderOptions
+            isSelected={isSelected}
+            setIsSelected={setIsSelected}
+            openFilter={openFilterCard}
+            filteredOptions={filteredOptions}
+            style={styles.shadow}
+          />
+        </Animated.View>
+      </SafeAreaView>
+
+      <FilterCard
+        ref={filterCardRef}
+        onFilterReset={handleFilterReset}
+        isReset={isReset}
+      />
+    </>
   );
 };
 
@@ -400,6 +453,39 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: "#fff",
   },
+
+  stickyHead: {
+    width: "100%",
+    position: "absolute",
+    height: 55,
+    top: -55,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    opacity: 1,
+    overflow: "hidden",
+    paddingBottom: 2,
+  },
+
+  shadow: {
+    width: "100%",
+    backgroundColor: "white",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
+        shadowOpacity: 0.2,
+        shadowRadius: 3, // You can adjust this for more blur effect
+      },
+      android: {
+        elevation: 5, // This will create shadow, but not just at the bottom
+      },
+    }),
+  },
+
   tabHead: {
     flex: 1,
     flexDirection: "row",

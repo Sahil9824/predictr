@@ -29,8 +29,9 @@ export const SCREENS = {
   GENERAL_SCREEN: "GeneralScreen",
   POST: "PostScreen",
   OTHER_USER_PROFILE: "OtherUserProfile",
-  PREDICTION: "PREDICTION",
-  NOTIFICATION: "NOTIFICATION",
+  PREDICTION: "PredictionScreen",
+  NOTIFICATION: "NotificationScreen",
+  LEADERBOARD: "LeaderboardScreen",
 };
 
 export const PRE_LOGIN_NAVIGATION = {

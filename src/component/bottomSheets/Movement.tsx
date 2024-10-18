@@ -54,9 +54,9 @@ const MovementSheet = ({ movementBottomRef, setMovement }) => {
       enableHandlePanningGesture={true}
       enableContentPanningGesture={false}
       ref={movementBottomRef}
-      index={1}
+      index={0}
       enablePanDownToClose
-      snapPoints={["60%", "70%", "80%"]}
+      snapPoints={[450]}
       handleIndicatorStyle={{
         width: 65,
         height: 5,
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
   },
 
   sectionTitle: {
-    fontSize: scale(15),
+    fontSize: scale(14),
     color: Colors.textBlack,
     marginVertical: scale(4),
     fontWeight: "600",
@@ -298,15 +298,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.lightGrey,
     borderRadius: 7,
-    paddingStart: scale(10),
-    height: scale(49),
+    paddingStart: 10,
+    height: 49,
     width: "100%",
   },
 
   accuracyOptions: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: scale(6),
+    marginVertical: 6,
     width: "100%",
   },
 
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderColor: Colors.lightGrey,
-    paddingVertical: scale(11),
+    paddingVertical: 11,
     borderRadius: 8,
     width: "24%",
   },

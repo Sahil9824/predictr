@@ -22,34 +22,39 @@ import {
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ScoringSystemScreen } from "../HowItWorks";
 
 const ContestDetails = forwardRef((props, ref) => {
+  const scoringRef = useRef(null);
+
   const closeBottomSheet = () => {
     ref.current?.close();
   };
 
   const handleScoringPress = () => {
-    //
+    ref.current?.close();
+    scoringRef.current.present();
   };
 
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
   );
   return (
-    <BottomSheetModalProvider>
+    <>
       <BottomSheetModal
         enableHandlePanningGesture={true}
         enableContentPanningGesture={false}
         enablePanDownToClose
         backdropComponent={renderBackdrop}
         ref={ref}
+        index={0}
         handleIndicatorStyle={{
           width: 65,
           height: 5,
           backgroundColor: "#B3B3B3",
         }}
         style={styles.bottomSheet}
-        snapPoints={["98%"]}
+        snapPoints={["92%"]}
       >
         <View style={styles.bottomSheetContainer}>
           <View style={styles.header}>
@@ -160,7 +165,27 @@ const ContestDetails = forwardRef((props, ref) => {
           </KeyboardAwareScrollView>
         </View>
       </BottomSheetModal>
-    </BottomSheetModalProvider>
+
+      <BottomSheetModal
+        ref={scoringRef}
+        index={0}
+        enablePanDownToClose
+        backdropComponent={renderBackdrop}
+        snapPoints={["93%"]}
+        handleIndicatorStyle={{
+          width: 65,
+          height: 5,
+          backgroundColor: "#B3B3B3",
+        }}
+        enableHandlePanningGesture={true}
+        enableContentPanningGesture={false}
+      >
+        <ScoringSystemScreen
+          bottomSheetRef={scoringRef}
+          closeBottomSheet={closeBottomSheet}
+        />
+      </BottomSheetModal>
+    </>
   );
 });
 

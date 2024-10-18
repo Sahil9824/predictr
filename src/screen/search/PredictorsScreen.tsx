@@ -23,7 +23,7 @@ const PredictorsScreen = () => {
   const renderItem = ({ item }) => {
     return (
       <>
-        <View style={styles.itemContainer}>
+        <View style={styles.itemContainer} key={item.id}>
           {/* Avatar */}
           <Image
             source={Images.avatar6}

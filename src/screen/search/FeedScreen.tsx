@@ -19,9 +19,9 @@ const FeedScreen = () => {
         </>
       }
       data={data}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <View style={{ paddingHorizontal: 16 }}>
-          <PredictionCard index={item.index} />
+          <PredictionCard index={item.index} key={index} />
         </View>
       )}
       keyExtractor={(item) => item.id.toString()}

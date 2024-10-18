@@ -23,6 +23,8 @@ import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import PredictionStack from "./Prediction.stack";
 import NotificationScreen from "../screen/Notification";
+import LeaderboardStack from "./Leaderboard.stack";
+import NotificationStack from "./Notification.stack";
 
 const Tab = createBottomTabNavigator();
 const numOfTabs = 5;
@@ -64,7 +66,7 @@ export default function App({ navigation }) {
       <Tab.Screen name={APP_NAVIGATION.HOME_SCREEN} component={HomeStack} />
       <Tab.Screen
         name={APP_NAVIGATION.LEADERBOARD}
-        component={LeaderboardScreen}
+        component={LeaderboardStack}
       />
 
       <Tab.Screen
@@ -74,7 +76,10 @@ export default function App({ navigation }) {
         }}
         component={PredictionStack}
       />
-      <Tab.Screen name={SCREENS.NOTIFICATION} component={NotificationScreen} />
+      <Tab.Screen
+        name={APP_NAVIGATION.NOTIFICATION}
+        component={NotificationStack}
+      />
       <Tab.Screen name={APP_NAVIGATION.PROFILE} component={ProfileStack} />
     </Tab.Navigator>
   );

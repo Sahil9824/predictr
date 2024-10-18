@@ -1,5 +1,6 @@
 import {
   Image,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -98,39 +99,51 @@ const PredictionCard = ({ index, imgSrc }: IPredictionCard) => {
           borderBottomColor: "white",
           backgroundColor: "white",
           overflow: "hidden",
-          shadowColor: "rgba(0, 0, 0, 0.15)",
-          shadowOffset: {
-            width: 0,
-            height: 5,
-          },
-          shadowOpacity: 0.15,
-          shadowRadius: 10,
-          elevation: 10,
+          ...Platform.select({
+            ios: {
+              shadowColor: "#000", // Shadow color
+              shadowOffset: { width: 0, height: 3.34 }, // Vertical offset 3.34px
+              shadowOpacity: 0.07, // Approximate opacity (from #00000012)
+              shadowRadius: 8.68, // Blur radius
+            },
+            android: {
+              elevation: 4, // Use elevation to approximate the shadow
+            },
+          }),
         }}
       >
         <View style={{ flexDirection: "row", marginBottom: 12 }}>
-          <Image
-            source={Images.avatar6}
-            style={{
-              height: scale(40),
-              width: scale(40),
-              borderRadius: 8,
-              marginRight: 8,
-            }}
-          />
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
+          >
+            <Image
+              source={Images.avatar6}
+              style={{
+                height: scale(40),
+                width: scale(40),
+                borderRadius: 8,
+                marginRight: 8,
+              }}
+            />
+          </TouchableWithoutFeedback>
           <View style={{ flexGrow: 1 }}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text
-                style={{
-                  fontFamily: fonts.f800,
-                  fontSize: scale(15),
-                  lineHeight: scale(19),
-                  color: Colors.textBlack,
-                  fontWeight: "800",
-                }}
+              <TouchableWithoutFeedback
+                onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
               >
-                {"Nikunj Maniya"}{" "}
-              </Text>
+                <Text
+                  style={{
+                    fontFamily: fonts.f800,
+                    fontSize: scale(15),
+                    lineHeight: scale(19),
+                    color: Colors.textBlack,
+                    fontWeight: "800",
+                  }}
+                  suppressHighlighting={true}
+                >
+                  {"Nikunj Maniya"}{" "}
+                </Text>
+              </TouchableWithoutFeedback>
               <Text
                 style={{
                   fontFamily: fonts.f400,
@@ -294,12 +307,24 @@ const PredictionCard = ({ index, imgSrc }: IPredictionCard) => {
 
         {imgSrc && (
           <Image
-            source={{ uri: imgSrc }}
-            style={{ width: "100%", height: 190, marginBottom: 12 }}
+            source={imgSrc}
+            style={{
+              width: "100%",
+              height: 190,
+              marginTop: 12,
+              borderRadius: 16,
+            }}
           />
         )}
 
-        <View style={{ flexDirection: "row", marginTop: 10 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 10,
+            alignItems: "center",
+          }}
+        >
           <View style={{ flexDirection: "row" }}>
             <Pressable
               onPress={handleLike}
@@ -351,44 +376,44 @@ const PredictionCard = ({ index, imgSrc }: IPredictionCard) => {
                 {disliked || liked ? dislikeCount : "Disagree"}
               </Text>
             </Pressable>
-          </View>
-          <Pressable
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: scale(10),
-            }}
-            onPress={() => navigation.navigate(SCREENS.POST)}
-          >
-            <Image
-              source={Images.comment}
-              style={{ height: scale(16), width: scale(16), marginRight: 4 }}
-            />
-            <Text
+            <Pressable
               style={{
-                fontFamily: fonts.f400,
-                fontSize: scale(13),
-                lineHeight: scale(19),
-                color: Colors.textGrey,
-                fontWeight: "400",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: scale(10),
               }}
+              onPress={() => navigation.navigate(SCREENS.POST)}
             >
-              {"Comment"}
-            </Text>
-          </Pressable>
+              <Image
+                source={Images.comment}
+                style={{ height: scale(16), width: scale(16), marginRight: 4 }}
+              />
+              <Text
+                style={{
+                  fontFamily: fonts.f400,
+                  fontSize: scale(13),
+                  lineHeight: scale(19),
+                  color: Colors.textGrey,
+                  fontWeight: "400",
+                }}
+              >
+                {"Comment"}
+              </Text>
+            </Pressable>
+          </View>
+
           <TouchableOpacity onPress={onSharePress}>
             <View
               style={{
                 flexDirection: "row",
-                flexGrow: 1,
                 justifyContent: "flex-end",
                 marginStart: scale(40),
               }}
             >
               <Image
                 source={Images.share}
-                style={{ height: scale(16), width: scale(16) }}
+                style={{ height: 16, width: scale(16) }}
               />
             </View>
           </TouchableOpacity>
@@ -399,7 +424,7 @@ const PredictionCard = ({ index, imgSrc }: IPredictionCard) => {
         style={{
           flexDirection: "row",
           padding: scale(16),
-          backgroundColor: "#f0f3f5",
+          // backgroundColor: "#f0f3f5",
           justifyContent: "space-between",
           overflow: "hidden",
         }}

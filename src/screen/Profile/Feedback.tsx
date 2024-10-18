@@ -43,7 +43,7 @@ const GiveFeedback = ({ navigation }) => {
           <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
             <Icons type={ICONS.BACKARR} />
           </TouchableWithoutFeedback>
-          <Text style={styles.menuText}>Menu</Text>
+          <Text style={styles.menuText}>Give Feedback</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.title}>Rate Your Experience</Text>

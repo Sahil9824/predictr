@@ -33,6 +33,7 @@ import { useRoute } from "@react-navigation/native";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import userStore from "../../user.store";
 
 const Avatars = [
   { image: Images.avatar1, name: "Bear" },

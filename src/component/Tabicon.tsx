@@ -4,6 +4,8 @@ import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
 import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 import { TAB_ICON_COLORS } from "../constant";
+import { Image } from "react-native";
+import { Images } from "../assets/images";
 
 const TabIcon = ({ focused, route }) => {
   const { name } = route;
@@ -11,28 +13,41 @@ const TabIcon = ({ focused, route }) => {
     () => (focused ? TAB_ICON_COLORS.ACTIVE : TAB_ICON_COLORS.DEFAULT),
     [focused]
   );
-  console.log(name, focused, "kyaa");
 
   switch (name) {
     case APP_NAVIGATION.HOME_SCREEN:
-      return <Icons type={ICONS.HOME} fill={tabIconColor} />;
+      return (
+        <Image
+          source={focused ? Images.HomeIcon : Images.HomeIconInac}
+          style={{ height: 24, width: 24 }}
+        />
+      );
     case APP_NAVIGATION.LEADERBOARD:
       return (
-        <Icons type={ICONS.LEADERBOARD} fill={tabIconColor} strokeWidth={2} />
+        <Image
+          source={focused ? Images.Lead : Images.LeadInac}
+          style={{ height: 24, width: 24 }}
+        />
       );
     case APP_NAVIGATION.PREDICTION:
       return (
-        <Icons type={ICONS.PREDICTION} fill={tabIconColor} strokeWidth={2} />
+        <Image
+          source={focused ? Images.Predict : Images.PredictInac}
+          style={{ height: 24, width: 24 }}
+        />
       );
     case APP_NAVIGATION.PROFILE:
-      return <Icons type={ICONS.PROFILE} fill={tabIconColor} strokeWidth={2} />;
-    case SCREENS.NOTIFICATION:
       return (
-        <Icons
-          type={ICONS.NOTIFICATION}
-          stroke={tabIconColor}
-          fill={tabIconColor}
-          strokeWidth={2}
+        <Image
+          source={focused ? Images.Profile : Images.ProfileInac}
+          style={{ height: 24, width: 24 }}
+        />
+      );
+    case APP_NAVIGATION.NOTIFICATION:
+      return (
+        <Image
+          source={focused ? Images.Notification : Images.NotificationInac}
+          style={{ height: 24, width: 24 }}
         />
       );
     default:

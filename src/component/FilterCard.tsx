@@ -133,7 +133,7 @@ const FilterCard = forwardRef((props, ref) => {
           backgroundColor: "#B3B3B3",
         }}
         style={styles.bottomSheet}
-        snapPoints={["77%", "90%"]}
+        snapPoints={[600]}
       >
         <KeyboardAwareScrollView
           contentContainerStyle={{ flexGrow: 1 }}
@@ -253,7 +253,7 @@ const FilterCard = forwardRef((props, ref) => {
         ref={datePickerRef}
         index={0}
         enablePanDownToClose
-        snapPoints={Platform.OS === "android" ? ["74%"] : ["58%"]}
+        snapPoints={[550]}
         handleIndicatorStyle={{
           width: 65,
           height: 5,
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    paddingBottom: scale(10),
+    paddingBottom: 10,
   },
   filterText: {
     fontFamily: fonts.f700,
@@ -303,27 +303,28 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: scale(15),
     color: Colors.textBlack,
-    marginVertical: scale(4),
+    marginTop: 24,
+    marginBottom: 5,
     fontWeight: "600",
   },
   accuracyInput: {
     borderWidth: 1,
     borderColor: Colors.lightGrey,
     borderRadius: 7,
-    paddingStart: scale(10),
-    height: scale(49),
+    paddingStart: 10,
+    height: 49,
   },
   accuracyOptions: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: scale(6),
+    marginVertical: 5,
     width: "100%",
   },
   accuracyButton: {
     borderWidth: 1,
     borderColor: Colors.lightGrey,
-    paddingVertical: scale(12),
-    paddingHorizontal: scale(25.7),
+    paddingVertical: 12,
+    paddingHorizontal: 25.7,
     borderRadius: 8,
   },
   accuracyButtonSelected: {
@@ -349,9 +350,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.lightGrey,
     borderRadius: 10,
-    marginBottom: scale(10),
-    paddingHorizontal: scale(10),
-    paddingVertical: scale(15),
+    marginBottom: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
   },
   dateInput: {
     flex: 1,
@@ -361,19 +362,19 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   calendarIcon: {
-    width: scale(20),
-    height: scale(20),
+    width: 20,
+    height: 20,
     tintColor: Colors.textGrey,
   },
   buttonContainer: {
-    paddingBottom: scale(20),
-    paddingTop: scale(5),
+    paddingBottom: 20,
+    paddingTop: 5,
     width: "100%",
-    marginBottom: scale(10),
+    marginBottom: 10,
   },
   applyButton: {
     backgroundColor: Colors.primaryBlue,
-    paddingVertical: scale(10),
+    paddingVertical: 10,
     borderRadius: 8,
     alignItems: "center",
   },
@@ -384,9 +385,9 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   bottomSheet: {
-    paddingHorizontal: scale(16),
-    paddingTop: scale(16),
-    paddingBottom: scale(24),
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 24,
     borderRadius: 24,
     overflow: "hidden",
   },
@@ -396,28 +397,28 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.lightGrey,
     borderRadius: 10,
-    paddingHorizontal: scale(10),
+    paddingHorizontal: 10,
     paddingVertical: scale(2),
-    marginBottom: scale(10),
+    marginBottom: 10,
   },
   hashtagInput: {
     flex: 1,
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: Colors.textGrey,
-    marginLeft: scale(10),
-    height: scale(44),
+    marginLeft: 10,
+    height: 44,
     fontWeight: "400",
   },
   hashtagIcon: {
-    width: scale(20),
-    height: scale(20),
+    width: 20,
+    height: 20,
     tintColor: Colors.textGrey,
   },
   datePickerBottomSheet: {
-    paddingHorizontal: scale(16),
-    paddingTop: scale(16),
-    paddingBottom: scale(24),
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 24,
     borderRadius: 24,
     overflow: "hidden",
   },
@@ -425,7 +426,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: scale(10),
+    paddingBottom: 10,
   },
   resetButtonText: {
     fontFamily: fonts.f600,

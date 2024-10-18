@@ -5,8 +5,7 @@ import { Images } from "../assets/images";
 import { SCREENS } from "../constant/navigation.constants";
 import { useNavigation } from "@react-navigation/native";
 
-const WinnerCard = ({ setIsSelected }) => {
-  const navigation = useNavigation();
+const WinnerCard = ({ setIsSelected, openBottomSheet }) => {
   return (
     <>
       <View
@@ -283,16 +282,18 @@ const WinnerCard = ({ setIsSelected }) => {
           </Text>
         </TouchableOpacity>
 
-        <Text
-          style={{
-            color: Colors.white,
-            paddingVertical: scale(15),
-            fontFamily: fonts.f600,
-            fontWeight: "600",
-          }}
-        >
-          {"Contest Details"}
-        </Text>
+        <TouchableOpacity onPress={openBottomSheet}>
+          <Text
+            style={{
+              color: Colors.white,
+              paddingVertical: scale(15),
+              fontFamily: fonts.f600,
+              fontWeight: "600",
+            }}
+          >
+            {"Contest Details"}
+          </Text>
+        </TouchableOpacity>
         <Image
           source={Images.dots}
           style={{ height: scale(6), width: scale(16) }}

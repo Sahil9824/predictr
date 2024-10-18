@@ -32,7 +32,7 @@ const CustomCalSheet = ({ datePickerRef, setDate }) => {
       ref={datePickerRef}
       index={0}
       enablePanDownToClose
-      snapPoints={Platform.OS === "android" ? ["74%"] : ["58%"]}
+      snapPoints={[550]}
       handleIndicatorStyle={{
         width: 65,
         height: 5,
@@ -55,9 +55,9 @@ export default CustomCalSheet;
 
 const styles = StyleSheet.create({
   datePickerBottomSheet: {
-    paddingHorizontal: scale(16),
-    paddingTop: scale(16),
-    paddingBottom: scale(24),
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 24,
     borderRadius: 24,
     overflow: "hidden",
   },
