@@ -48,7 +48,7 @@ const HeaderOptions = ({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        paddingHorizontal: scale(10),
+        paddingHorizontal: scale(16),
         ...style,
       }}
     >
@@ -154,12 +154,12 @@ const HeaderOptions = ({
         {filteredOptions ? (
           <Image
             source={Images.FilterSelected}
-            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
+            style={{ height: scale(24), width: scale(24) }}
           />
         ) : (
           <Image
             source={Images.moreOptions}
-            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
+            style={{ height: scale(24), width: scale(24) }}
           />
         )}
       </Pressable>
@@ -258,7 +258,7 @@ const DashBoard = () => {
               alignItems: "center",
               justifyContent: "space-between",
               paddingVertical: scale(10),
-              paddingHorizontal: scale(10),
+              paddingHorizontal: scale(16),
             }}
           >
             <Text

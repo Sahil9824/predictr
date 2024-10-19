@@ -408,7 +408,6 @@ const PredictionCard = ({ index, imgSrc }: IPredictionCard) => {
               style={{
                 flexDirection: "row",
                 justifyContent: "flex-end",
-                marginStart: scale(40),
               }}
             >
               <Image

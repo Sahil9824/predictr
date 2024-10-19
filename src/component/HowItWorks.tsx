@@ -220,6 +220,7 @@ const ScoringSystemScreen = ({ bottomSheetRef }) => {
                 ...styles.tableCell1,
                 color: "#717272",
                 fontFamily: fonts.f400,
+                fontStyle: "italic",
               }}
             >
               Actual Movement
@@ -238,6 +239,7 @@ const ScoringSystemScreen = ({ bottomSheetRef }) => {
                 ...styles.tableCell3,
                 color: "#717272",
                 fontFamily: fonts.f400,
+                fontStyle: "italic",
               }}
             >
               Accuracy
@@ -426,19 +428,28 @@ const styles = StyleSheet.create({
     borderBottomColor: "#EAEAEA",
   },
   tableCell1: {
-    fontSize: scale(14),
-    fontWeight: "500",
-    color: "#333",
+    fontFamily: fonts.f400,
+    fontSize: scale(12),
+    fontWeight: "400",
+    color: "#000000",
     width: 130,
     marginRight: 10,
   },
   tableCell2: {
-    width: 120,
+    fontFamily: fonts.f400,
+    fontSize: scale(12),
+    fontWeight: "400",
+    color: "#000000",
+    width: 100,
     marginRight: "auto",
     flexDirection: "row",
     textAlign: "left",
   },
   tableCell3: {
+    fontFamily: fonts.f400,
+    fontSize: scale(12),
+    fontWeight: "400",
+    color: "#000000",
     width: "auto",
     alignSelf: "flex-start",
   },

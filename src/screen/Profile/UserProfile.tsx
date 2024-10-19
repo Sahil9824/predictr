@@ -63,7 +63,7 @@ const HeaderOptions = ({
         justifyContent: "space-between",
         borderBottomWidth: 1,
         borderBottomColor: Colors.lightGrey,
-        paddingHorizontal: scale(10),
+        paddingHorizontal: 16,
         ...style,
       }}
     >
@@ -100,7 +100,6 @@ const HeaderOptions = ({
           </Text>
         </Pressable>
 
-        {/* Explore Pressable */}
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
@@ -138,12 +137,12 @@ const HeaderOptions = ({
         {filteredOptions ? (
           <Image
             source={Images.FilterSelected}
-            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
+            style={{ height: scale(24), width: scale(24) }}
           />
         ) : (
           <Image
             source={Images.moreOptions}
-            style={{ height: scale(24), width: scale(24), marginEnd: scale(7) }}
+            style={{ height: scale(24), width: scale(24) }}
           />
         )}
       </Pressable>
@@ -467,7 +466,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     opacity: 1,
     overflow: "hidden",
-    paddingBottom: 2,
+    paddingBottom: 1,
   },
 
   shadow: {
@@ -514,7 +513,7 @@ const styles = StyleSheet.create({
   mainHeader: {
     backgroundColor: "#fff",
     flexDirection: "row",
-    padding: moderateScale(16),
+    padding: 16,
     alignItems: "center",
     justifyContent: "space-between",
     borderBottomWidth: 1,
@@ -522,7 +521,7 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     flexDirection: "column",
-    padding: moderateScale(16),
+    padding: 16,
     alignItems: "center",
   },
   profileImage: {
@@ -543,8 +542,8 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(4),
   },
   followButton: {
-    paddingHorizontal: moderateScale(16),
-    paddingVertical: verticalScale(10),
+    paddingHorizontal: 16,
+    paddingVertical: 10,
     borderRadius: moderateScale(12),
     alignItems: "center",
   },
@@ -557,19 +556,19 @@ const styles = StyleSheet.create({
   followText: {
     color: "#fff",
     fontWeight: "bold",
-    fontSize: moderateScale(16),
+    fontSize: scale(16),
   },
   followingText: {
     color: "#717272",
     fontWeight: "bold",
-    fontSize: moderateScale(16),
+    fontSize: scale(16),
   },
   tabs: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginHorizontal: scale(15),
+    marginHorizontal: 15,
     backgroundColor: "#F9F9F9",
-    borderRadius: scale(10),
+    borderRadius: 10,
     borderColor: "#ddd",
     borderWidth: 1,
   },
@@ -584,7 +583,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E5E5",
   },
   tabText: {
-    fontSize: moderateScale(16),
+    fontSize: scale(16),
     color: "#000",
     fontWeight: "400",
   },
@@ -607,29 +606,29 @@ const styles = StyleSheet.create({
     borderRadius: scale(8),
   },
   statNumber: {
-    fontSize: moderateScale(18),
+    fontSize: scale(18),
     fontWeight: "bold",
     color: Colors.labelBlack,
   },
   statLabel: {
     color: "#888",
-    fontSize: moderateScale(12),
+    fontSize: scale(12),
     fontWeight: "400",
   },
   predictionsHeader: {
-    fontSize: moderateScale(18),
+    fontSize: scale(18),
     fontWeight: "bold",
-    paddingHorizontal: moderateScale(16),
+    paddingHorizontal: 16,
     paddingTop: verticalScale(14),
     paddingBottom: verticalScale(10),
     color: Colors.labelBlack,
   },
   cardContainer: {
-    paddingHorizontal: moderateScale(16),
+    paddingHorizontal: 16,
     paddingVertical: verticalScale(8),
   },
   card: {
-    padding: moderateScale(16),
+    padding: 16,
     borderRadius: moderateScale(8),
     backgroundColor: "#f9f9f9",
     borderWidth: 1,
@@ -642,7 +641,7 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   labelStyle: {
-    fontSize: 16,
+    fontSize: scale(16),
     fontWeight: "500",
     textTransform: "none",
   },
