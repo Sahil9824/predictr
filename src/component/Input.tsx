@@ -18,6 +18,7 @@ import {
   useState,
 } from "react";
 import { Images } from "../assets/images";
+import { scale } from "../../helper";
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderColor: Colors.lightGrey,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
   },
   input: {
     flex: 1,
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   icon: {
-    height: 16,
-    width: 16,
+    height: scale(16),
+    width: scale(16),
   },
 });

@@ -83,4 +83,10 @@ export const Images = {
   ProfileInac: require("./ProfileInac.png"),
   Lead: require("./Lead.png"),
   LeadInac: require("./LeadInac.png"),
+  FlareLeft: require("./FlareLeft.png"),
+  FlareRight: require("./FlareRight.png"),
+  LeadEmpty: require("./LeadEmpty.png"),
+  userPredEmp: require("./userPredEmp.png"),
+  close: require("./Close.png"),
+  CloseGrey: require("./CloseGrey.png"),
 };

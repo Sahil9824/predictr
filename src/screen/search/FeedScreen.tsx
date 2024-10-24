@@ -13,14 +13,9 @@ const data = [
 const FeedScreen = () => {
   return (
     <FlatList
-      ListHeaderComponent={
-        <>
-          <View style={{ paddingHorizontal: 16 }}></View>
-        </>
-      }
       data={data}
       renderItem={({ item, index }) => (
-        <View style={{ paddingHorizontal: 16 }}>
+        <View style={{ paddingHorizontal: 8, paddingTop: 16 }}>
           <PredictionCard index={item.index} key={index} />
         </View>
       )}

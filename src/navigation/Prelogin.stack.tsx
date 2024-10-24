@@ -7,9 +7,7 @@ import CreateAccount from "../screen/onboarding/CreateAccount";
 import Login from "../screen/onboarding/Login";
 import ResetPassword from "../screen/onboarding/ResetPassword";
 import SetNewPassword from "../screen/onboarding/SetNewPassword";
-import SelectAvatar from "../screen/onboarding/SelectAvatar";
-import FeedSetup from "../screen/onboarding/FeedSetup";
-import DashBoard from "../screen/home/DashBoard";
+
 import { SCREENS } from "../constant/navigation.constants";
 
 const Stack = createNativeStackNavigator();

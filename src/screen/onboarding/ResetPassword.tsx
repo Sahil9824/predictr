@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     fontSize: scale(32),
     fontWeight: "800",
     color: Colors.textBlack,
+    letterSpacing: scale(32) * -0.02,
   },
   subTitle: {
     marginTop: scale(8),

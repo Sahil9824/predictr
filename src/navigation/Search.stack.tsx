@@ -15,14 +15,25 @@ import { Images } from "../assets/images";
 import { scale } from "../../helper";
 import { SCREENS } from "../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icons from "../component/Icons";
+import { ICONS } from "../constant/icons.constants";
+import { useRoute } from "@react-navigation/native";
 
 const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [index, setIndex] = useState(0);
+
   const [routes] = useState([
     { key: "feeds", title: "Feeds" },
     { key: "predictors", title: "Predictors" },
   ]);
+
+  const route = useRoute().params;
+  const backRoute = route?.previousScreen
+    ? route?.previousScreen
+    : SCREENS.HOME;
+
+  console.log(route, "namam");
 
   const renderScene = SceneMap({
     feeds: FeedScreen,
@@ -31,25 +42,23 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <>
-      {/* Search Box with Icon and Cancel Button */}
       <SafeAreaView
         style={{ flex: 1, backgroundColor: "white" }}
         edges={["left", "right", "top"]}
       >
         <View style={styles.searchContainer}>
           <View style={styles.searchBoxContainer}>
-            <Image
-              source={Images.headerSearch}
-              style={{ height: scale(18), width: scale(18), marginLeft: 10 }}
-            />
+            <Icons type={ICONS.HEAD_SEARCH} />
+
             <TextInput
               style={styles.searchBox}
               placeholder=""
               value={searchQuery}
               onChangeText={(text) => setSearchQuery(text)}
+              autoFocus
             />
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate(SCREENS.HOME)}>
+          <TouchableOpacity onPress={() => navigation.navigate(backRoute)}>
             <Text style={styles.cancelButton}>Cancel</Text>
           </TouchableOpacity>
         </View>
@@ -86,7 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 3,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
     backgroundColor: "#fff",
     paddingTop: 12,
   },
@@ -99,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     paddingVertical: 2,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
   },
   searchBox: {
     flex: 1,

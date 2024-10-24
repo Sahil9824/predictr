@@ -6,13 +6,15 @@ import {
   StyleSheet,
   Modal,
   TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
-import { Colors } from "../constant";
+import { Colors, fonts } from "../constant";
 import { ICONS } from "../constant/icons.constants";
 import Icons from "./Icons";
 import { scale } from "../../helper";
+import Button from "./Button";
 
 const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
   const [currentDate, setCurrentDate] = useState(
@@ -115,6 +117,7 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
         transparent={true}
         animationType="slide"
         onRequestClose={() => setIsYearPickerVisible(false)}
+        statusBarTranslucent
       >
         <TouchableWithoutFeedback onPress={() => setIsYearPickerVisible(false)}>
           <View style={styles.modalBackground}>
@@ -163,36 +166,32 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          marginBottom: 10,
         }}
       >
         <Text style={styles.title}>Pick a Date</Text>
-        <TouchableOpacity
-          style={{ paddingHorizontal: 10 }}
-          onPress={closeBottomSheet}
-        >
-          <View style={{ paddingEnd: 5, alignItems: "center" }}>
-            <Icons type={ICONS.CLOSE} onClick={closeBottomSheet} />
-          </View>
+        <TouchableOpacity onPress={closeBottomSheet}>
+          <Icons type={ICONS.CLOSE} onClick={closeBottomSheet} />
         </TouchableOpacity>
       </View>
 
       <View style={styles.header}>
         {/* Month and Year Text */}
         <TouchableOpacity
-          style={{ flexDirection: "row" }}
+          style={{ flexDirection: "row", alignItems: "center" }}
           onPress={() => setIsYearPickerVisible(true)}
         >
           <Text style={styles.monthText}>
             {months[currentDate.month()]} {selectedYear}
           </Text>
-          <Icons type={ICONS.NEXT} />
+          <Icons type={ICONS.CAL_CHANGE} />
         </TouchableOpacity>
 
         {/* Month Navigation Arrows */}
         <View style={styles.arrowContainer}>
           <TouchableWithoutFeedback
             onPress={() => changeMonth(-1)}
-            style={styles.arrow}
+            style={{ ...styles.arrow, transform: [{ rotate: "180deg" }] }}
           >
             <Icons type={ICONS.PREVIOUS} />
           </TouchableWithoutFeedback>
@@ -218,16 +217,13 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
       {/* Days */}
       <View style={styles.daysContainer}>{renderDays()}</View>
 
-      <TouchableOpacity
-        style={[
-          styles.saveButton,
-          !selectedDate ? styles.disabledSaveButton : null,
-        ]}
+      <Button
+        text="Save"
+        style={{ marginTop: 12 }}
         onPress={handleSave}
-        disabled={!selectedDate}
-      >
-        <Text style={styles.saveButtonText}>Save</Text>
-      </TouchableOpacity>
+        inActive={!selectedDate}
+      />
+
       {renderYearPicker()}
     </View>
   );
@@ -236,26 +232,24 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 5,
-    backgroundColor: "#fff",
   },
   title: {
-    fontSize: scale(16),
-    fontWeight: "600",
+    fontFamily: fonts.f700,
+    fontSize: scale(17),
+    fontWeight: "700",
     textAlign: "left",
-    marginBottom: 10,
     color: Colors.labelBlack,
-    paddingStart: 11,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
     justifyContent: "space-between",
-    paddingStart: 10,
     marginTop: 15,
   },
   monthText: {
-    fontSize: scale(15),
+    fontFamily: fonts.f600,
+    fontSize: scale(17),
     fontWeight: "600",
     marginEnd: 8,
     color: "#000000",
@@ -263,14 +257,14 @@ const styles = StyleSheet.create({
   arrowContainer: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 28,
   },
   arrow: {
-    paddingHorizontal: 5,
     justifyContent: "center",
   },
   weekDaysContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     marginBottom: 8,
   },
   weekDay: {
@@ -283,12 +277,11 @@ const styles = StyleSheet.create({
   daysContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
-    paddingHorizontal: 5,
+    gap: "10%",
   },
   day: {
-    width: scale(41.5),
-    height: scale(41.5),
+    width: 44,
+    height: 44,
     alignItems: "center",
     justifyContent: "center",
     margin: scale(3),

@@ -1,5 +1,6 @@
 import {
   Animated,
+  Dimensions,
   FlatList,
   Image,
   Platform,
@@ -32,6 +33,9 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 import ShareCard from "../../component/ShareCard";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Carousel from "react-native-reanimated-carousel";
+
+const { width: screenWidth } = Dimensions.get("window");
 
 const HeaderOptions = ({
   isSelected,
@@ -48,20 +52,27 @@ const HeaderOptions = ({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+        borderBottomColor: "#E7E7E7",
+        borderBottomWidth: 1,
         paddingHorizontal: scale(16),
         ...style,
       }}
     >
-      <View style={{ flexDirection: "row", height: scale(50) }}>
+      <View style={{ flexDirection: "row" }}>
         {/* My Feed Pressable */}
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
-            { width: scale(100), justifyContent: "center" },
+            {
+              justifyContent: "center",
+              paddingHorizontal: 16,
+              paddingVertical: 12,
+            },
             isSelected === 0 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-              height: scale(50),
+
+              // height: scale(50),
             },
           ]}
         >
@@ -89,11 +100,14 @@ const HeaderOptions = ({
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
-            { width: scale(90), justifyContent: "center" },
+            {
+              justifyContent: "center",
+              paddingHorizontal: 16,
+              paddingVertical: 12,
+            },
             isSelected === 1 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-              height: scale(50),
             },
           ]}
         >
@@ -120,11 +134,14 @@ const HeaderOptions = ({
         <Pressable
           onPress={() => setIsSelected(2)}
           style={[
-            { width: scale(95), justifyContent: "center" },
+            {
+              justifyContent: "center",
+              paddingHorizontal: 16,
+              paddingVertical: 12,
+            },
             isSelected === 2 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: 3,
-              height: scale(50),
             },
           ]}
         >
@@ -170,7 +187,9 @@ const HeaderOptions = ({
 const DashBoard = () => {
   const contestDetailsRef = useRef(null);
   const filterCardRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
+  const [winnerHeight, setWinnerHeight] = useState(0);
   const [filteredOptions, setFilteredOptions] = useState(null);
   const navigation = useNavigation();
   const scrollY = new Animated.Value(0);
@@ -181,7 +200,7 @@ const DashBoard = () => {
   });
   const animatedOpac = scrollY.interpolate({
     outputRange: [0, 1],
-    inputRange: [495, 500],
+    inputRange: [500, 500],
     extrapolate: "clamp",
   });
 
@@ -237,7 +256,7 @@ const DashBoard = () => {
   };
 
   const openContestDetails = () => {
-    contestDetailsRef.current?.present();
+    contestDetailsRef?.current?.present();
   };
 
   const openFilterCard = () => {
@@ -274,7 +293,7 @@ const DashBoard = () => {
             <TouchableOpacity onPress={onSearchPress}>
               <Image
                 source={Images.headerSearch}
-                style={{ height: scale(22), width: scale(22) }}
+                style={{ height: scale(18), width: scale(18) }}
               />
             </TouchableOpacity>
           </View>
@@ -288,11 +307,53 @@ const DashBoard = () => {
               }
             )}
           >
-            <View style={{ paddingHorizontal: 16 }}>
-              <WinnerCard
-                openBottomSheet={openContestDetails}
-                setIsSelected={setIsSelected}
+            <View
+              style={{
+                paddingHorizontal: 8,
+                alignItems: "center",
+                position: "relative",
+              }}
+            >
+              <Carousel
+                pagingEnabled={true}
+                loop={true}
+                width={screenWidth}
+                height={winnerHeight}
+                snapEnabled={true}
+                onSnapToItem={(index) => setActiveIndex(index)}
+                panGestureHandlerProps={{
+                  activeOffsetX: [-10, 10],
+                }}
+                data={[
+                  { id: 1, name: "Winner 1" },
+                  { id: 2, name: "Winner 2" },
+                ]}
+                renderItem={({ index }) => (
+                  <WinnerCard
+                    setWinnerHeight={setWinnerHeight}
+                    openBottomSheet={openContestDetails}
+                    setIsSelected={setIsSelected}
+                    style={{ marginHorizontal: 8 }}
+                  />
+                )}
               />
+
+              <View style={styles.paginationContainer}>
+                {[
+                  { id: 1, name: "Winner 1" },
+                  { id: 2, name: "Winner 2" },
+                ].map((_, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={[
+                      styles.dot,
+                      activeIndex === index
+                        ? styles.activeDot
+                        : styles.inactiveDot,
+                    ]}
+                  />
+                ))}
+              </View>
             </View>
 
             <HeaderOptions
@@ -301,12 +362,14 @@ const DashBoard = () => {
               openFilter={openFilterCard}
               filteredOptions={filteredOptions}
               handleLayout={handleLayout}
+              style={{ marginBottom: 12 }}
             />
 
             {(isSelected === 1 || isSelected === 0) &&
               [1, 2, 3, 4].map((item) => (
-                <View style={{ paddingHorizontal: 16 }} key={item}>
+                <View style={{ paddingHorizontal: 8 }} key={item}>
                   <PredictionCard
+                    isFollowBtn={isSelected === 1}
                     index={item}
                     // isFavorited={item.isFavorited}
                     // onFavoritePress={() => toggleFavorite(item.id)}
@@ -344,6 +407,7 @@ const DashBoard = () => {
         ref={filterCardRef}
         onFilterReset={handleFilterReset}
         isReset={isReset}
+        setFilteredOptions={setFilteredOptions}
       />
     </>
   );
@@ -396,5 +460,30 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "lightgrey",
+  },
+
+  paginationContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10,
+    position: "absolute",
+    left: "50%",
+    right: "50%",
+    bottom: 20,
+  },
+
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginHorizontal: 2,
+    backgroundColor: "white",
+    opacity: 0.5,
+  },
+  activeDot: {
+    opacity: 1,
+  },
+  inactiveDot: {
+    backgroundColor: "gray",
   },
 });

@@ -212,10 +212,11 @@ const styles = StyleSheet.create({
   },
 
   sectionHeader: {
-    fontSize: scale(14),
+    fontSize: 14,
     fontWeight: "400",
     fontFamily: fonts.f400,
-    marginVertical: 8,
+    marginTop: 15,
+    marginBottom: 8,
     color: "#717272",
   },
 
@@ -240,8 +241,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "red",
     position: "absolute",
-    top: 0,
-    right: 0,
+    top: -3,
+    right: -3,
   },
   notificationText: {
     fontSize: 14,

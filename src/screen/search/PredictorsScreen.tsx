@@ -6,10 +6,14 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
 import { Images } from "../../assets/images";
 import { scale } from "../../../helper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../../constant/navigation.constants";
 
 const mockData = [
   { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
@@ -20,25 +24,37 @@ const mockData = [
 ];
 
 const PredictorsScreen = () => {
+  const navigation = useNavigation();
   const renderItem = ({ item }) => {
     return (
       <>
         <View style={styles.itemContainer} key={item.id}>
           {/* Avatar */}
-          <Image
-            source={Images.avatar6}
+
+          <Pressable
             style={{
-              height: scale(40),
-              width: scale(40),
-              borderRadius: 8,
-              marginRight: 8,
+              flexDirection: "row",
+              flex: 1,
             }}
-          />
-          {/* Name and Accuracy */}
-          <View style={styles.detailsContainer}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.accuracy}>{item.accuracy} Accurate</Text>
-          </View>
+            onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
+          >
+            <>
+              <Image
+                source={Images.avatar6}
+                style={{
+                  height: scale(40),
+                  width: scale(40),
+                  borderRadius: 8,
+                  marginRight: 8,
+                }}
+              />
+              {/* Name and Accuracy */}
+              <View style={styles.detailsContainer}>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.accuracy}>{item.accuracy} Accurate</Text>
+              </View>
+            </>
+          </Pressable>
           {/* Follow Button */}
           <TouchableOpacity>
             <Text style={styles.followButtonText}>Follow</Text>
@@ -80,12 +96,13 @@ const styles = StyleSheet.create({
   accuracy: {
     fontSize: 14,
     color: "#666",
-    marginTop: 4,
+    marginTop: 2,
   },
   followButtonText: {
     color: "#024BAC",
     fontWeight: "800",
     fontSize: 14,
+    marginLeft: 12,
   },
   divider: {
     height: 1,

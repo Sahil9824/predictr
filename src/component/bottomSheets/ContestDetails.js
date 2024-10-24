@@ -29,11 +29,12 @@ const ContestDetails = forwardRef((props, ref) => {
 
   const closeBottomSheet = () => {
     ref.current?.close();
+    scoringRef?.current?.close();
   };
 
   const handleScoringPress = () => {
     ref.current?.close();
-    scoringRef.current.present();
+    scoringRef?.current?.present();
   };
 
   const renderBackdrop = (props) => (
@@ -219,6 +220,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
+    paddingBottom: 5,
   },
 
   subText: {

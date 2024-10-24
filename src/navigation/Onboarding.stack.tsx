@@ -31,18 +31,7 @@ const OnboardingStack = () => (
       component={FeedSetup}
       options={{ headerShown: false }}
     />
-    <Stack.Screen
-      name={SCREENS.HOME}
-      component={DashBoard}
-      options={{ headerShown: false }}
-    />
   </Stack.Navigator>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default OnboardingStack;

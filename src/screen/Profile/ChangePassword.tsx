@@ -39,15 +39,15 @@ const ChangePassword = ({ navigation }) => {
   }, [passwordRef.current?.value, confirmPasswordRef.current?.value]);
 
   const passwordValidation = () => {
-    if (!passwordRef.current?.value) {
-      setPasswordErr("");
-      return false;
-    } else if (!regex.password.test(passwordRef.current?.value)) {
-      setPasswordErr(errorMsg.password);
-      return false;
-    }
+    // if (!passwordRef.current?.value) {
+    //   setPasswordErr("");
+    //   return false;
+    // } else if (!regex.password.test(passwordRef.current?.value)) {
+    //   setPasswordErr(errorMsg.password);
+    //   return false;
+    // }
 
-    setPasswordErr("");
+    // setPasswordErr("");
     return true;
   };
 
@@ -69,7 +69,7 @@ const ChangePassword = ({ navigation }) => {
       setCnfValidText("");
       return;
     }
-    if (confirmPasswordRef.current?.value === passwordRef.current?.value) {
+    if (confirmPasswordRef.current?.value === newPasswordRef.current?.value) {
       setcnfPasswordErr("");
       setCnfValidText(errorMsg.passwordMatch);
       return true;
@@ -100,46 +100,44 @@ const ChangePassword = ({ navigation }) => {
           <Text style={styles.menuText}>Change Password</Text>
         </View>
 
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
-          <View style={styles.containerBox}>
-            <Icons type={ICONS.CHANGE_PASS} />
-            <View style={{ marginTop: 50, width: "100%" }}>
-              <Input
-                label="Current password"
-                password={true}
-                error={passwordErr}
-                ref={passwordRef}
-                onSubmitEditing={() => passwordRef?.current?.focus()}
-                blurOnSubmit={false}
-                onBlur={passwordOnBlur}
-              />
-              <Input
-                label="New password"
-                password={true}
-                error={newPasswordErr}
-                ref={newPasswordRef}
-                onSubmitEditing={() => newPasswordRef?.current?.focus()}
-                blurOnSubmit={false}
-                onBlur={passwordOnBlur}
-              />
-              <Input
-                label="Re-enter new password"
-                password={true}
-                error={cnfPasswordErr}
-                ref={confirmPasswordRef}
-                onBlur={passwordOnBlur}
-                rightText={cnfValidText}
-              />
-            </View>
-            <Button
-              onPress={() => {
-                navigation.navigate(SCREENS.MENU);
-              }}
-              style={{ marginTop: "auto" }}
-              text="Save Changes"
-              inActive={disabled}
+        <ScrollView contentContainerStyle={styles.containerBox}>
+          <Icons type={ICONS.CHANGE_PASS} />
+          <View style={{ marginTop: 50, width: "100%" }}>
+            <Input
+              label="Current password"
+              password={true}
+              // error={passwordErr}
+              ref={passwordRef}
+              onSubmitEditing={() => passwordRef?.current?.focus()}
+              blurOnSubmit={false}
+              onBlur={passwordOnBlur}
+            />
+            <Input
+              label="New password"
+              password={true}
+              error={newPasswordErr}
+              ref={newPasswordRef}
+              onSubmitEditing={() => newPasswordRef?.current?.focus()}
+              blurOnSubmit={false}
+              onBlur={passwordOnBlur}
+            />
+            <Input
+              label="Re-enter new password"
+              password={true}
+              error={cnfPasswordErr}
+              ref={confirmPasswordRef}
+              onBlur={passwordOnBlur}
+              rightText={cnfValidText}
             />
           </View>
+          <Button
+            onPress={() => {
+              navigation.navigate(SCREENS.MENU);
+            }}
+            style={{ marginTop: "auto" }}
+            text="Save Changes"
+            inActive={disabled}
+          />
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -156,6 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 16,
+    // paddingTop: 500,
   },
   header: {
     flexDirection: "row",
@@ -163,6 +162,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#00000020",
+    marginBottom: 34,
   },
   menuText: {
     fontFamily: fonts.f600,

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { View, TextInput, Image, StyleSheet } from "react-native";
 import Icons from "./Icons";
 import { Images } from "../assets/images";
 import { ICONS } from "../constant/icons.constants";
 
-const CommentInput = ({}) => {
+const CommentInput = forwardRef(({ isReply }, ref) => {
   return (
     <View style={styles.container}>
       {/* Left Icon */}
@@ -12,10 +12,12 @@ const CommentInput = ({}) => {
 
       {/* Text Input */}
       <TextInput
+        ref={ref}
         placeholder="Enter comment..."
         style={styles.input}
         placeholderTextColor="#999"
         multiline
+        // autoFocus={isReply}
       />
 
       {/* Right Icon */}
@@ -24,7 +26,7 @@ const CommentInput = ({}) => {
       </View>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

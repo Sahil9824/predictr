@@ -57,7 +57,24 @@ const MenuScreen = ({ navigation }) => {
       title: "Logout",
       icon: <Icons type={ICONS.LOGOUT} />,
 
-      onPress: () => Alert.alert("Logout?", "Are you sure want to logout?"),
+      onPress: () =>
+        Alert.alert(
+          "Logout?",
+          "Are you sure you want to logout?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+            {
+              text: "Logout",
+              onPress: () => console.log("Logout Pressed"),
+              style: "destructive",
+            },
+          ],
+          { cancelable: true }
+        ),
     },
   ];
 

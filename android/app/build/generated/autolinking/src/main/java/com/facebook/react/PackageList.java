@@ -22,6 +22,8 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-image-crop-picker
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
+// react-native-linear-gradient
+import com.BV.LinearGradient.LinearGradientPackage;
 // react-native-navigation-bar-color
 import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
 // react-native-pager-view
@@ -87,6 +89,7 @@ public class PackageList {
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
       new PickerPackage(),
+      new LinearGradientPackage(),
       new NavigationBarColorPackage(),
       new PagerViewPackage(),
       new RNPermissionsPackage(),

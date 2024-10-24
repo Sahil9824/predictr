@@ -157,6 +157,30 @@
         }
       }
     },
+    "react-native-linear-gradient": {
+      "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-linear-gradient",
+      "name": "react-native-linear-gradient",
+      "platforms": {
+        "ios": {
+          "podspecPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-linear-gradient/BVLinearGradient.podspec",
+          "version": "2.8.3",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-linear-gradient/android",
+          "packageImportPath": "import com.BV.LinearGradient.LinearGradientPackage;",
+          "packageInstance": "new LinearGradientPackage()",
+          "buildTypes": [],
+          "componentDescriptors": [],
+          "cmakeListsPath": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-linear-gradient/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
     "react-native-navigation-bar-color": {
       "root": "/Users/Sahil/Documents/GitHub/predictr/node_modules/react-native-navigation-bar-color",
       "name": "react-native-navigation-bar-color",
@@ -582,7 +606,8 @@
         },
         {
           "name": "--terminal <string>",
-          "description": "Launches the Metro Bundler in a new window using the specified terminal path."
+          "description": "Launches the Metro Bundler in a new window using the specified terminal path.",
+          "default": "vscode"
         },
         {
           "name": "--binary-path <string>",
@@ -741,7 +766,8 @@
         },
         {
           "name": "--terminal <string>",
-          "description": "Launches the Metro Bundler in a new window using the specified terminal path."
+          "description": "Launches the Metro Bundler in a new window using the specified terminal path.",
+          "default": "vscode"
         },
         {
           "name": "--appId <string>",
@@ -814,7 +840,7 @@
     "android": {}
   },
   "assets": [
-    "./src/assets/fonts"
+    "./src/assets/fonts/"
   ],
   "project": {
     "ios": {

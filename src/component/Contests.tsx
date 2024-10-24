@@ -21,16 +21,10 @@ import { SCREENS } from "../constant/navigation.constants";
 import RNPickerSelect from "react-native-picker-select";
 
 const dummyDates = [
-  { label: "August 24", value: "August 24" },
-  { label: "July 30", value: "July 30" },
-  { label: "June 11", value: "June 11" },
-  { label: "June 5", value: "June 5" },
-  { label: "June 21", value: "June 21" },
-  { label: "June 22", value: "June 22" },
-  { label: "June 23", value: "June 23" },
-  { label: "June 24", value: "June 24" },
-  { label: "June 25", value: "June 25" },
-  { label: "June 26", value: "June 26" },
+  { label: "August 2024 (Ongoing)", value: "August 24" },
+  { label: "July 2024", value: "July 30" },
+  { label: "June 2024", value: "June 11" },
+  { label: "June 2024", value: "June 5" },
 ];
 
 const dummyUsers = [
@@ -39,43 +33,50 @@ const dummyUsers = [
     accuracy: "88%",
     predictionNos: 10,
     rank: 1,
+    participated: true,
   },
   {
     name: "Mandela Nilson",
     accuracy: "54%",
     predictionNos: "06",
     rank: 2,
+    participated: true,
   },
   {
     name: "Bill Tech",
     accuracy: "45%",
     predictionNos: "03",
     rank: 3,
+    participated: true,
   },
 
   {
     name: "Kinyle Jam",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 10,
+    rank: 4,
+    participated: true,
   },
   {
     name: "Kinyle Jam",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 11,
+    rank: 5,
+    participated: true,
   },
   {
     name: "Kinyle Jam",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 12,
+    rank: 6,
+    participated: true,
   },
   {
     name: "Kinyle Jam",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 13,
+    rank: 7,
+    participated: true,
   },
   {
     isUser: true,
@@ -83,7 +84,7 @@ const dummyUsers = [
     name: "Userslef Self",
     accuracy: "13%",
     predictionNos: "02",
-    rank: 14,
+    rank: 8,
   },
   {
     isUser: true,
@@ -91,23 +92,23 @@ const dummyUsers = [
     name: "Userslef Self",
     accuracy: "13%",
     predictionNos: "00",
-    rank: 15,
+    rank: 9,
   },
   {
     isUser: false,
-    participated: false,
+    participated: true,
     name: "Userslef Self",
     accuracy: "13%",
     predictionNos: "00",
-    rank: 16,
+    rank: 10,
   },
   {
     isUser: false,
-    participated: false,
+    participated: true,
     name: "Userslef Self",
     accuracy: "13%",
     predictionNos: "00",
-    rank: 17,
+    rank: 11,
   },
 ];
 
@@ -136,11 +137,11 @@ const Contests = ({ openBottomSheet }) => {
         ]}
       >
         <View style={styles.textBox}>
-          {rank === 1 && <Icons type={ICONS.GOLD} />}
-          {rank === 2 && <Icons type={ICONS.SILVER} />}
-          {rank === 3 && <Icons type={ICONS.BRONZE} />}
+          {rank === 1 && <Icons type={ICONS.GOLD} width={scale(28)} />}
+          {rank === 2 && <Icons type={ICONS.SILVER} width={scale(28)} />}
+          {rank === 3 && <Icons type={ICONS.BRONZE} width={scale(28)} />}
           {rank > 3 && participated && (
-            <View style={{ width: 28, alignItems: "center" }}>
+            <View style={{ width: scale(28), alignItems: "center" }}>
               <Text
                 style={{
                   fontFamily: fonts.f600,
@@ -154,7 +155,7 @@ const Contests = ({ openBottomSheet }) => {
             </View>
           )}
           {rank > 3 && !participated && (
-            <View style={{ width: 28, alignItems: "center" }}>
+            <View style={{ width: scale(28), alignItems: "center" }}>
               <Text
                 style={{
                   fontFamily: fonts.f600,
@@ -170,9 +171,9 @@ const Contests = ({ openBottomSheet }) => {
 
           <View
             style={{
-              height: 32,
-              width: 32,
-              borderRadius: 8,
+              height: scale(32),
+              width: scale(32),
+              borderRadius: scale(8),
               overflow: "hidden",
             }}
           >
@@ -212,7 +213,7 @@ const Contests = ({ openBottomSheet }) => {
                     </Text>
                   ))}
               </View>
-              <Text style={styles.subName}>{accuracy}Accurate</Text>
+              <Text style={styles.subName}>{accuracy} Accurate</Text>
             </View>
             <Text style={styles.no}>{predictionNos}</Text>
           </View>
@@ -274,7 +275,7 @@ const Contests = ({ openBottomSheet }) => {
         <View style={styles.tableBox}>
           <View style={styles.tableBoxIn}>
             <Icons type={ICONS.HASH} />
-            <Text style={{ ...styles.predictText, marginLeft: 12 }}>
+            <Text style={{ ...styles.predictText, marginLeft: scale(12) }}>
               Predictors
             </Text>
           </View>
@@ -314,7 +315,8 @@ const styles = StyleSheet.create({
   header: {
     width: "100%",
     backgroundColor: "#F6F6F6",
-    padding: 16,
+    paddingRight: 16,
+    paddingLeft: 6,
     paddingVertical: Platform.OS === "ios" ? 16 : 0,
     borderWidth: 1,
     borderColor: "#E7E7E7",
@@ -346,7 +348,7 @@ const styles = StyleSheet.create({
   },
 
   table: {
-    marginTop: scale(10),
+    // marginTop: scale(10),
     // flex: 1,
   },
 
@@ -357,6 +359,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "30%",
     paddingHorizontal: 39,
+    paddingBottom: "60%",
   },
 
   noWinText: {
@@ -383,7 +386,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderBottomColor: "#E7E7E7",
-    paddingVertical: scale(10),
+    paddingVertical: 10,
     paddingHorizontal: 16,
   },
 
@@ -418,7 +421,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f600,
     fontSize: scale(13),
     color: "#151B26",
-    marginTop: 11,
     fontWeight: "600",
   },
 
@@ -430,7 +432,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E7E7E7",
     flex: 1,
     marginLeft: -4,
-    paddingBottom: scale(16),
+    paddingBottom: 11,
     marginTop: 11,
   },
 

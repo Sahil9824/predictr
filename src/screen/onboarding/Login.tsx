@@ -25,7 +25,7 @@ const Login = ({ navigation }: any) => {
 
   const emailRef = useRef<Iref>(null);
   const passwordRef = useRef<Iref>(null);
-  const { setIsAuthenticated } = userStore();
+  const { setIsAuthenticated, setIsOnboarded } = userStore();
 
   const emailValidation = () => {
     if (!emailRef.current?.value) {
@@ -65,7 +65,7 @@ const Login = ({ navigation }: any) => {
     }
 
     setIsAuthenticated(true);
-    navigation.navigate(SCREENS.HOME);
+    setIsOnboarded(true);
   };
 
   useLayoutEffect(() => {
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     fontSize: scale(32),
     color: Colors.textBlack,
     fontWeight: "800",
+    letterSpacing: scale(32) * -0.02,
   },
   inputContainer: {
     marginVertical: scale(30),

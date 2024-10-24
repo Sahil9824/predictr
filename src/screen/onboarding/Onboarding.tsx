@@ -73,12 +73,11 @@ const Onboarding = ({ navigation }: any) => {
             style={styles.image}
             resizeMode="contain"
           />
+          <Text style={styles.subTitle}>
+            {"Prizes for top three predictors "}
+          </Text>
+          <Text style={styles.subTitle}>{"every month."}</Text>
         </View>
-
-        <Text style={styles.subTitle}>
-          {"Prizes for top three predictors "}
-        </Text>
-        <Text style={styles.subTitle}>{"every month."}</Text>
 
         <View style={styles.signInContainer}>
           <Pressable
@@ -139,12 +138,12 @@ const styles = StyleSheet.create({
     marginBottom: scale(10),
   },
   titleText: {
-    fontSize: scale(34),
     fontFamily: fonts.f800,
-    lineHeight: scale(40),
+    fontSize: scale(34),
     fontWeight: "800",
     color: Colors.white,
     textAlign: "center",
+    letterSpacing: scale(34) * -0.02,
   },
   subTitle: {
     fontFamily: fonts.f400,
@@ -161,11 +160,13 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: scale(100),
+    marginBottom: 12,
   },
   signInContainer: {
     marginTop: "auto", //60,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 20,
   },
   signIn: {
     height: scale(50),

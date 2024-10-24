@@ -14,7 +14,10 @@ import {
 import { scale, verticalScale, moderateScale } from "../../helper";
 import { Images } from "../assets/images";
 import { Colors, fonts } from "../constant";
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+} from "@gorhom/bottom-sheet";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -29,9 +32,9 @@ const HowToPredictScreen = ({ navigation }) => {
   };
 
   // Open the bottom sheet
-  const handleOpenBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.expand();
-  }, []);
+  const handleOpenBottomSheet = () => {
+    bottomSheetRef?.current?.present();
+  };
 
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
@@ -49,7 +52,13 @@ const HowToPredictScreen = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.header}>
-              <TouchableOpacity onPress={handleBackPress}>
+              <TouchableOpacity
+                style={{
+                  paddingRight: 10,
+                  paddingVertical: 5,
+                }}
+                onPress={handleBackPress}
+              >
                 <Image
                   source={Images.back}
                   style={{ width: scale(20), height: scale(20) }}
@@ -65,12 +74,12 @@ const HowToPredictScreen = ({ navigation }) => {
             {/* Pick a Stock */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>1. Pick a stock</Text>
-              <TouchableOpacity style={styles.inputContainer}>
+              <View style={styles.inputContainer}>
                 <Image source={Images.think} style={styles.emojiIcon} />
                 <Text style={styles.inputText}>I think</Text>
                 <Text style={styles.placeHolder}>Select Stock</Text>
                 <Image style={{ marginEnd: 5 }} source={Images.Chevron_down} />
-              </TouchableOpacity>
+              </View>
             </View>
 
             {/* Set Movement */}
@@ -81,23 +90,23 @@ const HowToPredictScreen = ({ navigation }) => {
                   Select how much you think it will move and the direction.
                 </Text>
               </View>
-              <TouchableOpacity style={styles.inputContainer}>
+              <View style={styles.inputContainer}>
                 <Image source={Images.Chart} style={styles.icon} />
                 <Text style={styles.inputText}>Will go</Text>
                 <Text style={styles.placeHolder}>Set Movement</Text>
                 <Image style={{ marginEnd: 5 }} source={Images.Chevron_down} />
-              </TouchableOpacity>
+              </View>
             </View>
 
             {/* Select End Date */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>3. Select end date</Text>
-              <TouchableOpacity style={styles.inputContainer}>
+              <View style={styles.inputContainer}>
                 <Image source={Images.Calendar} style={styles.icon} />
                 <Text style={styles.inputText}>By</Text>
                 <Text style={styles.placeHolder}>Pick a Date </Text>
                 <Image style={{ marginEnd: 5 }} source={Images.Chevron_down} />
-              </TouchableOpacity>
+              </View>
             </View>
 
             {/* Scoring System Link */}
@@ -106,7 +115,7 @@ const HowToPredictScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={{
                   alignSelf: "flex-start",
-                  marginStart: 14,
+                  marginStart: scale(19),
                   borderBottomWidth: 1,
                   borderBottomColor: "#024BAC",
                 }}
@@ -124,32 +133,33 @@ const HowToPredictScreen = ({ navigation }) => {
             </TouchableOpacity>
           </ScrollView>
         </View>
-        <BottomSheet
-          ref={bottomSheetRef}
-          index={-1}
-          enablePanDownToClose
-          backdropComponent={renderBackdrop}
-          snapPoints={snapPoints}
-          handleIndicatorStyle={{
-            width: 65,
-            height: 5,
-            backgroundColor: "#B3B3B3",
-          }}
-          enableHandlePanningGesture={true}
-          enableContentPanningGesture={false}
-        >
-          <ScoringSystemScreen bottomSheetRef={bottomSheetRef} />
-        </BottomSheet>
       </SafeAreaView>
+
+      <BottomSheetModal
+        ref={bottomSheetRef}
+        enablePanDownToClose
+        backdropComponent={renderBackdrop}
+        snapPoints={snapPoints}
+        handleIndicatorStyle={{
+          width: 65,
+          height: 5,
+          backgroundColor: "#B3B3B3",
+        }}
+        enableHandlePanningGesture={true}
+        enableContentPanningGesture={false}
+      >
+        <ScoringSystemScreen bottomSheetRef={bottomSheetRef} />
+      </BottomSheetModal>
     </>
   );
 };
 
 // Scoring System Bottom Sheet
-const ScoringSystemScreen = ({ bottomSheetRef }) => {
-  const handleCloseBottomSheet = useCallback(() => {
+const ScoringSystemScreen = ({ bottomSheetRef, closeBottomSheet }) => {
+  const handleCloseBottomSheet = () => {
     bottomSheetRef?.current?.close();
-  }, [bottomSheetRef]);
+    closeBottomSheet && closeBottomSheet();
+  };
 
   return (
     <View style={styles.modalContainer}>
@@ -174,7 +184,7 @@ const ScoringSystemScreen = ({ bottomSheetRef }) => {
             style={{
               fontWeight: "700",
               color: Colors.textBlack,
-              marginBottom: 10,
+              marginVertical: 10,
               fontSize: scale(14),
             }}
           >
@@ -229,6 +239,7 @@ const ScoringSystemScreen = ({ bottomSheetRef }) => {
               style={{
                 ...styles.tableCell2,
                 color: "#717272",
+                fontStyle: "italic",
                 fontFamily: fonts.f400,
               }}
             >
@@ -286,18 +297,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    marginTop: 16,
+    marginTop: 11,
     flexDirection: "row",
     alignItems: "center",
-    borderBottomWidth: 0.2,
-    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    borderBottomColor: "#0000001A",
     paddingVertical: 10,
     paddingStart: 10,
   },
   headerText: {
     fontSize: scale(18),
     fontWeight: "bold",
-    marginStart: 15,
+    marginStart: 5,
     color: Colors.textBlack,
   },
   subTitle: {
@@ -312,6 +323,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#717272",
     marginBottom: 10,
+    fontWeight: "400",
   },
   section: {
     marginBottom: 8,
@@ -319,12 +331,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   sectionTitle: {
+    fontFamily: fonts.f400,
+    fontWeight: "400",
     fontSize: scale(15),
     marginBottom: 8,
+    color: "#000000",
   },
   sectionTitle2: {
-    fontSize: scale(14),
     marginBottom: 5,
+    fontFamily: fonts.f400,
+    fontWeight: "400",
+    fontSize: scale(15),
+    color: "#000000",
   },
   inputContainer: {
     flexDirection: "row",
@@ -354,14 +372,16 @@ const styles = StyleSheet.create({
   },
   placeHolder: {
     fontSize: scale(15),
-    color: "#A9A9A9",
+    color: "#717272",
     flex: 1,
     textAlign: "left",
     fontWeight: "500",
+    fontFamily: fonts.f500,
+    letterSpacing: -0.2,
   },
   linkText: {
     color: "#024BAC",
-    fontSize: scale(14),
+    fontSize: scale(15),
 
     fontWeight: "700",
     paddingBottom: 2,
@@ -389,7 +409,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 16,
+    marginBottom: 12,
   },
   modalTitle: {
     fontSize: scale(17),
@@ -398,8 +418,9 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: scale(14),
-    marginBottom: 7,
-    color: Colors.labelBlack,
+    color: "#717272",
+    fontFamily: fonts.f400,
+    fontWeight: "400",
   },
   formulaBox: {
     backgroundColor: "#FFF",
@@ -416,7 +437,7 @@ const styles = StyleSheet.create({
   accuracyTable: {
     borderWidth: 1,
     backgroundColor: "#E9F1FC",
-    paddingHorizontal: 6,
+    paddingHorizontal: 12,
     borderColor: "transparent",
     borderRadius: 5,
   },

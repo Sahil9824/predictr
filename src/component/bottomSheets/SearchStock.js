@@ -1,5 +1,9 @@
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
-import React, { useState } from "react";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  useBottomSheetTimingConfigs,
+} from "@gorhom/bottom-sheet";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Modal,
@@ -17,6 +21,7 @@ import { TouchableOpacity } from "react-native";
 import { fonts } from "../../constant";
 import Icons from "../Icons";
 import { ICONS } from "../../constant/icons.constants";
+import { Easing } from "react-native-reanimated";
 
 const stocks = [
   {
@@ -162,7 +167,7 @@ const ListItems = ({ nameAb, name, setSelectedStock, searchBottomRef }) => {
           {name}
         </Text>
       </View>
-      <Icons type={ICONS.RIGHTARR} />
+      <Icons type={ICONS.BLUE_RIGHT} />
     </TouchableOpacity>
   );
 };
@@ -230,13 +235,14 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
 
           <View style={styles.searchBoxContainer}>
             <Image
-              source={Images.headerSearch}
-              style={{ height: scale(18), width: scale(18), marginLeft: 10 }}
+              source={Images.search}
+              style={{ height: 18, width: 18, marginLeft: 16 }}
             />
             <TextInput
               style={styles.searchBox}
               placeholder=""
               onChangeText={handleSearch}
+              autoFocus
             />
           </View>
           <ScrollView
@@ -269,10 +275,11 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
       </BottomSheetModal>
       <Modal
         visible={isModal}
-        animationType="fade"
+        animationType="none"
         transparent={true}
         style={{ backgroundColor: "red" }}
         presentationStyle="overFullScreen"
+        statusBarTranslucent
       >
         <Pressable
           style={{
@@ -291,8 +298,9 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
             <TextInput
               value={modalVal}
               onChangeText={(text) => setModalVal(text)}
-              style={styles.modalInput}
+              style={[styles.modalInput, modalVal && { color: "black" }]}
               placeholder="Enter symbol"
+              placeholderTextColor="#B8B8B8"
             />
 
             <View style={styles.modBot}>
@@ -300,7 +308,7 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
                 style={styles.box}
                 onPress={() => setIsModal(false)}
               >
-                <Text style={styles.canText}>Cancle</Text>
+                <Text style={styles.canText}>Cancel</Text>
               </TouchableOpacity>
               <View
                 style={{
@@ -357,6 +365,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#0000001A",
+
+    fontFamily: fonts.f500,
+    fontWeight: "500",
+    fontSize: 15,
+    color: "#B8B8B8",
   },
 
   box: {

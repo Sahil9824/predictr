@@ -61,6 +61,7 @@ export default function App({ navigation }) {
           fontFamily: fonts.f600,
           fontWeight: "600",
         },
+        tabBarActiveTintColor: "#024BAC",
       })}
     >
       <Tab.Screen name={APP_NAVIGATION.HOME_SCREEN} component={HomeStack} />

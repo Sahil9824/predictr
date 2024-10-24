@@ -10,6 +10,7 @@ import {
   Animated,
   Platform,
   ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
@@ -18,6 +19,7 @@ import { Colors } from "../../constant";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FilterCard from "../../component/FilterCard";
+import { SCREENS } from "../../constant/navigation.constants";
 
 const OtherUserProfile = () => {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -44,8 +46,8 @@ const OtherUserProfile = () => {
   const animatedOpac = scrollY.interpolate({
     outputRange: [0, 1],
     inputRange: [
-      Platform.OS === "ios" ? 305 : 313,
-      Platform.OS === "ios" ? 305 : 313,
+      Platform.OS === "ios" ? 313 : 313,
+      Platform.OS === "ios" ? 313 : 313,
     ],
     extrapolate: "clamp",
   });
@@ -118,37 +120,57 @@ const OtherUserProfile = () => {
                 <View
                   style={{ flexDirection: "row", paddingVertical: scale(10) }}
                 >
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontWeight: "700",
-                        paddingHorizontal: scale(3),
-                        fontSize: scale(14),
-                        color: "#505050",
-                      }}
-                    >
-                      88
-                    </Text>
-                    <Text style={{ fontWeight: "400", fontSize: scale(14) }}>
-                      {" "}
-                      followers
-                    </Text>
-                  </View>
-                  <View style={{ flexDirection: "row", marginStart: 15 }}>
-                    <Text
-                      style={{
-                        fontWeight: "700",
-                        paddingHorizontal: scale(3),
-                        fontSize: scale(14),
-                        color: "#505050",
-                      }}
-                    >
-                      55
-                    </Text>
-                    <Text style={{ fontWeight: "400", fontSize: scale(14) }}>
-                      following
-                    </Text>
-                  </View>
+                  <TouchableWithoutFeedback
+                    onPress={() =>
+                      navigation.navigate(SCREENS.GENERAL_SCREEN, {
+                        title: "Followers",
+                        data: null,
+                        backscreen: SCREENS.OTHER_USER_PROFILE,
+                      })
+                    }
+                  >
+                    <View style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "700",
+                          fontSize: scale(14),
+                          color: "#505050",
+                          marginRight: 4,
+                        }}
+                      >
+                        88
+                      </Text>
+                      <Text style={{ fontWeight: "400", fontSize: scale(14) }}>
+                        followers
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+
+                  <TouchableWithoutFeedback
+                    onPress={() =>
+                      navigation.navigate(SCREENS.GENERAL_SCREEN, {
+                        title: "Followings",
+                        data: null,
+                        backscreen: SCREENS.OTHER_USER_PROFILE,
+                      })
+                    }
+                  >
+                    <View style={{ flexDirection: "row", marginStart: 15 }}>
+                      <Text
+                        style={{
+                          fontWeight: "700",
+                          fontSize: scale(14),
+                          color: "#505050",
+                          marginRight: 4,
+                        }}
+                      >
+                        55
+                      </Text>
+                      <Text style={{ fontWeight: "400", fontSize: scale(14) }}>
+                        followings
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
                 </View>
 
                 <TouchableOpacity
@@ -257,11 +279,32 @@ const OtherUserProfile = () => {
             </View>
 
             {/* FlatList for Predictions */}
-            {data.map((item, index) => (
-              <View style={styles.cardContainer} key={index}>
-                <PredictionCard index={item.index} />
+            {!data ? (
+              data.map((item, index) => (
+                <View style={styles.cardContainer} key={index}>
+                  <PredictionCard index={item.index} />
+                </View>
+              ))
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <View style={{ height: 160, width: 288 }}>
+                  <Image
+                    source={Images.userPredEmp}
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                      resizeMode: "contain",
+                    }}
+                  />
+                </View>
               </View>
-            ))}
+            )}
           </ScrollView>
         </View>
 

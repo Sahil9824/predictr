@@ -96,7 +96,6 @@ const CreateAccount = ({ navigation }: any) => {
       return;
     }
     setIsAuthenticated(true);
-    navigation.navigate(SCREENS.SELECT_AVATAR);
   };
 
   useEffect(() => {
@@ -197,6 +196,7 @@ const styles = StyleSheet.create({
     fontSize: scale(32),
     color: Colors.textBlack,
     fontWeight: "800",
+    letterSpacing: scale(32) * -0.02,
   },
   inputContainer: {
     marginVertical: scale(22),

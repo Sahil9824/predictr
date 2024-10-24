@@ -133,7 +133,9 @@ const LeaderboardScreen = () => {
   const navigation = useNavigation();
 
   const onSearchPress = () => {
-    navigation.navigate(SCREENS.SEARCH);
+    navigation.navigate(SCREENS.SEARCH, {
+      previousScreen: SCREENS.LEADERBOARD,
+    });
   };
 
   const openPicker = () => {
@@ -165,7 +167,7 @@ const LeaderboardScreen = () => {
             <Text style={styles.accuracy}>{item.accuracy}</Text>
           </View>
         </View>
-        <Image source={Images.Chevron_right} />
+        <Icons type={ICONS.BLUE_RIGHT} />
       </View>
     </TouchableWithoutFeedback>
   );
@@ -232,7 +234,7 @@ const LeaderboardScreen = () => {
               style={{
                 paddingHorizontal: 7,
                 fontSize: scale(16),
-                marginLeft: moderateScale(4),
+                marginLeft: 12,
                 color: "#717272",
                 fontWeight: "400",
               }}
@@ -292,9 +294,30 @@ const LeaderboardScreen = () => {
         </View>
 
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          {leaderboardData.map((item, index) => (
-            <RenderEntry item={item} key={index} />
-          ))}
+          {leaderboardData.length ? (
+            leaderboardData.map((item, index) => (
+              <RenderEntry item={item} key={index} />
+            ))
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <View style={{ width: 300, height: 240 }}>
+                <Image
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    resizeMode: "contain",
+                  }}
+                  source={Images.LeadEmpty}
+                />
+              </View>
+            </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -351,7 +374,7 @@ const styles = StyleSheet.create({
     borderColor: "#f0f0f0",
   },
   currentUser: {
-    backgroundColor: "#e0f2ff",
+    backgroundColor: "#E9F1FC",
   },
   rankContainer: {
     flexDirection: "row",

@@ -13,13 +13,13 @@ const App = () => {
     flex: 1,
   };
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
+        <StatusBar
+          barStyle={"dark-content"}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
         <NavigationContainer>
-          <StatusBar
-            barStyle={"dark-content"}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
           <Navigation />
         </NavigationContainer>
       </SafeAreaProvider>

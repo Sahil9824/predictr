@@ -4,18 +4,54 @@ import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
 import { SCREENS } from "../constant/navigation.constants";
 import { useNavigation } from "@react-navigation/native";
+import Icons from "./Icons";
+import { ICONS } from "../constant/icons.constants";
+import LinearGradient from "react-native-linear-gradient";
 
-const WinnerCard = ({ setIsSelected, openBottomSheet }) => {
+const WinnerCard = ({
+  setIsSelected,
+  openBottomSheet,
+  setWinnerHeight,
+  style,
+}) => {
   return (
     <>
       <View
+        onLayout={(event) => {
+          const { height } = event.nativeEvent.layout;
+          setWinnerHeight(height);
+        }}
         style={{
           backgroundColor: Colors.primaryBlue,
-          paddingVertical: scale(30),
+          paddingBottom: 20,
+          paddingTop: 32,
           alignItems: "center",
           borderRadius: scale(24),
+          position: "relative",
+          ...style,
         }}
       >
+        <Image
+          source={Images.FlareLeft}
+          style={{
+            position: "absolute",
+            top: -100,
+            left: -100,
+            width: "100%",
+            height: "100%",
+          }}
+        />
+        <Image
+          source={Images.FlareRight}
+          style={{
+            position: "absolute",
+            top: -50,
+            right: -110,
+            width: "100%",
+            height: "100%",
+          }}
+        />
+
         <Text
           style={{
             fontFamily: fonts.f700,
@@ -52,13 +88,13 @@ const WinnerCard = ({ setIsSelected, openBottomSheet }) => {
           <View
             style={{
               alignItems: "center",
-              alignSelf: "center",
               marginTop: scale(30),
+              justifyContent: "center",
             }}
           >
             <Image
               source={Images.silverTrophy}
-              style={{ height: scale(24), width: scale(27) }}
+              style={{ height: scale(23.7), width: scale(27.14) }}
               resizeMode="contain"
             />
             <Image
@@ -123,68 +159,80 @@ const WinnerCard = ({ setIsSelected, openBottomSheet }) => {
               alignSelf: "auto",
             }}
           >
-            <Image
-              source={Images.goldTrophy}
-              style={{ height: scale(40), width: scale(30) }}
-              resizeMode="contain"
+            <Icons
+              type={ICONS.GOLD_BIG}
+              iconContainerStyle={{ marginBottom: -10, zIndex: 1 }}
             />
-            <Image
-              source={Images.avatar15}
+
+            <LinearGradient
+              colors={["rgba(255, 255, 255, 0.35)", "rgba(255, 255, 255, 0)"]}
+              start={{ x: 0.5, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
               style={{
-                height: scale(52),
-                width: scale(52),
-                borderRadius: scale(8),
-              }}
-            />
-            <Text
-              style={{
-                fontFamily: fonts.f700,
-                fontSize: scale(11),
-                lineHeight: scale(14),
-                textAlign: "center",
-                color: Colors.white,
-                marginVertical: scale(4),
-                fontWeight: "700",
+                alignItems: "center",
+                paddingHorizontal: 16,
+                paddingVertical: 12,
+                borderRadius: 12,
               }}
             >
-              {"Jesus Boston"}
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.f400,
-                fontSize: scale(10),
-                lineHeight: scale(13),
-                textAlign: "center",
-                color: Colors.white,
-                fontWeight: "400",
-              }}
-            >
-              {"60.2% Accurate"}
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.f400,
-                fontSize: scale(10),
-                lineHeight: scale(13),
-                textAlign: "center",
-                color: Colors.white,
-                fontWeight: "400",
-              }}
-            >
-              {"3 Predictions"}
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.f700,
-                fontSize: scale(12),
-                lineHeight: scale(15),
-                color: Colors.textGreen,
-                marginTop: scale(6),
-                fontWeight: "700",
-              }}
-            >
-              {"$500"}
-            </Text>
+              <Image
+                source={Images.avatar15}
+                style={{
+                  height: scale(52),
+                  width: scale(52),
+                  borderRadius: 12,
+                }}
+              />
+              <Text
+                style={{
+                  fontFamily: fonts.f700,
+                  fontSize: scale(11),
+                  lineHeight: scale(14),
+                  textAlign: "center",
+                  color: Colors.white,
+                  marginVertical: scale(4),
+                  fontWeight: "700",
+                }}
+              >
+                {"Jesus Boston"}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.f400,
+                  fontSize: scale(10),
+                  lineHeight: scale(13),
+                  textAlign: "center",
+                  color: Colors.white,
+                  fontWeight: "400",
+                }}
+              >
+                {"60.2% Accurate"}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.f400,
+                  fontSize: scale(10),
+                  lineHeight: scale(13),
+                  textAlign: "center",
+                  color: Colors.white,
+                  fontWeight: "400",
+                }}
+              >
+                {"3 Predictions"}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.f700,
+                  fontSize: scale(12),
+                  lineHeight: scale(15),
+                  color: Colors.textGreen,
+                  marginTop: scale(6),
+                  fontWeight: "700",
+                }}
+              >
+                {"$500"}
+              </Text>
+            </LinearGradient>
           </View>
 
           <View
@@ -294,11 +342,6 @@ const WinnerCard = ({ setIsSelected, openBottomSheet }) => {
             {"Contest Details"}
           </Text>
         </TouchableOpacity>
-        <Image
-          source={Images.dots}
-          style={{ height: scale(6), width: scale(16) }}
-          resizeMode="contain"
-        />
       </View>
     </>
   );

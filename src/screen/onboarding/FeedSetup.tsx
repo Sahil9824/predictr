@@ -17,6 +17,7 @@ import { Colors, fonts } from "../../constant";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import userStore from "../../user.store";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "FeedSetup">;
@@ -287,6 +288,7 @@ const Titles: React.FC<TileProp> = ({
 };
 
 const FeedSetup: React.FC<any> = ({ navigation, route }) => {
+  const { setIsOnboarded } = userStore();
   const [username, setUsername] = useState(route.params.username);
   const [profileImage, setProfileImage] = useState(route.params.profileImage);
   const [listData, setListData] = useState(data);
@@ -315,10 +317,9 @@ const FeedSetup: React.FC<any> = ({ navigation, route }) => {
       })
     );
   };
-  console.log("ff", followList);
 
   const navigateToLogin = () => {
-    navigation.navigate(SCREENS.LOGIN);
+    setIsOnboarded(true);
   };
 
   useEffect(() => {

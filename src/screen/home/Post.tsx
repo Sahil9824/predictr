@@ -21,10 +21,12 @@ import { Images } from "../../assets/images";
 import { SCREENS } from "../../constant/navigation.constants";
 import { useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Pressable } from "react-native";
 
 const Post = ({ navigation }) => {
   const [isComment, setIsComment] = useState(true);
   const headerHeight = useHeaderHeight();
+  const [replyClicked, setReplyClicked] = useState(false);
 
   const { imgSrc, date, selectedStock, movement, reason, previousScreen } =
     useRoute().params || {};
@@ -68,11 +70,12 @@ const Post = ({ navigation }) => {
           >
             <View style={styles.postBox}>
               <PredictionCard index={0} imgSrc={imgSrc} />
-
-              <View style={styles.mainBox}>
-                <View style={styles.textBox}>
+              <View style={{ paddingHorizontal: 8 }}>
+                <View style={styles.mainBox}>
+                  {/* <View style={styles.textBox}> */}
                   {isComment && (
-                    <TouchableWithoutFeedback
+                    <Pressable
+                      style={styles.textBox}
                       onPress={() =>
                         navigation.navigate(SCREENS.GENERAL_SCREEN, {
                           title: "Agreed",
@@ -80,15 +83,17 @@ const Post = ({ navigation }) => {
                         })
                       }
                     >
-                      <Icons type={ICONS.MULTI_AVA} />
-                    </TouchableWithoutFeedback>
+                      <>
+                        <Icons type={ICONS.MULTI_AVA} />
+                        <Text style={styles.text1}>0</Text>
+                        <Text style={styles.text2}>Agreed</Text>
+                      </>
+                    </Pressable>
                   )}
-                  <Text style={styles.text1}>00</Text>
-                  <Text style={styles.text2}>Agreed</Text>
-                </View>
-                <View style={styles.textBox}>
+                  {/* </View> */}
                   {isComment && (
-                    <TouchableWithoutFeedback
+                    <Pressable
+                      style={styles.textBox}
                       onPress={() =>
                         navigation.navigate(SCREENS.GENERAL_SCREEN, {
                           title: "Disagreed",
@@ -96,39 +101,44 @@ const Post = ({ navigation }) => {
                         })
                       }
                     >
-                      <Icons type={ICONS.MULTI_AVA} />
-                    </TouchableWithoutFeedback>
+                      <>
+                        <Icons type={ICONS.MULTI_AVA} />
+                        <Text style={styles.text1}>0</Text>
+                        <Text style={styles.text2}>Disagreed</Text>
+                      </>
+                    </Pressable>
                   )}
-                  <Text style={styles.text1}>00</Text>
-                  <Text style={styles.text2}>Disagreed</Text>
                 </View>
-              </View>
 
-              {isComment && (
-                <View style={{ padding: 16 }}>
-                  <Comment
-                    name="Trevor Nik"
-                    ago="2 Hours ago"
-                    content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasd `}
-                    avatar={Images.avatar1}
-                  />
-                  <Comment
-                    name="S Shar"
-                    ago="5 Hours ago"
-                    content={`lorem ams das dasdn laks dasjd akd as dasj dka adsda asdas dasd asda`}
-                    avatar={Images.avatar2}
-                  />
-                  <Comment
-                    name="Dev Trev"
-                    ago="10 hours ago"
-                    content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasda sdasd asd asdasdsfasfasasdasd d asda dasda sdasd ad`}
-                    avatar={Images.avatar3}
-                  />
-                </View>
-              )}
+                {isComment && (
+                  <View style={{ paddingTop: 12, paddingRight: 8 }}>
+                    <Comment
+                      name="Trevor Nik"
+                      ago="2 Hours ago"
+                      content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasd `}
+                      avatar={Images.avatar1}
+                      setReplyClicked={setReplyClicked}
+                    />
+                    <Comment
+                      name="S Shar"
+                      ago="5 Hours ago"
+                      content={`lorem ams das dasdn laks dasjd akd as dasj dka adsda asdas dasd asda`}
+                      avatar={Images.avatar2}
+                      setReplyClicked={setReplyClicked}
+                    />
+                    <Comment
+                      name="Dev Trev"
+                      ago="10 hours ago"
+                      content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasda sdasd asd asdasdsfasfasasdasd d asda dasda sdasd ad`}
+                      avatar={Images.avatar3}
+                      setReplyClicked={setReplyClicked}
+                    />
+                  </View>
+                )}
+              </View>
             </View>
           </ScrollView>
-          <CommentInput />
+          <CommentInput isReply={replyClicked} />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -160,11 +170,10 @@ const styles = StyleSheet.create({
   mainBox: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    padding: 12,
+    paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: "#E7E7E7",
-    paddingHorizontal: 16,
+    gap: 54,
   },
 
   textBox: {
@@ -198,7 +207,7 @@ const styles = StyleSheet.create({
 
   postBox: {
     paddingHorizontal: 8,
-    paddingTop: 18,
+    paddingTop: 14,
   },
 });
 

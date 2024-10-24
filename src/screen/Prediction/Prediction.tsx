@@ -82,12 +82,26 @@ const Prediction = ({ navigation }) => {
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
           showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[0]}
         >
+          <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                marginTop: 10,
+              }}
+            >
+              <View style={{ height: 24, width: 24 }}>
+                <Image
+                  style={{ height: "100%", width: "100%" }}
+                  source={Images.CloseGrey}
+                />
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
           <View style={{ width: "100%", alignItems: "flex-end" }}>
-            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-              <Icons type={ICONS.CLOSE} />
-            </TouchableWithoutFeedback>
-
             <Text style={styles.text1}>Make a prediction</Text>
             <Text style={styles.text2}>Predict stock, movement, and date.</Text>
           </View>
@@ -117,7 +131,11 @@ const Prediction = ({ navigation }) => {
                     </Text>
                   )}
                   {!selectedStock ? (
-                    <Icons type={ICONS.DOWN_ARROW} />
+                    <Icons
+                      type={ICONS.DOWN_ARROW}
+                      stroke="#717272"
+                      strokeOpacity={1}
+                    />
                   ) : (
                     <Image
                       source={Images.CheckmarkBlue}
@@ -128,7 +146,15 @@ const Prediction = ({ navigation }) => {
               </View>
             </Pressable>
             <Pressable onPress={() => movementBottomRef.current.present()}>
-              <View style={styles.boxMain}>
+              <View
+                style={{
+                  ...styles.boxMain,
+                  borderBottomColor: "#0000001A",
+                  borderTopColor: "#0000001A",
+                  borderTopWidth: 1,
+                  borderBottomWidth: 1,
+                }}
+              >
                 <View style={styles.box2}>
                   <Image
                     source={Images.DateCal}
@@ -152,7 +178,11 @@ const Prediction = ({ navigation }) => {
                     </Text>
                   )}
                   {!movement ? (
-                    <Icons type={ICONS.DOWN_ARROW} />
+                    <Icons
+                      type={ICONS.DOWN_ARROW}
+                      stroke="#717272"
+                      strokeOpacity={1}
+                    />
                   ) : (
                     <Image
                       source={Images.CheckmarkBlue}
@@ -187,7 +217,11 @@ const Prediction = ({ navigation }) => {
                     </Text>
                   )}
                   {!date ? (
-                    <Icons type={ICONS.DOWN_ARROW} />
+                    <Icons
+                      type={ICONS.DOWN_ARROW}
+                      stroke="#717272"
+                      strokeOpacity={1}
+                    />
                   ) : (
                     <Image
                       source={Images.CheckmarkBlue}
@@ -202,7 +236,7 @@ const Prediction = ({ navigation }) => {
           <TextInput
             value={reason}
             onChange={setReason}
-            style={styles.input}
+            style={[styles.input, reason && { color: "#151B26" }]}
             placeholder="Reason..."
             placeholderTextColor="#717272"
             multiline
@@ -215,7 +249,7 @@ const Prediction = ({ navigation }) => {
             >
               <View style={styles.box3}>
                 <Icons type={ICONS.PIN} />
-                <Text style={styles.text5}>Upload</Text>
+                <Text style={styles.text5}>Upload image</Text>
               </View>
             </Pressable>
           ) : (
@@ -232,18 +266,28 @@ const Prediction = ({ navigation }) => {
             >
               <Image
                 source={{ uri: imgSrc.uri }}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "100%", resizeMode: "contain" }}
               />
 
               <View style={{ position: "absolute", left: 10, top: 10 }}>
                 <Icons type={ICONS.PIN} stroke="#FFFFFF" />
               </View>
 
-              <TouchableWithoutFeedback onPress={() => setImgSrc(null)}>
-                <View style={{ position: "absolute", right: 10, top: 10 }}>
-                  <Icons type={ICONS.CLOSE} stroke="#fff" />
-                </View>
-              </TouchableWithoutFeedback>
+              <Pressable
+                onPress={() => setImgSrc(null)}
+                style={{
+                  position: "absolute",
+                  right: 10,
+                  top: 10,
+                  height: 24,
+                  width: 24,
+                }}
+              >
+                <Image
+                  style={{ height: "100%", width: "100%" }}
+                  source={Images.close}
+                />
+              </Pressable>
             </View>
           )}
 
@@ -284,8 +328,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EFF0F1",
-    padding: 16,
-    paddingTop: 20,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    // paddingTop: 20,
+    position: "relative",
   },
 
   headerOptionsContainer: {
@@ -351,6 +397,11 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    fontFamily: fonts.f400,
+    fontSize: 15,
+    lineHeight: 21,
+    fontWeight: "400",
+    color: "#717272",
     width: "99%",
     padding: 16,
     paddingVertical: Platform.OS === "ios" ? 20 : 16,
@@ -383,7 +434,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 2,
-    paddingHorizontal: 16,
     marginTop: 32,
   },
 
@@ -391,7 +441,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 16,
+    padding: 16,
   },
 
   box2: {

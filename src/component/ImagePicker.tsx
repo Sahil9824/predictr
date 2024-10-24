@@ -1,27 +1,45 @@
 import React from "react";
-import { Alert, Image, Linking, Modal, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Image,
+  Linking,
+  Modal,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import ImageCropPicker from "react-native-image-crop-picker";
-import { PERMISSIONS, request, check, PermissionStatus } from "react-native-permissions";
+import {
+  PERMISSIONS,
+  request,
+  check,
+  PermissionStatus,
+} from "react-native-permissions";
 import { Images } from "../assets/images";
-import DeviceInfo from 'react-native-device-info';
-
+import DeviceInfo from "react-native-device-info";
 
 interface Props {
   visible: boolean;
-  setPickedImage: (image: string | {}) => void
-  hideModal: () => void
+  setPickedImage: (image: string | {}) => void;
+  hideModal: () => void;
 }
 
-const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) => {
-
+const ImagePicker: React.FC<Props> = ({
+  visible,
+  setPickedImage,
+  hideModal,
+}) => {
   const androidVersion = parseInt(DeviceInfo.getSystemVersion());
 
   const capturePhoto = async () => {
-    const permission = Platform.OS === 'ios'
-      ? PERMISSIONS.IOS.CAMERA
-      : androidVersion >= 13
+    const permission =
+      Platform.OS === "ios"
+        ? PERMISSIONS.IOS.CAMERA
+        : androidVersion >= 13
         ? PERMISSIONS.ANDROID.READ_MEDIA_IMAGES
-        : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
+        : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
 
     const resCheck = await check(permission);
 
@@ -35,7 +53,7 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
             cropping: true,
           });
           setPickedImage({ uri: res.path });
-          hideModal()
+          hideModal();
         } else {
           Alert.alert(
             "Open setting",
@@ -43,10 +61,12 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
             [
               {
                 text: "Open Settings",
-                onPress: () => { Linking.openSettings() }
-              }
+                onPress: () => {
+                  Linking.openSettings();
+                },
+              },
             ]
-          )
+          );
         }
         break;
 
@@ -56,7 +76,7 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
           height: 400,
           cropping: true,
         });
-        setPickedImage({ uri: res.path })
+        setPickedImage({ uri: res.path });
         hideModal();
         break;
 
@@ -65,9 +85,10 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
           width: 300,
           height: 400,
           cropping: true,
+          useFrontCamera: false,
         });
-        setPickedImage({ uri: resl.path })
-        hideModal()
+        setPickedImage({ uri: resl.path });
+        hideModal();
         break;
       default:
         Alert.alert(
@@ -76,33 +97,37 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
           [
             {
               text: "Open Settings",
-              onPress: () => { Linking.openSettings() }
-            }
+              onPress: () => {
+                Linking.openSettings();
+              },
+            },
           ]
-        )
+        );
     }
-  }
+  };
 
   const pickImage = async () => {
-    const permission = Platform.OS === 'ios'
-      ? PERMISSIONS.IOS.PHOTO_LIBRARY
-      : androidVersion >= 13
+    const permission =
+      Platform.OS === "ios"
+        ? PERMISSIONS.IOS.PHOTO_LIBRARY
+        : androidVersion >= 13
         ? PERMISSIONS.ANDROID.READ_MEDIA_IMAGES
         : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
     const resCheck = await check(permission);
 
     switch (resCheck) {
-
       case "denied":
-        const req: PermissionStatus = await request(PERMISSIONS.ANDROID.READ_MEDIA_IMAGES);
+        const req: PermissionStatus = await request(
+          PERMISSIONS.ANDROID.READ_MEDIA_IMAGES
+        );
         if (req === "granted" || req === "limited") {
           let res = await ImageCropPicker.openPicker({
             width: 300,
             height: 400,
             cropping: true,
-          })
-          setPickedImage({ uri: res.path })
-          hideModal()
+          });
+          setPickedImage({ uri: res.path });
+          hideModal();
         } else {
           Alert.alert(
             "Open setting",
@@ -110,10 +135,12 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
             [
               {
                 text: "Open Settings",
-                onPress: () => { Linking.openSettings() }
-              }
+                onPress: () => {
+                  Linking.openSettings();
+                },
+              },
             ]
-          )
+          );
         }
         break;
 
@@ -122,8 +149,8 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
           width: 300,
           height: 400,
           cropping: true,
-        })
-        setPickedImage({ uri: res.path })
+        });
+        setPickedImage({ uri: res.path });
         hideModal();
         break;
 
@@ -132,8 +159,8 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
           width: 300,
           height: 400,
           cropping: true,
-        })
-        setPickedImage({ uri: resl.path })
+        });
+        setPickedImage({ uri: resl.path });
         hideModal();
         break;
 
@@ -144,31 +171,53 @@ const ImagePicker: React.FC<Props> = ({ visible, setPickedImage, hideModal }) =>
           [
             {
               text: "Open Settings",
-              onPress: () => { Linking.openSettings() }
-            }
+              onPress: () => {
+                Linking.openSettings();
+              },
+            },
           ]
-        )
+        );
         break;
     }
-  }
+  };
 
   return (
-    <Modal visible={visible} transparent>
+    <Modal visible={visible} transparent statusBarTranslucent>
       <Pressable onPress={hideModal} style={styles.modal}>
         <View style={styles.container}>
-          <Pressable onPress={capturePhoto} style={({ pressed }) => [pressed && { opacity: 0.75 }, styles.option1]}>
+          <Pressable
+            onPress={capturePhoto}
+            style={({ pressed }) => [
+              pressed && { opacity: 0.75 },
+              styles.option1,
+            ]}
+          >
             <Text style={styles.text}>{"Take photo"}</Text>
-            <Image source={Images.cameraTransparent} style={styles.image} resizeMode="contain" />
+            <Image
+              source={Images.cameraTransparent}
+              style={styles.image}
+              resizeMode="contain"
+            />
           </Pressable>
-          <Pressable onPress={pickImage} style={({ pressed }) => [pressed && { opacity: 0.75 }, styles.option2]}>
+          <Pressable
+            onPress={pickImage}
+            style={({ pressed }) => [
+              pressed && { opacity: 0.75 },
+              styles.option2,
+            ]}
+          >
             <Text style={styles.text}>{"Choose photo"}</Text>
-            <Image source={Images.image} style={styles.image} resizeMode="contain" />
+            <Image
+              source={Images.image}
+              style={styles.image}
+              resizeMode="contain"
+            />
           </Pressable>
         </View>
       </Pressable>
     </Modal>
-  )
-}
+  );
+};
 
 export default ImagePicker;
 
@@ -216,9 +265,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 25,
-    height: 30
+    height: 30,
   },
   modal: {
-    flex: 1
-  }
-})
+    flex: 1,
+  },
+});

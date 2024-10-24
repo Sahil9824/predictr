@@ -21,7 +21,10 @@ interface Props {
 const AuthHeader = ({ navigation, rightText, onRightPress }: Props) => {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
-      <Pressable onPress={() => navigation.goBack()}>
+      <Pressable
+        style={{ width: 40, paddingVertical: 8 }}
+        onPress={() => navigation.goBack()}
+      >
         <Image source={Images.back} style={styles.image} resizeMode="contain" />
       </Pressable>
       {rightText && (
@@ -44,6 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
+    paddingVertical: 8,
     backgroundColor: Colors.white,
   },
   text: {

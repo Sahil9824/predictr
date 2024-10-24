@@ -31,6 +31,13 @@ import ChangePass from "./ChangePass";
 import CommentEnt from "./CommentEnt";
 import MultiAva from "./MultiAva";
 import Pin from "./Pin";
+import FlareLeft from "./FlareLeft";
+import FlareRight from "./FlareRight";
+import GoldBig from "./GoldBig";
+import HeadSearch from "./HeadSearch";
+import CalChange from "./CalChange";
+import BlueRight from "./BlueRight";
+import Done from "./Done";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -68,4 +75,11 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.CMNT_ENTER]: CommentEnt,
   [ICONS.MULTI_AVA]: MultiAva,
   [ICONS.PIN]: Pin,
+  [ICONS.FLARE_LEFT]: FlareLeft,
+  [ICONS.FLARE_RIGHT]: FlareRight,
+  [ICONS.GOLD_BIG]: GoldBig,
+  [ICONS.HEAD_SEARCH]: HeadSearch,
+  [ICONS.CAL_CHANGE]: CalChange,
+  [ICONS.BLUE_RIGHT]: BlueRight,
+  [ICONS.DONE]: Done,
 };

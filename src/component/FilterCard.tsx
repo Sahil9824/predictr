@@ -8,6 +8,7 @@ import {
   Platform,
   KeyboardAvoidingView,
   ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Colors, fonts } from "../constant";
 import { scale } from "../../helper";
@@ -18,6 +19,7 @@ import CustomDatePicker from "./CustomDatePicker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
+import Button from "./Button";
 
 const FilterCard = forwardRef((props, ref) => {
   const [selectedAccuracy, setSelectedAccuracy] = useState(null);
@@ -80,20 +82,23 @@ const FilterCard = forwardRef((props, ref) => {
 
   const handleSave = () => {
     if (
-      dateRange.from &&
-      dateRange.to &&
-      (selectedAccuracy || manualAccuracy.trim())
+      dateRange.from ||
+      dateRange.to ||
+      selectedAccuracy ||
+      manualAccuracy.trim()
     ) {
       const filteredOptions = {
         accuracy: selectedAccuracy || manualAccuracy,
-        from: dateRange.from.toISOString(),
-        to: dateRange.to.toISOString(),
+        from: dateRange?.from?.toISOString() || "",
+        to: dateRange?.to?.toISOString() || "",
         tags: hashtag || "",
       };
+
+      props?.setFilteredOptions && props.setFilteredOptions(filteredOptions);
       setIsReset(false);
       closeBottomSheet();
       ref.current?.close();
-      navigation.navigate(SCREENS.HOME, { filteredOptions, isReset });
+      // navigation.navigate(SCREENS.HOME, { filteredOptions, isReset });
     }
   };
 
@@ -112,9 +117,7 @@ const FilterCard = forwardRef((props, ref) => {
   };
 
   const isSaveButtonEnabled =
-    dateRange.from &&
-    dateRange.to &&
-    (selectedAccuracy || manualAccuracy.trim());
+    dateRange.from || dateRange.to || selectedAccuracy || manualAccuracy.trim();
   const isResetVisible =
     dateRange.from || dateRange.to || selectedAccuracy || manualAccuracy.trim();
 
@@ -188,9 +191,13 @@ const FilterCard = forwardRef((props, ref) => {
                 onPress={() => openDatePicker("from")}
                 style={styles.dateInputContainer}
               >
-                <Text style={styles.dateInput}>
-                  {formatDate(dateRange.from) || "From"}
-                </Text>
+                {formatDate(dateRange.from) ? (
+                  <Text style={{ ...styles.dateInput, color: "black" }}>
+                    {formatDate(dateRange.from)}
+                  </Text>
+                ) : (
+                  <Text style={styles.dateInput}>From</Text>
+                )}
                 <Icons
                   type={ICONS.CALENDAR}
                   iconContainerStyle={styles.calendarIcon}
@@ -201,9 +208,13 @@ const FilterCard = forwardRef((props, ref) => {
                 onPress={() => openDatePicker("to")}
                 style={styles.dateInputContainer}
               >
-                <Text style={styles.dateInput}>
-                  {formatDate(dateRange.to) || "To"}
-                </Text>
+                {formatDate(dateRange.to) ? (
+                  <Text style={{ ...styles.dateInput, color: "black" }}>
+                    {formatDate(dateRange.to)}
+                  </Text>
+                ) : (
+                  <Text style={styles.dateInput}>To</Text>
+                )}
                 <Icons
                   type={ICONS.CALENDAR}
                   iconContainerStyle={styles.calendarIcon}
@@ -214,7 +225,7 @@ const FilterCard = forwardRef((props, ref) => {
             <Text style={styles.sectionTitle}>Hashtags</Text>
             <View style={styles.hashtagInputContainer}>
               <Icons
-                type={ICONS.SEARCH}
+                type={ICONS.HEAD_SEARCH}
                 iconContainerStyle={styles.hashtagIcon}
               />
               <TextInput
@@ -226,21 +237,11 @@ const FilterCard = forwardRef((props, ref) => {
             </View>
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                activeOpacity={0.8}
+              <Button
+                inActive={!isSaveButtonEnabled}
                 onPress={handleSave}
-                style={[
-                  styles.applyButton,
-                  {
-                    backgroundColor: isSaveButtonEnabled
-                      ? Colors.primaryBlue
-                      : "#717272",
-                  },
-                ]}
-                disabled={!isSaveButtonEnabled}
-              >
-                <Text style={styles.buttonText}>Save</Text>
-              </TouchableOpacity>
+                text="Save"
+              />
             </View>
           </View>
         </KeyboardAwareScrollView>
@@ -319,27 +320,32 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 5,
     width: "100%",
+    gap: 5,
   },
   accuracyButton: {
+    alignItems: "center",
     borderWidth: 1,
     borderColor: Colors.lightGrey,
     paddingVertical: 12,
-    paddingHorizontal: 25.7,
+    flex: 1,
     borderRadius: 8,
   },
   accuracyButtonSelected: {
     backgroundColor: "#e9f1fc",
     borderColor: Colors.primaryBlue,
+    borderWidth: 2,
   },
   accuracyText: {
     fontFamily: fonts.f400,
-    fontSize: scale(14),
+    fontSize: 15,
     color: Colors.textBlack,
     fontWeight: "400",
   },
   accuracyTextSelected: {
+    fontFamily: fonts.f700,
+    fontSize: 15,
     color: Colors.textBlack,
-    fontWeight: "bold",
+    fontWeight: "700",
   },
   dateRangeContainer: {
     marginVertical: scale(3),

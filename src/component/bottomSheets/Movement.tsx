@@ -19,8 +19,8 @@ import { ICONS } from "../../constant/icons.constants";
 import Button from "../Button";
 
 const MovementSheet = ({ movementBottomRef, setMovement }) => {
-  const [selectedOption, setSelectedOption] = useState("Up");
-  const [selectedAccuracy, setSelectedAccuracy] = useState("5%");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedAccuracy, setSelectedAccuracy] = useState("");
   const [manualAccuracy, setManualAccuracy] = useState("");
 
   const handleManualAccuracyChange = (text) => {
@@ -323,6 +323,7 @@ const styles = StyleSheet.create({
   accuracyButtonSelected: {
     backgroundColor: "#e9f1fc",
     borderColor: Colors.primaryBlue,
+    borderWidth: 2,
   },
   accuracyText: {
     fontFamily: fonts.f500,

@@ -67,7 +67,7 @@ const HeaderOptions = ({
         ...style,
       }}
     >
-      <View style={{ flexDirection: "row", height: scale(50) }}>
+      <View style={{ flexDirection: "row" }}>
         {/* My Feed Pressable */}
         <Pressable
           onPress={() => setIsSelected(0)}
@@ -76,7 +76,9 @@ const HeaderOptions = ({
             isSelected === 0 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-              height: scale(50),
+              // height: scale(50),
+              paddingHorizontal: 16,
+              paddingVertical: 12,
             },
           ]}
         >
@@ -107,7 +109,8 @@ const HeaderOptions = ({
             isSelected === 1 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-              height: scale(50),
+              paddingHorizontal: 16,
+              paddingVertical: 12,
             },
           ]}
         >
@@ -172,7 +175,7 @@ const UserProfile = () => {
   const animatedOpac = scrollY.interpolate({
     outputRange: [0, 1],
     inputRange: [
-      Platform.OS === "ios" ? 414 : 449,
+      Platform.OS === "ios" ? 415 : 449,
       Platform.OS === "ios" ? 415 : 450,
     ],
     extrapolate: "clamp",
@@ -411,7 +414,11 @@ const UserProfile = () => {
           {data.length ? (
             data.map((item, index) => (
               <View style={styles.cardContainer} key={index}>
-                <PredictionCard index={item.index} />
+                <PredictionCard
+                  style={{ marginVertical: 0 }}
+                  index={item.index}
+                  isBookmarked={false}
+                />
               </View>
             ))
           ) : (
@@ -442,6 +449,7 @@ const UserProfile = () => {
         ref={filterCardRef}
         onFilterReset={handleFilterReset}
         isReset={isReset}
+        setFilteredOptions={setFilteredOptions}
       />
     </>
   );
@@ -530,7 +538,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(20),
   },
   profileInfo: {
-    //
+    marginTop: 8,
   },
   profileName: {
     fontSize: moderateScale(24),
@@ -568,19 +576,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginHorizontal: 15,
     backgroundColor: "#F9F9F9",
-    borderRadius: 10,
+    borderRadius: scale(10),
     borderColor: "#ddd",
     borderWidth: 1,
+    overflow: "hidden",
   },
   tabItem: {
     flex: 1,
     paddingVertical: verticalScale(10),
     alignItems: "center",
-    borderRadius: scale(10),
+    borderRadius: scale(9),
     backgroundColor: "#F9F9F9",
   },
   selectedTabItem: {
     backgroundColor: "#E5E5E5",
+    borderRadius: scale(9),
   },
   tabText: {
     fontSize: scale(16),
@@ -593,14 +603,15 @@ const styles = StyleSheet.create({
   },
   stats: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     paddingVertical: verticalScale(16),
-    paddingHorizontal: scale(10),
+    paddingHorizontal: 16,
+    gap: 10,
   },
   statItem: {
     alignItems: "center",
     backgroundColor: "#F6F8F9",
-    width: scale(108),
+    flex: 1,
     height: scale(70),
     justifyContent: "center",
     borderRadius: scale(8),
@@ -624,8 +635,8 @@ const styles = StyleSheet.create({
     color: Colors.labelBlack,
   },
   cardContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: verticalScale(8),
+    paddingHorizontal: 8,
+    paddingVertical: 8,
   },
   card: {
     padding: 16,
@@ -655,7 +666,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignContent: "center",
     alignItems: "center",
-    marginTop: "30%",
+    marginVertical: "30%",
     paddingHorizontal: 39,
   },
 

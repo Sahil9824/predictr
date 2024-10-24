@@ -6,7 +6,7 @@ import { Colors, fonts } from "../../constant";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 
-const Comment = ({ name, ago, content, avatar }) => {
+const Comment = ({ name, ago, content, avatar, setReplyClicked }) => {
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
   const [likeCount, setLikeCount] = useState(0); // Count for likes
@@ -59,6 +59,8 @@ const Comment = ({ name, ago, content, avatar }) => {
           <View
             style={{
               flexDirection: "row",
+              alignItems: "center",
+              marginTop: 1.5,
             }}
           >
             <Text style={styles.textName}>{name}</Text>
@@ -125,7 +127,7 @@ const Comment = ({ name, ago, content, avatar }) => {
                 justifyContent: "center",
                 marginRight: scale(10),
               }}
-              // onPress={() => navigation.navigate(SCREENS.POST)}
+              onPress={() => setReplyClicked(true)}
             >
               <Text
                 style={{
@@ -159,6 +161,7 @@ const Comment = ({ name, ago, content, avatar }) => {
               <View
                 style={{
                   flexDirection: "row",
+                  marginTop: 1.5,
                 }}
               >
                 <Text style={styles.textName}>{name}</Text>
@@ -233,7 +236,7 @@ const Comment = ({ name, ago, content, avatar }) => {
                     justifyContent: "center",
                     marginRight: scale(10),
                   }}
-                  // onPress={() => navigation.navigate(SCREENS.POST)}
+                  onPress={() => setReplyClicked(true)}
                 >
                   <Text
                     style={{
