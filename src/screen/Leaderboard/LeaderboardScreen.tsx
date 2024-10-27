@@ -159,15 +159,27 @@ const LeaderboardScreen = () => {
         <View style={styles.rankContainer}>
           <Text style={styles.id}>{item.id}</Text>
           <Image source={Images.avatar6} style={styles.avatar} />
-          <View>
-            <Text style={styles.name}>
-              {item.name}{" "}
-              {item.isCurrentUser && <Text style={styles.youText}>You</Text>}
-            </Text>
-            <Text style={styles.accuracy}>{item.accuracy}</Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              borderBottomWidth: 1,
+              borderColor: "#f0f0f0",
+              paddingVertical: verticalScale(12),
+              paddingRight: moderateScale(16),
+            }}
+          >
+            <View>
+              <Text style={styles.name}>
+                {item.name}{" "}
+                {item.isCurrentUser && <Text style={styles.youText}>You</Text>}
+              </Text>
+              <Text style={styles.accuracy}>{item.accuracy}</Text>
+            </View>
+            <Icons type={ICONS.BLUE_RIGHT} />
           </View>
         </View>
-        <Icons type={ICONS.BLUE_RIGHT} />
       </View>
     </TouchableWithoutFeedback>
   );
@@ -242,7 +254,7 @@ const LeaderboardScreen = () => {
               Predictors
             </Text>
           </View>
-          <View style={{ marginEnd: 15 }}>
+          <View style={{ marginEnd: moderateScale(18) }}>
             <View
               style={{
                 flexDirection: "row",
@@ -368,10 +380,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: verticalScale(12),
-    paddingHorizontal: moderateScale(16),
-    borderBottomWidth: 1,
-    borderColor: "#f0f0f0",
+    paddingLeft: moderateScale(16),
   },
   currentUser: {
     backgroundColor: "#E9F1FC",
@@ -384,7 +393,8 @@ const styles = StyleSheet.create({
     width: scale(40),
     height: scale(40),
     borderRadius: 8,
-    marginRight: moderateScale(8),
+    marginRight: moderateScale(12),
+    paddingHorizontal: moderateScale(16),
   },
   name: {
     fontSize: scale(16),

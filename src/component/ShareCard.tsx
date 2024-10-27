@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,13 +6,31 @@ import {
   TouchableOpacity,
   Platform,
   Image,
+  BackHandler,
 } from "react-native";
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  useBottomSheetModal,
+} from "@gorhom/bottom-sheet";
 import { scale } from "../../helper";
 import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
 
 const ShareCard = forwardRef((props, ref) => {
+  const { dismiss } = useBottomSheetModal();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
+
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
   );

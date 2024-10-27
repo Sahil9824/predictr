@@ -1,5 +1,7 @@
 import {
+  Animated,
   Image,
+  Keyboard,
   Platform,
   Pressable,
   ScrollView,
@@ -16,7 +18,7 @@ import { ICONS } from "../../constant/icons.constants";
 import { moderateScale, scale } from "../../../helper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Images } from "../../assets/images";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchStock from "../../component/bottomSheets/SearchStock";
 import MovementSheet from "../../component/bottomSheets/Movement";
 import CustomDatePicker from "../../component/CustomDatePicker";
@@ -24,7 +26,12 @@ import CustomCalSheet from "../../component/bottomSheets/CustomCalSheet";
 import ImagePicker from "../../component/ImagePicker";
 import Button from "../../component/Button";
 import { SCREENS } from "../../constant/navigation.constants";
-import { useRoute } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 const Prediction = ({ navigation }) => {
   const [selectedStock, setSelectedStock] = useState("");
@@ -33,6 +40,30 @@ const Prediction = ({ navigation }) => {
   const [reason, setReason] = useState("");
   const [isPick, setIsPick] = useState(false);
   const [imgSrc, setImgSrc] = useState(null);
+
+  const translateY = useSharedValue(1000);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      // Reset data when the screen is focused
+      resetValues();
+    }
+  }, [isFocused]);
+
+  useEffect(() => {
+    translateY.value = withTiming(0, { duration: 300 });
+
+    return () => {
+      translateY.value = withTiming(1000, { duration: 300 });
+      resetValues();
+    };
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }],
+  }));
 
   const resetValues = () => {
     setSelectedStock("");
@@ -74,7 +105,7 @@ const Prediction = ({ navigation }) => {
   return (
     <>
       {Platform.OS === "ios" && <StatusBar backgroundColor="#EFF0F1" />}
-
+      {/* <Animated.View style={[{ height: 100, width: 100 }, animatedStyle]}> */}
       <SafeAreaView
         style={styles.container}
         edges={["left", "right", "bottom", "top"]}
@@ -266,7 +297,11 @@ const Prediction = ({ navigation }) => {
             >
               <Image
                 source={{ uri: imgSrc.uri }}
-                style={{ width: "100%", height: "100%", resizeMode: "contain" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  resizeMode: "contain",
+                }}
               />
 
               <View style={{ position: "absolute", left: 10, top: 10 }}>
@@ -318,6 +353,7 @@ const Prediction = ({ navigation }) => {
 
         <CustomCalSheet datePickerRef={calBottomRef} setDate={setDate} />
       </SafeAreaView>
+      {/* </Animated.View> */}
     </>
   );
 };

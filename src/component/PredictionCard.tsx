@@ -13,8 +13,7 @@ import {
 import { scale } from "../../helper";
 import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
-import { useRef, useState } from "react";
-import Tooltip from "react-native-walkthrough-tooltip";
+import { useEffect, useRef, useState } from "react";
 import ShareCard from "./ShareCard";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
@@ -41,6 +40,8 @@ const PredictionCard = ({
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
+
+  const [textWidth, setTextWidth] = useState(0);
   const [likeCount, setLikeCount] = useState(45); // Count for likes
   const [dislikeCount, setDislikeCount] = useState(70); // Count for dislikes
   const shareCardRef = useRef(null);
@@ -57,6 +58,17 @@ const PredictionCard = ({
       shareCardRef.current.present();
     }
   };
+
+  const handlePress = () => {
+    setToolTipVisible(true);
+  };
+
+  useEffect(() => {
+    if (toolTipVisible) {
+      const timer = setTimeout(() => setToolTipVisible(false), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [toolTipVisible]);
 
   // Function to handle like
   const handleLike = () => {
@@ -118,18 +130,14 @@ const PredictionCard = ({
             borderRadius: scale(20),
             borderBottomColor: "white",
             backgroundColor: "white",
-            overflow: "hidden",
-            ...Platform.select({
-              ios: {
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 3.34 },
-                shadowOpacity: 0.07,
-                shadowRadius: 8.68,
-              },
-              android: {
-                elevation: 4,
-              },
-            }),
+            shadowColor: "black",
+            shadowOffset: {
+              width: 0,
+              height: 5,
+            },
+            shadowOpacity: 0.15,
+            shadowRadius: 9,
+            elevation: 8,
           }}
         >
           <View
@@ -245,43 +253,39 @@ const PredictionCard = ({
             >
               {"I think "}
             </Text>
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "rgba(0, 0, 0, 0.75)",
-                borderRadius: 4,
+
+            <Pressable
+              onPress={handlePress}
+              onLayout={(event) => {
+                const { width } = event.nativeEvent.layout;
+                setTextWidth(width);
               }}
-              backgroundColor={"transparent"}
-              isVisible={toolTipVisible}
-              placement="top"
-              // showChildInTooltip={false}
-              onClose={() => setToolTipVisible(false)}
-              content={
-                <Text style={styles.tootltipText}>Tesla Private Limited</Text>
-              }
+              style={{
+                backgroundColor: Colors.primaryBLueLight,
+                paddingHorizontal: scale(6),
+                paddingVertical: scale(4),
+                borderRadius: scale(6),
+                marginHorizontal: 3,
+                position: "relative",
+              }}
             >
-              <Pressable
-                onPress={() => setToolTipVisible(true)}
+              {toolTipVisible && (
+                <View style={[styles.tooltip, { left: textWidth / 2 - 70 }]}>
+                  <Text style={styles.tooltipText}>Tesla Stock (TSLA)</Text>
+                </View>
+              )}
+              <Text
                 style={{
-                  backgroundColor: Colors.primaryBLueLight,
-                  paddingHorizontal: scale(6),
-                  paddingVertical: scale(4),
-                  borderRadius: scale(6),
-                  marginHorizontal: 3,
+                  fontFamily: fonts.f700,
+                  fontSize: scale(15),
+                  lineHeight: scale(19),
+                  color: Colors.textBlack,
+                  fontWeight: "700",
                 }}
               >
-                <Text
-                  style={{
-                    fontFamily: fonts.f700,
-                    fontSize: scale(15),
-                    lineHeight: scale(19),
-                    color: Colors.textBlack,
-                    fontWeight: "700",
-                  }}
-                >
-                  {"TSLA"}
-                </Text>
-              </Pressable>
-            </Tooltip>
+                {"TSLA"}
+              </Text>
+            </Pressable>
             <Text
               style={{
                 fontFamily: fonts.f400,
@@ -614,6 +618,7 @@ const PredictionCard = ({
               backgroundColor: "#DFE3E6",
               borderBottomEndRadius: scale(24),
               borderBottomStartRadius: scale(24),
+              alignItems: "center",
             }}
           >
             <View style={{ flexDirection: "row" }}>
@@ -636,7 +641,16 @@ const PredictionCard = ({
                 {"No movement yet"}
               </Text>
             </View>
-            <Text>{"Result in 5d"}</Text>
+            <Text
+              style={{
+                fontFamily: fonts.f400,
+                fontWeight: "400",
+                fontSize: 14,
+                color: "#717272",
+              }}
+            >
+              {"Result in 5d"}
+            </Text>
           </View>
         )}
 
@@ -649,9 +663,15 @@ const PredictionCard = ({
               backgroundColor: "#FBBABA",
               borderBottomEndRadius: scale(24),
               borderBottomStartRadius: scale(24),
+              alignItems: "center",
             }}
           >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
               <Image
                 source={Images.wrongMark}
                 style={{
@@ -684,7 +704,16 @@ const PredictionCard = ({
                 {"LIVE TRACKING"}
               </Text>
             </View>
-            <Text>{"Result in 5d"}</Text>
+            <Text
+              style={{
+                fontFamily: fonts.f400,
+                fontWeight: "400",
+                fontSize: 14,
+                color: "#717272",
+              }}
+            >
+              {"Result in 5d"}
+            </Text>
           </View>
         )}
 
@@ -718,7 +747,6 @@ const PredictionCard = ({
                 {"Inaccurate"}
               </Text>
             </View>
-            {/* <Text>{"Result in 5d"}</Text> */}
           </View>
         )}
 
@@ -753,7 +781,6 @@ const PredictionCard = ({
                 {"30% Accurate"}
               </Text>
             </View>
-            {/* <Text>{"Result in 5d"}</Text> */}
           </View>
         )}
         <ShareCard ref={shareCardRef} />
@@ -766,13 +793,22 @@ export default PredictionCard;
 
 const styles = StyleSheet.create({
   tooltip: {
-    width: "auto",
+    position: "absolute",
+    width: 150,
+    bottom: scale(30),
+    backgroundColor: "#000000BF",
+    paddingHorizontal: scale(8),
+    paddingVertical: scale(4),
+    borderRadius: scale(4),
+    zIndex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-
-  tootltipText: {
+  tooltipText: {
     color: "white",
     fontFamily: fonts.f500,
     fontSize: scale(12),
     fontWeight: "500",
+    letterSpacing: scale(12) * -0.02,
   },
 });

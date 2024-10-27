@@ -203,6 +203,13 @@ const DashBoard = () => {
     inputRange: [500, 500],
     extrapolate: "clamp",
   });
+  const scrollViewRef = useRef(null);
+
+  useEffect(() => {
+    if (isSelected === 2) {
+      scrollViewRef.current?.scrollTo({ y: 450, animated: true });
+    }
+  }, [isSelected]);
 
   const [viewHeight, setViewHeight] = useState(0);
 
@@ -299,6 +306,7 @@ const DashBoard = () => {
           </View>
 
           <ScrollView
+            ref={scrollViewRef}
             contentContainerStyle={{ flexGrow: 1 }}
             onScroll={Animated.event(
               [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -440,17 +448,11 @@ const styles = StyleSheet.create({
   shadow: {
     width: "100%",
     backgroundColor: "white",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
-        shadowOpacity: 0.2,
-        shadowRadius: 3, // You can adjust this for more blur effect
-      },
-      android: {
-        elevation: 5, // This will create shadow, but not just at the bottom
-      },
-    }),
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
+    shadowOpacity: 0.2,
+    shadowRadius: 3, // You can adjust this for more blur effect
+    elevation: 5, // This will create shadow, but not just at the bottom
   },
   headerOptionsContainer: {
     position: "absolute",

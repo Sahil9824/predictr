@@ -16,7 +16,13 @@ import Icons from "./Icons";
 import { scale } from "../../helper";
 import Button from "./Button";
 
-const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
+const CustomDatePicker = ({
+  initialDate,
+  onDateChange,
+  closeBottomSheet,
+  fromDate,
+  toDate,
+}) => {
   const [currentDate, setCurrentDate] = useState(
     moment(initialDate || new Date())
   );
@@ -44,6 +50,16 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
     "December",
   ];
 
+  const isDateSelectable = (date) => {
+    if (fromDate && moment(date).isBefore(moment(fromDate))) {
+      return false;
+    }
+    if (toDate && moment(date).isAfter(moment(toDate))) {
+      return false;
+    }
+    return true;
+  };
+
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const getDaysInMonth = (month, year) => {
@@ -55,6 +71,41 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
     setCurrentDate(newDate);
     setSelectedYear(newDate.year());
   };
+
+  // const renderDays = () => {
+  //   const year = currentDate.year();
+  //   const month = currentDate.month();
+  //   const firstDayOfMonth = new Date(year, month, 1).getDay();
+  //   const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  //   let days = [];
+  //   for (let i = 0; i < firstDayOfMonth; i++) {
+  //     days.push(<View style={styles.day} key={`empty-${i}`} />);
+  //   }
+
+  //   for (let day = 1; day <= daysInMonth; day++) {
+  //     const isSelected =
+  //       selectedDate?.getDate() === day &&
+  //       selectedDate?.getMonth() === month &&
+  //       selectedDate?.getFullYear() === year;
+
+  //     days.push(
+  //       <TouchableOpacity
+  //         style={[styles.day, isSelected ? styles.selectedDay : null]}
+  //         key={day}
+  //         onPress={() => setSelectedDate(new Date(year, month, day))}
+  //       >
+  //         <Text
+  //           style={[styles.dayText, isSelected ? styles.selectedDayText : null]}
+  //         >
+  //           {day}
+  //         </Text>
+  //       </TouchableOpacity>
+  //     );
+  //   }
+
+  //   return days;
+  // };
 
   const renderDays = () => {
     const year = currentDate.year();
@@ -68,19 +119,31 @@ const CustomDatePicker = ({ initialDate, onDateChange, closeBottomSheet }) => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, month, day);
       const isSelected =
         selectedDate?.getDate() === day &&
         selectedDate?.getMonth() === month &&
         selectedDate?.getFullYear() === year;
 
+      const selectable = isDateSelectable(date);
+
       days.push(
         <TouchableOpacity
-          style={[styles.day, isSelected ? styles.selectedDay : null]}
+          style={[
+            styles.day,
+            isSelected ? styles.selectedDay : null,
+            !selectable ? styles.disabledDay : null,
+          ]}
           key={day}
-          onPress={() => setSelectedDate(new Date(year, month, day))}
+          onPress={() => selectable && setSelectedDate(date)}
+          disabled={!selectable} // Disable the button if date is not selectable
         >
           <Text
-            style={[styles.dayText, isSelected ? styles.selectedDayText : null]}
+            style={[
+              styles.dayText,
+              isSelected ? styles.selectedDayText : null,
+              !selectable ? styles.disabledDayText : null,
+            ]}
           >
             {day}
           </Text>
@@ -301,6 +364,12 @@ const styles = StyleSheet.create({
   selectedDayText: {
     color: "#007AFF",
     fontWeight: "bold",
+  },
+  disabledDay: {
+    backgroundColor: "#f0f0f0",
+  },
+  disabledDayText: {
+    color: "#d0d0d0",
   },
   saveButton: {
     backgroundColor: Colors.primaryBlue,

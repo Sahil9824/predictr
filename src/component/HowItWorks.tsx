@@ -1,5 +1,5 @@
 // Import necessary libraries
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   ScrollView,
   StatusBar,
   TouchableWithoutFeedback,
+  BackHandler,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "../../helper";
 import { Images } from "../assets/images";
@@ -17,6 +18,7 @@ import { Colors, fonts } from "../constant";
 import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetModal,
+  useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
@@ -24,6 +26,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { SCREENS } from "../constant/navigation.constants";
 
 const HowToPredictScreen = ({ navigation }) => {
+  const { dismiss } = useBottomSheetModal();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
+
   const bottomSheetRef = useRef(null);
   const snapPoints = ["92%"];
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import PredictionCard from "../../component/PredictionCard";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const data = [
   { id: "1", index: 0 },
@@ -12,16 +13,18 @@ const data = [
 
 const FeedScreen = () => {
   return (
-    <FlatList
-      data={data}
-      renderItem={({ item, index }) => (
-        <View style={{ paddingHorizontal: 8, paddingTop: 16 }}>
-          <PredictionCard index={item.index} key={index} />
-        </View>
-      )}
-      keyExtractor={(item) => item.id.toString()}
-      scrollEventThrottle={16}
-    />
+    <KeyboardAwareScrollView enableOnAndroid>
+      <FlatList
+        data={data}
+        renderItem={({ item, index }) => (
+          <View style={{ paddingHorizontal: 8, paddingTop: 16 }}>
+            <PredictionCard index={item.index} key={index} />
+          </View>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        scrollEventThrottle={16}
+      />
+    </KeyboardAwareScrollView>
   );
 };
 

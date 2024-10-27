@@ -1,27 +1,85 @@
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
-import React, { useState } from "react";
 import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  useBottomSheetModal,
+} from "@gorhom/bottom-sheet";
+import React, { useEffect, useState } from "react";
+import {
+  BackHandler,
   Image,
+  Keyboard,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { Images } from "../../assets/images";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { scale } from "../../../helper";
 import { TouchableOpacity } from "react-native";
 import { Colors, fonts } from "../../constant";
 import Icons from "../Icons";
 import { ICONS } from "../../constant/icons.constants";
 import Button from "../Button";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const MovementSheet = ({ movementBottomRef, setMovement }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedAccuracy, setSelectedAccuracy] = useState("");
   const [manualAccuracy, setManualAccuracy] = useState("");
+  const [snapPoints, setSnapPoints] = useState([600, "80%"]);
+
+  const { dismiss } = useBottomSheetModal();
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    // Event listeners for keyboard show/hide
+    const keyboardShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      handleKeyboardShow
+    );
+    const keyboardHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      handleKeyboardHide
+    );
+
+    return () => {
+      keyboardShowListener.remove();
+      keyboardHideListener.remove();
+    };
+  }, []);
+
+  const handleKeyboardShow = () => {
+    movementBottomRef.current?.snapToIndex(1);
+  };
+
+  const handleKeyboardHide = () => {
+    movementBottomRef.current?.snapToIndex(0);
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      // Reset data when the screen is focused
+      setSelectedOption("");
+      setSelectedAccuracy("");
+      setManualAccuracy("");
+    }
+  }, [isFocused]);
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
 
   const handleManualAccuracyChange = (text) => {
     setManualAccuracy(text);
@@ -56,7 +114,7 @@ const MovementSheet = ({ movementBottomRef, setMovement }) => {
       ref={movementBottomRef}
       index={0}
       enablePanDownToClose
-      snapPoints={[450]}
+      snapPoints={[450, "80%"]}
       handleIndicatorStyle={{
         width: 65,
         height: 5,
@@ -64,113 +122,122 @@ const MovementSheet = ({ movementBottomRef, setMovement }) => {
       }}
       backdropComponent={renderBackdrop}
     >
-      <View style={styles.searchContainer}>
-        <View style={styles.header}>
-          <Text style={styles.headText}>Stock Movement</Text>
-          <TouchableOpacity onPress={() => movementBottomRef.current.dismiss()}>
-            <Text style={styles.cancelButton}>Cancel</Text>
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.label}>Trend</Text>
-
-        <View style={styles.radioButtonContainer}>
-          {/* Up Button */}
-          <TouchableOpacity
-            style={[
-              styles.radioButton,
-              selectedOption === "Up" ? styles.selected : {},
-            ]}
-            onPress={() => setSelectedOption("Up")}
-          >
-            <View style={styles.circleContainer}>
-              <View
-                style={[
-                  styles.outerCircle,
-                  selectedOption === "Up" ? styles.selectedOuterCircle : {},
-                ]}
-              >
-                {selectedOption === "Up" && <View style={styles.innerCircle} />}
-              </View>
-              <Text
-                style={
-                  selectedOption === "Up" ? styles.selectedText : styles.text
-                }
-              >
-                Up
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          {/* Down Button */}
-          <TouchableOpacity
-            style={[
-              styles.radioButton,
-              selectedOption === "Down" ? styles.selected : {},
-            ]}
-            onPress={() => setSelectedOption("Down")}
-          >
-            <View style={styles.circleContainer}>
-              <View
-                style={[
-                  styles.outerCircle,
-                  selectedOption === "Down" ? styles.selectedOuterCircle : {},
-                ]}
-              >
-                {selectedOption === "Down" && (
-                  <View style={styles.innerCircle} />
-                )}
-              </View>
-              <Text
-                style={
-                  selectedOption === "Down" ? styles.selectedText : styles.text
-                }
-              >
-                Down
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.sectionTitle}>Percentage (%)</Text>
-        <TextInput
-          style={styles.accuracyInput}
-          placeholder="Enter percentage"
-          value={manualAccuracy}
-          onChangeText={handleManualAccuracyChange}
-          keyboardType="numeric"
-          inputMode="numeric"
-        />
-
-        <View style={styles.accuracyOptions}>
-          {["3%", "5%", "7%", "10%"].map((range) => (
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.searchContainer}>
+          <View style={styles.header}>
+            <Text style={styles.headText}>Stock Movement</Text>
             <TouchableOpacity
-              key={range}
-              style={[
-                styles.accuracyButton,
-                selectedAccuracy === range && styles.accuracyButtonSelected,
-              ]}
-              onPress={() => handleAccuracyOptionPress(range)}
+              onPress={() => movementBottomRef.current.dismiss()}
             >
-              <Text
-                style={[
-                  styles.accuracyText,
-                  selectedAccuracy === range && styles.accuracyTextSelected,
-                ]}
-              >
-                {range}
-              </Text>
+              <Text style={styles.cancelButton}>Cancel</Text>
             </TouchableOpacity>
-          ))}
-        </View>
+          </View>
 
-        <Button
-          style={{ marginTop: 32, marginBottom: 30 }}
-          text="Save"
-          inActive={!selectedOption || (!selectedAccuracy && !manualAccuracy)}
-          onPress={handlePress}
-        />
-      </View>
+          <Text style={styles.label}>Trend</Text>
+
+          <View style={styles.radioButtonContainer}>
+            {/* Up Button */}
+            <TouchableOpacity
+              style={[
+                styles.radioButton,
+                selectedOption === "Up" ? styles.selected : {},
+              ]}
+              onPress={() => setSelectedOption("Up")}
+            >
+              <View style={styles.circleContainer}>
+                <View
+                  style={[
+                    styles.outerCircle,
+                    selectedOption === "Up" ? styles.selectedOuterCircle : {},
+                  ]}
+                >
+                  {selectedOption === "Up" && (
+                    <View style={styles.innerCircle} />
+                  )}
+                </View>
+                <Text
+                  style={
+                    selectedOption === "Up" ? styles.selectedText : styles.text
+                  }
+                >
+                  Up
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            {/* Down Button */}
+            <TouchableOpacity
+              style={[
+                styles.radioButton,
+                selectedOption === "Down" ? styles.selected : {},
+              ]}
+              onPress={() => setSelectedOption("Down")}
+            >
+              <View style={styles.circleContainer}>
+                <View
+                  style={[
+                    styles.outerCircle,
+                    selectedOption === "Down" ? styles.selectedOuterCircle : {},
+                  ]}
+                >
+                  {selectedOption === "Down" && (
+                    <View style={styles.innerCircle} />
+                  )}
+                </View>
+                <Text
+                  style={
+                    selectedOption === "Down"
+                      ? styles.selectedText
+                      : styles.text
+                  }
+                >
+                  Down
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.sectionTitle}>Percentage (%)</Text>
+
+          <TextInput
+            style={styles.accuracyInput}
+            placeholder="Enter percentage"
+            value={manualAccuracy}
+            onChangeText={handleManualAccuracyChange}
+            keyboardType="numeric"
+            inputMode="numeric"
+          />
+
+          <View style={styles.accuracyOptions}>
+            {["3%", "5%", "7%", "10%"].map((range) => (
+              <TouchableOpacity
+                key={range}
+                style={[
+                  styles.accuracyButton,
+                  selectedAccuracy === range && styles.accuracyButtonSelected,
+                ]}
+                onPress={() => handleAccuracyOptionPress(range)}
+              >
+                <Text
+                  style={[
+                    styles.accuracyText,
+                    selectedAccuracy === range && styles.accuracyTextSelected,
+                  ]}
+                >
+                  {range}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <Button
+            style={{ marginTop: 32, marginBottom: 30 }}
+            text="Save"
+            inActive={!selectedOption || (!selectedAccuracy && !manualAccuracy)}
+            onPress={handlePress}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     </BottomSheetModal>
   );
 };

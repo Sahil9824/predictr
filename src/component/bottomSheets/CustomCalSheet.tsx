@@ -1,11 +1,27 @@
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
-import React, { useState } from "react";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  useBottomSheetModal,
+} from "@gorhom/bottom-sheet";
+import React, { useEffect, useState } from "react";
 import CustomDatePicker from "../CustomDatePicker";
-import { Platform, StyleSheet } from "react-native";
+import { BackHandler, Platform, StyleSheet } from "react-native";
 import { scale } from "../../../helper";
 
 const CustomCalSheet = ({ datePickerRef, setDate }) => {
+  const { dismiss } = useBottomSheetModal();
   const [dateRange, setDateRange] = useState(null);
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
 
   const handleCustomDateChange = (selectedDate) => {
     const newDate = new Date(selectedDate);
@@ -32,7 +48,7 @@ const CustomCalSheet = ({ datePickerRef, setDate }) => {
       ref={datePickerRef}
       index={0}
       enablePanDownToClose
-      snapPoints={[550]}
+      snapPoints={[Platform.OS === "ios" ? 600 : 500, 600]}
       handleIndicatorStyle={{
         width: 65,
         height: 5,

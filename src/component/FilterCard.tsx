@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useRef } from "react";
+import React, { useState, forwardRef, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,10 +9,15 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TouchableWithoutFeedback,
+  BackHandler,
 } from "react-native";
 import { Colors, fonts } from "../constant";
 import { scale } from "../../helper";
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  useBottomSheetModal,
+} from "@gorhom/bottom-sheet";
 import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import CustomDatePicker from "./CustomDatePicker";
@@ -22,6 +27,18 @@ import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 import Button from "./Button";
 
 const FilterCard = forwardRef((props, ref) => {
+  const { dismiss } = useBottomSheetModal();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
   const [selectedAccuracy, setSelectedAccuracy] = useState(null);
   const [manualAccuracy, setManualAccuracy] = useState("");
   const [dateRange, setDateRange] = useState({ from: null, to: null });
@@ -140,7 +157,7 @@ const FilterCard = forwardRef((props, ref) => {
       >
         <KeyboardAwareScrollView
           contentContainerStyle={{ flexGrow: 1 }}
-          extraHeight={Platform.OS === "ios" ? 120 : 90}
+          extraScrollHeight={Platform.OS === "android" ? 190 : 0}
           enableOnAndroid
           keyboardShouldPersistTaps="handled"
         >
@@ -254,7 +271,7 @@ const FilterCard = forwardRef((props, ref) => {
         ref={datePickerRef}
         index={0}
         enablePanDownToClose
-        snapPoints={[550]}
+        snapPoints={[Platform.OS === "ios" ? 600 : 500, 600]}
         handleIndicatorStyle={{
           width: 65,
           height: 5,
@@ -269,6 +286,7 @@ const FilterCard = forwardRef((props, ref) => {
             initialDate={dateRange.from}
             onDateChange={(date) => handleCustomDateChange(date, "from")}
             closeBottomSheet={() => datePickerRef.current?.dismiss()}
+            toDate={!dateRange.from && dateRange?.to}
           />
         )}
         {showCustomDatePicker.to && (
@@ -276,6 +294,7 @@ const FilterCard = forwardRef((props, ref) => {
             initialDate={dateRange.to}
             onDateChange={(date) => handleCustomDateChange(date, "to")}
             closeBottomSheet={() => datePickerRef.current?.dismiss()}
+            fromDate={!dateRange?.to && dateRange?.from}
           />
         )}
       </BottomSheetModal>

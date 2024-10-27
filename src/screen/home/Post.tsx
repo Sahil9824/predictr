@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Keyboard,
   Platform,
@@ -22,11 +22,16 @@ import { SCREENS } from "../../constant/navigation.constants";
 import { useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Pressable } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Post = ({ navigation }) => {
   const [isComment, setIsComment] = useState(true);
   const headerHeight = useHeaderHeight();
-  const [replyClicked, setReplyClicked] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    inputRef?.current?.focus();
+  };
 
   const { imgSrc, date, selectedStock, movement, reason, previousScreen } =
     useRoute().params || {};
@@ -40,32 +45,36 @@ const Post = ({ navigation }) => {
   }, [selectedStock]);
 
   return (
-    <SafeAreaView style={{ flexGrow: 1, backgroundColor: "white" }}>
-      <KeyboardAvoidingView
-        style={styles.avoidingView}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        enabled
-        keyboardVerticalOffset={headerHeight + 60}
-        onStartShouldSetResponder={() => {
-          Keyboard.dismiss();
-          return false;
-        }}
-      >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <TouchableWithoutFeedback
-              onPress={
-                previousScreen
-                  ? () => navigation.navigate(previousScreen)
-                  : () => navigation.goBack()
-              }
-            >
-              <Icons type={ICONS.BACKARR} />
-            </TouchableWithoutFeedback>
-            <Text style={styles.menuText}>Post</Text>
-          </View>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "white" }}
+      edges={["top", "right", "left"]}
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableWithoutFeedback
+            onPress={
+              previousScreen
+                ? () => navigation.navigate(previousScreen)
+                : () => navigation.goBack()
+            }
+          >
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+          <Text style={styles.menuText}>Post</Text>
+        </View>
+        <KeyboardAvoidingView
+          style={styles.avoidingView}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          enabled
+          keyboardVerticalOffset={60}
+          onStartShouldSetResponder={() => {
+            Keyboard.dismiss();
+            return false;
+          }}
+        >
           <ScrollView
-            style={{ paddingBottom: 100 }}
+            // automaticallyAdjustKeyboardInsets
+            // style={{ paddingBottom: 100 }}
             contentContainerStyle={styles.scrollStyle}
           >
             <View style={styles.postBox}>
@@ -111,36 +120,61 @@ const Post = ({ navigation }) => {
                 </View>
 
                 {isComment && (
-                  <View style={{ paddingTop: 12, paddingRight: 8 }}>
+                  <View style={{ paddingTop: 12, paddingRight: 16 }}>
                     <Comment
                       name="Trevor Nik"
                       ago="2 Hours ago"
                       content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasd `}
                       avatar={Images.avatar1}
-                      setReplyClicked={setReplyClicked}
+                      onReplyClicked={handleFocus}
                     />
                     <Comment
                       name="S Shar"
                       ago="5 Hours ago"
                       content={`lorem ams das dasdn laks dasjd akd as dasj dka adsda asdas dasd asda`}
                       avatar={Images.avatar2}
-                      setReplyClicked={setReplyClicked}
+                      onReplyClicked={handleFocus}
+                      isReply
                     />
                     <Comment
                       name="Dev Trev"
                       ago="10 hours ago"
                       content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasda sdasd asd asdasdsfasfasasdasd d asda dasda sdasd ad`}
                       avatar={Images.avatar3}
-                      setReplyClicked={setReplyClicked}
+                      onReplyClicked={handleFocus}
+                    />
+                    <Comment
+                      name="Dev Trev"
+                      ago="10 hours ago"
+                      content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasda sdasd asd asdasdsfasfasasdasd d asda dasda sdasd ad`}
+                      avatar={Images.avatar3}
+                      onReplyClicked={handleFocus}
+                      isReply
+                    />
+                    <Comment
+                      name="Dev Trev"
+                      ago="10 hours ago"
+                      content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasda sdasd asd asdasdsfasfasasdasd d asda dasda sdasd ad`}
+                      avatar={Images.avatar3}
+                      onReplyClicked={handleFocus}
+                    />
+                    <Comment
+                      name="Dev Trev"
+                      ago="10 hours ago"
+                      content={`lorem ams das dasdn laks dasjd akd as dasj dka asdasda sdasd asd asdasdsfasfasasdasd d asda dasda sdasd ad`}
+                      avatar={Images.avatar3}
+                      onReplyClicked={handleFocus}
+                      isReply
                     />
                   </View>
                 )}
               </View>
             </View>
           </ScrollView>
-          <CommentInput isReply={replyClicked} />
-        </View>
-      </KeyboardAvoidingView>
+
+          <CommentInput ref={inputRef} />
+        </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -148,7 +182,7 @@ const Post = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
   },
 
   header: {
@@ -164,7 +198,7 @@ const styles = StyleSheet.create({
   },
 
   scrollStyle: {
-    flexGrow: 1,
+    // flexGrow: 1,
   },
 
   mainBox: {

@@ -14,6 +14,7 @@ import { scale } from "../../../helper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const mockData = [
   { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
@@ -67,12 +68,14 @@ const PredictorsScreen = () => {
   };
 
   return (
-    <FlatList
-      data={mockData}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id}
-      contentContainerStyle={styles.listContainer}
-    />
+    <KeyboardAwareScrollView enableOnAndroid>
+      <FlatList
+        data={mockData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContainer}
+      />
+    </KeyboardAwareScrollView>
   );
 };
 

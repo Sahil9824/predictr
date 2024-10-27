@@ -89,4 +89,5 @@ export const Images = {
   userPredEmp: require("./userPredEmp.png"),
   close: require("./Close.png"),
   CloseGrey: require("./CloseGrey.png"),
+  WinnerBg: require("./WinnerBg.png"),
 };

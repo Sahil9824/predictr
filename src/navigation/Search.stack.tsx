@@ -18,6 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import { useRoute } from "@react-navigation/native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -63,7 +64,6 @@ const SearchScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Tab View */}
         <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}

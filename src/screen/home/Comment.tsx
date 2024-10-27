@@ -6,12 +6,11 @@ import { Colors, fonts } from "../../constant";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 
-const Comment = ({ name, ago, content, avatar, setReplyClicked }) => {
+const Comment = ({ name, ago, content, avatar, onReplyClicked, isReply }) => {
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
   const [likeCount, setLikeCount] = useState(0); // Count for likes
   const [dislikeCount, setDislikeCount] = useState(0); // Count for dislikes
-  const [isReply, setIsReply] = useState(true);
 
   const navigation = useNavigation();
 
@@ -45,7 +44,15 @@ const Comment = ({ name, ago, content, avatar, setReplyClicked }) => {
   };
   return (
     <>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          isReply && {
+            paddingLeft: 30,
+            marginTop: 4,
+          },
+        ]}
+      >
         <Pressable
           onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
         >
@@ -127,7 +134,7 @@ const Comment = ({ name, ago, content, avatar, setReplyClicked }) => {
                 justifyContent: "center",
                 marginRight: scale(10),
               }}
-              onPress={() => setReplyClicked(true)}
+              onPress={onReplyClicked}
             >
               <Text
                 style={{
@@ -144,117 +151,6 @@ const Comment = ({ name, ago, content, avatar, setReplyClicked }) => {
           </View>
         </View>
       </View>
-
-      {isReply && (
-        <>
-          <View style={{ ...styles.container, paddingLeft: 30, marginTop: 4 }}>
-            <Pressable
-              onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
-            >
-              <Image
-                source={avatar}
-                style={{ height: 24, width: 24, borderRadius: 6 }}
-              />
-            </Pressable>
-
-            <View style={{ paddingLeft: 8 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginTop: 1.5,
-                }}
-              >
-                <Text style={styles.textName}>{name}</Text>
-                <Text style={styles.ago}>{ago}</Text>
-              </View>
-
-              <Text style={styles.contentText}>{content}</Text>
-
-              <View style={{ flexDirection: "row" }}>
-                <Pressable
-                  onPress={handleLike}
-                  style={{
-                    width: 56,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginRight: scale(20),
-                  }}
-                >
-                  <Image
-                    source={liked ? Images.likeFilled : Images.like}
-                    style={{
-                      height: scale(16),
-                      width: scale(16),
-                      marginRight: 4,
-                    }}
-                  />
-                  <Text
-                    style={{
-                      fontFamily: liked ? fonts.f700 : fonts.f500,
-                      fontSize: scale(13),
-                      lineHeight: scale(19),
-                      color: liked ? "#024BAC" : Colors.textGrey,
-                      fontWeight: liked ? "700" : "500",
-                    }}
-                  >
-                    {disliked || liked ? likeCount : "Agree"}
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={handleDislike}
-                  style={{
-                    width: 73,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginRight: scale(20),
-                  }}
-                >
-                  <Image
-                    source={disliked ? Images.dislikeFilled : Images.dislike}
-                    style={{
-                      height: scale(16),
-                      width: scale(16),
-                      marginRight: 4,
-                    }}
-                  />
-                  <Text
-                    style={{
-                      fontFamily: disliked ? fonts.f700 : fonts.f500,
-                      fontSize: scale(13),
-                      lineHeight: scale(19),
-                      color: disliked ? "#E33F3F" : Colors.textGrey,
-                      fontWeight: disliked ? "700" : "500",
-                    }}
-                  >
-                    {disliked || liked ? dislikeCount : "Disagree"}
-                  </Text>
-                </Pressable>
-                <Pressable
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: scale(10),
-                  }}
-                  onPress={() => setReplyClicked(true)}
-                >
-                  <Text
-                    style={{
-                      fontFamily: fonts.f400,
-                      fontSize: scale(13),
-                      lineHeight: scale(19),
-                      color: Colors.textGrey,
-                      fontWeight: "400",
-                    }}
-                  >
-                    {"Reply"}
-                  </Text>
-                </Pressable>
-              </View>
-            </View>
-          </View>
-        </>
-      )}
     </>
   );
 };

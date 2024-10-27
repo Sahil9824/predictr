@@ -40,13 +40,20 @@ const NotificationSettings = ({ navigation }) => {
           {/* Newsletter Emails Section */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Newsletter Emails</Text>
-            <View style={{ ...styles.row, borderBottomWidth: 0 }}>
+            <View
+              style={{
+                ...styles.row,
+                borderBottomWidth: 1,
+                borderTopWidth: 1,
+                borderTopColor: "#0000001A",
+              }}
+            >
               <Text style={styles.label}>Receive Newsletter Emails</Text>
               <Switch
                 value={newsletterEmails}
                 onValueChange={setNewsletterEmails}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
           </View>
@@ -56,13 +63,19 @@ const NotificationSettings = ({ navigation }) => {
             <Text style={styles.sectionTitle}>Activity Emails</Text>
 
             {/* When you receive a like */}
-            <View style={styles.row}>
+            <View
+              style={{
+                ...styles.row,
+                borderTopWidth: 1,
+                borderTopColor: "#0000001A",
+              }}
+            >
               <Text style={styles.label}>When you receive a like</Text>
               <Switch
                 value={likeNotification}
                 onValueChange={setLikeNotification}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
 
@@ -73,7 +86,7 @@ const NotificationSettings = ({ navigation }) => {
                 value={commentNotification}
                 onValueChange={setCommentNotification}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
 
@@ -84,7 +97,7 @@ const NotificationSettings = ({ navigation }) => {
                 value={followNotification}
                 onValueChange={setFollowNotification}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
 
@@ -95,7 +108,7 @@ const NotificationSettings = ({ navigation }) => {
                 value={profileViewNotification}
                 onValueChange={setProfileViewNotification}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
 
@@ -108,7 +121,7 @@ const NotificationSettings = ({ navigation }) => {
                 value={predictionNotification}
                 onValueChange={setPredictionNotification}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
 
@@ -121,7 +134,7 @@ const NotificationSettings = ({ navigation }) => {
                 value={newPostNotification}
                 onValueChange={setNewPostNotification}
                 thumbColor="#FFFFFF"
-                trackColor={{ false: "#34C759", true: "#34C759" }}
+                trackColor={{ false: "#78788029", true: "#34C759" }}
               />
             </View>
           </View>
@@ -173,8 +186,6 @@ const styles = StyleSheet.create({
   },
   row: {
     borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderTopColor: "#0000001A",
     borderBottomColor: "#0000001A",
     flexDirection: "row",
     justifyContent: "space-between",

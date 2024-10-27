@@ -1,6 +1,7 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import {
   Animated,
+  BackHandler,
   FlatList,
   Image,
   Pressable,
@@ -18,6 +19,7 @@ import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetModalProvider,
+  useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
@@ -26,6 +28,18 @@ import { ScoringSystemScreen } from "../HowItWorks";
 
 const ContestDetails = forwardRef((props, ref) => {
   const scoringRef = useRef(null);
+  const { dismiss } = useBottomSheetModal();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss();
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
 
   const closeBottomSheet = () => {
     ref.current?.close();
@@ -33,16 +47,18 @@ const ContestDetails = forwardRef((props, ref) => {
   };
 
   const handleScoringPress = () => {
-    ref.current?.close();
     scoringRef?.current?.present();
+    ref.current?.dismiss();
   };
 
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
   );
+
   return (
     <>
       <BottomSheetModal
+        name="First"
         enableHandlePanningGesture={true}
         enableContentPanningGesture={false}
         enablePanDownToClose
@@ -168,6 +184,8 @@ const ContestDetails = forwardRef((props, ref) => {
       </BottomSheetModal>
 
       <BottomSheetModal
+        name="second"
+        stackBehavior="replace"
         ref={scoringRef}
         index={0}
         enablePanDownToClose

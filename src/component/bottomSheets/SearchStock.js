@@ -1,11 +1,14 @@
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
+  useBottomSheetModal,
   useBottomSheetTimingConfigs,
 } from "@gorhom/bottom-sheet";
 import React, { useEffect, useState } from "react";
 import {
+  BackHandler,
   Image,
+  KeyboardAvoidingView,
   Modal,
   Pressable,
   ScrollView,
@@ -22,6 +25,7 @@ import { fonts } from "../../constant";
 import Icons from "../Icons";
 import { ICONS } from "../../constant/icons.constants";
 import { Easing } from "react-native-reanimated";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const stocks = [
   {
@@ -178,6 +182,19 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalVal, setModalVal] = useState("");
 
+  const { dismiss } = useBottomSheetModal();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
+
   const handleSavePress = () => {
     searchBottomRef.current.dismiss();
     setSelectedStock({ symbol: modalVal, name: "" });
@@ -245,9 +262,12 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
               autoFocus
             />
           </View>
-          <ScrollView
-            contentContainerStyle={styles.scrollview}
+
+          <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scrollview}
+            enableOnAndroid
+            keyboardShouldPersistTaps="always"
           >
             {filteredStocks.map((item, index) => (
               <ListItems
@@ -270,7 +290,7 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
                 <Text style={styles.addText}>Add</Text>
               </TouchableOpacity>
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         </View>
       </BottomSheetModal>
       <Modal
@@ -301,6 +321,7 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
               style={[styles.modalInput, modalVal && { color: "black" }]}
               placeholder="Enter symbol"
               placeholderTextColor="#B8B8B8"
+              autoFocus={true}
             />
 
             <View style={styles.modBot}>
