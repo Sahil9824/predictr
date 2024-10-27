@@ -22,7 +22,9 @@ const PredictionStack = ({ navigation, route }) => {
       <Stack.Screen
         name={SCREENS.PREDICTION}
         component={Prediction}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={SCREENS.POST}

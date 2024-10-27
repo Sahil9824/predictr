@@ -21,8 +21,8 @@ const Navigation = () => {
   ) : (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
-        {true ? (
-          true ? (
+        {isAuthenticated ? (
+          isOnboarded ? (
             <AppNavigation />
           ) : (
             <OnboardingStack />

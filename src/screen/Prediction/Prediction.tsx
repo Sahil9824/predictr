@@ -1,7 +1,9 @@
 import {
   Animated,
+  BackHandler,
   Image,
   Keyboard,
+  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -32,6 +34,7 @@ import {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import ImageViewer from "react-native-image-zoom-viewer";
 
 const Prediction = ({ navigation }) => {
   const [selectedStock, setSelectedStock] = useState("");
@@ -40,6 +43,7 @@ const Prediction = ({ navigation }) => {
   const [reason, setReason] = useState("");
   const [isPick, setIsPick] = useState(false);
   const [imgSrc, setImgSrc] = useState(null);
+  const [isPreview, setIsPreview] = useState(false);
 
   const translateY = useSharedValue(1000);
 
@@ -102,6 +106,9 @@ const Prediction = ({ navigation }) => {
     });
   };
 
+  const handlePreview = () => {
+    setIsPreview(true);
+  };
   return (
     <>
       {Platform.OS === "ios" && <StatusBar backgroundColor="#EFF0F1" />}
@@ -284,7 +291,7 @@ const Prediction = ({ navigation }) => {
               </View>
             </Pressable>
           ) : (
-            <View
+            <Pressable
               style={{
                 width: "100%",
                 height: scale(190),
@@ -294,15 +301,17 @@ const Prediction = ({ navigation }) => {
                 position: "relative",
                 marginBottom: 30,
               }}
+              onPress={handlePreview}
             >
+              {/* <Pressable > */}
               <Image
                 source={{ uri: imgSrc.uri }}
                 style={{
                   width: "100%",
                   height: "100%",
-                  resizeMode: "contain",
                 }}
               />
+              {/* </Pressable> */}
 
               <View style={{ position: "absolute", left: 10, top: 10 }}>
                 <Icons type={ICONS.PIN} stroke="#FFFFFF" />
@@ -323,7 +332,7 @@ const Prediction = ({ navigation }) => {
                   source={Images.close}
                 />
               </Pressable>
-            </View>
+            </Pressable>
           )}
 
           <Button
@@ -350,7 +359,17 @@ const Prediction = ({ navigation }) => {
           movementBottomRef={movementBottomRef}
           setMovement={setMovement}
         />
-
+        <Modal
+          onRequestClose={() => setIsPreview(false)}
+          visible={isPreview}
+          transparent={true}
+        >
+          <ImageViewer
+            onCancel={() => setIsPreview(false)}
+            imageUrls={[{ url: imgSrc?.uri }]}
+            enableSwipeDown
+          />
+        </Modal>
         <CustomCalSheet datePickerRef={calBottomRef} setDate={setDate} />
       </SafeAreaView>
       {/* </Animated.View> */}

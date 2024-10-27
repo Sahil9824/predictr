@@ -186,7 +186,6 @@ const WinnerCard = ({
                     textAlign: "center",
                     color: Colors.white,
                     marginVertical: scale(4),
-                    //fontWeight: "700",
                   }}
                 >
                   {"Jesus Boston"}
@@ -198,7 +197,6 @@ const WinnerCard = ({
                     lineHeight: scale(13),
                     textAlign: "center",
                     color: Colors.white,
-                    //fontWeight: "400",
                   }}
                 >
                   {"60.2% Accurate"}
@@ -210,7 +208,6 @@ const WinnerCard = ({
                     lineHeight: scale(13),
                     textAlign: "center",
                     color: Colors.white,
-                    //fontWeight: "400",
                   }}
                 >
                   {"3 Predictions"}
@@ -278,7 +275,6 @@ const WinnerCard = ({
                   fontSize: scale(10),
                   lineHeight: scale(13),
                   textAlign: "center",
-                  //fontWeight: "400",
 
                   color: Colors.white,
                 }}

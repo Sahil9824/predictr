@@ -39,6 +39,7 @@ const FilterCard = forwardRef((props, ref) => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
     };
   }, []);
+
   const [selectedAccuracy, setSelectedAccuracy] = useState(null);
   const [manualAccuracy, setManualAccuracy] = useState("");
   const [dateRange, setDateRange] = useState({ from: null, to: null });

@@ -186,7 +186,7 @@ const DashBoard = () => {
   const navigation = useNavigation();
   const scrollY = new Animated.Value(0);
   const stickyTop = scrollY.interpolate({
-    outputRange: [-56 * 3, 0],
+    outputRange: [-55 * 3, 0],
     inputRange: [150, 500],
     extrapolate: "clamp",
   });
@@ -434,17 +434,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     opacity: 1,
     overflow: "hidden",
-    paddingBottom: 2,
+    // paddingBottom: 2,
   },
 
   shadow: {
     width: "100%",
     backgroundColor: "white",
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
-    shadowOpacity: 0.2,
-    shadowRadius: 3, // You can adjust this for more blur effect
-    elevation: 5, // This will create shadow, but not just at the bottom
+    // shadowColor: "#000000",
+    // shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
+    // shadowOpacity: 0.2,
+    // shadowRadius: 3, // You can adjust this for more blur effect
+    // elevation: 5, // This will create shadow, but not just at the bottom
   },
   headerOptionsContainer: {
     position: "absolute",

@@ -8,25 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* predictrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* predictrTests.m */; };
+		06824DA36E9E4AB58209C906 /* SF Pro Text Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0807D3D7A9F34FBFB8C8C756 /* SF Pro Text Heavy.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		27901C1611F04D41AC831224 /* Inter 18pt Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23400EE5685546B58889066B /* Inter 18pt Medium.ttf */; };
+		333B07F7F1A14CC9AF32B33D /* SF Pro Text Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0AD90CAEB6A4E1EBFC54E64 /* SF Pro Text Regular.ttf */; };
+		3E41F1A7BBAF47EFAFBE01BB /* Inter 18pt Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D0B510547BF4BB594853EAC /* Inter 18pt Regular.ttf */; };
+		4D08655DBD914FF092FE6C89 /* SF Pro Text Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6DCAC814948DDAE93DA06 /* SF Pro Text Bold.ttf */; };
+		5D47ABD3B3EF46D286F3B776 /* Inter 18pt SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AD91E2D5D084117B81B42F3 /* Inter 18pt SemiBold.ttf */; };
+		63A4CBDFC41841F081DD88B7 /* Inter 18pt Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9D0F46ECAEF40B2B2E5B5CF /* Inter 18pt Black.ttf */; };
+		6A64D902C8584E16AAB3E14C /* SF Pro Text Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2C1A0A591AD4F3D9A25EDEE /* SF Pro Text Semibold.ttf */; };
 		72DE0F0B85859131C8FC5880 /* libPods-predictr-predictrTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4549BEC4744277841E0F3D45 /* libPods-predictr-predictrTests.a */; };
 		76648805D6C6AA0C82F1FA6B /* libPods-predictr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E95CC90940E5BB11C82421C /* libPods-predictr.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		F4A7F3EFB7B7C439AD67C846 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 7AA64F5ABAEE9DD355F510FC /* PrivacyInfo.xcprivacy */; };
-		63A4CBDFC41841F081DD88B7 /* Inter 18pt Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9D0F46ECAEF40B2B2E5B5CF /* Inter 18pt Black.ttf */; };
-		F02756E7922F4F6E8FD8FFE2 /* Inter 18pt Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47F08A26F19404E83289188 /* Inter 18pt Bold.ttf */; };
-		F8B243FCDD93467CB4346C82 /* Inter 18pt ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E484FBBBC7E9495B96572984 /* Inter 18pt ExtraBold.ttf */; };
-		27901C1611F04D41AC831224 /* Inter 18pt Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23400EE5685546B58889066B /* Inter 18pt Medium.ttf */; };
-		3E41F1A7BBAF47EFAFBE01BB /* Inter 18pt Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D0B510547BF4BB594853EAC /* Inter 18pt Regular.ttf */; };
-		5D47ABD3B3EF46D286F3B776 /* Inter 18pt SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AD91E2D5D084117B81B42F3 /* Inter 18pt SemiBold.ttf */; };
-		4D08655DBD914FF092FE6C89 /* SF Pro Text Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6DCAC814948DDAE93DA06 /* SF Pro Text Bold.ttf */; };
-		333B07F7F1A14CC9AF32B33D /* SF Pro Text Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0AD90CAEB6A4E1EBFC54E64 /* SF Pro Text Regular.ttf */; };
 		CEA233B6EA6849CCA1ACAF4B /* SF Pro Text Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 99548C6C85764D2FA151BA04 /* SF Pro Text Black.otf */; };
-		06824DA36E9E4AB58209C906 /* SF Pro Text Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0807D3D7A9F34FBFB8C8C756 /* SF Pro Text Heavy.ttf */; };
+		F02756E7922F4F6E8FD8FFE2 /* Inter 18pt Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47F08A26F19404E83289188 /* Inter 18pt Bold.ttf */; };
 		F07FCA6BD23643ADBC3C0CA1 /* SF Pro Text Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90194987473542CF9970A938 /* SF Pro Text Medium.ttf */; };
-		6A64D902C8584E16AAB3E14C /* SF Pro Text Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2C1A0A591AD4F3D9A25EDEE /* SF Pro Text Semibold.ttf */; };
+		F4A7F3EFB7B7C439AD67C846 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 7AA64F5ABAEE9DD355F510FC /* PrivacyInfo.xcprivacy */; };
+		F8B243FCDD93467CB4346C82 /* Inter 18pt ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E484FBBBC7E9495B96572984 /* Inter 18pt ExtraBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +43,7 @@
 		00E356EE1AD99517003FC87E /* predictrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = predictrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* predictrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = predictrTests.m; sourceTree = "<group>"; };
+		0807D3D7A9F34FBFB8C8C756 /* SF Pro Text Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Heavy.ttf"; path = "../src/assets/fonts/SF Pro Text Heavy.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* predictr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = predictr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = predictr/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = predictr/AppDelegate.mm; sourceTree = "<group>"; };
@@ -50,27 +51,26 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = predictr/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = predictr/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = predictr/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		23400EE5685546B58889066B /* Inter 18pt Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Medium.ttf"; path = "../src/assets/fonts/Inter 18pt Medium.ttf"; sourceTree = "<group>"; };
 		235C55AC26173A66128A0ADB /* Pods-predictr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr.release.xcconfig"; path = "Target Support Files/Pods-predictr/Pods-predictr.release.xcconfig"; sourceTree = "<group>"; };
+		3AE6DCAC814948DDAE93DA06 /* SF Pro Text Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Bold.ttf"; path = "../src/assets/fonts/SF Pro Text Bold.ttf"; sourceTree = "<group>"; };
 		3E95CC90940E5BB11C82421C /* libPods-predictr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-predictr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4549BEC4744277841E0F3D45 /* libPods-predictr-predictrTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-predictr-predictrTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB6C2A54655E49E9C12923F /* Pods-predictr-predictrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr-predictrTests.release.xcconfig"; path = "Target Support Files/Pods-predictr-predictrTests/Pods-predictr-predictrTests.release.xcconfig"; sourceTree = "<group>"; };
+		5AD91E2D5D084117B81B42F3 /* Inter 18pt SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt SemiBold.ttf"; path = "../src/assets/fonts/Inter 18pt SemiBold.ttf"; sourceTree = "<group>"; };
 		7AA64F5ABAEE9DD355F510FC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = predictr/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = predictr/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		90194987473542CF9970A938 /* SF Pro Text Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Medium.ttf"; path = "../src/assets/fonts/SF Pro Text Medium.ttf"; sourceTree = "<group>"; };
+		99548C6C85764D2FA151BA04 /* SF Pro Text Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Black.otf"; path = "../src/assets/fonts/SF Pro Text Black.otf"; sourceTree = "<group>"; };
+		9D0B510547BF4BB594853EAC /* Inter 18pt Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Regular.ttf"; path = "../src/assets/fonts/Inter 18pt Regular.ttf"; sourceTree = "<group>"; };
 		9D1917B39C8FC741F573E4F7 /* Pods-predictr-predictrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr-predictrTests.debug.xcconfig"; path = "Target Support Files/Pods-predictr-predictrTests/Pods-predictr-predictrTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A2C1A0A591AD4F3D9A25EDEE /* SF Pro Text Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Semibold.ttf"; path = "../src/assets/fonts/SF Pro Text Semibold.ttf"; sourceTree = "<group>"; };
+		A47F08A26F19404E83289188 /* Inter 18pt Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Bold.ttf"; path = "../src/assets/fonts/Inter 18pt Bold.ttf"; sourceTree = "<group>"; };
+		C0AD90CAEB6A4E1EBFC54E64 /* SF Pro Text Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Regular.ttf"; path = "../src/assets/fonts/SF Pro Text Regular.ttf"; sourceTree = "<group>"; };
+		C9D0F46ECAEF40B2B2E5B5CF /* Inter 18pt Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Black.ttf"; path = "../src/assets/fonts/Inter 18pt Black.ttf"; sourceTree = "<group>"; };
+		E484FBBBC7E9495B96572984 /* Inter 18pt ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt ExtraBold.ttf"; path = "../src/assets/fonts/Inter 18pt ExtraBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F5C0339D6B19ABEBE719A12E /* Pods-predictr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr.debug.xcconfig"; path = "Target Support Files/Pods-predictr/Pods-predictr.debug.xcconfig"; sourceTree = "<group>"; };
-		C9D0F46ECAEF40B2B2E5B5CF /* Inter 18pt Black.ttf */ = {isa = PBXFileReference; name = "Inter 18pt Black.ttf"; path = "../src/assets/fonts/Inter 18pt Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A47F08A26F19404E83289188 /* Inter 18pt Bold.ttf */ = {isa = PBXFileReference; name = "Inter 18pt Bold.ttf"; path = "../src/assets/fonts/Inter 18pt Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E484FBBBC7E9495B96572984 /* Inter 18pt ExtraBold.ttf */ = {isa = PBXFileReference; name = "Inter 18pt ExtraBold.ttf"; path = "../src/assets/fonts/Inter 18pt ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		23400EE5685546B58889066B /* Inter 18pt Medium.ttf */ = {isa = PBXFileReference; name = "Inter 18pt Medium.ttf"; path = "../src/assets/fonts/Inter 18pt Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9D0B510547BF4BB594853EAC /* Inter 18pt Regular.ttf */ = {isa = PBXFileReference; name = "Inter 18pt Regular.ttf"; path = "../src/assets/fonts/Inter 18pt Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5AD91E2D5D084117B81B42F3 /* Inter 18pt SemiBold.ttf */ = {isa = PBXFileReference; name = "Inter 18pt SemiBold.ttf"; path = "../src/assets/fonts/Inter 18pt SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3AE6DCAC814948DDAE93DA06 /* SF Pro Text Bold.ttf */ = {isa = PBXFileReference; name = "SF Pro Text Bold.ttf"; path = "../src/assets/fonts/SF Pro Text Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C0AD90CAEB6A4E1EBFC54E64 /* SF Pro Text Regular.ttf */ = {isa = PBXFileReference; name = "SF Pro Text Regular.ttf"; path = "../src/assets/fonts/SF Pro Text Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		99548C6C85764D2FA151BA04 /* SF Pro Text Black.otf */ = {isa = PBXFileReference; name = "SF Pro Text Black.otf"; path = "../src/assets/fonts/SF Pro Text Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0807D3D7A9F34FBFB8C8C756 /* SF Pro Text Heavy.ttf */ = {isa = PBXFileReference; name = "SF Pro Text Heavy.ttf"; path = "../src/assets/fonts/SF Pro Text Heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		90194987473542CF9970A938 /* SF Pro Text Medium.ttf */ = {isa = PBXFileReference; name = "SF Pro Text Medium.ttf"; path = "../src/assets/fonts/SF Pro Text Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A2C1A0A591AD4F3D9A25EDEE /* SF Pro Text Semibold.ttf */ = {isa = PBXFileReference; name = "SF Pro Text Semibold.ttf"; path = "../src/assets/fonts/SF Pro Text Semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

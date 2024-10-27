@@ -72,13 +72,14 @@ const HeaderOptions = ({
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
-            { width: scale(144), justifyContent: "center" },
+            {
+              paddingHorizontal: 16,
+              paddingVertical: 12,
+              justifyContent: "center",
+            },
             isSelected === 0 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-              // height: scale(50),
-              paddingHorizontal: 16,
-              paddingVertical: 12,
             },
           ]}
         >
@@ -86,15 +87,13 @@ const HeaderOptions = ({
             style={[
               {
                 fontFamily: fonts.f400,
-                fontSize: scale(15),
+                fontSize: 15,
                 lineHeight: scale(21),
                 textAlign: "center",
-                //fontWeight: "400",
               },
               isSelected === 0 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
-                //fontWeight: "800",
               },
             ]}
           >
@@ -105,12 +104,14 @@ const HeaderOptions = ({
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
-            { width: scale(116), justifyContent: "center" },
+            {
+              paddingHorizontal: 16,
+              paddingVertical: 12,
+              justifyContent: "center",
+            },
             isSelected === 1 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-              paddingHorizontal: 16,
-              paddingVertical: 12,
             },
           ]}
         >
@@ -118,7 +119,7 @@ const HeaderOptions = ({
             style={[
               {
                 fontFamily: fonts.f400,
-                fontSize: scale(15),
+                fontSize: 15,
                 lineHeight: scale(21),
                 textAlign: "center",
                 //fontWeight: "400",
@@ -430,7 +431,7 @@ const UserProfile = () => {
           style={{
             ...styles.stickyHead,
             marginTop:
-              Platform.OS === "android" ? viewHeight - 1 : viewHeight * 2,
+              Platform.OS === "android" ? viewHeight - 1 : viewHeight * 2.2,
             top: stickyTop,
             opacity: animatedOpac,
           }}
@@ -474,23 +475,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     opacity: 1,
     overflow: "hidden",
-    paddingBottom: 1,
   },
 
   shadow: {
     width: "100%",
     backgroundColor: "white",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 }, // Only bottom shadow
-        shadowOpacity: 0.2,
-        shadowRadius: 3, // You can adjust this for more blur effect
-      },
-      android: {
-        elevation: 5, // This will create shadow, but not just at the bottom
-      },
-    }),
   },
 
   tabHead: {
