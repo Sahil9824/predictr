@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f600,
     paddingLeft: 16,
     color: "#101010",
-    fontWeight: "600",
+    //fontWeight: "600",
   },
   faqItem: {
     paddingVertical: 12,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   questionText: {
     fontSize: 15,
     fontFamily: fonts.f500,
-    fontWeight: "500",
+    //fontWeight: "500",
     color: "black",
   },
   answerContainer: {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   answerText: {
     fontSize: 14,
     fontFamily: fonts.f500,
-    fontWeight: "500",
+    //fontWeight: "500",
     color: "#717272",
   },
 });

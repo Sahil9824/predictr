@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     color: "#505050",
     paddingLeft: 8,
     width: "98%",
-    fontWeight: "400",
+    //fontWeight: "400",
   },
 
   contestText: {
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlign: "left",
     color: "#151B26",
-    fontWeight: "700",
+    //fontWeight: "700",
   },
 
   bottomSheet: {
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f700,
     fontSize: 16,
     color: "#151B26",
-    fontWeight: "700",
+    //fontWeight: "700",
   },
   headTextSub: {
     flexDirection: "row",
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: 15,
     color: "#505050",
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   bottomBtnBox: {
     width: "100%",
@@ -307,6 +307,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     color: "#024BAC",
-    fontWeight: "700",
+    //fontWeight: "700",
   },
 });

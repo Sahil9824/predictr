@@ -96,7 +96,6 @@ const Comment = ({ name, ago, content, avatar, onReplyClicked, isReply }) => {
                   fontSize: scale(13),
                   lineHeight: scale(19),
                   color: liked ? "#024BAC" : Colors.textGrey,
-                  fontWeight: liked ? "700" : "500",
                 }}
               >
                 {disliked || liked ? likeCount : "Agree"}
@@ -121,7 +120,6 @@ const Comment = ({ name, ago, content, avatar, onReplyClicked, isReply }) => {
                   fontSize: scale(13),
                   lineHeight: scale(19),
                   color: disliked ? "#E33F3F" : Colors.textGrey,
-                  fontWeight: disliked ? "700" : "500",
                 }}
               >
                 {disliked || liked ? dislikeCount : "Disagree"}
@@ -142,7 +140,7 @@ const Comment = ({ name, ago, content, avatar, onReplyClicked, isReply }) => {
                   fontSize: scale(13),
                   lineHeight: scale(19),
                   color: Colors.textGrey,
-                  fontWeight: "400",
+                  //fontWeight: "400",
                 }}
               >
                 {"Reply"}
@@ -167,7 +165,7 @@ const styles = StyleSheet.create({
 
   textName: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: scale(14),
     color: "#151B26",
     marginRight: 4,
@@ -175,14 +173,14 @@ const styles = StyleSheet.create({
 
   ago: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(13),
     color: "#717272",
   },
 
   contentText: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(15),
     color: "#151B26",
     marginTop: 4,

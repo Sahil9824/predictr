@@ -26,68 +26,28 @@
       "sha1": "f3e44abd6661d5b861e66db22f4f79a6c466cd00"
     },
     {
-      "path": "src/assets/fonts/Inter_18pt-BlackItalic.ttf",
-      "sha1": "1d5eae80ec55b454fad2bc00e3190e006ebbdb9f"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-BoldItalic.ttf",
-      "sha1": "3be7a4fdd0a2901f4607cb5d5914086cd87c3421"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-ExtraBoldItalic.ttf",
-      "sha1": "a447ce4b78aca02c2183a6a765f5e199bf205660"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-ExtraLight.ttf",
-      "sha1": "42e4cb6caa0b9fb529bf640645a9bc29284d79b2"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-ExtraLightItalic.ttf",
-      "sha1": "61072f48214e0f0959dc5356a39559e6ab4f3a64"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-Italic.ttf",
-      "sha1": "ec36f0b6431e16cae9c11f93832eae6dbad40b4a"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-Light.ttf",
-      "sha1": "6b041e6fc61656b930d8ef638a0b9d6a0ac8e084"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-LightItalic.ttf",
-      "sha1": "c896e4309f43e88093e058a6b822692d43120a18"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-MediumItalic.ttf",
-      "sha1": "be7237b6cdcd5738007a1fb702309e23bdfd7125"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-SemiBoldItalic.ttf",
-      "sha1": "6b5eb26c850c647aaab42e7e299e23108416ca32"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-Thin.ttf",
-      "sha1": "4f2b3c3c97e618166627b4d3fff9322fa5198e81"
-    },
-    {
-      "path": "src/assets/fonts/Inter_18pt-ThinItalic.ttf",
-      "sha1": "2215c5b4224e0f646b85bbc0a684c9844d8c8c82"
+      "path": "src/assets/fonts/SF Pro Text Black.otf",
+      "sha1": "7e41ec8e9fb7779fae27b90ed9e4275239b8c6e7"
     },
     {
       "path": "src/assets/fonts/SF Pro Text Bold.ttf",
       "sha1": "09a7ce76077f8696943638f5cc99c112f8d716ae"
     },
     {
-      "path": "src/assets/fonts/SF Pro Text Light.ttf",
-      "sha1": "2598837d0da90b71704242c5ca507bab3499708e"
+      "path": "src/assets/fonts/SF Pro Text Heavy.ttf",
+      "sha1": "1b6502f1314bd6e1cb60ac6ad813201f4bda4b46"
+    },
+    {
+      "path": "src/assets/fonts/SF Pro Text Medium.ttf",
+      "sha1": "62f39df9906a56dc84d68caf2996940413e55525"
     },
     {
       "path": "src/assets/fonts/SF Pro Text Regular.ttf",
       "sha1": "6f8b9d118e5e053ba77690922f793a5fa87667d2"
     },
     {
-      "path": "src/assets/fonts/SFNS Text Medium.ttf",
-      "sha1": "8cb56a028cc7bf091e49830a8b19a7a0dd07b84e"
+      "path": "src/assets/fonts/SF Pro Text Semibold.ttf",
+      "sha1": "eb4d4aa16e23ce6374667c66fc750501a34ac9a4"
     }
   ]
 }

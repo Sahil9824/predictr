@@ -225,7 +225,7 @@ const Titles: React.FC<TileProp> = ({
                 fontSize: 15,
                 lineHeight: 20,
                 color: Colors.textBlack,
-                fontWeight: "800",
+                //fontWeight: "800",
               }}
             >
               {item.name}
@@ -233,7 +233,7 @@ const Titles: React.FC<TileProp> = ({
             <Text
               style={{
                 fontFamily: fonts.f400,
-                fontWeight: "400",
+                //fontWeight: "400",
 
                 fontSize: 13,
                 lineHeight: 20,
@@ -267,7 +267,7 @@ const Titles: React.FC<TileProp> = ({
                     fontFamily: fonts.f800,
                     fontSize: 14,
                     color: Colors.primaryBlue,
-                    fontWeight: "800",
+                    //fontWeight: "800",
                   },
             ]}
           >
@@ -440,7 +440,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f400,
     color: Colors.textBlack,
-    fontWeight: "400",
+    //fontWeight: "400",
 
     paddingLeft: scale(10),
   },
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f800,
     fontSize: scale(32),
     lineHeight: scale(40),
-    fontWeight: "800",
+    //fontWeight: "800",
 
     color: Colors.textBlack,
   },
@@ -457,7 +457,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: scale(15),
     color: Colors.textBlack,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   header: {
     marginVertical: 10,
@@ -490,13 +490,13 @@ const styles = StyleSheet.create({
   followCount: {
     fontFamily: fonts.f400,
     fontSize: scale(14),
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   top10: {
     fontFamily: fonts.f800,
     fontSize: scale(14),
     color: Colors.primaryBlue,
-    fontWeight: "800",
+    //fontWeight: "800",
   },
   listContainer: {
     width: "86%",

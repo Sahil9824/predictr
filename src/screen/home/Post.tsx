@@ -219,21 +219,21 @@ const styles = StyleSheet.create({
 
   text1: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: scale(14),
     color: "#000",
   },
 
   text2: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(14),
     color: "#717272",
   },
 
   menuText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: 16,
     color: "#101010",
     marginLeft: 16,

@@ -55,18 +55,6 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Inter_18pt-BlackItalic.ttf</string>
-		<string>Inter_18pt-BoldItalic.ttf</string>
-		<string>Inter_18pt-ExtraBoldItalic.ttf</string>
-		<string>Inter_18pt-ExtraLight.ttf</string>
-		<string>Inter_18pt-ExtraLightItalic.ttf</string>
-		<string>Inter_18pt-Italic.ttf</string>
-		<string>Inter_18pt-Light.ttf</string>
-		<string>Inter_18pt-LightItalic.ttf</string>
-		<string>Inter_18pt-MediumItalic.ttf</string>
-		<string>Inter_18pt-SemiBoldItalic.ttf</string>
-		<string>Inter_18pt-Thin.ttf</string>
-		<string>Inter_18pt-ThinItalic.ttf</string>
 		<string>Inter 18pt Black.ttf</string>
 		<string>Inter 18pt Bold.ttf</string>
 		<string>Inter 18pt ExtraBold.ttf</string>
@@ -74,9 +62,11 @@
 		<string>Inter 18pt Regular.ttf</string>
 		<string>Inter 18pt SemiBold.ttf</string>
 		<string>SF Pro Text Bold.ttf</string>
-		<string>SF Pro Text Light.ttf</string>
 		<string>SF Pro Text Regular.ttf</string>
-		<string>SFNS Text Medium.ttf</string>
+		<string>SF Pro Text Black.otf</string>
+		<string>SF Pro Text Heavy.ttf</string>
+		<string>SF Pro Text Medium.ttf</string>
+		<string>SF Pro Text Semibold.ttf</string>
 	</array>
 </dict>
 </plist>

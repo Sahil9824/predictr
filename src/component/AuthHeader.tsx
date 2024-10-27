@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f600,
     fontSize: 15,
-    fontWeight: "600",
+    //fontWeight: "600",
     color: Colors.primaryBlue,
   },
   image: {

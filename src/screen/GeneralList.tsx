@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: 16,
     color: "#101010",
   },
@@ -114,13 +114,14 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
     color: "#333",
   },
   accuracy: {
     fontSize: 14,
     color: "#666",
     marginTop: 4,
+    fontFamily: fonts.f500,
   },
 });
 

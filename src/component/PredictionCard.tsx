@@ -173,7 +173,7 @@ const PredictionCard = ({
                       fontSize: scale(15),
                       lineHeight: scale(19),
                       color: Colors.textBlack,
-                      fontWeight: "800",
+                      //fontWeight: "800",
                     }}
                     suppressHighlighting={true}
                   >
@@ -183,7 +183,7 @@ const PredictionCard = ({
                 <Text
                   style={{
                     fontFamily: fonts.f400,
-                    fontWeight: "400",
+                    //fontWeight: "400",
 
                     fontSize: scale(12),
                     lineHeight: scale(15),
@@ -207,7 +207,7 @@ const PredictionCard = ({
                   <Text
                     style={{
                       color: "#024BAC",
-                      fontWeight: "800",
+                      //fontWeight: "800",
                       fontFamily: fonts.f800,
                       fontSize: 14,
                       marginRight: 10,
@@ -248,7 +248,7 @@ const PredictionCard = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 color: Colors.textBlack,
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {"I think "}
@@ -280,7 +280,7 @@ const PredictionCard = ({
                   fontSize: scale(15),
                   lineHeight: scale(19),
                   color: Colors.textBlack,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"TSLA"}
@@ -290,7 +290,7 @@ const PredictionCard = ({
               style={{
                 fontFamily: fonts.f400,
                 fontSize: scale(15),
-                fontWeight: "400",
+                //fontWeight: "400",
 
                 lineHeight: scale(21),
                 color: Colors.textBlack,
@@ -313,7 +313,7 @@ const PredictionCard = ({
                   fontSize: scale(15),
                   lineHeight: scale(19),
                   color: Colors.textBlack,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {" Up 4% "}
@@ -325,7 +325,7 @@ const PredictionCard = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 color: Colors.textBlack,
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {" by "}
@@ -345,7 +345,7 @@ const PredictionCard = ({
                   fontSize: scale(15),
                   lineHeight: scale(19),
                   color: Colors.textBlack,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"Apr 5"}
@@ -359,7 +359,7 @@ const PredictionCard = ({
               fontSize: scale(15),
               lineHeight: scale(21),
               color: Colors.textBlack,
-              fontWeight: "400",
+              //fontWeight: "400",
             }}
           >
             {
@@ -411,7 +411,7 @@ const PredictionCard = ({
                     fontSize: scale(13),
                     lineHeight: scale(19),
                     color: liked ? "#024BAC" : Colors.textGrey,
-                    fontWeight: liked ? "700" : "400",
+                    // fontWeight: liked ? "700" : "400",
                   }}
                 >
                   {disliked || liked ? likeCount : "Agree"}
@@ -440,7 +440,7 @@ const PredictionCard = ({
                     fontSize: scale(13),
                     lineHeight: scale(19),
                     color: disliked ? "#E33F3F" : Colors.textGrey,
-                    fontWeight: disliked ? "700" : "400",
+                    // fontWeight: disliked ? "700" : "400",
                   }}
                 >
                   {disliked || liked ? dislikeCount : "Disagree"}
@@ -469,7 +469,7 @@ const PredictionCard = ({
                     fontSize: scale(13),
                     lineHeight: scale(19),
                     color: Colors.textGrey,
-                    fontWeight: "400",
+                    //fontWeight: "400",
                   }}
                 >
                   {"Comment"}
@@ -509,7 +509,7 @@ const PredictionCard = ({
                 fontSize: scale(12),
                 color: Colors.textGrey,
                 lineHeight: scale(19),
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {"When Guessed"}
@@ -520,7 +520,7 @@ const PredictionCard = ({
                 fontSize: scale(15),
                 lineHeight: scale(19),
                 color: Colors.textBlack,
-                fontWeight: "700",
+                //fontWeight: "700",
               }}
             >
               {"228.52 USD"}
@@ -530,7 +530,7 @@ const PredictionCard = ({
                 fontFamily: fonts.f400,
                 fontSize: scale(12),
                 color: Colors.textGrey,
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {"24 Oct, 7:59 pm"}
@@ -543,7 +543,7 @@ const PredictionCard = ({
                 fontSize: scale(12),
                 color: Colors.textGrey,
                 lineHeight: scale(19),
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {"Last Updated"}
@@ -554,7 +554,7 @@ const PredictionCard = ({
                 fontSize: scale(15),
                 lineHeight: 19,
                 color: Colors.textBlack,
-                fontWeight: "700",
+                //fontWeight: "700",
               }}
             >
               {"221.20 USD"}
@@ -564,7 +564,7 @@ const PredictionCard = ({
                 fontFamily: fonts.f400,
                 fontSize: scale(12),
                 color: Colors.textGrey,
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {"28 Oct, 2:59 pm"}
@@ -577,7 +577,7 @@ const PredictionCard = ({
                 fontSize: scale(12),
                 color: Colors.textGrey,
                 lineHeight: scale(19),
-                fontWeight: "400",
+                //fontWeight: "400",
               }}
             >
               {"Movement"}
@@ -595,7 +595,7 @@ const PredictionCard = ({
                   fontSize: scale(15),
                   lineHeight: scale(19),
                   color: Colors.textRed,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"-3.2%"}
@@ -635,7 +635,7 @@ const PredictionCard = ({
                   fontFamily: fonts.f700,
                   fontSize: scale(14),
                   color: Colors.textBlack,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"No movement yet"}
@@ -644,7 +644,7 @@ const PredictionCard = ({
             <Text
               style={{
                 fontFamily: fonts.f400,
-                fontWeight: "400",
+                //fontWeight: "400",
                 fontSize: 14,
                 color: "#717272",
               }}
@@ -685,7 +685,7 @@ const PredictionCard = ({
                   fontFamily: fonts.f700,
                   fontSize: scale(14),
                   color: Colors.textRed,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"Inaccuracy"}
@@ -697,7 +697,7 @@ const PredictionCard = ({
                   lineHeight: scale(12),
                   marginLeft: scale(4),
                   marginTop: scale(3),
-                  fontWeight: "700",
+                  //fontWeight: "700",
                   letterSpacing: 0.4,
                 }}
               >
@@ -707,7 +707,7 @@ const PredictionCard = ({
             <Text
               style={{
                 fontFamily: fonts.f400,
-                fontWeight: "400",
+                //fontWeight: "400",
                 fontSize: 14,
                 color: "#717272",
               }}
@@ -775,7 +775,7 @@ const PredictionCard = ({
                   fontFamily: fonts.f700,
                   fontSize: scale(14),
                   color: Colors.white,
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"30% Accurate"}
@@ -808,7 +808,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: fonts.f500,
     fontSize: scale(12),
-    fontWeight: "500",
+    //fontWeight: "500",
     letterSpacing: scale(12) * -0.02,
   },
 });

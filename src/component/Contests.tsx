@@ -10,6 +10,7 @@ import {
   Image,
   Platform,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
@@ -145,7 +146,7 @@ const Contests = ({ openBottomSheet }) => {
               <Text
                 style={{
                   fontFamily: fonts.f600,
-                  fontWeight: "600",
+                  //fontWeight: "600",
                   fontSize: scale(14),
                   color: "#151B26",
                 }}
@@ -159,7 +160,7 @@ const Contests = ({ openBottomSheet }) => {
               <Text
                 style={{
                   fontFamily: fonts.f600,
-                  fontWeight: "600",
+                  //fontWeight: "600",
                   fontSize: scale(14),
                   color: "#151B26",
                 }}
@@ -169,20 +170,24 @@ const Contests = ({ openBottomSheet }) => {
             </View>
           )}
 
-          <View
+          <Pressable
             style={{
               height: scale(32),
               width: scale(32),
               borderRadius: scale(8),
               overflow: "hidden",
             }}
+            onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
           >
             <Image
               style={{ height: "100%", width: "100%" }}
               source={Images.avatar1}
             />
-          </View>
-          <View style={styles.nameBox}>
+          </Pressable>
+          <Pressable
+            onPress={() => navigation.navigate(SCREENS.OTHER_USER_PROFILE)}
+            style={styles.nameBox}
+          >
             <View>
               <View
                 style={{
@@ -216,7 +221,7 @@ const Contests = ({ openBottomSheet }) => {
               <Text style={styles.subName}>{accuracy} Accurate</Text>
             </View>
             <Text style={styles.no}>{predictionNos}</Text>
-          </View>
+          </Pressable>
         </View>
       </View>
     );
@@ -247,13 +252,13 @@ const Contests = ({ openBottomSheet }) => {
                 color: "#101010",
                 fontFamily: fonts.f600,
                 fontSize: 14,
-                fontWeight: "600",
+                //fontWeight: "600",
                 width: "100%",
               },
               inputAndroid: {
                 color: "#101010",
                 fontFamily: fonts.f600,
-                fontWeight: "600",
+                //fontWeight: "600",
                 fontSize: 14,
                 width: "100%",
               },
@@ -337,14 +342,14 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     color: "#101010",
     marginRight: 4,
-    fontWeight: "600",
+    //fontWeight: "600",
   },
 
   text2: {
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: "#717272",
-    fontWeight: "400",
+    //fontWeight: "400",
   },
 
   table: {
@@ -368,7 +373,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: 16,
-    fontWeight: "700",
+    //fontWeight: "700",
   },
 
   noWinText2: {
@@ -377,7 +382,7 @@ const styles = StyleSheet.create({
     color: "#717272",
     textAlign: "center",
     marginTop: 4,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
 
   tableBox: {
@@ -399,7 +404,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: "#717272",
-    fontWeight: "400",
+    //fontWeight: "400",
   },
 
   userBox: {
@@ -421,7 +426,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f600,
     fontSize: scale(13),
     color: "#151B26",
-    fontWeight: "600",
+    //fontWeight: "600",
   },
 
   nameBox: {
@@ -440,14 +445,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f700,
     fontSize: scale(14),
     color: "#151B26",
-    fontWeight: "700",
+    //fontWeight: "700",
   },
 
   subName: {
     fontFamily: fonts.f500,
     fontSize: scale(12),
     color: "#717272",
-    fontWeight: "500",
+    //fontWeight: "500",
   },
 
   dropdown: {

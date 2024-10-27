@@ -71,8 +71,6 @@ const HeaderOptions = ({
             isSelected === 0 && {
               borderBottomColor: Colors.primaryBlue,
               borderBottomWidth: scale(3),
-
-              // height: scale(50),
             },
           ]}
         >
@@ -83,12 +81,10 @@ const HeaderOptions = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
-                fontWeight: "400",
               },
               isSelected === 0 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
-                fontWeight: "800",
               },
             ]}
           >
@@ -118,12 +114,10 @@ const HeaderOptions = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
-                fontWeight: "400",
               },
               isSelected === 1 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
-                fontWeight: "800",
               },
             ]}
           >
@@ -152,12 +146,10 @@ const HeaderOptions = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
-                fontWeight: "400",
               },
               isSelected === 2 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
-                fontWeight: "800",
               },
             ]}
           >
@@ -292,7 +284,7 @@ const DashBoard = () => {
                 fontFamily: fonts.f800,
                 color: Colors.textBlack,
                 fontSize: scale(22),
-                fontWeight: "800",
+                // fontWeight: "800",
               }}
             >
               {"Predictr."}

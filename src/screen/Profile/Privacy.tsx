@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: 16,
     color: "#101010",
     marginLeft: 16,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: scale(17),
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     marginBottom: 8,
     color: "#151B26",
   },
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     marginBottom: 16,
     color: "#505050",
   },

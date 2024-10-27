@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f700,
     fontSize: scale(17),
-    fontWeight: "700",
+    //fontWeight: "700",
     textAlign: "left",
     color: Colors.labelBlack,
   },
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
   monthText: {
     fontFamily: fonts.f600,
     fontSize: scale(17),
-    fontWeight: "600",
+    //fontWeight: "600",
     marginEnd: 8,
     color: "#000000",
   },
@@ -333,9 +333,10 @@ const styles = StyleSheet.create({
   weekDay: {
     width: 35.5,
     textAlign: "center",
-    fontWeight: "600",
-    color: "#8E8E93",
+    //fontWeight: "600",
+    color: "#3C3C434D",
     fontSize: scale(13),
+    fontFamily: fonts.f600,
   },
   daysContainer: {
     flexDirection: "row",
@@ -360,10 +361,10 @@ const styles = StyleSheet.create({
   dayText: {
     color: "#000",
     fontSize: scale(14),
+    fontFamily: fonts.f400,
   },
   selectedDayText: {
     color: "#007AFF",
-    fontWeight: "bold",
   },
   disabledDay: {
     backgroundColor: "#f0f0f0",
@@ -385,7 +386,9 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: "white",
     fontSize: scale(14),
-    fontWeight: "600",
+    fontFamily: fonts.f600,
+
+    //fontWeight: "600",
   },
   modalBackground: {
     flex: 1,
@@ -410,6 +413,7 @@ const styles = StyleSheet.create({
   yearText: {
     fontSize: scale(18),
     color: "#000",
+    fontFamily: fonts.f500,
   },
 });
 

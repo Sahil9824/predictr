@@ -324,14 +324,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.f800, //900
-    fontWeight: "800",
+    //fontWeight: "800",
     fontSize: scale(22),
     color: Colors.primaryBlue,
     textAlign: "center",
   },
   dot: {
     fontFamily: fonts.f800,
-    fontWeight: "800",
+    //fontWeight: "800",
     fontSize: scale(22),
     color: Colors.yellow,
     borderRadius: scale(24),
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
   },
   avatarText: {
     fontFamily: fonts.f800,
-    fontWeight: "800",
+    //fontWeight: "800",
     fontSize: scale(32),
     color: Colors.textBlack,
     textAlign: "center",
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
 
   subHeadText: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: 15,
     color: "#151B26",
   },
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
   },
   avatarSubtitle: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(16),
     textAlign: "center",
     marginBottom: scale(30),
@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
   flatlist: {},
   edit: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: scale(16),
     color: Colors.primaryBlue,
     textAlign: "center",

@@ -53,7 +53,7 @@ const WinnerCard = ({
               fontSize: scale(16),
               lineHeight: scale(20),
               marginBottom: scale(10),
-              fontWeight: "700",
+              //fontWeight: "700",
             }}
           >
             {"Predict to win monthly prizes"}
@@ -65,7 +65,7 @@ const WinnerCard = ({
               lineHeight: scale(27),
               textAlign: "center",
               color: Colors.white,
-              fontWeight: "800",
+              //fontWeight: "800",
             }}
           >
             {"Win $500, $300 and $200\n for top three predictors"}
@@ -101,7 +101,7 @@ const WinnerCard = ({
                   textAlign: "center",
                   color: Colors.white,
                   marginVertical: scale(4),
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"Braden Edwards"}
@@ -113,7 +113,7 @@ const WinnerCard = ({
                   lineHeight: scale(13),
                   textAlign: "center",
                   color: Colors.white,
-                  fontWeight: "400",
+                  //fontWeight: "400",
                 }}
               >
                 {"56.8% Accurate"}
@@ -125,7 +125,7 @@ const WinnerCard = ({
                   lineHeight: scale(13),
                   textAlign: "center",
                   color: Colors.white,
-                  fontWeight: "400",
+                  //fontWeight: "400",
                 }}
               >
                 {"3 Predictions"}
@@ -137,7 +137,7 @@ const WinnerCard = ({
                   lineHeight: scale(15),
                   color: Colors.textGreen,
                   marginTop: scale(6),
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"$300"}
@@ -186,7 +186,7 @@ const WinnerCard = ({
                     textAlign: "center",
                     color: Colors.white,
                     marginVertical: scale(4),
-                    fontWeight: "700",
+                    //fontWeight: "700",
                   }}
                 >
                   {"Jesus Boston"}
@@ -198,7 +198,7 @@ const WinnerCard = ({
                     lineHeight: scale(13),
                     textAlign: "center",
                     color: Colors.white,
-                    fontWeight: "400",
+                    //fontWeight: "400",
                   }}
                 >
                   {"60.2% Accurate"}
@@ -210,7 +210,7 @@ const WinnerCard = ({
                     lineHeight: scale(13),
                     textAlign: "center",
                     color: Colors.white,
-                    fontWeight: "400",
+                    //fontWeight: "400",
                   }}
                 >
                   {"3 Predictions"}
@@ -222,7 +222,7 @@ const WinnerCard = ({
                     lineHeight: scale(15),
                     color: Colors.textGreen,
                     marginTop: scale(6),
-                    fontWeight: "700",
+                    //fontWeight: "700",
                   }}
                 >
                   {"$500"}
@@ -255,7 +255,7 @@ const WinnerCard = ({
                   textAlign: "center",
                   color: Colors.white,
                   marginVertical: scale(4),
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"Patrik Manning"}
@@ -267,7 +267,7 @@ const WinnerCard = ({
                   lineHeight: scale(13),
                   textAlign: "center",
                   color: Colors.white,
-                  fontWeight: "400",
+                  //fontWeight: "400",
                 }}
               >
                 {"45.5% Accurate"}
@@ -278,7 +278,7 @@ const WinnerCard = ({
                   fontSize: scale(10),
                   lineHeight: scale(13),
                   textAlign: "center",
-                  fontWeight: "400",
+                  //fontWeight: "400",
 
                   color: Colors.white,
                 }}
@@ -292,7 +292,7 @@ const WinnerCard = ({
                   lineHeight: scale(15),
                   color: Colors.textGreen,
                   marginTop: scale(6),
-                  fontWeight: "700",
+                  //fontWeight: "700",
                 }}
               >
                 {"$200"}
@@ -319,7 +319,7 @@ const WinnerCard = ({
                 color: Colors.textBlack,
                 textAlign: "center",
                 fontSize: scale(16),
-                fontWeight: "800",
+                //fontWeight: "800",
               }}
             >
               {"Winners of August 2024"}
@@ -332,7 +332,7 @@ const WinnerCard = ({
                 color: "#ffffff99",
                 marginVertical: 18,
                 fontFamily: fonts.f600,
-                fontWeight: "600",
+                //fontWeight: "600",
               }}
             >
               {"Contest Details"}

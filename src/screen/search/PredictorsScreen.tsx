@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { fonts } from "../../constant";
 
 const mockData = [
   { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
@@ -93,17 +94,18 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
     color: "#333",
   },
   accuracy: {
     fontSize: 14,
     color: "#666",
     marginTop: 2,
+    fontFamily: fonts.f500,
   },
   followButtonText: {
     color: "#024BAC",
-    fontWeight: "800",
+    fontFamily: fonts.f800,
     fontSize: 14,
     marginLeft: 12,
   },

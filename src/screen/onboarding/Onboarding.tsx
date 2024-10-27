@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
     fontSize: scale(22),
     fontFamily: fonts.f800,
     color: Colors.white,
-    fontWeight: "800",
+    //fontWeight: "800",
   },
   dot: {
     fontSize: scale(22),
     color: Colors.yellow,
     fontFamily: fonts.f800,
-    fontWeight: "800",
+    //fontWeight: "800",
   },
   titleContainer: {
     marginTop: scale(60),
@@ -140,14 +140,14 @@ const styles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.f800,
     fontSize: scale(34),
-    fontWeight: "800",
+    //fontWeight: "800",
     color: Colors.white,
     textAlign: "center",
     letterSpacing: scale(34) * -0.02,
   },
   subTitle: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(16),
     textAlign: "center",
     color: Colors.lightBlue,
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   loginText: {
     textAlign: "center",
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     color: Colors.white,
     fontSize: scale(16),
     marginTop: scale(24),

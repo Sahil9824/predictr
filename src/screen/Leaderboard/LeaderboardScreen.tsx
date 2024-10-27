@@ -237,7 +237,9 @@ const LeaderboardScreen = () => {
                 fontSize: scale(16),
                 marginLeft: moderateScale(10),
                 color: "#717272",
-                fontWeight: "500",
+                fontFamily: fonts.f500,
+
+                //fontWeight: "500",
               }}
             >
               #
@@ -248,7 +250,9 @@ const LeaderboardScreen = () => {
                 fontSize: scale(16),
                 marginLeft: 12,
                 color: "#717272",
-                fontWeight: "400",
+                fontFamily: fonts.f400,
+
+                //fontWeight: "400",
               }}
             >
               Predictors
@@ -275,13 +279,13 @@ const LeaderboardScreen = () => {
                     color: "#717272",
                     fontFamily: fonts.f400,
                     fontSize: 15,
-                    fontWeight: "400",
+                    //fontWeight: "400",
                     width: "100%",
                   },
                   inputAndroid: {
                     color: "#717272",
                     fontFamily: fonts.f400,
-                    fontWeight: "400",
+                    //fontWeight: "400",
                     fontSize: 15,
                     width: "100%",
                     padding: 0,
@@ -350,8 +354,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: scale(22),
-    fontWeight: "800",
     color: Colors.textBlack,
+    fontFamily: fonts.f800,
   },
   rankLabel: {
     flexDirection: "row",
@@ -363,18 +367,18 @@ const styles = StyleSheet.create({
   rankNumber: {
     fontSize: scale(15),
     color: "#024BAC",
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
   },
   rankText: {
     fontSize: scale(15),
     marginLeft: moderateScale(4),
     color: "#024BAC",
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
   },
   filterText: {
     fontSize: scale(15),
     color: Colors.textBlack,
-    fontWeight: "300",
+    fontFamily: fonts.f300,
   },
   entryContainer: {
     flexDirection: "row",
@@ -398,23 +402,24 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: scale(16),
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
     color: Colors.textBlack,
   },
   id: {
-    fontSize: scale(16),
-    fontWeight: "500",
+    fontSize: scale(15),
     marginRight: 12,
     color: Colors.textBlack,
     width: 28,
+    fontFamily: fonts.f600,
   },
   youText: {
     color: "#024BAC",
-    fontSize: scale(16),
+    fontSize: scale(15),
+    fontFamily: fonts.f700,
   },
   accuracy: {
     fontSize: scale(14),
-    fontWeight: "500",
+    fontFamily: fonts.f500,
   },
   dropdown: {
     position: "absolute",

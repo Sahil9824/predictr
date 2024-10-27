@@ -89,12 +89,12 @@ const HeaderOptions = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
-                fontWeight: "400",
+                //fontWeight: "400",
               },
               isSelected === 0 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
-                fontWeight: "800",
+                //fontWeight: "800",
               },
             ]}
           >
@@ -121,12 +121,12 @@ const HeaderOptions = ({
                 fontSize: scale(15),
                 lineHeight: scale(21),
                 textAlign: "center",
-                fontWeight: "400",
+                //fontWeight: "400",
               },
               isSelected === 1 && {
                 fontFamily: fonts.f800,
                 color: Colors.primaryBlue,
-                fontWeight: "800",
+                //fontWeight: "800",
               },
             ]}
           >
@@ -207,7 +207,7 @@ const UserProfile = () => {
               fontFamily: fonts.f800,
               fontSize: scale(22),
               color: Colors.labelBlack,
-              fontWeight: "800",
+              //fontWeight: "800",
             }}
           >
             Profile
@@ -270,7 +270,7 @@ const UserProfile = () => {
                   >
                     <Text
                       style={{
-                        fontWeight: "700",
+                        //fontWeight: "700",
                         fontSize: scale(14),
                         color: "#505050",
                         fontFamily: fonts.f700,
@@ -281,7 +281,7 @@ const UserProfile = () => {
                     <Text
                       style={{
                         fontFamily: fonts.f400,
-                        fontWeight: "400",
+                        //fontWeight: "400",
                         fontSize: scale(14),
                         color: "#505050",
                       }}
@@ -308,7 +308,7 @@ const UserProfile = () => {
                   >
                     <Text
                       style={{
-                        fontWeight: "700",
+                        //fontWeight: "700",
                         fontSize: scale(14),
                         color: "#505050",
                         fontFamily: fonts.f700,
@@ -319,7 +319,7 @@ const UserProfile = () => {
                     <Text
                       style={{
                         fontFamily: fonts.f400,
-                        fontWeight: "400",
+                        //fontWeight: "400",
                         fontSize: scale(14),
                         color: "#505050",
                       }}
@@ -514,7 +514,7 @@ const styles = StyleSheet.create({
   emailStyle: {
     fontFamily: fonts.f400,
     fontSize: 15,
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#00000080",
     marginTop: 4,
   },
@@ -542,8 +542,9 @@ const styles = StyleSheet.create({
   },
   profileName: {
     fontSize: moderateScale(24),
-    fontWeight: "700",
+    //fontWeight: "700",
     color: Colors.labelBlack,
+    fontFamily: fonts.f700,
   },
   profileStats: {
     color: "#888",
@@ -563,12 +564,13 @@ const styles = StyleSheet.create({
   },
   followText: {
     color: "#fff",
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
+
     fontSize: scale(16),
   },
   followingText: {
     color: "#717272",
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
     fontSize: scale(16),
   },
   tabs: {
@@ -595,11 +597,13 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: scale(16),
     color: "#000",
-    fontWeight: "400",
+    fontFamily: fonts.f400,
+
+    //fontWeight: "400",
   },
   selectedTabText: {
     color: "#000",
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
   },
   stats: {
     flexDirection: "row",
@@ -618,17 +622,19 @@ const styles = StyleSheet.create({
   },
   statNumber: {
     fontSize: scale(18),
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
+
     color: Colors.labelBlack,
   },
   statLabel: {
     color: "#888",
     fontSize: scale(12),
-    fontWeight: "400",
+    //fontWeight: "400",
+    fontFamily: fonts.f400,
   },
   predictionsHeader: {
     fontSize: scale(18),
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
     paddingHorizontal: 16,
     paddingTop: verticalScale(14),
     paddingBottom: verticalScale(10),
@@ -653,8 +659,9 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: scale(16),
-    fontWeight: "500",
+    //fontWeight: "500",
     textTransform: "none",
+    fontFamily: fonts.f500,
   },
   indicatorStyle: {
     backgroundColor: "#024BAC",
@@ -676,7 +683,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: 16,
-    fontWeight: "700",
+    //fontWeight: "700",
   },
 
   noWinText2: {
@@ -685,7 +692,7 @@ const styles = StyleSheet.create({
     color: "#717272",
     textAlign: "center",
     marginTop: 4,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
 });
 

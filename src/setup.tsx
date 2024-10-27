@@ -34,7 +34,7 @@ const Setup = () => {
             <Text
               style={{
                 fontFamily: fonts.f400,
-                fontWeight: "400",
+                //fontWeight: "400",
                 fontSize: 15,
                 lineHeight: 21,
                 color: Colors.white,

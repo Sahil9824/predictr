@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: 16,
     color: "#101010",
     marginLeft: 16,

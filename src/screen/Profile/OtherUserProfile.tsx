@@ -15,7 +15,7 @@ import {
 import { scale, verticalScale, moderateScale } from "../../../helper";
 import PredictionCard from "../../component/PredictionCard";
 import { Images } from "../../assets/images";
-import { Colors } from "../../constant";
+import { Colors, fonts } from "../../constant";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FilterCard from "../../component/FilterCard";
@@ -97,8 +97,8 @@ const OtherUserProfile = () => {
               style={{
                 fontSize: scale(16),
                 color: Colors.labelBlack,
-                fontWeight: "600",
                 marginStart: 15,
+                fontFamily: fonts.f600,
               }}
             >
               Profile
@@ -132,15 +132,22 @@ const OtherUserProfile = () => {
                     <View style={{ flexDirection: "row" }}>
                       <Text
                         style={{
-                          fontWeight: "700",
                           fontSize: scale(14),
                           color: "#505050",
                           marginRight: 4,
+                          fontFamily: fonts.f700,
                         }}
                       >
                         88
                       </Text>
-                      <Text style={{ fontWeight: "400", fontSize: scale(14) }}>
+                      <Text
+                        style={{
+                          fontSize: scale(14),
+                          color: "#505050",
+
+                          fontFamily: fonts.f400,
+                        }}
+                      >
                         followers
                       </Text>
                     </View>
@@ -158,7 +165,7 @@ const OtherUserProfile = () => {
                     <View style={{ flexDirection: "row", marginStart: 15 }}>
                       <Text
                         style={{
-                          fontWeight: "700",
+                          fontFamily: fonts.f700,
                           fontSize: scale(14),
                           color: "#505050",
                           marginRight: 4,
@@ -166,7 +173,13 @@ const OtherUserProfile = () => {
                       >
                         55
                       </Text>
-                      <Text style={{ fontWeight: "400", fontSize: scale(14) }}>
+                      <Text
+                        style={{
+                          fontSize: scale(14),
+                          fontFamily: fonts.f400,
+                          color: "#505050",
+                        }}
+                      >
                         followings
                       </Text>
                     </View>
@@ -409,8 +422,8 @@ const styles = StyleSheet.create({
   },
   profileName: {
     fontSize: moderateScale(24),
-    fontWeight: "700",
     color: Colors.labelBlack,
+    fontFamily: fonts.f700,
   },
   profileStats: {
     color: "#888",
@@ -430,13 +443,13 @@ const styles = StyleSheet.create({
   },
   followText: {
     color: "#fff",
-    fontWeight: "bold",
     fontSize: moderateScale(16),
+    fontFamily: fonts.f600,
   },
   followingText: {
     color: "#717272",
-    fontWeight: "bold",
     fontSize: moderateScale(16),
+    fontFamily: fonts.f600,
   },
   tabs: {
     flexDirection: "row",
@@ -460,11 +473,10 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: moderateScale(16),
     color: "#000",
-    fontWeight: "400",
+    fontFamily: fonts.f600,
   },
   selectedTabText: {
     color: "#000",
-    fontWeight: "bold",
   },
   stats: {
     flexDirection: "row",
@@ -482,21 +494,21 @@ const styles = StyleSheet.create({
   },
   statNumber: {
     fontSize: moderateScale(18),
-    fontWeight: "bold",
     color: Colors.labelBlack,
+    fontFamily: fonts.f700,
   },
   statLabel: {
     color: "#888",
     fontSize: moderateScale(12),
-    fontWeight: "400",
+    fontFamily: fonts.f400,
   },
   predictionsHeader: {
     fontSize: moderateScale(18),
-    fontWeight: "bold",
     paddingHorizontal: moderateScale(16),
     paddingTop: verticalScale(14),
     paddingBottom: verticalScale(10),
     color: Colors.labelBlack,
+    fontFamily: fonts.f700,
   },
   cardContainer: {
     paddingHorizontal: moderateScale(16),

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.labelBlack,
     marginBottom: 4,
-    fontWeight: "600",
+    //fontWeight: "600",
   },
   inputContainer: {
     flexDirection: "row",
@@ -149,13 +149,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: Colors.errorRed,
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: 12,
   },
   right: {
     color: Colors.validGreen,
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: 12,
   },
   iconPress: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   extraText: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: 12,
     marginVertical: 4,
   },

@@ -315,17 +315,17 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f700,
     fontSize: scale(17),
     color: Colors.textBlack,
-    fontWeight: "700",
+    //fontWeight: "700",
   },
   content: {
     flex: 1,
   },
   sectionTitle: {
+    fontFamily: fonts.f600,
     fontSize: scale(15),
     color: Colors.textBlack,
     marginTop: 24,
     marginBottom: 5,
-    fontWeight: "600",
   },
   accuracyInput: {
     borderWidth: 1,
@@ -358,13 +358,13 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: 15,
     color: Colors.textBlack,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   accuracyTextSelected: {
     fontFamily: fonts.f700,
     fontSize: 15,
     color: Colors.textBlack,
-    fontWeight: "700",
+    //fontWeight: "700",
   },
   dateRangeContainer: {
     marginVertical: scale(3),
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: Colors.textGrey,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   calendarIcon: {
     width: 20,
@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f700,
     fontSize: scale(16),
     color: Colors.white,
-    fontWeight: "700",
+    //fontWeight: "700",
   },
   bottomSheet: {
     paddingHorizontal: 16,
@@ -433,7 +433,7 @@ const styles = StyleSheet.create({
     color: Colors.textGrey,
     marginLeft: 10,
     height: 44,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   hashtagIcon: {
     width: 20,
@@ -457,6 +457,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f600,
     fontSize: scale(16),
     color: Colors.primaryBlue,
-    fontWeight: "600",
+    //fontWeight: "600",
   },
 });

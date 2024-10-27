@@ -197,10 +197,11 @@ const ScoringSystemScreen = ({ bottomSheetRef, closeBottomSheet }) => {
         <View>
           <Text
             style={{
-              fontWeight: "700",
+              //fontWeight: "700",
               color: Colors.textBlack,
               marginVertical: 10,
               fontSize: scale(14),
+              fontFamily: fonts.f700,
             }}
           >
             Formula:
@@ -322,23 +323,24 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: scale(18),
-    fontWeight: "bold",
     marginStart: 5,
     color: Colors.textBlack,
+    fontFamily: fonts.f600,
   },
   subTitle: {
     fontSize: scale(16),
     marginVertical: 16,
-    fontWeight: "700",
+    //fontWeight: "700",
     color: Colors.textBlack,
     marginHorizontal: 12,
+    fontFamily: fonts.f700,
   },
   text1: {
     fontFamily: fonts.f400,
     fontSize: 14,
     color: "#717272",
     marginBottom: 10,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   section: {
     marginBottom: 8,
@@ -347,7 +349,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(15),
     marginBottom: 8,
     color: "#000000",
@@ -355,7 +357,7 @@ const styles = StyleSheet.create({
   sectionTitle2: {
     marginBottom: 5,
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(15),
     color: "#000000",
   },
@@ -380,25 +382,27 @@ const styles = StyleSheet.create({
   inputText: {
     fontSize: scale(15),
     color: Colors.labelBlack,
-    fontWeight: "600",
+    //fontWeight: "600",
     paddingStart: 7,
     width: 70,
     marginRight: "20%",
+    fontFamily: fonts.f600,
   },
   placeHolder: {
     fontSize: scale(15),
     color: "#717272",
     flex: 1,
     textAlign: "left",
-    fontWeight: "500",
+    //fontWeight: "500",
     fontFamily: fonts.f500,
     letterSpacing: -0.2,
   },
   linkText: {
     color: "#024BAC",
     fontSize: scale(15),
+    fontFamily: fonts.f700,
 
-    fontWeight: "700",
+    //fontWeight: "700",
     paddingBottom: 2,
   },
   predictButton: {
@@ -413,7 +417,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: scale(16),
-    fontWeight: "bold",
+    fontFamily: fonts.f600,
   },
   modalContainer: {
     flex: 1,
@@ -428,14 +432,14 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: scale(17),
-    fontWeight: "bold",
     color: Colors.labelBlack,
+    fontFamily: fonts.f700,
   },
   modalText: {
     fontSize: scale(14),
     color: "#717272",
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
   },
   formulaBox: {
     backgroundColor: "#FFF",
@@ -446,8 +450,9 @@ const styles = StyleSheet.create({
   formulaText: {
     fontSize: scale(14),
     color: "#000",
-    fontWeight: "600",
+    //fontWeight: "600",
     textAlign: "center",
+    fontFamily: fonts.f600,
   },
   accuracyTable: {
     borderWidth: 1,
@@ -466,7 +471,7 @@ const styles = StyleSheet.create({
   tableCell1: {
     fontFamily: fonts.f400,
     fontSize: scale(12),
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#000000",
     width: 130,
     marginRight: 10,
@@ -474,7 +479,7 @@ const styles = StyleSheet.create({
   tableCell2: {
     fontFamily: fonts.f400,
     fontSize: scale(12),
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#000000",
     width: 100,
     marginRight: "auto",
@@ -484,7 +489,7 @@ const styles = StyleSheet.create({
   tableCell3: {
     fontFamily: fonts.f400,
     fontSize: scale(12),
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#000000",
     width: "auto",
     alignSelf: "flex-start",
@@ -501,7 +506,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: scale(16),
-    fontWeight: "bold",
+    fontFamily: fonts.f600,
   },
 });
 

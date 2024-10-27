@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 
   ty: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: 20,
     color: "#000000",
     marginBottom: 8,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
 
   ty2: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: 14,
     color: "#717272",
   },
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: 16,
     color: "#101010",
     marginLeft: 16,
@@ -188,14 +188,14 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f700,
     fontSize: scale(17),
-    fontWeight: "700",
+    //fontWeight: "700",
     marginBottom: 8,
     color: "#151B26",
   },
   subtitle: {
     fontFamily: fonts.f400,
     fontSize: scale(15),
-    fontWeight: "400",
+    //fontWeight: "400",
     marginBottom: 24,
     color: "#505050",
   },
@@ -225,14 +225,14 @@ const styles = StyleSheet.create({
     fontSize: scale(12),
     fontFamily: fonts.f400,
     color: "#505050",
-    fontWeight: "400",
+    //fontWeight: "400",
   },
 
   selectedEmojiLabel: {
     fontSize: scale(12),
     fontFamily: fonts.f700,
     color: "#024BAC",
-    fontWeight: "700",
+    //fontWeight: "700",
   },
   textInput: {
     minHeight: 100,
@@ -243,14 +243,9 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     fontSize: 14,
     maxHeight: 250,
+    fontFamily: fonts.f500,
   },
-  charCount: {
-    alignSelf: "flex-end",
-    fontSize: 12,
-    color: "#666",
-    marginTop: 5,
-    marginBottom: 20,
-  },
+
   submitButton: {
     marginTop: "auto",
   },
@@ -260,6 +255,6 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: fonts.f700,
   },
 });

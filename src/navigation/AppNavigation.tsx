@@ -59,7 +59,7 @@ export default function App({ navigation }) {
         tabBarLabelStyle: {
           marginTop: 5,
           fontFamily: fonts.f600,
-          fontWeight: "600",
+          //fontWeight: "600",
         },
         tabBarActiveTintColor: "#024BAC",
       })}

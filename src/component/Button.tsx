@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f600,
     color: Colors.white,
-    fontWeight: "600",
+    //fontWeight: "600",
   },
 });

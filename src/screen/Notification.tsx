@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.f800,
     fontSize: scale(22),
-    fontWeight: "800",
+    //fontWeight: "800",
     marginVertical: 16,
     color: "#151B26",
   },
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
 
   sectionHeader: {
     fontSize: 14,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontFamily: fonts.f400,
     marginTop: 15,
     marginBottom: 8,
@@ -245,12 +245,13 @@ const styles = StyleSheet.create({
     right: -3,
   },
   notificationText: {
-    fontSize: 14,
-    color: "#333",
+    fontSize: 15,
+    color: "#101010",
     flex: 1,
+    fontFamily: fonts.f400,
   },
   boldText: {
-    fontWeight: "bold",
+    fontFamily: fonts.f600,
   },
 });
 

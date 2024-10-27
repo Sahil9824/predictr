@@ -388,7 +388,7 @@ const styles = StyleSheet.create({
     borderColor: "#0000001A",
 
     fontFamily: fonts.f500,
-    fontWeight: "500",
+    //fontWeight: "500",
     fontSize: 15,
     color: "#B8B8B8",
   },
@@ -412,7 +412,7 @@ const styles = StyleSheet.create({
 
   stockName: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(15),
     color: "#717272",
     width: "60%",
@@ -427,28 +427,28 @@ const styles = StyleSheet.create({
 
   modText: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: scale(17),
     color: "#000",
   },
 
   canText: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(17),
     color: "#024BAC",
   },
 
   saveText: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: scale(17),
     color: "#024BAC",
   },
 
   modText2: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(13),
     color: "#717272",
     marginTop: 4,
@@ -458,7 +458,7 @@ const styles = StyleSheet.create({
 
   stockAb: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: scale(16),
     color: "#000",
     width: 100,
@@ -475,14 +475,14 @@ const styles = StyleSheet.create({
 
   headText: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: scale(17),
     color: "#000",
   },
 
   addText: {
     fontFamily: fonts.f800,
-    fontWeight: "800",
+    //fontWeight: "800",
     fontSize: scale(15),
     color: "#024BAC",
   },
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
     width: "85%",
     backgroundColor: "red",
     fontFamily: fonts.f500,
-    fontWeight: "500",
+    //fontWeight: "500",
     height: 40,
     paddingLeft: 10,
     backgroundColor: "#fff",
@@ -513,5 +513,6 @@ const styles = StyleSheet.create({
     color: "#717272",
     paddingLeft: 10,
     fontSize: 16,
+    fontFamily: fonts.f500,
   },
 });

@@ -154,7 +154,7 @@ const Prediction = ({ navigation }) => {
                       style={{
                         ...styles.text4,
                         fontFamily: fonts.f500,
-                        fontWeight: "500",
+                        //fontWeight: "500",
                         color: "#151B26",
                       }}
                     >
@@ -201,7 +201,7 @@ const Prediction = ({ navigation }) => {
                       style={{
                         ...styles.text4,
                         fontFamily: fonts.f500,
-                        fontWeight: "500",
+                        //fontWeight: "500",
                         color: "#151B26",
                       }}
                     >
@@ -240,7 +240,7 @@ const Prediction = ({ navigation }) => {
                       style={{
                         ...styles.text4,
                         fontFamily: fonts.f500,
-                        fontWeight: "500",
+                        //fontWeight: "500",
                         color: "#151B26",
                       }}
                     >
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
   text1: {
     fontSize: scale(24),
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     color: "#151B26",
     textAlign: "center",
     width: "100%",
@@ -411,14 +411,14 @@ const styles = StyleSheet.create({
   text5: {
     fontSize: scale(15),
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#024BAC",
   },
 
   text2: {
     fontSize: scale(15),
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#717272",
     textAlign: "center",
     width: "100%",
@@ -427,7 +427,7 @@ const styles = StyleSheet.create({
   text3: {
     fontFamily: fonts.f600,
     fontSize: scale(15),
-    fontWeight: "600",
+    //fontWeight: "600",
     color: "#101010",
     marginLeft: 16,
   },
@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: 15,
     lineHeight: 21,
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#717272",
     width: "99%",
     padding: 16,
@@ -454,7 +454,7 @@ const styles = StyleSheet.create({
   text4: {
     fontFamily: fonts.f400,
     fontSize: scale(15),
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#717272",
     marginRight: 40,
     textAlign: "left",

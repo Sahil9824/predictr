@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     color: "#000",
     paddingTop: Platform.OS === "ios" ? 0 : 10,
   },

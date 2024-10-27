@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
 
   headerText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: 16,
     color: "#101010",
   },
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontFamily: fonts.f400,
     fontSize: 14,
-    fontWeight: "400",
+    //fontWeight: "400",
     marginBottom: 10,
     marginTop: 16,
     color: "#717272",

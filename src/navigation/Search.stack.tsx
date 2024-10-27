@@ -19,6 +19,7 @@ import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import { useRoute } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { fonts } from "../constant";
 
 const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -112,16 +113,18 @@ const styles = StyleSheet.create({
   },
   searchBox: {
     flex: 1,
-    height: 40,
+    // height: 40,
     paddingLeft: 10,
     backgroundColor: "#fff",
     fontSize: 16,
     color: "#717272",
+    fontFamily: fonts.f400,
   },
   cancelButton: {
     color: "#717272",
     paddingLeft: 10,
     fontSize: 16,
+    fontFamily: fonts.f500,
   },
   tabBar: {
     backgroundColor: "white",
@@ -131,8 +134,9 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 16,
-    fontWeight: "500",
+    //fontWeight: "500",
     textTransform: "none",
+    fontFamily: fonts.f500,
   },
   indicatorStyle: {
     backgroundColor: "#024BAC",

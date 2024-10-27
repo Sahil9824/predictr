@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: scale(18),
     color: Colors.textBlack,
     marginBottom: scale(20),
-    fontWeight: "700",
+    //fontWeight: "700",
   },
   shareOptionsRow: {
     flexDirection: "row",
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     color: "#717272",
     marginTop: scale(8),
     marginHorizontal: scale(7),
-    fontWeight: "500",
+    //fontWeight: "500",
   },
   icon: {
     width: scale(20),

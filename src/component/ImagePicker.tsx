@@ -19,6 +19,7 @@ import {
 } from "react-native-permissions";
 import { Images } from "../assets/images";
 import DeviceInfo from "react-native-device-info";
+import { fonts } from "../constant";
 
 interface Props {
   visible: boolean;
@@ -257,8 +258,7 @@ const styles = StyleSheet.create({
     // marginTop: 8
   },
   text: {
-    fontFamily: "SF-Pro-Text-Regular",
-    // fontSize: 18,
+    fontFamily: fonts.f400,
     fontSize: 17,
     color: "black",
     lineHeight: 22,

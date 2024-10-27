@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
 
   headText: {
     fontFamily: fonts.f700,
-    fontWeight: "700",
+    //fontWeight: "700",
     fontSize: scale(17),
     color: "#000",
   },
@@ -267,6 +267,7 @@ const styles = StyleSheet.create({
     color: "#717272",
     paddingLeft: 10,
     fontSize: 16,
+    fontFamily: fonts.f500,
   },
 
   searchContainer: {
@@ -281,7 +282,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: scale(14),
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     color: "#101010",
     width: "100%",
     marginTop: 24,
@@ -340,13 +341,13 @@ const styles = StyleSheet.create({
 
   text: {
     fontFamily: fonts.f400,
-    fontWeight: "400",
+    //fontWeight: "400",
     fontSize: scale(14),
     color: "#151B26",
   },
   selectedText: {
     fontFamily: fonts.f600,
-    fontWeight: "600",
+    //fontWeight: "600",
     fontSize: scale(14),
     color: "#151B26",
   },
@@ -355,7 +356,9 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     color: Colors.textBlack,
     marginVertical: scale(4),
-    fontWeight: "600",
+    fontFamily: fonts.f600,
+
+    //fontWeight: "600",
     width: "100%",
     textAlign: "left",
     marginTop: 24,
@@ -396,10 +399,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f500,
     fontSize: scale(15),
     color: Colors.textBlack,
-    fontWeight: "500",
+    //fontWeight: "500",
   },
   accuracyTextSelected: {
     color: Colors.textBlack,
-    fontWeight: "bold",
   },
 });
