@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "#F5F5F5",
     padding: 14,
-    borderRadius: 16,
+    borderRadius: 10,
   },
   emojiIcon: {
     width: 24,

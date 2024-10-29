@@ -1,6 +1,14 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
@@ -11,6 +19,8 @@ import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import userStore from "../../user.store";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icons from "../../component/Icons";
+import { ICONS } from "../../constant/icons.constants";
 
 // interface Props {
 //   navigation: StackNavigationProp<any, "CreateAccount">;
@@ -68,24 +78,22 @@ const Login = ({ navigation }: any) => {
     setIsOnboarded(true);
   };
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      header: () => (
-        <AuthHeader
-          navigation={navigation}
-          rightText={"Create Account"}
-          onRightPress={() => navigation.navigate(SCREENS.CREATE_ACCOUNT)}
-        />
-      ),
-    });
-  }, []);
-
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white" }}
+      style={{ flex: 1, backgroundColor: Colors.white }}
       edges={["top", "left", "right"]}
     >
       <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+          <Pressable
+            onPress={() => navigation.navigate(SCREENS.CREATE_ACCOUNT)}
+          >
+            <Text style={styles.menuText}>Create Account</Text>
+          </Pressable>
+        </View>
         <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
         <Text style={styles.title}>{"Login"}</Text>
         <View style={styles.inputContainer}>
@@ -135,7 +143,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f800,
     fontSize: scale(32),
     color: Colors.textBlack,
-    //fontWeight: "800",
     letterSpacing: scale(32) * -0.02,
   },
   inputContainer: {
@@ -152,5 +159,18 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     color: Colors.primaryBlue,
     textAlign: "right",
+  },
+
+  header: {
+    flexDirection: "row",
+    paddingVertical: 13,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  menuText: {
+    fontFamily: fonts.f600,
+    fontSize: 15,
+    color: Colors.primaryBlue,
   },
 });

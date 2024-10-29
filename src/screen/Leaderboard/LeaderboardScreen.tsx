@@ -163,6 +163,7 @@ const LeaderboardScreen = () => {
             style={{
               flex: 1,
               flexDirection: "row",
+              alignItems: "center",
               justifyContent: "space-between",
               borderBottomWidth: 1,
               borderColor: "#f0f0f0",

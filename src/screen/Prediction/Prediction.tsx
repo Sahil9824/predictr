@@ -112,6 +112,7 @@ const Prediction = ({ navigation }) => {
   return (
     <>
       {Platform.OS === "ios" && <StatusBar backgroundColor="#EFF0F1" />}
+
       {/* <Animated.View style={[{ height: 100, width: 100 }, animatedStyle]}> */}
       <SafeAreaView
         style={styles.container}
@@ -477,7 +478,7 @@ const styles = StyleSheet.create({
     color: "#717272",
     marginRight: 40,
     textAlign: "left",
-    width: 115,
+    width: scale(115),
   },
 
   box: {

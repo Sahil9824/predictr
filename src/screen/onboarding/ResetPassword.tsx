@@ -1,6 +1,13 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
@@ -9,6 +16,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ICONS } from "../../constant/icons.constants";
+import Icons from "../../component/Icons";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -47,17 +56,16 @@ const ResetPassword = ({ navigation }: any) => {
     }
   }, [emailRef.current?.value]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      header: () => <AuthHeader navigation={navigation} />,
-    });
-  }, []);
-
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white" }}
       edges={["top", "left", "right"]}
     >
+      <View style={styles.header}>
+        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+          <Icons type={ICONS.BACKARR} />
+        </TouchableWithoutFeedback>
+      </View>
       <Pressable style={styles.container}>
         <KeyboardAwareScrollView
           contentContainerStyle={{
@@ -121,5 +129,12 @@ const styles = StyleSheet.create({
   button: {
     marginTop: "auto",
     marginBottom: scale(40),
+  },
+  header: {
+    flexDirection: "row",
+    paddingVertical: 13,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
   },
 });

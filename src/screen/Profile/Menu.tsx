@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     flexDirection: "row",
     alignItems: "center",
+    // paddingVertical: 14,
   },
   label: {
     fontFamily: fonts.f500,
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
     paddingRight: 16,
-    paddingVertical: 12,
+    paddingVertical: 14,
     borderBottomWidth: 1,
     borderBottomColor: "#00000020",
     flexDirection: "row",

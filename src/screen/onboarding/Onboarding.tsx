@@ -20,13 +20,13 @@ import { SCREENS } from "../../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Onboarding = ({ navigation }: any) => {
-  useFocusEffect(() => {
-    changeNavigationBarColor(Colors.primaryBlue, true);
+  // useFocusEffect(() => {
+  //   changeNavigationBarColor(Colors.primaryBlue, true);
 
-    return () => {
-      changeNavigationBarColor("black", true);
-    };
-  });
+  //   return () => {
+  //     changeNavigationBarColor("black", true);
+  //   };
+  // });
 
   const goToCreateAcc = () => {
     navigation.navigate(SCREENS.CREATE_ACCOUNT);
@@ -35,17 +35,22 @@ const Onboarding = ({ navigation }: any) => {
   const goToLogin = () => {
     navigation.navigate(SCREENS.LOGIN);
   };
-  useFocusEffect(
-    useCallback(() => {
-      StatusBar.setBackgroundColor(Colors.primaryBlue);
-      StatusBar.setBarStyle("light-content");
-    }, [])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     StatusBar.setBackgroundColor(Colors.primaryBlue);
+  //     StatusBar.setBarStyle("light-content");
+  //   }, [])
+  // );
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white" }}
+      style={{ flex: 1, backgroundColor: Colors.primaryBlue }}
       edges={["top", "left", "right"]}
     >
+      <StatusBar
+        barStyle={"light-content"}
+        backgroundColor={Colors.primaryBlue}
+      />
+
       <View style={styles.container}>
         <Text style={styles.header}>
           <Text800 style={styles.headerText}>{"Predictr"}</Text800>

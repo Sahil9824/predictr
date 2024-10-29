@@ -511,6 +511,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     padding: 16,
+    paddingVertical: 12.5,
     alignItems: "center",
     justifyContent: "space-between",
     borderBottomWidth: 1,
@@ -520,6 +521,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 16,
     alignItems: "center",
+    marginBottom: 8,
   },
   profileImage: {
     width: scale(130),
@@ -566,7 +568,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginHorizontal: 15,
-    backgroundColor: "#F9F9F9",
+    backgroundColor: "#FFFFFF",
     borderRadius: scale(10),
     borderColor: "#ddd",
     borderWidth: 1,
@@ -577,10 +579,11 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(10),
     alignItems: "center",
     borderRadius: scale(9),
-    backgroundColor: "#F9F9F9",
+    backgroundColor: "#FFFFFF",
   },
   selectedTabItem: {
-    backgroundColor: "#E5E5E5",
+    backgroundColor: "#F0F3F5",
+
     borderRadius: scale(9),
   },
   tabText: {
@@ -672,7 +675,6 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: 16,
-    //fontWeight: "700",
   },
 
   noWinText2: {

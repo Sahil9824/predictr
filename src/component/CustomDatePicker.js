@@ -7,6 +7,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Pressable,
+  Platform,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
@@ -34,6 +35,7 @@ const CustomDatePicker = ({
   );
   const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
   const [isYearPickerVisible, setIsYearPickerVisible] = useState(false);
+  const [dayWidth, setDayWidth] = useState(null);
 
   const months = [
     "January",
@@ -72,41 +74,6 @@ const CustomDatePicker = ({
     setSelectedYear(newDate.year());
   };
 
-  // const renderDays = () => {
-  //   const year = currentDate.year();
-  //   const month = currentDate.month();
-  //   const firstDayOfMonth = new Date(year, month, 1).getDay();
-  //   const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  //   let days = [];
-  //   for (let i = 0; i < firstDayOfMonth; i++) {
-  //     days.push(<View style={styles.day} key={`empty-${i}`} />);
-  //   }
-
-  //   for (let day = 1; day <= daysInMonth; day++) {
-  //     const isSelected =
-  //       selectedDate?.getDate() === day &&
-  //       selectedDate?.getMonth() === month &&
-  //       selectedDate?.getFullYear() === year;
-
-  //     days.push(
-  //       <TouchableOpacity
-  //         style={[styles.day, isSelected ? styles.selectedDay : null]}
-  //         key={day}
-  //         onPress={() => setSelectedDate(new Date(year, month, day))}
-  //       >
-  //         <Text
-  //           style={[styles.dayText, isSelected ? styles.selectedDayText : null]}
-  //         >
-  //           {day}
-  //         </Text>
-  //       </TouchableOpacity>
-  //     );
-  //   }
-
-  //   return days;
-  // };
-
   const renderDays = () => {
     const year = currentDate.year();
     const month = currentDate.month();
@@ -115,7 +82,9 @@ const CustomDatePicker = ({
 
     let days = [];
     for (let i = 0; i < firstDayOfMonth; i++) {
-      days.push(<View style={styles.day} key={`empty-${i}`} />);
+      days.push(
+        <View style={{ ...styles.day, width: dayWidth }} key={`empty-${i}`} />
+      );
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
@@ -131,6 +100,7 @@ const CustomDatePicker = ({
         <TouchableOpacity
           style={[
             styles.day,
+            { width: dayWidth },
             isSelected ? styles.selectedDay : null,
             !selectable ? styles.disabledDay : null,
           ]}
@@ -153,6 +123,70 @@ const CustomDatePicker = ({
 
     return days;
   };
+
+  // const renderDays = () => {
+  //   const year = currentDate.year();
+  //   const month = currentDate.month();
+  //   const firstDayOfMonth = new Date(year, month, 1).getDay();
+  //   const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  //   let days = [];
+  //   let week = [];
+
+  //   // Empty placeholders for days before the first of the month
+  //   for (let i = 0; i < firstDayOfMonth; i++) {
+  //     week.push(
+  //       <View style={{ ...styles.day, width: dayWidth }} key={`empty-${i}`} />
+  //     );
+  //   }
+
+  //   // Days in the month
+  //   for (let day = 1; day <= daysInMonth; day++) {
+  //     const date = new Date(year, month, day);
+  //     const isSelected =
+  //       selectedDate?.getDate() === day &&
+  //       selectedDate?.getMonth() === month &&
+  //       selectedDate?.getFullYear() === year;
+
+  //     const selectable = isDateSelectable(date);
+
+  //     week.push(
+  //       <TouchableOpacity
+  //         style={[
+  //           styles.day,
+  //           { width: dayWidth },
+  //           isSelected ? styles.selectedDay : null,
+  //           !selectable ? styles.disabledDay : null,
+  //         ]}
+  //         key={day}
+  //         onPress={() => selectable && setSelectedDate(date)}
+  //         disabled={!selectable}
+  //       >
+  //         <Text
+  //           style={[
+  //             styles.dayText,
+  //             isSelected ? styles.selectedDayText : null,
+  //             !selectable ? styles.disabledDayText : null,
+  //           ]}
+  //         >
+  //           {day}
+  //         </Text>
+  //       </TouchableOpacity>
+  //     );
+
+  //     // Every 7 days, push the current week array to the main array and reset
+  //     if (week.length === 7 || day === daysInMonth) {
+  //       days.push(
+  //         <View style={styles.weekRow} key={`week-${day}`}>
+  //           {week}
+  //         </View>
+  //       );
+  //       week = [];
+  //     }
+  //   }
+
+  //   return days;
+  // };
 
   const handleSave = () => {
     const yearToUse = selectedYear || currentDate.year();
@@ -271,7 +305,14 @@ const CustomDatePicker = ({
       {/* Week Days */}
       <View style={styles.weekDaysContainer}>
         {daysOfWeek.map((day, index) => (
-          <Text style={styles.weekDay} key={index}>
+          <Text
+            onLayout={(event) => {
+              const { width } = event.nativeEvent.layout;
+              setDayWidth(width);
+            }}
+            style={styles.weekDay}
+            key={index}
+          >
             {day}
           </Text>
         ))}
@@ -285,6 +326,7 @@ const CustomDatePicker = ({
         style={{ marginTop: 12 }}
         onPress={handleSave}
         inActive={!selectedDate}
+        inActiveColor="#717272"
       />
 
       {renderYearPicker()}
@@ -331,9 +373,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   weekDay: {
-    width: 35.5,
+    width: 44,
     textAlign: "center",
-    //fontWeight: "600",
     color: "#3C3C434D",
     fontSize: scale(13),
     fontFamily: fonts.f600,
@@ -348,7 +389,7 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: "center",
     justifyContent: "center",
-    margin: scale(3),
+    margin: Platform.OS === "ios" ? -1 : scale(3),
   },
   selectedDay: {
     backgroundColor: "#e0efff",
@@ -364,7 +405,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
   },
   selectedDayText: {
+    fontFamily: fonts.f500,
     color: "#007AFF",
+    fontSize: 24,
   },
   disabledDay: {
     backgroundColor: "#f0f0f0",
@@ -414,6 +457,10 @@ const styles = StyleSheet.create({
     fontSize: scale(18),
     color: "#000",
     fontFamily: fonts.f500,
+  },
+  weekRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 

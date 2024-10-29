@@ -410,7 +410,7 @@ const FeedSetup: React.FC<any> = ({ navigation, route }) => {
           )}
           keyExtractor={(item) => item?.id?.toString()}
         />
-        {followList.length > 0 && (
+        {followList.length > 4 && (
           <Button text="Done" onPress={navigateToLogin} style={styles.line} />
         )}
       </View>

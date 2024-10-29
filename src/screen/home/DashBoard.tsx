@@ -264,11 +264,13 @@ const DashBoard = () => {
 
   return (
     <>
-      <StatusBar backgroundColor="white" />
+      {/* <StatusBar backgroundColor="white" /> */}
       <SafeAreaView
         style={{ flex: 1, backgroundColor: "white" }}
         edges={["top", "left", "right"]}
       >
+        <StatusBar backgroundColor={"white"} />
+
         <View style={styles.container}>
           <View
             style={{
@@ -362,7 +364,7 @@ const DashBoard = () => {
               openFilter={openFilterCard}
               filteredOptions={filteredOptions}
               handleLayout={handleLayout}
-              style={{ marginBottom: 12 }}
+              style={{ marginBottom: isSelected !== 2 ? 12 : 0 }}
             />
 
             {(isSelected === 1 || isSelected === 0) &&

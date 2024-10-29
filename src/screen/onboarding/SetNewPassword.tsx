@@ -1,6 +1,13 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
 import Input, { Iref } from "../../component/Input";
@@ -12,6 +19,8 @@ import { Images } from "../../assets/images";
 import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ICONS } from "../../constant/icons.constants";
+import Icons from "../../component/Icons";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -81,6 +90,11 @@ const SetNewPassword = ({ navigation }: any) => {
       edges={["top", "left", "right"]}
     >
       <Pressable style={{ flex: 1 }}>
+        <View style={styles.header}>
+          <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+            <Icons type={ICONS.BACKARR} />
+          </TouchableWithoutFeedback>
+        </View>
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
           <Text style={styles.title}>{"Set new password"}</Text>
           <Text style={styles.subTitle}>
@@ -151,5 +165,13 @@ const styles = StyleSheet.create({
     // left: 20
     marginTop: "auto",
     marginBottom: scale(20),
+  },
+
+  header: {
+    flexDirection: "row",
+    paddingVertical: 13,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
   },
 });

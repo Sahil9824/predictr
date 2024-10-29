@@ -14,6 +14,7 @@ interface Props {
   textStyle?: TextStyle;
   onPress: () => void;
   inActive?: boolean;
+  inActiveColor?: string;
 }
 
 const Button: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const Button: React.FC<Props> = ({
   textStyle,
   onPress,
   inActive,
+  inActiveColor,
 }) => {
   const onButtonPress = () => {
     if (!inActive) {
@@ -34,7 +36,9 @@ const Button: React.FC<Props> = ({
       style={({ pressed }) => [
         styles.container,
         style,
-        inActive && { backgroundColor: Colors.disableGrey },
+        inActive && {
+          backgroundColor: !inActiveColor ? Colors.disableGrey : inActiveColor,
+        },
         pressed && { opacity: 0.75 },
       ]}
       onPress={onButtonPress}
@@ -58,6 +62,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f600,
     color: Colors.white,
-    //fontWeight: "600",
+    fontSize: 16,
   },
 });

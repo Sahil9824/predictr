@@ -117,9 +117,7 @@ const OtherUserProfile = () => {
               <Image source={Images.avatar17} style={styles.profileImage} />
               <View style={styles.profileInfo}>
                 <Text style={styles.profileName}>Lincoln Philips</Text>
-                <View
-                  style={{ flexDirection: "row", paddingVertical: scale(10) }}
-                >
+                <View style={{ flexDirection: "row" }}>
                   <TouchableWithoutFeedback
                     onPress={() =>
                       navigation.navigate(SCREENS.GENERAL_SCREEN, {
@@ -292,7 +290,7 @@ const OtherUserProfile = () => {
             </View>
 
             {/* FlatList for Predictions */}
-            {!data ? (
+            {data ? (
               data.map((item, index) => (
                 <View style={styles.cardContainer} key={index}>
                   <PredictionCard index={item.index} />
@@ -306,7 +304,7 @@ const OtherUserProfile = () => {
                   justifyContent: "center",
                 }}
               >
-                <View style={{ height: 160, width: 288 }}>
+                <View style={{ height: 160, width: 388 }}>
                   <Image
                     source={Images.userPredEmp}
                     style={{
@@ -405,6 +403,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
+    paddingVertical: 12.5,
   },
   profileHeader: {
     flexDirection: "row",
@@ -424,6 +423,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(24),
     color: Colors.labelBlack,
     fontFamily: fonts.f700,
+    marginBottom: 4,
   },
   profileStats: {
     color: "#888",
@@ -434,6 +434,7 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(10),
     borderRadius: moderateScale(12),
     alignItems: "center",
+    marginTop: 16,
   },
   follow: {
     backgroundColor: "#024BAC",
@@ -455,7 +456,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginHorizontal: scale(15),
-    backgroundColor: "#F9F9F9",
+    backgroundColor: "#FFFFFF",
     borderRadius: scale(10),
     borderColor: "#ddd",
     borderWidth: 1,
@@ -465,10 +466,10 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(10),
     alignItems: "center",
     borderRadius: scale(10),
-    backgroundColor: "#F9F9F9",
+    backgroundColor: "#FFFFFF",
   },
   selectedTabItem: {
-    backgroundColor: "#E5E5E5",
+    backgroundColor: "#F0F3F5",
   },
   tabText: {
     fontSize: moderateScale(16),

@@ -189,8 +189,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 13,
     paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#00000020",
+  },
+
+  menuText: {
+    fontFamily: fonts.f600,
+    //fontWeight: "600",
+    fontSize: 16,
+    color: "#101010",
+    marginLeft: 16,
   },
 
   avoidingView: {
@@ -229,14 +235,6 @@ const styles = StyleSheet.create({
     //fontWeight: "400",
     fontSize: scale(14),
     color: "#717272",
-  },
-
-  menuText: {
-    fontFamily: fonts.f600,
-    //fontWeight: "600",
-    fontSize: 16,
-    color: "#101010",
-    marginLeft: 16,
   },
 
   postBox: {

@@ -65,7 +65,7 @@ const PredictionCard = ({
 
   useEffect(() => {
     if (toolTipVisible) {
-      const timer = setTimeout(() => setToolTipVisible(false), 1500);
+      const timer = setTimeout(() => setToolTipVisible(false), 10000);
       return () => clearTimeout(timer);
     }
   }, [toolTipVisible]);
@@ -182,11 +182,12 @@ const PredictionCard = ({
                 </TouchableWithoutFeedback>
                 <Text
                   style={{
-                    fontFamily: fonts.f400,
+                    fontFamily: fonts.f500,
                     //fontWeight: "400",
 
                     fontSize: scale(12),
                     lineHeight: scale(15),
+                    color: "#717272",
                   }}
                 >
                   {"40.3%"}
@@ -270,7 +271,8 @@ const PredictionCard = ({
               }}
             >
               {toolTipVisible && (
-                <View style={[styles.tooltip, { left: textWidth / 2 - 70 }]}>
+                <View style={[styles.tooltip, { left: textWidth / 2 - 75 }]}>
+                  <View style={{ ...styles.tooltipTriangle }} />
                   <Text style={styles.tooltipText}>Tesla Stock (TSLA)</Text>
                 </View>
               )}
@@ -383,7 +385,7 @@ const PredictionCard = ({
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              marginTop: 10,
+              marginTop: scale(12),
               alignItems: "center",
             }}
           >
@@ -795,7 +797,7 @@ const styles = StyleSheet.create({
   tooltip: {
     position: "absolute",
     width: 150,
-    bottom: scale(30),
+    bottom: scale(35),
     backgroundColor: "#000000BF",
     paddingHorizontal: scale(8),
     paddingVertical: scale(4),
@@ -810,5 +812,18 @@ const styles = StyleSheet.create({
     fontSize: scale(12),
     //fontWeight: "500",
     letterSpacing: scale(12) * -0.02,
+  },
+  tooltipTriangle: {
+    position: "absolute",
+    bottom: -scale(7), // Position the triangle below the tooltip box
+    marginLeft: -scale(7), // Center-align triangle (half of width)
+    width: 0,
+    height: 0,
+    borderLeftWidth: scale(7),
+    borderRightWidth: scale(7),
+    borderTopWidth: scale(7),
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderTopColor: "#000000BF", // Same as tooltip background
   },
 });

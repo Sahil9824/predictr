@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     paddingVertical: 8,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBlue,
   },
   text: {
     fontFamily: fonts.f600,

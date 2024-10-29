@@ -9,6 +9,7 @@ import {
 } from "react";
 import {
   Keyboard,
+  Pressable,
   StatusBar,
   StyleSheet,
   Text,
@@ -24,6 +25,8 @@ import { scale } from "../../../helper";
 import { SCREENS } from "../../constant/navigation.constants";
 import userStore from "../../user.store";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icons from "../../component/Icons";
+import { ICONS } from "../../constant/icons.constants";
 
 // interface Props {
 //   navigation: StackNavigationProp<RootStackParamList, "CreateAccount">;
@@ -110,20 +113,6 @@ const CreateAccount = ({ navigation }: any) => {
     confirmPasswordRef.current?.value,
   ]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      header: () => (
-        <AuthHeader
-          navigation={navigation}
-          rightText={"Login"}
-          onRightPress={() => {
-            navigation.navigate(SCREENS.LOGIN);
-          }}
-        />
-      ),
-    });
-  }, []);
-
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle("dark-content");
@@ -136,6 +125,15 @@ const CreateAccount = ({ navigation }: any) => {
       style={{ flex: 1, backgroundColor: "white" }}
       edges={["top", "left", "right"]}
     >
+      <View style={styles.header}>
+        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+          <Icons type={ICONS.BACKARR} />
+        </TouchableWithoutFeedback>
+        <Pressable onPress={() => navigation.navigate(SCREENS.LOGIN)}>
+          <Text style={styles.menuText}>Login</Text>
+        </Pressable>
+      </View>
+
       <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{ flex: 1 }}>
         <KeyboardAwareScrollView
@@ -204,5 +202,19 @@ const styles = StyleSheet.create({
   button: {
     marginTop: "auto",
     marginBottom: scale(40),
+  },
+  header: {
+    flexDirection: "row",
+    paddingVertical: 13,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+  },
+
+  menuText: {
+    fontFamily: fonts.f600,
+    fontSize: 15,
+    //fontWeight: "600",
+    color: Colors.primaryBlue,
   },
 });

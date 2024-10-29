@@ -251,15 +251,13 @@ const Contests = ({ openBottomSheet }) => {
               inputIOS: {
                 color: "#101010",
                 fontFamily: fonts.f600,
-                fontSize: 14,
-                //fontWeight: "600",
+                fontSize: scale(14),
                 width: "100%",
               },
               inputAndroid: {
                 color: "#101010",
                 fontFamily: fonts.f600,
-                //fontWeight: "600",
-                fontSize: 14,
+                fontSize: scale(14),
                 width: "100%",
               },
             }}

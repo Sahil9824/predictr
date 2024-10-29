@@ -17,8 +17,8 @@ const Stack = createNativeStackNavigator();
 const OnboardingStack = () => (
   <Stack.Navigator
     screenOptions={{
-      animation: "slide_from_right",
-      animationDuration: 300,
+      animation: "ios",
+      animationDuration: 200,
     }}
   >
     <Stack.Screen

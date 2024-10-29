@@ -259,6 +259,7 @@ const FilterCard = forwardRef((props, ref) => {
                 inActive={!isSaveButtonEnabled}
                 onPress={handleSave}
                 text="Save"
+                inActiveColor="#717272"
               />
             </View>
           </View>
@@ -268,11 +269,12 @@ const FilterCard = forwardRef((props, ref) => {
       {/* DatePicker bottom sheet */}
       <BottomSheetModal
         enableHandlePanningGesture={true}
+        // enableDynamicSizing
         enableContentPanningGesture={false}
         ref={datePickerRef}
         index={0}
         enablePanDownToClose
-        snapPoints={[Platform.OS === "ios" ? 600 : 500, 600]}
+        snapPoints={[550]}
         handleIndicatorStyle={{
           width: 65,
           height: 5,

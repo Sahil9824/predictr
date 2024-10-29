@@ -28,7 +28,7 @@ export const TAB_ICON_COLORS = {
 export const fonts = {
   f800: Platform.OS === "ios" ? "SF Pro Text Heavy" : "Inter 18pt ExtraBold",
   f700: Platform.OS === "ios" ? "SF Pro Text Bold" : "Inter 18pt Bold",
-  f600: Platform.OS === "ios" ? "SF Pro Text SemiBold" : "Inter 18pt SemiBold",
+  f600: Platform.OS === "ios" ? "SF Pro Text Semibold" : "Inter 18pt SemiBold",
   f500: Platform.OS === "ios" ? "SF Pro Text Medium" : "Inter 18pt Medium",
   f400: Platform.OS === "ios" ? "SF Pro Text Regular" : "Inter 18pt Regular",
 };

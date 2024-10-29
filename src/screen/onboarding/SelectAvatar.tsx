@@ -364,10 +364,10 @@ const styles = StyleSheet.create({
   },
   avatarSubtitle: {
     fontFamily: fonts.f400,
-    //fontWeight: "400",
     fontSize: scale(16),
     textAlign: "center",
     marginBottom: scale(30),
+    color: "#151B26",
   },
   imageSelection: {
     flexDirection: "row",

@@ -15,8 +15,8 @@ const Stack = createNativeStackNavigator();
 const PreloginStack = () => (
   <Stack.Navigator
     screenOptions={{
-      animation: "slide_from_right",
-      animationDuration: 300,
+      animation: "ios",
+      headerShown: false,
     }}
   >
     <Stack.Screen

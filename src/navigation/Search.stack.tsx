@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  Platform,
 } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FeedScreen from "../screen/search/FeedScreen";
@@ -95,10 +96,10 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 3,
     paddingHorizontal: 16,
     backgroundColor: "#fff",
     paddingTop: 12,
+    paddingVertical: 3,
   },
   searchBoxContainer: {
     flexDirection: "row",
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.8,
     backgroundColor: "#fff",
     borderRadius: 12,
-    paddingVertical: 2,
+    paddingVertical: Platform.OS === "ios" ? 10 : 0,
     paddingHorizontal: 16,
   },
   searchBox: {
