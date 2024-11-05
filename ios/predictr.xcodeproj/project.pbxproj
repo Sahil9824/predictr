@@ -43,7 +43,7 @@
 		00E356EE1AD99517003FC87E /* predictrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = predictrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* predictrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = predictrTests.m; sourceTree = "<group>"; };
-		0807D3D7A9F34FBFB8C8C756 /* SF Pro Text Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Heavy.ttf"; path = "../src/assets/fonts/SF Pro Text Heavy.ttf"; sourceTree = "<group>"; };
+		0807D3D7A9F34FBFB8C8C756 /* SF Pro Text Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Heavy.ttf"; path = "../src/assets/fonts/SF Pro Text Heavy.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* predictr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = predictr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = predictr/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = predictr/AppDelegate.mm; sourceTree = "<group>"; };
@@ -51,24 +51,24 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = predictr/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = predictr/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = predictr/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		23400EE5685546B58889066B /* Inter 18pt Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Medium.ttf"; path = "../src/assets/fonts/Inter 18pt Medium.ttf"; sourceTree = "<group>"; };
+		23400EE5685546B58889066B /* Inter 18pt Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Medium.ttf"; path = "../src/assets/fonts/Inter 18pt Medium.ttf"; sourceTree = "<group>"; };
 		235C55AC26173A66128A0ADB /* Pods-predictr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr.release.xcconfig"; path = "Target Support Files/Pods-predictr/Pods-predictr.release.xcconfig"; sourceTree = "<group>"; };
-		3AE6DCAC814948DDAE93DA06 /* SF Pro Text Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Bold.ttf"; path = "../src/assets/fonts/SF Pro Text Bold.ttf"; sourceTree = "<group>"; };
+		3AE6DCAC814948DDAE93DA06 /* SF Pro Text Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Bold.ttf"; path = "../src/assets/fonts/SF Pro Text Bold.ttf"; sourceTree = "<group>"; };
 		3E95CC90940E5BB11C82421C /* libPods-predictr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-predictr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4549BEC4744277841E0F3D45 /* libPods-predictr-predictrTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-predictr-predictrTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB6C2A54655E49E9C12923F /* Pods-predictr-predictrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr-predictrTests.release.xcconfig"; path = "Target Support Files/Pods-predictr-predictrTests/Pods-predictr-predictrTests.release.xcconfig"; sourceTree = "<group>"; };
-		5AD91E2D5D084117B81B42F3 /* Inter 18pt SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt SemiBold.ttf"; path = "../src/assets/fonts/Inter 18pt SemiBold.ttf"; sourceTree = "<group>"; };
+		5AD91E2D5D084117B81B42F3 /* Inter 18pt SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt SemiBold.ttf"; path = "../src/assets/fonts/Inter 18pt SemiBold.ttf"; sourceTree = "<group>"; };
 		7AA64F5ABAEE9DD355F510FC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = predictr/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = predictr/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		90194987473542CF9970A938 /* SF Pro Text Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Medium.ttf"; path = "../src/assets/fonts/SF Pro Text Medium.ttf"; sourceTree = "<group>"; };
-		99548C6C85764D2FA151BA04 /* SF Pro Text Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Black.otf"; path = "../src/assets/fonts/SF Pro Text Black.otf"; sourceTree = "<group>"; };
-		9D0B510547BF4BB594853EAC /* Inter 18pt Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Regular.ttf"; path = "../src/assets/fonts/Inter 18pt Regular.ttf"; sourceTree = "<group>"; };
+		90194987473542CF9970A938 /* SF Pro Text Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Medium.ttf"; path = "../src/assets/fonts/SF Pro Text Medium.ttf"; sourceTree = "<group>"; };
+		99548C6C85764D2FA151BA04 /* SF Pro Text Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Black.otf"; path = "../src/assets/fonts/SF Pro Text Black.otf"; sourceTree = "<group>"; };
+		9D0B510547BF4BB594853EAC /* Inter 18pt Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Regular.ttf"; path = "../src/assets/fonts/Inter 18pt Regular.ttf"; sourceTree = "<group>"; };
 		9D1917B39C8FC741F573E4F7 /* Pods-predictr-predictrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr-predictrTests.debug.xcconfig"; path = "Target Support Files/Pods-predictr-predictrTests/Pods-predictr-predictrTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A2C1A0A591AD4F3D9A25EDEE /* SF Pro Text Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Semibold.ttf"; path = "../src/assets/fonts/SF Pro Text Semibold.ttf"; sourceTree = "<group>"; };
-		A47F08A26F19404E83289188 /* Inter 18pt Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Bold.ttf"; path = "../src/assets/fonts/Inter 18pt Bold.ttf"; sourceTree = "<group>"; };
-		C0AD90CAEB6A4E1EBFC54E64 /* SF Pro Text Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Regular.ttf"; path = "../src/assets/fonts/SF Pro Text Regular.ttf"; sourceTree = "<group>"; };
-		C9D0F46ECAEF40B2B2E5B5CF /* Inter 18pt Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Black.ttf"; path = "../src/assets/fonts/Inter 18pt Black.ttf"; sourceTree = "<group>"; };
-		E484FBBBC7E9495B96572984 /* Inter 18pt ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt ExtraBold.ttf"; path = "../src/assets/fonts/Inter 18pt ExtraBold.ttf"; sourceTree = "<group>"; };
+		A2C1A0A591AD4F3D9A25EDEE /* SF Pro Text Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Semibold.ttf"; path = "../src/assets/fonts/SF Pro Text Semibold.ttf"; sourceTree = "<group>"; };
+		A47F08A26F19404E83289188 /* Inter 18pt Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Bold.ttf"; path = "../src/assets/fonts/Inter 18pt Bold.ttf"; sourceTree = "<group>"; };
+		C0AD90CAEB6A4E1EBFC54E64 /* SF Pro Text Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF Pro Text Regular.ttf"; path = "../src/assets/fonts/SF Pro Text Regular.ttf"; sourceTree = "<group>"; };
+		C9D0F46ECAEF40B2B2E5B5CF /* Inter 18pt Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt Black.ttf"; path = "../src/assets/fonts/Inter 18pt Black.ttf"; sourceTree = "<group>"; };
+		E484FBBBC7E9495B96572984 /* Inter 18pt ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter 18pt ExtraBold.ttf"; path = "../src/assets/fonts/Inter 18pt ExtraBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F5C0339D6B19ABEBE719A12E /* Pods-predictr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-predictr.debug.xcconfig"; path = "Target Support Files/Pods-predictr/Pods-predictr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -528,7 +528,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 6Y7Q75D8AF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = predictr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,7 +542,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stockalgos.predictr;
 				PRODUCT_NAME = predictr;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -556,19 +557,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 6Y7Q75D8AF;
 				INFOPLIST_FILE = predictr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stockalgos.predictr;
 				PRODUCT_NAME = predictr;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

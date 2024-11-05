@@ -113,12 +113,19 @@ const Login = ({ navigation }: any) => {
             onBlur={passwordValidation}
             password
           />
-          <Text
-            style={styles.resetPassword}
-            onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
+          <View
+            style={{
+              width: "100%",
+              alignItems: "flex-end",
+            }}
           >
-            {"Reset Password"}
-          </Text>
+            <Text
+              style={styles.resetPassword}
+              onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
+            >
+              {"Reset Password"}
+            </Text>
+          </View>
         </View>
         <Button
           text={"Login"}
@@ -155,10 +162,8 @@ const styles = StyleSheet.create({
   },
   resetPassword: {
     fontFamily: fonts.f600,
-    //fontWeight: "600",
     fontSize: scale(14),
     color: Colors.primaryBlue,
-    textAlign: "right",
   },
 
   header: {
