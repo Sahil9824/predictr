@@ -39,4 +39,5 @@ export const ICONS = {
   CAL_CHANGE: "CAL_CHANGE",
   BLUE_RIGHT: "BLUE_RIGHT",
   DONE: "DONE",
+  SEARCH_S: "SEARCH_S",
 };

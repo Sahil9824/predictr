@@ -38,6 +38,7 @@ import HeadSearch from "./HeadSearch";
 import CalChange from "./CalChange";
 import BlueRight from "./BlueRight";
 import Done from "./Done";
+import SearchS from "./SearchS";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -82,4 +83,5 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.CAL_CHANGE]: CalChange,
   [ICONS.BLUE_RIGHT]: BlueRight,
   [ICONS.DONE]: Done,
+  [ICONS.SEARCH_S]: SearchS,
 };
