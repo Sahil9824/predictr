@@ -25,9 +25,32 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useNavigation } from "@react-navigation/native";
 import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 import Button from "./Button";
+import SearchStock from "./bottomSheets/SearchStock";
+import { RangeSlider } from "@react-native-assets/slider";
+import { Pressable } from "react-native";
 
 const FilterCard = forwardRef((props, ref) => {
   const { dismiss } = useBottomSheetModal();
+  const [selectedAccuracy, setSelectedAccuracy] = useState(null);
+  const [manualAccuracy, setManualAccuracy] = useState("");
+  const [sliderValue, setSliderValue] = useState([20, 80]);
+  const [dateRange, setDateRange] = useState({ from: null, to: null });
+  const [showCustomDatePicker, setShowCustomDatePicker] = useState({
+    from: false,
+    to: false,
+  });
+  const [hashtag, setHashtag] = useState("");
+  const [isReset, setIsReset] = useState(false);
+  const [selectedStock, setSelectedStock] = useState("");
+
+  const datePickerRef = useRef<BottomSheetModal>(null);
+
+  const navigation = useNavigation();
+
+  const onValuesChange = (values) => {
+    setRange(values);
+  };
+  const searchBottomRef = useRef(null);
 
   useEffect(() => {
     const handleBackButton = () => {
@@ -40,18 +63,9 @@ const FilterCard = forwardRef((props, ref) => {
     };
   }, []);
 
-  const [selectedAccuracy, setSelectedAccuracy] = useState(null);
-  const [manualAccuracy, setManualAccuracy] = useState("");
-  const [dateRange, setDateRange] = useState({ from: null, to: null });
-  const [showCustomDatePicker, setShowCustomDatePicker] = useState({
-    from: false,
-    to: false,
-  });
-  const [hashtag, setHashtag] = useState("");
-  const [isReset, setIsReset] = useState(false);
-  const datePickerRef = useRef<BottomSheetModal>(null);
-
-  const navigation = useNavigation();
+  const openStockPicker = (type) => {
+    searchBottomRef.current?.present();
+  };
 
   const renderBackdrop = (props) => (
     <BottomSheetBackdrop
@@ -60,6 +74,13 @@ const FilterCard = forwardRef((props, ref) => {
       disappearsOnIndex={-1}
       appearsOnIndex={0}
     />
+  );
+
+  const renderThumb = (value) => (
+    <View style={styles.thumbContainer}>
+      <Text style={styles.thumbValue}>{value}</Text>
+      <View style={styles.thumb} />
+    </View>
   );
 
   const formatDate = (date) => {
@@ -154,7 +175,7 @@ const FilterCard = forwardRef((props, ref) => {
           backgroundColor: "#B3B3B3",
         }}
         style={styles.bottomSheet}
-        snapPoints={[600]}
+        snapPoints={["90%"]}
       >
         <KeyboardAwareScrollView
           contentContainerStyle={{ flexGrow: 1 }}
@@ -172,36 +193,71 @@ const FilterCard = forwardRef((props, ref) => {
           </View>
 
           <View style={styles.content}>
-            <Text style={styles.sectionTitle}>Accuracy (%)</Text>
-            <TextInput
-              style={styles.accuracyInput}
-              placeholder="Enter Manual Accuracy"
-              value={manualAccuracy}
-              onChangeText={handleManualAccuracyChange}
-              keyboardType="numeric"
+            <Text style={styles.sectionTitle}>Stock</Text>
+            <Pressable onPress={openStockPicker} style={styles.searchContainer}>
+              <View style={styles.searchBoxContainer}>
+                <Icons type={ICONS.HEAD_SEARCH} />
+                <Text style={styles.stext}>Search</Text>
+              </View>
+            </Pressable>
+            <SearchStock
+              searchBottomRef={searchBottomRef}
+              setSelectedStock={setSelectedStock}
             />
-
-            <View style={styles.accuracyOptions}>
-              {["30-50%", "50-70%", "70% & up"].map((range) => (
-                <TouchableOpacity
-                  key={range}
-                  style={[
-                    styles.accuracyButton,
-                    selectedAccuracy === range && styles.accuracyButtonSelected,
-                  ]}
-                  onPress={() => handleAccuracyOptionPress(range)}
-                >
-                  <Text
-                    style={[
-                      styles.accuracyText,
-                      selectedAccuracy === range && styles.accuracyTextSelected,
-                    ]}
+            <Text style={{ ...styles.sectionTitle, marginBottom: 26 }}>
+              Accuracy (%)
+            </Text>
+            <RangeSlider
+              style={{ width: "100%" }}
+              range={[0, 100]} // set the current slider's value
+              step={0.1}
+              minimumRange={3} // Minimum range between the two thumbs (defaults as "step")
+              minimumValue={10} // Minimum value (defaults as 0)
+              maximumValue={100} // Maximum value (defaults as minimumValue + minimumRange)
+              crossingAllowed={false} // If true, the user can make one thumb cross over the second thumb
+              outboundColor="#E7E7E7" // The track color outside the current range value
+              inboundColor="#025ED7" // The track color inside the current range value
+              thumbTintColor="#025ED7" // The color of the slider's thumb
+              thumbStyle={undefined} // Override the thumb's style
+              trackStyle={undefined} // Override the tracks' style
+              minTrackStyle={undefined} // Override the tracks' style for the minimum range
+              midTrackStyle={undefined} // Override the tracks' style for the middle range
+              maxTrackStyle={undefined} // Override the tracks' style for the maximum range
+              enabled={true} // If false, the slider won't respond to touches anymore
+              slideOnTap={true} // If true, touching the slider will update it's value. No need to slide the thumb.
+              onValueChange={undefined} // Called each time the value changed. Return false to prevent the value from being updated. The type is (range: [number, number]) => boolean | void
+              onSlidingStart={undefined} // Called when the slider is pressed. The type is (range: [number, number]) => void
+              onSlidingComplete={undefined} // Called when the press is released. The type is (range: [number, number]) => void
+              CustomThumb={({ value, thumb }) => (
+                <>
+                  <View
+                    style={{
+                      backgroundColor: "#025ED7",
+                      height: 16,
+                      width: 16,
+                      borderRadius: 8,
+                      borderWidth: 1.5,
+                      borderColor: "white",
+                      shadowColor: "#000", // Shadow color
+                      shadowOffset: { width: 0, height: 3 }, // Horizontal and vertical shadow offset
+                      shadowOpacity: 0.15, // Opacity of the shadow
+                      shadowRadius: 4, //
+                      elevation: 3, // Elevation gives a shadow on Android
+                    }}
                   >
-                    {range}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+                    <Text style={{ fontSize: 100, color: "black" }}>
+                      asdjsajdjas {value}
+                    </Text>
+                  </View>
+                </>
+              )} // Provide your own component to render the thumb. The type is a component: ({ value: number, thumb: 'min' | 'max' }) => JSX.Element
+              CustomMark={({ value, active }) => (
+                <Text style={{ color: "black", fontSize: 10 }}>
+                  {active && value}
+                </Text>
+              )} // Provide your own component to render the marks. The type is a component: ({ value: number; active: boolean }) => JSX.Element ; value indicates the value represented by the mark, while active indicates wether a thumb is currently standing on the mark
+              {...props} // Add any View Props that will be applied to the container (style, ref, etc)
+            />
 
             <Text style={styles.sectionTitle}>Date Range</Text>
             <View style={styles.dateRangeContainer}>
@@ -240,7 +296,7 @@ const FilterCard = forwardRef((props, ref) => {
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.sectionTitle}>Hashtags</Text>
+            {/* <Text style={styles.sectionTitle}>Hashtags</Text>
             <View style={styles.hashtagInputContainer}>
               <Icons
                 type={ICONS.HEAD_SEARCH}
@@ -252,7 +308,7 @@ const FilterCard = forwardRef((props, ref) => {
                 value={hashtag}
                 onChangeText={setHashtag}
               />
-            </View>
+            </View> */}
 
             <View style={styles.buttonContainer}>
               <Button
@@ -344,6 +400,24 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 5,
   },
+
+  markerStyle: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    backgroundColor: "#ff6347",
+  },
+  selectedStyle: {
+    backgroundColor: "#ff6347",
+  },
+  unselectedStyle: {
+    backgroundColor: "#cccccc",
+  },
+  rangeText: {
+    fontSize: 16,
+    marginTop: 20,
+  },
+
   accuracyButton: {
     alignItems: "center",
     borderWidth: 1,
@@ -395,10 +469,27 @@ const styles = StyleSheet.create({
     tintColor: Colors.textGrey,
   },
   buttonContainer: {
+    marginTop: "auto",
     paddingBottom: 20,
     paddingTop: 5,
     width: "100%",
-    marginBottom: 10,
+    marginBottom: 40,
+  },
+
+  thumbContainer: {
+    alignItems: "center",
+  },
+  thumbValue: {
+    position: "absolute",
+    top: -25, // Adjust to place the value above the thumb
+    fontSize: 14,
+    color: "#333",
+  },
+  thumb: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#ff6347",
   },
   applyButton: {
     backgroundColor: Colors.primaryBlue,
@@ -461,5 +552,38 @@ const styles = StyleSheet.create({
     fontSize: scale(16),
     color: Colors.primaryBlue,
     //fontWeight: "600",
+  },
+
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  searchBoxContainer: {
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
+    borderColor: "#ccc",
+    borderWidth: 0.8,
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    paddingVertical: Platform.OS === "ios" ? 12 : 0,
+    paddingHorizontal: 16,
+  },
+  stext: {
+    marginLeft: 10,
+    fontFamily: fonts.f400,
+    fontSize: scale(14),
+    color: "#717272",
+    // color: Colors.primaryBlue,
+  },
+  searchBox: {
+    flex: 1,
+    // height: 40,
+    paddingLeft: 10,
+    backgroundColor: "#fff",
+    fontSize: 16,
+    color: "#101010",
+    fontFamily: fonts.f400,
   },
 });
