@@ -40,6 +40,7 @@ const PredictionCard = ({
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
+  const [isResult, setIsResult] = useState(false);
 
   const [textWidth, setTextWidth] = useState(0);
   const [likeCount, setLikeCount] = useState(45); // Count for likes
@@ -385,100 +386,115 @@ const PredictionCard = ({
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              marginTop: scale(12),
+              flex: 1,
               alignItems: "center",
+              marginTop: 12,
             }}
           >
-            <View style={{ flexDirection: "row" }}>
-              <Pressable
-                onPress={handleLike}
+            <Pressable
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={() => navigation.navigate(SCREENS.POST)}
+            >
+              <Image
+                source={Images.comment}
                 style={{
-                  width: 56,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginRight: scale(20),
+                  height: scale(16),
+                  width: scale(16),
+                  marginRight: 4,
                 }}
-              >
-                <Image
-                  source={liked ? Images.likeFilled : Images.like}
-                  style={{
-                    height: scale(16),
-                    width: scale(16),
-                    marginRight: 4,
-                  }}
-                />
-                <Text
-                  style={{
-                    fontFamily: liked ? fonts.f700 : fonts.f400,
-                    fontSize: scale(13),
-                    lineHeight: scale(19),
-                    color: liked ? "#024BAC" : Colors.textGrey,
-                    // fontWeight: liked ? "700" : "400",
-                  }}
-                >
-                  {disliked || liked ? likeCount : "Agree"}
-                </Text>
-              </Pressable>
-              <Pressable
-                onPress={handleDislike}
-                style={{
-                  width: 73,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginRight: scale(20),
-                }}
-              >
-                <Image
-                  source={disliked ? Images.dislikeFilled : Images.dislike}
-                  style={{
-                    height: scale(16),
-                    width: scale(16),
-                    marginRight: 4,
-                  }}
-                />
-                <Text
-                  style={{
-                    fontFamily: disliked ? fonts.f700 : fonts.f400,
-                    fontSize: scale(13),
-                    lineHeight: scale(19),
-                    color: disliked ? "#E33F3F" : Colors.textGrey,
-                    // fontWeight: disliked ? "700" : "400",
-                  }}
-                >
-                  {disliked || liked ? dislikeCount : "Disagree"}
-                </Text>
-              </Pressable>
-              <Pressable
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginRight: scale(10),
-                }}
-                onPress={() => navigation.navigate(SCREENS.POST)}
-              >
-                <Image
-                  source={Images.comment}
-                  style={{
-                    height: scale(16),
-                    width: scale(16),
-                    marginRight: 4,
-                  }}
-                />
-                <Text
-                  style={{
-                    fontFamily: fonts.f400,
-                    fontSize: scale(13),
-                    lineHeight: scale(19),
-                    color: Colors.textGrey,
-                    //fontWeight: "400",
-                  }}
-                >
-                  {"Comment"}
-                </Text>
-              </Pressable>
-            </View>
+              />
+            </Pressable>
 
+            <View
+              style={{
+                flexDirection: "row",
+                width: "73%",
+              }}
+            >
+              {!isResult ? (
+                <>
+                  <TouchableWithoutFeedback onPress={() => setIsResult(true)}>
+                    <View
+                      style={{
+                        borderColor: "#4BB54B",
+                        borderWidth: 1,
+                        paddingVertical: 7,
+                        width: "50%",
+                        alignItems: "center",
+                        borderRightWidth: 0,
+                        backgroundColor: "#4BB54B33",
+                        borderTopLeftRadius: 8,
+                        borderBottomLeftRadius: 8,
+                        flex: 1,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontFamily: fonts.f800,
+                          fontSize: scale(12),
+                          color: "#4BB54B",
+                        }}
+                      >
+                        AGREE
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback onPress={() => setIsResult(true)}>
+                    <View
+                      style={{
+                        flex: 1,
+                        borderColor: "#E33F3F",
+                        borderWidth: 1,
+                        paddingVertical: 7,
+                        width: "50%",
+                        alignItems: "center",
+                        borderLeftWidth: 0,
+                        backgroundColor: "#E33F3F1A",
+                        borderTopRightRadius: 8,
+                        borderBottomRightRadius: 8,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontFamily: fonts.f800,
+                          fontSize: scale(12),
+                          color: "#E33F3F",
+                        }}
+                      >
+                        DISAGREE
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </>
+              ) : (
+                <>
+                  <View
+                    style={{
+                      height: 9,
+                      width: "50%",
+                      backgroundColor: "#4BB54B",
+                      borderTopLeftRadius: 4.5,
+                      borderBottomLeftRadius: 4.5,
+                      flex: 1,
+                    }}
+                  ></View>
+                  <View
+                    style={{
+                      height: 9,
+                      width: "50%",
+                      backgroundColor: "#E33F3F",
+                      borderTopRightRadius: 4.5,
+                      borderBottomRightRadius: 4.5,
+                      flex: 1,
+                    }}
+                  ></View>
+                </>
+              )}
+            </View>
             <TouchableOpacity onPress={onSharePress}>
               <View
                 style={{
