@@ -40,4 +40,6 @@ export const ICONS = {
   BLUE_RIGHT: "BLUE_RIGHT",
   DONE: "DONE",
   SEARCH_S: "SEARCH_S",
+  BLUE_TICK: "BLUE_TICK",
+  CANCEL: "CANCEL",
 };

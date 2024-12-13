@@ -19,6 +19,7 @@ import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
 import { SCREENS } from "../constant/navigation.constants";
 import { useNavigation } from "@react-navigation/native";
+import HapticFeedback from "react-native-haptic-feedback";
 
 interface IPredictionCard {
   index: number;
@@ -43,8 +44,8 @@ const PredictionCard = ({
   const [isResult, setIsResult] = useState(false);
 
   const [textWidth, setTextWidth] = useState(0);
-  const [likeCount, setLikeCount] = useState(45); // Count for likes
-  const [dislikeCount, setDislikeCount] = useState(70); // Count for dislikes
+  const [likeCount, setLikeCount] = useState(73); // Count for likes
+  const [dislikeCount, setDislikeCount] = useState(27); // Count for dislikes
   const shareCardRef = useRef(null);
   const [isSaved, setIsSaved] = useState(isBookmarked);
 
@@ -73,36 +74,30 @@ const PredictionCard = ({
 
   // Function to handle like
   const handleLike = () => {
-    if (liked) {
-      setLiked(false);
-      setLikeCount((prev) => prev - 1); // Decrement like count
-    } else {
-      Vibration.vibrate(100);
+    // const options = {
+    //   enableVibrateFallback: true,
+    //   ignoreAndroidSystemSettings: false,
+    // };
 
-      setLiked(true);
-      setLikeCount((prev) => prev + 1); // Increment like count
-      if (disliked) {
-        setDisliked(false); // Reset dislike if liked
-        setDislikeCount((prev) => prev - 1); // Decrement dislike count
-      }
-    }
+    // HapticFeedback.trigger("impactLight", options);
+    setIsResult(true);
+    setLikeCount(73);
+    setLiked(true);
+    setDisliked(false);
   };
 
   // Function to handle dislike
   const handleDislike = () => {
-    if (disliked) {
-      setDisliked(false);
-      setDislikeCount((prev) => prev - 1); // Decrement dislike count
-    } else {
-      Vibration.vibrate(100);
+    // const options = {
+    //   enableVibrateFallback: true,
+    //   ignoreAndroidSystemSettings: false,
+    // };
 
-      setDisliked(true);
-      setDislikeCount((prev) => prev + 1); // Increment dislike count
-      if (liked) {
-        setLiked(false); // Reset like if disliked
-        setLikeCount((prev) => prev - 1); // Decrement like count
-      }
-    }
+    // HapticFeedback.trigger("impactLight", options);
+    setIsResult(true);
+    setDislikeCount(27);
+    setLiked(false);
+    setDisliked(true);
   };
 
   return (
@@ -413,11 +408,12 @@ const PredictionCard = ({
               style={{
                 flexDirection: "row",
                 width: "73%",
+                // backgroundColor: "red",
               }}
             >
               {!isResult ? (
                 <>
-                  <TouchableWithoutFeedback onPress={() => setIsResult(true)}>
+                  <TouchableWithoutFeedback onPress={handleLike}>
                     <View
                       style={{
                         borderColor: "#4BB54B",
@@ -443,7 +439,7 @@ const PredictionCard = ({
                       </Text>
                     </View>
                   </TouchableWithoutFeedback>
-                  <TouchableWithoutFeedback onPress={() => setIsResult(true)}>
+                  <TouchableWithoutFeedback onPress={handleDislike}>
                     <View
                       style={{
                         flex: 1,
@@ -471,28 +467,57 @@ const PredictionCard = ({
                   </TouchableWithoutFeedback>
                 </>
               ) : (
-                <>
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    alignSelf: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: fonts.f700,
+                      fontSize: scale(13),
+                      color: liked ? "#151B26" : "#717272",
+                      marginRight: 4,
+                    }}
+                  >
+                    {likeCount}% {liked ? "You" : ""}
+                  </Text>
+
                   <View
                     style={{
                       height: 9,
-                      width: "50%",
+                      width: `${likeCount / 2}%`,
                       backgroundColor: "#4BB54B",
-                      borderTopLeftRadius: 4.5,
-                      borderBottomLeftRadius: 4.5,
+                      borderRadius: 4.5,
                       flex: 1,
                     }}
                   ></View>
+
                   <View
                     style={{
                       height: 9,
-                      width: "50%",
+                      width: `${dislikeCount / 2}%`,
                       backgroundColor: "#E33F3F",
                       borderTopRightRadius: 4.5,
                       borderBottomRightRadius: 4.5,
-                      flex: 1,
+                      marginLeft: -3,
                     }}
                   ></View>
-                </>
+                  <Text
+                    style={{
+                      fontFamily: fonts.f700,
+                      fontSize: scale(13),
+                      color: disliked ? "#151B26" : "#717272",
+                      marginLeft: 4,
+                    }}
+                  >
+                    {dislikeCount}% {disliked ? "You" : ""}
+                  </Text>
+                </View>
               )}
             </View>
             <TouchableOpacity onPress={onSharePress}>

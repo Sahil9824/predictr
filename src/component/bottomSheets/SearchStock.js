@@ -21,7 +21,7 @@ import { Images } from "../../assets/images";
 import { useNavigation } from "@react-navigation/native";
 import { scale } from "../../../helper";
 import { TouchableOpacity } from "react-native";
-import { fonts } from "../../constant";
+import { Colors, fonts } from "../../constant";
 import Icons from "../Icons";
 import { ICONS } from "../../constant/icons.constants";
 import { Easing } from "react-native-reanimated";
@@ -158,25 +158,61 @@ const stocks = [
   },
 ];
 
-const ListItems = ({ nameAb, name, setSelectedStock, searchBottomRef }) => {
+const ListItems = ({
+  nameAb,
+  name,
+  setSelectedStock,
+  searchBottomRef,
+  isMultiselect,
+  selectedStock,
+}) => {
   const handlePress = () => {
+    if (isMultiselect) {
+      setSelectedStock((prevSelectedStocks) => {
+        const exists = prevSelectedStocks.find(
+          (stock) => stock.symbol === nameAb
+        );
+        if (exists) {
+          return prevSelectedStocks.filter((stock) => stock.symbol !== nameAb);
+        } else {
+          return [...prevSelectedStocks, { symbol: nameAb, name }];
+        }
+      });
+      return;
+    }
     setSelectedStock({ symbol: nameAb, name });
     searchBottomRef.current.dismiss();
   };
+
+  const isSelected = Array.isArray(selectedStock)
+    ? selectedStock.some((stock) => stock.symbol === nameAb)
+    : false;
   return (
-    <TouchableOpacity style={styles.listBox} onPress={handlePress}>
+    <TouchableOpacity style={{ ...styles.listBox }} onPress={handlePress}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={styles.stockAb}>{nameAb}</Text>
         <Text style={styles.stockName} numberOfLines={1}>
           {name}
         </Text>
       </View>
-      <Icons type={ICONS.BLUE_RIGHT} />
+
+      {isMultiselect && isSelected ? (
+        <Icons type={ICONS.BLUE_TICK} />
+      ) : !isSelected ? (
+        <View></View>
+      ) : (
+        <Icons type={ICONS.BLUE_RIGHT} />
+      )}
     </TouchableOpacity>
   );
 };
 
-const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
+const SearchStock = ({
+  searchBottomRef,
+  setSelectedStock,
+  isMultiselect,
+  selectedStock,
+}) => {
   const [filteredStocks, setFilteredStocks] = useState(stocks);
   const [query, setQuery] = useState("");
   const [isModal, setIsModal] = useState(false);
@@ -246,7 +282,19 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
           <View style={styles.header}>
             <Text style={styles.headText}>Select Stock</Text>
             <TouchableOpacity onPress={() => searchBottomRef.current.dismiss()}>
-              <Text style={styles.cancelButton}>Cancel</Text>
+              {isMultiselect && selectedStock.length ? (
+                <Text
+                  style={{
+                    fontFamily: fonts.f600,
+                    fontSize: scale(16),
+                    color: Colors.primaryBlue,
+                  }}
+                >
+                  Done
+                </Text>
+              ) : (
+                <Text style={styles.cancelButton}>Cancel</Text>
+              )}
             </TouchableOpacity>
           </View>
 
@@ -276,23 +324,28 @@ const SearchStock = ({ searchBottomRef, setSelectedStock }) => {
                 nameAb={item.symbol}
                 setSelectedStock={setSelectedStock}
                 searchBottomRef={searchBottomRef}
+                isMultiselect={isMultiselect}
+                selectedStock={selectedStock}
               />
             ))}
 
-            <View style={styles.listBox}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={styles.stockAb} />
-                <Text style={styles.stockName} numberOfLines={1}>
-                  Don't see your stock?
-                </Text>
+            {!isMultiselect && (
+              <View style={styles.listBox}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={styles.stockAb} />
+                  <Text style={styles.stockName} numberOfLines={1}>
+                    Don't see your stock?
+                  </Text>
+                </View>
+                <TouchableOpacity onPress={handleAddPopUp}>
+                  <Text style={styles.addText}>Add</Text>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity onPress={handleAddPopUp}>
-                <Text style={styles.addText}>Add</Text>
-              </TouchableOpacity>
-            </View>
+            )}
           </KeyboardAwareScrollView>
         </View>
       </BottomSheetModal>
+
       <Modal
         visible={isModal}
         animationType="none"
@@ -366,6 +419,7 @@ const styles = StyleSheet.create({
   scrollview: {
     paddingVertical: 12,
     paddingBottom: 25,
+    width: "100%",
   },
 
   modalBox: {

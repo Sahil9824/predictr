@@ -13,9 +13,6 @@ import {
   FlatList,
   Pressable,
 } from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import FeedScreen from "../screen/search/FeedScreen";
-import PredictorsScreen from "../screen/search/PredictorsScreen";
 import { Images } from "../assets/images";
 import { scale } from "../../helper";
 import { SCREENS } from "../constant/navigation.constants";
@@ -23,28 +20,25 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icons from "../component/Icons";
 import { ICONS } from "../constant/icons.constants";
 import { useRoute } from "@react-navigation/native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { fonts } from "../constant";
-import { Icon } from "react-native-elements/dist/icons/Icon";
-import GeneralList from "../screen/GeneralList";
 
 const mockData = [
-  // { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "2", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "3", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "4", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "5", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "6", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "7", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "8", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "9", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "10", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "11", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "12", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "13", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "14", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "15", name: "Jacob Jones", accuracy: "78.90%" },
-  // { id: "16", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "1", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "2", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "3", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "4", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "5", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "6", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "7", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "8", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "9", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "10", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "11", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "12", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "13", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "14", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "15", name: "Jacob Jones", accuracy: "78.90%" },
+  { id: "16", name: "Jacob Jones", accuracy: "78.90%" },
 ];
 
 const SearchScreen = ({ navigation }) => {

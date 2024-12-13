@@ -80,45 +80,6 @@ const Post = ({ navigation }) => {
             <View style={styles.postBox}>
               <PredictionCard index={0} imgSrc={imgSrc} />
               <View style={{ paddingHorizontal: 8 }}>
-                <View style={styles.mainBox}>
-                  {/* <View style={styles.textBox}> */}
-                  {isComment && (
-                    <Pressable
-                      style={styles.textBox}
-                      onPress={() =>
-                        navigation.navigate(SCREENS.GENERAL_SCREEN, {
-                          title: "Agreed",
-                          backscreen: SCREENS.POST,
-                        })
-                      }
-                    >
-                      <>
-                        <Icons type={ICONS.MULTI_AVA} />
-                        <Text style={styles.text1}>0</Text>
-                        <Text style={styles.text2}>Agreed</Text>
-                      </>
-                    </Pressable>
-                  )}
-                  {/* </View> */}
-                  {isComment && (
-                    <Pressable
-                      style={styles.textBox}
-                      onPress={() =>
-                        navigation.navigate(SCREENS.GENERAL_SCREEN, {
-                          title: "Disagreed",
-                          backscreen: SCREENS.POST,
-                        })
-                      }
-                    >
-                      <>
-                        <Icons type={ICONS.MULTI_AVA} />
-                        <Text style={styles.text1}>0</Text>
-                        <Text style={styles.text2}>Disagreed</Text>
-                      </>
-                    </Pressable>
-                  )}
-                </View>
-
                 {isComment && (
                   <View style={{ paddingTop: 12, paddingRight: 16 }}>
                     <Comment

@@ -58,14 +58,15 @@ const HeaderOptions = ({
         ...style,
       }}
     >
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", width: "75%" }}>
         {/* My Feed Pressable */}
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
             {
               justifyContent: "center",
-              paddingHorizontal: 16,
+              // paddingHorizontal: 16,
+              width: "50%",
               paddingVertical: 12,
             },
             isSelected === 0 && {
@@ -98,7 +99,9 @@ const HeaderOptions = ({
           style={[
             {
               justifyContent: "center",
-              paddingHorizontal: 16,
+              // paddingHorizontal: 16,
+              width: "50%",
+
               paddingVertical: 12,
             },
             isSelected === 1 && {
@@ -125,7 +128,7 @@ const HeaderOptions = ({
           </Text>
         </Pressable>
 
-        <Pressable
+        {/* <Pressable
           onPress={() => setIsSelected(2)}
           style={[
             {
@@ -155,7 +158,7 @@ const HeaderOptions = ({
           >
             {"Contests"}
           </Text>
-        </Pressable>
+        </Pressable> */}
       </View>
 
       {/* More Options Button to open the FilterScreen */}

@@ -41,15 +41,10 @@ const FilterCard = forwardRef((props, ref) => {
   });
   const [hashtag, setHashtag] = useState("");
   const [isReset, setIsReset] = useState(false);
-  const [selectedStock, setSelectedStock] = useState("");
+  const [selectedStock, setSelectedStock] = useState([]);
 
   const datePickerRef = useRef<BottomSheetModal>(null);
 
-  const navigation = useNavigation();
-
-  const onValuesChange = (values) => {
-    setRange(values);
-  };
   const searchBottomRef = useRef(null);
 
   useEffect(() => {
@@ -76,13 +71,6 @@ const FilterCard = forwardRef((props, ref) => {
     />
   );
 
-  const renderThumb = (value) => (
-    <View style={styles.thumbContainer}>
-      <Text style={styles.thumbValue}>{value}</Text>
-      <View style={styles.thumb} />
-    </View>
-  );
-
   const formatDate = (date) => {
     if (!date || !(date instanceof Date)) return "";
     const day = String(date.getDate()).padStart(2, "0");
@@ -107,16 +95,22 @@ const FilterCard = forwardRef((props, ref) => {
     datePickerRef.current?.present();
   };
 
-  const handleManualAccuracyChange = (text) => {
-    setManualAccuracy(text);
-    if (text) {
-      setSelectedAccuracy(null);
-    }
-  };
-
-  const handleAccuracyOptionPress = (range) => {
-    setSelectedAccuracy(range);
-    setManualAccuracy("");
+  const handleSelectedPress = (item) => {
+    setSelectedStock((prevSelectedStocks) => {
+      const exists = prevSelectedStocks.find(
+        (stock) => stock.symbol === item.symbol
+      );
+      if (exists) {
+        return prevSelectedStocks.filter(
+          (stock) => stock.symbol !== item.symbol
+        );
+      } else {
+        return [
+          ...prevSelectedStocks,
+          { symbol: item.symbol, name: item.name },
+        ];
+      }
+    });
   };
 
   const handleSave = () => {
@@ -147,6 +141,7 @@ const FilterCard = forwardRef((props, ref) => {
     setManualAccuracy("");
     setDateRange({ from: null, to: null });
     setHashtag("");
+    setSelectedStock([]);
     props.onFilterReset && props.onFilterReset();
     props.isReset;
   };
@@ -158,7 +153,11 @@ const FilterCard = forwardRef((props, ref) => {
   const isSaveButtonEnabled =
     dateRange.from || dateRange.to || selectedAccuracy || manualAccuracy.trim();
   const isResetVisible =
-    dateRange.from || dateRange.to || selectedAccuracy || manualAccuracy.trim();
+    dateRange.from ||
+    dateRange.to ||
+    selectedAccuracy ||
+    manualAccuracy.trim() ||
+    selectedStock;
 
   return (
     <>
@@ -200,9 +199,38 @@ const FilterCard = forwardRef((props, ref) => {
                 <Text style={styles.stext}>Search</Text>
               </View>
             </Pressable>
+            {selectedStock?.length > 0 && (
+              <View style={styles.selectedBox}>
+                {selectedStock.map((item) => (
+                  <Pressable
+                    onPress={() => handleSelectedPress(item)}
+                    key={item?.symbol}
+                    style={styles.selectedItem}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: fonts.f700,
+                        fontSize: scale(12),
+                        color: Colors.textBlack,
+                      }}
+                    >
+                      {item?.symbol}
+                    </Text>
+                    <TouchableWithoutFeedback
+                      onPress={() => handleSelectedPress(item)}
+                    >
+                      <Icons type={ICONS.CANCEL} />
+                    </TouchableWithoutFeedback>
+                  </Pressable>
+                ))}
+              </View>
+            )}
+
             <SearchStock
               searchBottomRef={searchBottomRef}
               setSelectedStock={setSelectedStock}
+              selectedStock={selectedStock}
+              isMultiselect
             />
             <Text style={{ ...styles.sectionTitle, marginBottom: 26 }}>
               Accuracy (%)
@@ -296,20 +324,6 @@ const FilterCard = forwardRef((props, ref) => {
               </TouchableOpacity>
             </View>
 
-            {/* <Text style={styles.sectionTitle}>Hashtags</Text>
-            <View style={styles.hashtagInputContainer}>
-              <Icons
-                type={ICONS.HEAD_SEARCH}
-                iconContainerStyle={styles.hashtagIcon}
-              />
-              <TextInput
-                style={styles.hashtagInput}
-                placeholder="#tags"
-                value={hashtag}
-                onChangeText={setHashtag}
-              />
-            </View> */}
-
             <View style={styles.buttonContainer}>
               <Button
                 inActive={!isSaveButtonEnabled}
@@ -322,7 +336,6 @@ const FilterCard = forwardRef((props, ref) => {
         </KeyboardAwareScrollView>
       </BottomSheetModal>
 
-      {/* DatePicker bottom sheet */}
       <BottomSheetModal
         enableHandlePanningGesture={true}
         // enableDynamicSizing
@@ -367,6 +380,24 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     flex: 1,
   },
+
+  selectedBox: {
+    flexDirection: "row",
+    width: "100%",
+    marginTop: 5,
+    gap: 4,
+  },
+
+  selectedItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    backgroundColor: "#CCDFF7",
+    borderRadius: 16,
+    gap: 4,
+  },
+
   header: {
     paddingBottom: 10,
   },
@@ -435,13 +466,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: 15,
     color: Colors.textBlack,
-    //fontWeight: "400",
   },
   accuracyTextSelected: {
     fontFamily: fonts.f700,
     fontSize: 15,
     color: Colors.textBlack,
-    //fontWeight: "700",
   },
   dateRangeContainer: {
     marginVertical: scale(3),
@@ -461,7 +490,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: Colors.textGrey,
-    //fontWeight: "400",
   },
   calendarIcon: {
     width: 20,
@@ -481,7 +509,7 @@ const styles = StyleSheet.create({
   },
   thumbValue: {
     position: "absolute",
-    top: -25, // Adjust to place the value above the thumb
+    top: -25,
     fontSize: 14,
     color: "#333",
   },
@@ -501,7 +529,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f700,
     fontSize: scale(16),
     color: Colors.white,
-    //fontWeight: "700",
   },
   bottomSheet: {
     paddingHorizontal: 16,
@@ -527,7 +554,6 @@ const styles = StyleSheet.create({
     color: Colors.textGrey,
     marginLeft: 10,
     height: 44,
-    //fontWeight: "400",
   },
   hashtagIcon: {
     width: 20,
@@ -551,7 +577,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f600,
     fontSize: scale(16),
     color: Colors.primaryBlue,
-    //fontWeight: "600",
   },
 
   searchContainer: {
@@ -575,11 +600,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.f400,
     fontSize: scale(14),
     color: "#717272",
-    // color: Colors.primaryBlue,
   },
   searchBox: {
     flex: 1,
-    // height: 40,
     paddingLeft: 10,
     backgroundColor: "#fff",
     fontSize: 16,
