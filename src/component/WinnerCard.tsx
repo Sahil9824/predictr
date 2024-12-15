@@ -299,7 +299,7 @@ const WinnerCard = ({
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-              setIsSelected(2);
+              // setIsSelected(2);
             }}
             style={{
               width: scale(255),

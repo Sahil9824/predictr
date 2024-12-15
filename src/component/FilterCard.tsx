@@ -33,7 +33,7 @@ const FilterCard = forwardRef((props, ref) => {
   const { dismiss } = useBottomSheetModal();
   const [selectedAccuracy, setSelectedAccuracy] = useState(null);
   const [manualAccuracy, setManualAccuracy] = useState("");
-  const [sliderValue, setSliderValue] = useState([20, 80]);
+  const [sliderValue, setSliderValue] = useState([]);
   const [dateRange, setDateRange] = useState({ from: null, to: null });
   const [showCustomDatePicker, setShowCustomDatePicker] = useState({
     from: false,
@@ -49,7 +49,7 @@ const FilterCard = forwardRef((props, ref) => {
 
   useEffect(() => {
     const handleBackButton = () => {
-      return dismiss(); // dismiss() returns true/false, it means there is any instance of Bottom Sheet visible on current screen.
+      return dismiss();
     };
 
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
@@ -142,6 +142,7 @@ const FilterCard = forwardRef((props, ref) => {
     setDateRange({ from: null, to: null });
     setHashtag("");
     setSelectedStock([]);
+    setSliderValue([]);
     props.onFilterReset && props.onFilterReset();
     props.isReset;
   };
@@ -151,13 +152,15 @@ const FilterCard = forwardRef((props, ref) => {
   };
 
   const isSaveButtonEnabled =
-    dateRange.from || dateRange.to || selectedAccuracy || manualAccuracy.trim();
+    dateRange.from ||
+    dateRange.to ||
+    selectedStock.length > 0 ||
+    sliderValue.length > 0;
   const isResetVisible =
     dateRange.from ||
     dateRange.to ||
-    selectedAccuracy ||
-    manualAccuracy.trim() ||
-    selectedStock;
+    selectedStock.length > 0 ||
+    sliderValue.length > 0;
 
   return (
     <>
@@ -236,28 +239,43 @@ const FilterCard = forwardRef((props, ref) => {
               Accuracy (%)
             </Text>
             <RangeSlider
-              style={{ width: "100%" }}
-              range={[0, 100]} // set the current slider's value
-              step={0.1}
-              minimumRange={3} // Minimum range between the two thumbs (defaults as "step")
-              minimumValue={10} // Minimum value (defaults as 0)
-              maximumValue={100} // Maximum value (defaults as minimumValue + minimumRange)
-              crossingAllowed={false} // If true, the user can make one thumb cross over the second thumb
-              outboundColor="#E7E7E7" // The track color outside the current range value
-              inboundColor="#025ED7" // The track color inside the current range value
-              thumbTintColor="#025ED7" // The color of the slider's thumb
-              thumbStyle={undefined} // Override the thumb's style
-              trackStyle={undefined} // Override the tracks' style
-              minTrackStyle={undefined} // Override the tracks' style for the minimum range
-              midTrackStyle={undefined} // Override the tracks' style for the middle range
-              maxTrackStyle={undefined} // Override the tracks' style for the maximum range
-              enabled={true} // If false, the slider won't respond to touches anymore
-              slideOnTap={true} // If true, touching the slider will update it's value. No need to slide the thumb.
-              onValueChange={undefined} // Called each time the value changed. Return false to prevent the value from being updated. The type is (range: [number, number]) => boolean | void
-              onSlidingStart={undefined} // Called when the slider is pressed. The type is (range: [number, number]) => void
-              onSlidingComplete={undefined} // Called when the press is released. The type is (range: [number, number]) => void
+              style={{
+                width: "90%",
+                alignSelf: "center",
+              }}
+              range={[0, 100]}
+              step={1}
+              minimumRange={1}
+              minimumValue={0}
+              maximumValue={100}
+              crossingAllowed={false}
+              outboundColor="#E7E7E7"
+              inboundColor="#025ED7"
+              thumbTintColor="#025ED7"
+              enabled={true}
+              slideOnTap={true}
+              onValueChange={undefined}
+              onSlidingStart={undefined}
+              onSlidingComplete={(e) => setSliderValue(e)}
               CustomThumb={({ value, thumb }) => (
-                <>
+                <View
+                  style={{
+                    position: "relative",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: fonts.f500,
+                      fontSize: scale(13),
+                      color: "#717272",
+                      position: "absolute",
+                      top: -30,
+                    }}
+                  >
+                    {value}%
+                  </Text>
                   <View
                     style={{
                       backgroundColor: "#025ED7",
@@ -266,25 +284,16 @@ const FilterCard = forwardRef((props, ref) => {
                       borderRadius: 8,
                       borderWidth: 1.5,
                       borderColor: "white",
-                      shadowColor: "#000", // Shadow color
-                      shadowOffset: { width: 0, height: 3 }, // Horizontal and vertical shadow offset
-                      shadowOpacity: 0.15, // Opacity of the shadow
-                      shadowRadius: 4, //
-                      elevation: 3, // Elevation gives a shadow on Android
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 3 },
+                      shadowOpacity: 0.15,
+                      shadowRadius: 4,
+                      elevation: 3,
                     }}
-                  >
-                    <Text style={{ fontSize: 100, color: "black" }}>
-                      asdjsajdjas {value}
-                    </Text>
-                  </View>
-                </>
-              )} // Provide your own component to render the thumb. The type is a component: ({ value: number, thumb: 'min' | 'max' }) => JSX.Element
-              CustomMark={({ value, active }) => (
-                <Text style={{ color: "black", fontSize: 10 }}>
-                  {active && value}
-                </Text>
-              )} // Provide your own component to render the marks. The type is a component: ({ value: number; active: boolean }) => JSX.Element ; value indicates the value represented by the mark, while active indicates wether a thumb is currently standing on the mark
-              {...props} // Add any View Props that will be applied to the container (style, ref, etc)
+                  ></View>
+                </View>
+              )}
+              {...props}
             />
 
             <Text style={styles.sectionTitle}>Date Range</Text>

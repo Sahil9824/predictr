@@ -382,9 +382,9 @@ const DashBoard = () => {
                 </View>
               ))}
 
-            {isSelected === 2 && (
+            {/* {isSelected === 2 && (
               <Contests openBottomSheet={openContestDetails} />
-            )}
+            )} */}
           </ScrollView>
         </View>
 
