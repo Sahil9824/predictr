@@ -9,6 +9,7 @@ import {
   Modal,
   Pressable,
   TouchableWithoutFeedback,
+  TextInput,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "../../../helper";
 import { Images } from "../../assets/images";
@@ -21,12 +22,15 @@ import { ICONS } from "../../constant/icons.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native";
 import AnimatedSearch from "../../component/SearchBar";
+import Input from "../../component/Input";
 
 interface LeaderboardEntry {
   id: number;
+  predictions: number;
   name: string;
   accuracy: string;
   isCurrentUser: boolean;
+  isTop?: boolean;
 }
 
 const leaderboardData: LeaderboardEntry[] = [
@@ -35,78 +39,91 @@ const leaderboardData: LeaderboardEntry[] = [
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 5,
   },
   {
     id: 2,
     name: "Jacob Jones",
     accuracy: "72.70% Accurate",
     isCurrentUser: false,
+    predictions: 3,
   },
   {
     id: 3,
     name: "Jacob Jones",
     accuracy: "71.50% Accurate",
     isCurrentUser: false,
+    predictions: 1,
   },
   {
     id: 4,
     name: "Jacob Jones",
     accuracy: "67.55% Accurate",
     isCurrentUser: false,
+    predictions: 6,
   },
   {
     id: 7,
-    name: "Brooklyn Simmons",
+    name: "Brooklyn S",
     accuracy: "60.34% Accurate",
     isCurrentUser: true,
+    predictions: 7,
   },
   {
     id: 8,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 6,
   },
   {
     id: 9,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 4,
   },
   {
     id: 10,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 3,
   },
   {
     id: 11,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 1,
   },
   {
     id: 12,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 10,
   },
   {
     id: 13,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 20,
   },
   {
     id: 14,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 13,
   },
   {
     id: 15,
     name: "Jacob Jones",
     accuracy: "78.90% Accurate",
     isCurrentUser: false,
+    predictions: 12,
   },
 ];
 
@@ -116,30 +133,60 @@ const dummyDates = [
     value: 0,
   },
   {
-    label: "Week",
+    label: "Weekly",
     value: 1,
   },
   {
-    label: "Month",
+    label: "Monthly",
     value: 2,
+  },
+  {
+    label: "Contest Standings",
+    value: 3,
+  },
+];
+const dummyMonths = [
+  {
+    label: "November 2024 (Live)",
+    value: 0,
+  },
+  {
+    label: "Oct 2024",
+    value: 1,
+  },
+  {
+    label: "Aug 2024",
+    value: 2,
+  },
+  {
+    label: "July, 2024",
+    value: 3,
   },
 ];
 
 const LeaderboardScreen = () => {
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("August 24 (OnGoing)");
+  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedMonth, setSelectedMonth] = useState(0);
+  const [isInfo, setIsInfo] = useState(false);
+  const [isInput, setIsInput] = useState(false);
+  const [inputVal, setInputVal] = useState("");
   const pickerRef = useRef();
+  const monthPickerRef = useRef();
+  const isContentStanding = selectedOption == 3 || false;
 
   const navigation = useNavigation();
 
   const onSearchPress = () => {
-    navigation.navigate(SCREENS.SEARCH, {
-      previousScreen: SCREENS.LEADERBOARD,
-    });
+    setIsInput(true);
   };
 
   const openPicker = () => {
     pickerRef.current.togglePicker(); // Toggle the picker
+  };
+
+  const openMonthPicker = () => {
+    monthPickerRef.current.togglePicker(); // Toggle the picker
   };
 
   const RenderEntry = ({ item }: { item: LeaderboardEntry }) => (
@@ -153,11 +200,19 @@ const LeaderboardScreen = () => {
       <View
         style={[
           styles.entryContainer,
-          item.isCurrentUser && styles.currentUser,
+          item.isCurrentUser && item.isTop && styles.currentUser,
         ]}
       >
         <View style={styles.rankContainer}>
-          <Text style={styles.id}>{item.id}</Text>
+          {item.isCurrentUser && item.isTop ? (
+            <Text
+              style={{ ...styles.id, fontFamily: fonts.f700, color: "#FFC803" }}
+            >
+              #{item.id}
+            </Text>
+          ) : (
+            <Text style={styles.id}>{item.id}</Text>
+          )}
           <Image source={Images.avatar6} style={styles.avatar} />
           <View
             style={{
@@ -165,20 +220,121 @@ const LeaderboardScreen = () => {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              borderBottomWidth: 1,
+              borderBottomWidth: item.isCurrentUser && item.isTop ? 0 : 1,
               borderColor: "#f0f0f0",
               paddingVertical: verticalScale(12),
-              paddingRight: moderateScale(16),
+              paddingRight: moderateScale(8),
             }}
           >
             <View>
-              <Text style={styles.name}>
+              <Text
+                style={{
+                  ...styles.name,
+                  color: item.isTop ? "#FFFFFF" : "#151B26",
+                }}
+              >
                 {item.name}{" "}
-                {item.isCurrentUser && <Text style={styles.youText}>You</Text>}
+                {item.isCurrentUser && (
+                  <Text
+                    style={{
+                      ...styles.youText,
+                      color: item.isTop ? "#FFC803" : "#024BAC",
+                    }}
+                  >
+                    You
+                  </Text>
+                )}
               </Text>
-              <Text style={styles.accuracy}>{item.accuracy}</Text>
+              <Text
+                style={{
+                  ...styles.accuracy,
+                  color: item.isTop ? "#CCDFF7" : "#717272",
+                }}
+              >
+                {item.accuracy}
+              </Text>
             </View>
-            <Icons type={ICONS.BLUE_RIGHT} />
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 5,
+                  position: "relative",
+                }}
+              >
+                {item.isTop && item.predictions < 3 && (
+                  <>
+                    <TouchableWithoutFeedback onPress={() => setIsInfo(true)}>
+                      <Icons type={ICONS.YELLOW_INFO} />
+                    </TouchableWithoutFeedback>
+                    {isInfo && (
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          paddingHorizontal: 12,
+                          backgroundColor: "#151B26",
+                          paddingVertical: 8,
+                          borderRadius: 10,
+                          gap: 8,
+                          position: "absolute",
+                          top: 30,
+                          right: 0,
+                          zIndex: 10,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontFamily: fonts.f400,
+                            color: "#FFFFFF",
+                            fontSize: scale(14),
+                            width: scale(242),
+                          }}
+                        >
+                          You did not qualify due to posting only two
+                          predictions, minimum 3 predictions are required.
+                        </Text>
+                        <TouchableWithoutFeedback
+                          onPress={() => setIsInfo(false)}
+                        >
+                          <View
+                            style={{
+                              backgroundColor: "#FFFFFF1A",
+                              height: 20,
+                              width: 20,
+                              borderRadius: 10,
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Icons type={ICONS.POP_CLOSE} />
+                          </View>
+                        </TouchableWithoutFeedback>
+                      </View>
+                    )}
+                  </>
+                )}
+                <Text
+                  style={{
+                    ...styles.name,
+                    color: item.isTop && "#FFFFFF",
+                    fontSize: scale(13),
+                  }}
+                >
+                  {item.predictions}
+                </Text>
+              </View>
+              <Icons
+                type={ICONS.BLUE_RIGHT}
+                stroke={item.isTop ? "white" : "#025ED7"}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -203,114 +359,217 @@ const LeaderboardScreen = () => {
           <View style={styles.headerContainer}>
             <Text style={styles.headerText}>Leaderboard</Text>
             <View style={styles.rankLabel}>
-              <Text style={styles.rankNumber}>#7</Text>
-              <Text style={styles.rankText}>You</Text>
+              <View
+                style={{
+                  height: 9,
+                  width: 9,
+                  borderRadius: 4.5,
+                  backgroundColor: "#E33F3F",
+                }}
+              ></View>
+              <Text style={styles.rankText}>Live Contest</Text>
             </View>
           </View>
+        </View>
+        <View style={styles.topBox}>
+          {!isInput ? (
+            <>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginRight: 16,
+                  }}
+                >
+                  <RNPickerSelect
+                    ref={pickerRef}
+                    onValueChange={setSelectedOption}
+                    items={dummyDates}
+                    placeholder={
+                      {
+                        // color:
+                      }
+                    }
+                    useNativeAndroidPickerStyle={false}
+                    style={{
+                      inputIOS: {
+                        color: "#101010",
+                        fontFamily: fonts.f600,
+                        fontSize: 15,
+                        width: "100%",
+                      },
+                      inputAndroid: {
+                        color: "#101010",
+                        fontFamily: fonts.f600,
+                        fontSize: 15,
+                        width: "100%",
+                        padding: 0,
+                      },
+                    }}
+                  />
+                  <Pressable
+                    style={{
+                      marginTop: 2,
+                      paddingLeft: 4,
+                      height: 17,
+                      width: 17,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onPress={openPicker}
+                  >
+                    <Image source={Images.Chevron_down} />
+                  </Pressable>
+                </View>
+                {isContentStanding && (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <RNPickerSelect
+                      ref={monthPickerRef}
+                      onValueChange={setSelectedMonth}
+                      items={dummyMonths}
+                      placeholder={{}}
+                      useNativeAndroidPickerStyle={false}
+                      style={{
+                        inputIOS: {
+                          color: "#101010",
+                          fontFamily: fonts.f600,
+                          fontSize: 15,
+                          width: "100%",
+                        },
+                        inputAndroid: {
+                          color: "#101010",
+                          fontFamily: fonts.f600,
+                          fontSize: 15,
+                          width: "100%",
+                          padding: 0,
+                        },
+                      }}
+                    />
+                    <Pressable
+                      style={{
+                        marginTop: 2,
+                        paddingLeft: 4,
+                        height: 17,
+                        width: 17,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      onPress={openMonthPicker}
+                    >
+                      <Image source={Images.Chevron_down} />
+                    </Pressable>
+                  </View>
+                )}
+              </View>
 
-          <View style={{ paddingHorizontal: 15 }}>
-            <TouchableOpacity onPress={onSearchPress}>
-              <Image
-                source={Images.headerSearch}
+              <TouchableWithoutFeedback onPress={onSearchPress}>
+                <Icons type={ICONS.SEARCH_LEAD} />
+              </TouchableWithoutFeedback>
+            </>
+          ) : (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <TextInput
+                placeholder="Enter Username"
+                placeholderTextColor="#717272"
+                value={inputVal}
+                onChangeText={(text) => setInputVal(text)}
                 style={{
-                  height: scale(18),
-                  width: scale(18),
-                  justifyContent: "flex-end",
+                  fontSize: scale(14),
+                  fontFamily: fonts.f400,
+                  color: "#101010",
+                  width: "90%",
                 }}
               />
-            </TouchableOpacity>
-          </View>
+              <TouchableWithoutFeedback onPress={() => setIsInput(false)}>
+                <Icons type={ICONS.CLOSE_LEAD} />
+              </TouchableWithoutFeedback>
+            </View>
+          )}
         </View>
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
             paddingVertical: 10,
+            paddingRight: moderateScale(16),
             alignItems: "center",
             borderBottomWidth: 1,
             borderColor: "#e0e0e0",
+            paddingLeft: moderateScale(26),
           }}
         >
-          <View style={{ flexDirection: "row" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <Text
               style={{
-                paddingHorizontal: 7,
                 fontSize: scale(16),
-                marginLeft: moderateScale(10),
                 color: "#717272",
                 fontFamily: fonts.f500,
-
-                //fontWeight: "500",
               }}
             >
               #
             </Text>
             <Text
               style={{
+                // paddingHorizontal: 7,
+                fontSize: scale(16),
+                marginLeft: moderateScale(22),
+                color: "#717272",
+                fontFamily: fonts.f400,
+              }}
+            >
+              Predictors
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
                 paddingHorizontal: 7,
                 fontSize: scale(16),
-                marginLeft: 12,
                 color: "#717272",
                 fontFamily: fonts.f400,
 
                 //fontWeight: "400",
               }}
             >
-              Predictors
+              Predictions
             </Text>
-          </View>
-          <View style={{ marginEnd: moderateScale(18) }}>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <RNPickerSelect
-                ref={pickerRef}
-                onValueChange={setSelectedOption}
-                items={dummyDates}
-                placeholder={{}}
-                useNativeAndroidPickerStyle={false}
-                style={{
-                  viewContainer: {
-                    // width: Platform.OS === "ios" ? "auto" : "65%",
-                  },
-                  inputIOS: {
-                    color: "#717272",
-                    fontFamily: fonts.f400,
-                    fontSize: 15,
-                    //fontWeight: "400",
-                    width: "100%",
-                  },
-                  inputAndroid: {
-                    color: "#717272",
-                    fontFamily: fonts.f400,
-                    //fontWeight: "400",
-                    fontSize: 15,
-                    width: "100%",
-                    padding: 0,
-                  },
-                }}
-              />
-              <Pressable
-                style={{
-                  marginTop: 2,
-                  paddingLeft: 4,
-                  height: 17,
-                  width: 17,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                onPress={openPicker}
-              >
-                <Image source={Images.Chevron_down} />
-              </Pressable>
-            </View>
           </View>
         </View>
 
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            marginTop: 7,
+          }}
+        >
+          <RenderEntry
+            item={{
+              id: "7",
+              name: "Brooklyn S",
+              accuracy: "60.34% Accurate",
+              isCurrentUser: true,
+              isTop: true,
+              predictions: 2,
+            }}
+          />
+
           {leaderboardData.length ? (
             leaderboardData.map((item, index) => (
               <RenderEntry item={item} key={index} />
@@ -347,6 +606,19 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingTop: 10,
   },
+
+  topBox: {
+    width: "100%",
+    backgroundColor: "#F0F3F5",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E7E7E7",
+    paddingHorizontal: moderateScale(16),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 45,
+    alignItems: "center",
+  },
+
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -360,20 +632,18 @@ const styles = StyleSheet.create({
   },
   rankLabel: {
     flexDirection: "row",
-    backgroundColor: "#CCDFF7",
-    borderRadius: moderateScale(6),
-    padding: moderateScale(4),
+    backgroundColor: "#FBBABA80",
+    borderRadius: moderateScale(8),
+    paddingVertical: 4,
+    paddingHorizontal: 10,
     marginStart: 10,
+    alignItems: "center",
   },
-  rankNumber: {
-    fontSize: scale(15),
-    color: "#024BAC",
-    fontFamily: fonts.f700,
-  },
+
   rankText: {
-    fontSize: scale(15),
+    fontSize: scale(14),
     marginLeft: moderateScale(4),
-    color: "#024BAC",
+    color: "#E33F3F",
     fontFamily: fonts.f700,
   },
   filterText: {
@@ -385,10 +655,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingLeft: moderateScale(16),
+    paddingLeft: moderateScale(18),
+    marginHorizontal: 8,
+    paddingRight: moderateScale(8),
   },
   currentUser: {
-    backgroundColor: "#E9F1FC",
+    backgroundColor: "#024BAC",
+    borderRadius: 12,
   },
   rankContainer: {
     flexDirection: "row",
@@ -399,7 +672,7 @@ const styles = StyleSheet.create({
     height: scale(40),
     borderRadius: 8,
     marginRight: moderateScale(12),
-    paddingHorizontal: moderateScale(16),
+    // paddingHorizontal: moderateScale(16),
   },
   name: {
     fontSize: scale(16),
@@ -415,8 +688,8 @@ const styles = StyleSheet.create({
   },
   youText: {
     color: "#024BAC",
-    fontSize: scale(15),
     fontFamily: fonts.f700,
+    fontSize: scale(15),
   },
   accuracy: {
     fontSize: scale(14),

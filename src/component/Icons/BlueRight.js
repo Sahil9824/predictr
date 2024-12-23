@@ -15,6 +15,7 @@ const SVGComponent = (props) => (
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...props}
     />
   </Svg>
 );

@@ -22,6 +22,8 @@ import com.airbnb.android.react.lottie.LottiePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-haptic-feedback
+import com.mkuczera.RNReactNativeHapticFeedbackPackage;
 // react-native-image-crop-picker
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 // react-native-linear-gradient
@@ -91,6 +93,7 @@ public class PackageList {
       new LottiePackage(),
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
+      new RNReactNativeHapticFeedbackPackage(),
       new PickerPackage(),
       new LinearGradientPackage(),
       new NavigationBarColorPackage(),
