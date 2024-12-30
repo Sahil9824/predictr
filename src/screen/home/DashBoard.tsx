@@ -28,12 +28,13 @@ import { ICONS } from "../../constant/icons.constants";
 import ContestDetails from "../../component/bottomSheets/ContestDetails";
 import Contests from "../../component/Contests";
 import FilterCard from "../../component/FilterCard";
-import CustomDatePicker from "..//../component/CustomDatePicker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SCREENS } from "../../constant/navigation.constants";
 import ShareCard from "../../component/ShareCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-reanimated-carousel";
+import { MaterialTopTabBar } from "@react-navigation/material-top-tabs";
+import { matrixTransform } from "react-native-svg/lib/typescript/elements/Shape";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -367,7 +368,7 @@ const DashBoard = () => {
               openFilter={openFilterCard}
               filteredOptions={filteredOptions}
               handleLayout={handleLayout}
-              style={{ marginBottom: isSelected !== 2 ? 12 : 0 }}
+              style={{ marginBottom: isSelected !== 2 ? 12 : 0, marginTop: 8 }}
             />
 
             {(isSelected === 1 || isSelected === 0) &&

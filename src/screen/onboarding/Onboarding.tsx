@@ -58,8 +58,8 @@ const Onboarding = ({ navigation }: any) => {
         </Text>
 
         <View style={styles.titleContainer}>
-          <Text800 style={styles.titleText}>{"Predict"}</Text800>
-          <Text800 style={styles.titleText}>{"The Stock Market"}</Text800>
+          <Text style={styles.titleText}>{"Predict"}</Text>
+          <Text style={styles.titleText}>{"The Stock Market"}</Text>
         </View>
 
         <View>
@@ -145,10 +145,10 @@ const styles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.f800,
     fontSize: scale(34),
-    //fontWeight: "800",
     color: Colors.white,
     textAlign: "center",
     letterSpacing: scale(34) * -0.02,
+    lineHeight: 50,
   },
   subTitle: {
     fontFamily: fonts.f400,

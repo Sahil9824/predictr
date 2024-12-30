@@ -501,8 +501,8 @@ const styles = StyleSheet.create({
     color: Colors.textGrey,
   },
   calendarIcon: {
-    width: 20,
-    height: 20,
+    width: scale(20),
+    height: scale(20),
     tintColor: Colors.textGrey,
   },
   buttonContainer: {
@@ -601,7 +601,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.8,
     backgroundColor: "#fff",
     borderRadius: 12,
-    paddingVertical: Platform.OS === "ios" ? 12 : 0,
+    paddingVertical: 12,
     paddingHorizontal: 16,
   },
   stext: {

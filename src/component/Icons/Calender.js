@@ -1,9 +1,10 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
+import { scale } from "../../../helper";
 const SVGComponent = (props) => (
   <Svg
-    width={20}
-    height={21}
+    width={scale(20)}
+    height={scale(21)}
     viewBox="0 0 20 21"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

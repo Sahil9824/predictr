@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: Colors.errorRed,
     fontFamily: fonts.f400,
-    //fontWeight: "400",
-    fontSize: 12,
+    fontSize: scale(12),
+    letterSpacing: scale(12) * (-2 / 100),
   },
   right: {
     color: Colors.validGreen,

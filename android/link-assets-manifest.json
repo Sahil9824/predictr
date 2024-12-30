@@ -6,12 +6,12 @@
       "sha1": "4dbdd9baf9a7049838cc0e472e0136c4f310cc78"
     },
     {
-      "path": "src/assets/fonts/Inter 18pt Bold.ttf",
-      "sha1": "518a0361a245a66b49bc24ae0137f38328197bdc"
+      "path": "src/assets/fonts/Inter 18pt Bold Italic.ttf",
+      "sha1": "3be7a4fdd0a2901f4607cb5d5914086cd87c3421"
     },
     {
-      "path": "src/assets/fonts/Inter 18pt BoldItalic.ttf",
-      "sha1": "3be7a4fdd0a2901f4607cb5d5914086cd87c3421"
+      "path": "src/assets/fonts/Inter 18pt Bold.ttf",
+      "sha1": "518a0361a245a66b49bc24ae0137f38328197bdc"
     },
     {
       "path": "src/assets/fonts/Inter 18pt ExtraBold.ttf",
@@ -30,12 +30,12 @@
       "sha1": "f3e44abd6661d5b861e66db22f4f79a6c466cd00"
     },
     {
-      "path": "src/assets/fonts/SF Pro Display Bold Italic.ttf",
-      "sha1": "31b66c732923484225c1fcdc723f1ae32511e72b"
-    },
-    {
       "path": "src/assets/fonts/SF Pro Text Black.otf",
       "sha1": "7e41ec8e9fb7779fae27b90ed9e4275239b8c6e7"
+    },
+    {
+      "path": "src/assets/fonts/SF Pro Text Bold Italic.ttf",
+      "sha1": "bcc0ffef34f9ab3040ab258fe4d18d348327d39a"
     },
     {
       "path": "src/assets/fonts/SF Pro Text Bold.ttf",

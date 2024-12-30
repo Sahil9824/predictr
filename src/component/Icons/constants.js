@@ -45,6 +45,7 @@ import YellowInfo from "./YellowInfo";
 import PopClose from "./PopClose";
 import SearchLead from "./SearchLead";
 import CrossLead from "./CrossLead";
+import Cmnt from "./Cmnt";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -96,4 +97,5 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.POP_CLOSE]: PopClose,
   [ICONS.SEARCH_LEAD]: SearchLead,
   [ICONS.CLOSE_LEAD]: CrossLead,
+  [ICONS.CMNT]: Cmnt,
 };

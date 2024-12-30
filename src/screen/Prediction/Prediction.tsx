@@ -23,7 +23,6 @@ import { Images } from "../../assets/images";
 import { useEffect, useRef, useState } from "react";
 import SearchStock from "../../component/bottomSheets/SearchStock";
 import MovementSheet from "../../component/bottomSheets/Movement";
-import CustomDatePicker from "../../component/CustomDatePicker";
 import CustomCalSheet from "../../component/bottomSheets/CustomCalSheet";
 import ImagePicker from "../../component/ImagePicker";
 import Button from "../../component/Button";

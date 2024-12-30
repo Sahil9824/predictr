@@ -23,6 +23,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native";
 import AnimatedSearch from "../../component/SearchBar";
 import Input from "../../component/Input";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 
 interface LeaderboardEntry {
   id: number;
@@ -130,50 +131,50 @@ const leaderboardData: LeaderboardEntry[] = [
 const dummyDates = [
   {
     label: "All-Time",
-    value: 0,
-  },
-  {
-    label: "Weekly",
     value: 1,
   },
   {
-    label: "Monthly",
+    label: "Weekly",
     value: 2,
   },
   {
-    label: "Contest Standings",
+    label: "Monthly",
     value: 3,
+  },
+  {
+    label: "Contest Standings",
+    value: 4,
   },
 ];
 const dummyMonths = [
   {
-    label: "November 2024 (Live)",
-    value: 0,
-  },
-  {
-    label: "Oct 2024",
+    label: "Nov 2024 (Live)",
     value: 1,
   },
   {
-    label: "Aug 2024",
+    label: "Oct 2024",
     value: 2,
   },
   {
-    label: "July, 2024",
+    label: "Aug 2024",
     value: 3,
+  },
+  {
+    label: "July, 2024",
+    value: 4,
   },
 ];
 
 const LeaderboardScreen = () => {
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(0);
-  const [selectedMonth, setSelectedMonth] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(1);
+  const [selectedMonth, setSelectedMonth] = useState(1);
   const [isInfo, setIsInfo] = useState(false);
   const [isInput, setIsInput] = useState(false);
   const [inputVal, setInputVal] = useState("");
   const pickerRef = useRef();
   const monthPickerRef = useRef();
-  const isContentStanding = selectedOption == 3 || false;
+  const isContentStanding = selectedOption == 4 || false;
 
   const navigation = useNavigation();
 
@@ -224,6 +225,7 @@ const LeaderboardScreen = () => {
               borderColor: "#f0f0f0",
               paddingVertical: verticalScale(12),
               paddingRight: moderateScale(8),
+              zIndex: 1,
             }}
           >
             <View>
@@ -259,6 +261,7 @@ const LeaderboardScreen = () => {
                 flexDirection: "row",
                 alignItems: "center",
                 gap: 12,
+                zIndex: 1,
               }}
             >
               <View
@@ -267,6 +270,7 @@ const LeaderboardScreen = () => {
                   alignItems: "center",
                   gap: 5,
                   position: "relative",
+                  zIndex: 2,
                 }}
               >
                 {item.isTop && item.predictions < 3 && (
@@ -274,50 +278,6 @@ const LeaderboardScreen = () => {
                     <TouchableWithoutFeedback onPress={() => setIsInfo(true)}>
                       <Icons type={ICONS.YELLOW_INFO} />
                     </TouchableWithoutFeedback>
-                    {isInfo && (
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          paddingHorizontal: 12,
-                          backgroundColor: "#151B26",
-                          paddingVertical: 8,
-                          borderRadius: 10,
-                          gap: 8,
-                          position: "absolute",
-                          top: 30,
-                          right: 0,
-                          zIndex: 10,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: fonts.f400,
-                            color: "#FFFFFF",
-                            fontSize: scale(14),
-                            width: scale(242),
-                          }}
-                        >
-                          You did not qualify due to posting only two
-                          predictions, minimum 3 predictions are required.
-                        </Text>
-                        <TouchableWithoutFeedback
-                          onPress={() => setIsInfo(false)}
-                        >
-                          <View
-                            style={{
-                              backgroundColor: "#FFFFFF1A",
-                              height: 20,
-                              width: 20,
-                              borderRadius: 10,
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Icons type={ICONS.POP_CLOSE} />
-                          </View>
-                        </TouchableWithoutFeedback>
-                      </View>
-                    )}
                   </>
                 )}
                 <Text
@@ -341,6 +301,8 @@ const LeaderboardScreen = () => {
     </TouchableWithoutFeedback>
   );
 
+  console.log(selectedOption, "kyaaa??");
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white" }}
@@ -358,17 +320,20 @@ const LeaderboardScreen = () => {
         >
           <View style={styles.headerContainer}>
             <Text style={styles.headerText}>Leaderboard</Text>
-            <View style={styles.rankLabel}>
-              <View
-                style={{
-                  height: 9,
-                  width: 9,
-                  borderRadius: 4.5,
-                  backgroundColor: "#E33F3F",
-                }}
-              ></View>
-              <Text style={styles.rankText}>Live Contest</Text>
-            </View>
+            {selectedMonth == dummyMonths[0]?.value &&
+              selectedOption == dummyDates[3]?.value && (
+                <View style={styles.rankLabel}>
+                  <View
+                    style={{
+                      height: 9,
+                      width: 9,
+                      borderRadius: 4.5,
+                      backgroundColor: "#E33F3F",
+                    }}
+                  ></View>
+                  <Text style={styles.rankText}>Live Contest</Text>
+                </View>
+              )}
           </View>
         </View>
         <View style={styles.topBox}>
@@ -446,7 +411,7 @@ const LeaderboardScreen = () => {
                         },
                       }}
                     />
-                    <Pressable
+                    <View
                       style={{
                         marginTop: 2,
                         paddingLeft: 4,
@@ -455,10 +420,11 @@ const LeaderboardScreen = () => {
                         alignItems: "center",
                         justifyContent: "center",
                       }}
-                      onPress={openMonthPicker}
                     >
-                      <Image source={Images.Chevron_down} />
-                    </Pressable>
+                      <TouchableWithoutFeedback onPress={openMonthPicker}>
+                        <Image source={Images.Chevron_down} />
+                      </TouchableWithoutFeedback>
+                    </View>
                   </View>
                 )}
               </View>
@@ -473,6 +439,7 @@ const LeaderboardScreen = () => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 width: "100%",
+                alignItems: "center",
               }}
             >
               <TextInput
@@ -557,6 +524,8 @@ const LeaderboardScreen = () => {
           contentContainerStyle={{
             flexGrow: 1,
             marginTop: 7,
+            zIndex: 1,
+            position: "relative",
           }}
         >
           <RenderEntry
@@ -569,7 +538,6 @@ const LeaderboardScreen = () => {
               predictions: 2,
             }}
           />
-
           {leaderboardData.length ? (
             leaderboardData.map((item, index) => (
               <RenderEntry item={item} key={index} />
@@ -595,6 +563,64 @@ const LeaderboardScreen = () => {
             </View>
           )}
         </ScrollView>
+
+        <Modal
+          visible={isInfo}
+          animationType="none"
+          transparent={true}
+          style={{ backgroundColor: "red" }}
+          presentationStyle="overFullScreen"
+          statusBarTranslucent
+        >
+          <Pressable
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+            }}
+            onPress={() => setIsInfo(false)}
+          >
+            <View style={styles.modalBox}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingHorizontal: 20,
+                  backgroundColor: "#151B26",
+                  paddingVertical: 20,
+                  borderRadius: 10,
+                  gap: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: fonts.f400,
+                    color: "#FFFFFF",
+                    fontSize: scale(14),
+                    width: scale(242),
+                  }}
+                >
+                  You did not qualify due to posting only two predictions,
+                  minimum 3 predictions are required.
+                </Text>
+                <View
+                  style={{
+                    backgroundColor: "#FFFFFF1A",
+                    height: 20,
+                    width: 20,
+                    borderRadius: 10,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <TouchableWithoutFeedback onPress={() => setIsInfo(false)}>
+                    <Icons type={ICONS.POP_CLOSE} />
+                  </TouchableWithoutFeedback>
+                </View>
+              </View>
+            </View>
+          </Pressable>
+        </Modal>
       </View>
     </SafeAreaView>
   );
@@ -605,6 +631,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     paddingTop: 10,
+  },
+
+  modalBox: {
+    width: "90%",
+    borderRadius: 16,
+    overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   topBox: {
@@ -658,14 +692,17 @@ const styles = StyleSheet.create({
     paddingLeft: moderateScale(18),
     marginHorizontal: 8,
     paddingRight: moderateScale(8),
+    zIndex: 1,
   },
   currentUser: {
     backgroundColor: "#024BAC",
     borderRadius: 12,
+    zIndex: 1,
   },
   rankContainer: {
     flexDirection: "row",
     alignItems: "center",
+    zIndex: 1,
   },
   avatar: {
     width: scale(40),
@@ -688,8 +725,9 @@ const styles = StyleSheet.create({
   },
   youText: {
     color: "#024BAC",
-    fontFamily: fonts.f700,
+    fontFamily: fonts.f700_Italic,
     fontSize: scale(15),
+    fontStyle: "italic",
   },
   accuracy: {
     fontSize: scale(14),

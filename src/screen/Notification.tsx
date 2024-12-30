@@ -14,6 +14,8 @@ import { fonts } from "../constant";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icons from "../component/Icons";
+import { ICONS } from "../constant/icons.constants";
 
 // Sample data for notifications
 const notifications = [
@@ -141,10 +143,13 @@ const NotificationItem = ({ item }) => {
     >
       <View style={styles.avatarContainer}>
         {/* Placeholder Avatar */}
-        <Image
-          source={item.id !== 4 ? Images.avatar1 : Images.goldTrophy} // Use a placeholder image for avatar
-          style={styles.avatar}
-        />
+
+        {item.id !== 4 ? (
+          <Image source={Images.avatar1} style={styles.avatar} />
+        ) : (
+          <Icons type={ICONS.GOLD} height={40} width={40} />
+        )}
+
         {item.unread && !item.isSpecial && <View style={styles.unreadDot} />}
       </View>
       <Text style={styles.notificationText}>

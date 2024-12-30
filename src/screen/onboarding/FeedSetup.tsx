@@ -440,14 +440,13 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fonts.f400,
     color: Colors.textBlack,
-    //fontWeight: "400",
-
+    fontSize: scale(14),
     paddingLeft: scale(10),
   },
+
   title: {
     fontFamily: fonts.f800,
     fontSize: scale(32),
-    lineHeight: scale(40),
     //fontWeight: "800",
 
     color: Colors.textBlack,
@@ -479,7 +478,6 @@ const styles = StyleSheet.create({
   search: {
     marginHorizontal: scale(10),
     width: "90%",
-    paddingTop: scale(12),
   },
   followContainer: {
     flexDirection: "row",

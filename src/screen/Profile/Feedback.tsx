@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   Modal,
   Pressable,
+  KeyboardAvoidingView,
 } from "react-native";
 // For emojis
 import { Images } from "../../assets/images";
@@ -21,6 +22,7 @@ import { ICONS } from "../../constant/icons.constants";
 import Button from "../../component/Button";
 import { SCREENS } from "../../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Feedback Component
 const GiveFeedback = ({ navigation }) => {
@@ -42,67 +44,73 @@ const GiveFeedback = ({ navigation }) => {
         style={{ flex: 1, backgroundColor: "white" }}
         edges={["top", "left", "right"]}
       >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-              <Icons type={ICONS.BACKARR} />
-            </TouchableWithoutFeedback>
-            <Text style={styles.menuText}>Give Feedback</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.title}>Rate Your Experience</Text>
-            <Text style={styles.subtitle}>
-              How would you like to describe your experience with our App?
-            </Text>
-
-            <View style={styles.emojiRow}>
-              {ratings.map((rating) => (
-                <TouchableOpacity
-                  key={rating.id}
-                  style={{ alignItems: "center", justifyContent: "center" }}
-                  onPress={() => setSelectedRating(rating.id)}
-                >
-                  <View
-                    style={[
-                      styles.emojiContainer,
-                      selectedRating === rating.id && styles.selectedEmoji,
-                    ]}
-                  >
-                    <Image
-                      source={rating.emoji}
-                      style={{ height: 34, width: 34 }}
-                    />
-                  </View>
-                  <Text
-                    style={[
-                      styles.emojiLabel,
-                      selectedRating === rating.id && styles.selectedEmojiLabel,
-                    ]}
-                  >
-                    {rating.label}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+        <KeyboardAwareScrollView
+          contentContainerStyle={{ flex: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+                <Icons type={ICONS.BACKARR} />
+              </TouchableWithoutFeedback>
+              <Text style={styles.menuText}>Give Feedback</Text>
             </View>
+            <View style={styles.section}>
+              <Text style={styles.title}>Rate Your Experience</Text>
+              <Text style={styles.subtitle}>
+                How would you like to describe your experience with our App?
+              </Text>
 
-            <TextInput
-              style={styles.textInput}
-              multiline
-              placeholder="Tell us how we can improve..."
-              value={feedback}
-              onChangeText={setFeedback}
-            />
+              <View style={styles.emojiRow}>
+                {ratings.map((rating) => (
+                  <TouchableOpacity
+                    key={rating.id}
+                    style={{ alignItems: "center", justifyContent: "center" }}
+                    onPress={() => setSelectedRating(rating.id)}
+                  >
+                    <View
+                      style={[
+                        styles.emojiContainer,
+                        selectedRating === rating.id && styles.selectedEmoji,
+                      ]}
+                    >
+                      <Image
+                        source={rating.emoji}
+                        style={{ height: 34, width: 34 }}
+                      />
+                    </View>
+                    <Text
+                      style={[
+                        styles.emojiLabel,
+                        selectedRating === rating.id &&
+                          styles.selectedEmojiLabel,
+                      ]}
+                    >
+                      {rating.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
 
-            <Button
-              onPress={() => {
-                setIsModal(true);
-              }}
-              inActive={!feedback || !selectedRating}
-              style={styles.submitButton}
-              text="Submit Feedback"
-            />
+              <TextInput
+                style={styles.textInput}
+                multiline
+                placeholder="Tell us how we can improve..."
+                value={feedback}
+                onChangeText={setFeedback}
+              />
+
+              <Button
+                onPress={() => {
+                  setIsModal(true);
+                }}
+                inActive={!feedback || !selectedRating}
+                style={styles.submitButton}
+                text="Submit Feedback"
+              />
+            </View>
           </View>
-        </View>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
 
       <Modal

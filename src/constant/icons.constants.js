@@ -46,4 +46,5 @@ export const ICONS = {
   POP_CLOSE: "POP_CLOSE",
   SEARCH_LEAD: "SEARCH_LEAD",
   CLOSE_LEAD: "CLOSE_LEAD",
+  CMNT: "CMNT",
 };

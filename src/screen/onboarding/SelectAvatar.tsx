@@ -166,7 +166,26 @@ const SelectAvatar: React.FC<any> = ({ navigation }) => {
   const renderItem = useCallback(
     ({ item }: { item: { image: any } }) => {
       return (
-        <Pressable onPress={() => setImage(item)}>
+        <Pressable
+          style={
+            image.image === item.image
+              ? {
+                  // overflow: "hidden",
+                  borderRadius: scale(12),
+                  marginHorizontal: 4,
+                  backgroundColor: "white", // Adjust as needed
+                  shadowColor: "#000000", // Shadow color
+                  shadowOffset: { width: 0, height: 6 }, // Bottom shadow
+                  shadowOpacity: 0.15, // Approximation for 26% opacity (#00000026)
+                  shadowRadius: 6, // Blur radius
+                  elevation: 6, // For Android shadows
+                }
+              : {
+                  marginHorizontal: 4,
+                }
+          }
+          onPress={() => setImage(item)}
+        >
           <Image
             source={item?.image}
             style={[
@@ -261,8 +280,8 @@ const SelectAvatar: React.FC<any> = ({ navigation }) => {
                 setShowModal(true);
               }}
               style={{
-                height: 56,
-                width: 56,
+                height: scale(54),
+                width: scale(56),
                 borderRadius: 12,
                 backgroundColor: Colors.lightGrey,
                 justifyContent: "center",
@@ -382,7 +401,13 @@ const styles = StyleSheet.create({
     height: scale(54),
     width: scale(56),
     borderRadius: scale(12),
-    marginHorizontal: 4,
+    // marginHorizontal: 4,
+    // backgroundColor: "white", // Adjust as needed
+    // shadowColor: "#000000", // Shadow color
+    // shadowOffset: { width: 0, height: 6 }, // Bottom shadow
+    // shadowOpacity: 0.15, // Approximation for 26% opacity (#00000026)
+    // shadowRadius: 6, // Blur radius
+    // elevation: 6, // For Android shadows
   },
   button: {
     marginTop: "auto",
@@ -394,6 +419,7 @@ const styles = StyleSheet.create({
   },
   flatlistContent: {
     paddingHorizontal: 4,
+    overflow: "visible",
   },
   border: {
     backgroundColor: Colors.lightGrey,
@@ -402,7 +428,9 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     alignSelf: "center",
   },
-  flatlist: {},
+  flatlist: {
+    overflow: "visible",
+  },
   edit: {
     fontFamily: fonts.f600,
     //fontWeight: "600",

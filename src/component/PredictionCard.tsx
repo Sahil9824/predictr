@@ -42,6 +42,7 @@ const PredictionCard = ({
   const [liked, setLiked] = useState(false); // State to track if liked
   const [disliked, setDisliked] = useState(false); // State to track if disliked
   const [isResult, setIsResult] = useState(false);
+  const [isFollowed, setIsFollowed] = useState();
 
   const [textWidth, setTextWidth] = useState(0);
   const [likeCount, setLikeCount] = useState(73); // Count for likes
@@ -110,7 +111,7 @@ const PredictionCard = ({
             marginVertical: 4,
             borderRadius: scale(26),
             overflow: "hidden",
-            borderWidth: 1,
+            borderWidth: 0,
             borderColor: Colors.lightGrey,
             backgroundColor: "#f0f3f5",
             ...style,
@@ -199,20 +200,50 @@ const PredictionCard = ({
                 paddingTop: 3,
               }}
             >
-              {isFollowBtn && (
-                <TouchableOpacity activeOpacity={0.8}>
-                  <Text
+              {isFollowBtn ? (
+                isFollowed ? (
+                  <TouchableOpacity
                     style={{
-                      color: "#024BAC",
-                      //fontWeight: "800",
-                      fontFamily: fonts.f800,
-                      fontSize: 14,
+                      flexDirection: "row",
                       marginRight: 10,
                     }}
+                    activeOpacity={0.8}
+                    onPress={() => setIsFollowed(false)}
                   >
-                    Follow
-                  </Text>
-                </TouchableOpacity>
+                    {/* <Image
+                      source={Images.checkmark}
+                      style={{ height: 15, width: 15, marginRight: 8 }}
+                    /> */}
+                    <Text
+                      style={{
+                        color: "#717272",
+                        fontFamily: fonts.f500,
+                        fontSize: 14,
+                      }}
+                    >
+                      {"Following"}
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => setIsFollowed(true)}
+                  >
+                    <Text
+                      style={{
+                        color: "#024BAC",
+                        //fontWeight: "800",
+                        fontFamily: fonts.f800,
+                        fontSize: 14,
+                        marginRight: 10,
+                      }}
+                    >
+                      Follow
+                    </Text>
+                  </TouchableOpacity>
+                )
+              ) : (
+                <></>
               )}
 
               <TouchableWithoutFeedback
@@ -301,7 +332,7 @@ const PredictionCard = ({
                 backgroundColor: Colors.primaryBLueLight,
                 paddingHorizontal: 6,
                 paddingVertical: 4,
-                borderRadius: 6,
+                borderRadius: scale(6),
                 marginHorizontal: 3,
               }}
             >
@@ -394,20 +425,14 @@ const PredictionCard = ({
               }}
               onPress={() => navigation.navigate(SCREENS.POST)}
             >
-              <Image
-                source={Images.comment}
-                style={{
-                  height: scale(16),
-                  width: scale(16),
-                  marginRight: 4,
-                }}
-              />
+              <Icons type={ICONS.CMNT} />
             </Pressable>
 
             <View
               style={{
                 flexDirection: "row",
                 width: "73%",
+                height: scale(26),
                 // backgroundColor: "red",
               }}
             >
@@ -418,9 +443,9 @@ const PredictionCard = ({
                       style={{
                         borderColor: "#4BB54B",
                         borderWidth: 1,
-                        paddingVertical: 7,
                         width: "50%",
                         alignItems: "center",
+                        justifyContent: "center",
                         borderRightWidth: 0,
                         backgroundColor: "#4BB54B33",
                         borderTopLeftRadius: 8,
@@ -445,9 +470,9 @@ const PredictionCard = ({
                         flex: 1,
                         borderColor: "#E33F3F",
                         borderWidth: 1,
-                        paddingVertical: 7,
                         width: "50%",
                         alignItems: "center",
+                        justifyContent: "center",
                         borderLeftWidth: 0,
                         backgroundColor: "#E33F3F1A",
                         borderTopRightRadius: 8,
@@ -769,6 +794,8 @@ const PredictionCard = ({
               backgroundColor: Colors.textRed,
               borderBottomEndRadius: scale(24),
               borderBottomStartRadius: scale(24),
+              // borderColor: Colors.textRed,
+              // borderWidth: 2,
             }}
           >
             <View style={{ flexDirection: "row", alignItems: "center" }}>
