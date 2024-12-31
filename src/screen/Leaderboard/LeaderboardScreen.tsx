@@ -10,6 +10,7 @@ import {
   Pressable,
   TouchableWithoutFeedback,
   TextInput,
+  Platform,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "../../../helper";
 import { Images } from "../../assets/images";
@@ -172,6 +173,7 @@ const LeaderboardScreen = () => {
   const [isInfo, setIsInfo] = useState(false);
   const [isInput, setIsInput] = useState(false);
   const [inputVal, setInputVal] = useState("");
+  const [pickOpen, setPickOpen] = useState(false);
   const pickerRef = useRef();
   const monthPickerRef = useRef();
   const isContentStanding = selectedOption == 4 || false;
@@ -183,11 +185,11 @@ const LeaderboardScreen = () => {
   };
 
   const openPicker = () => {
-    pickerRef.current.togglePicker(); // Toggle the picker
+    pickerRef.current.togglePicker();
   };
 
   const openMonthPicker = () => {
-    monthPickerRef.current.togglePicker(); // Toggle the picker
+    monthPickerRef.current.togglePicker();
   };
 
   const RenderEntry = ({ item }: { item: LeaderboardEntry }) => (
@@ -301,8 +303,6 @@ const LeaderboardScreen = () => {
     </TouchableWithoutFeedback>
   );
 
-  console.log(selectedOption, "kyaaa??");
-
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white" }}
@@ -351,11 +351,16 @@ const LeaderboardScreen = () => {
                     ref={pickerRef}
                     onValueChange={setSelectedOption}
                     items={dummyDates}
+                    fixAndroidTouchableBug={true}
                     placeholder={
                       {
                         // color:
                       }
                     }
+                    onClose={() => setPickOpen(false)}
+                    onOpen={() => setPickOpen(true)}
+                    // onOpen={openPicker}
+
                     useNativeAndroidPickerStyle={false}
                     style={{
                       inputIOS: {
@@ -395,6 +400,9 @@ const LeaderboardScreen = () => {
                       items={dummyMonths}
                       placeholder={{}}
                       useNativeAndroidPickerStyle={false}
+                      fixAndroidTouchableBug={true}
+                      // onOpen={openMonthPicker}
+                      // onClose={openMonthPicker}
                       style={{
                         inputIOS: {
                           color: "#101010",
@@ -422,6 +430,7 @@ const LeaderboardScreen = () => {
                       }}
                     >
                       <TouchableWithoutFeedback onPress={openMonthPicker}>
+                        {/* <Icons type={ICONS.DOWN_ARROW} /> */}
                         <Image source={Images.Chevron_down} />
                       </TouchableWithoutFeedback>
                     </View>
@@ -727,7 +736,6 @@ const styles = StyleSheet.create({
     color: "#024BAC",
     fontFamily: fonts.f700_Italic,
     fontSize: scale(15),
-    fontStyle: "italic",
   },
   accuracy: {
     fontSize: scale(14),

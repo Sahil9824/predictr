@@ -370,7 +370,11 @@ const Prediction = ({ navigation }) => {
             enableSwipeDown
           />
         </Modal>
-        <CustomCalSheet datePickerRef={calBottomRef} setDate={setDate} />
+        <CustomCalSheet
+          datePickerRef={calBottomRef}
+          setDate={setDate}
+          canSelectPastDates={false}
+        />
       </SafeAreaView>
       {/* </Animated.View> */}
     </>

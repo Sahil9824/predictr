@@ -111,7 +111,7 @@ const PredictionCard = ({
             marginVertical: 4,
             borderRadius: scale(26),
             overflow: "hidden",
-            borderWidth: 0,
+            borderWidth: 2,
             borderColor: Colors.lightGrey,
             backgroundColor: "#f0f3f5",
             ...style,
@@ -794,8 +794,6 @@ const PredictionCard = ({
               backgroundColor: Colors.textRed,
               borderBottomEndRadius: scale(24),
               borderBottomStartRadius: scale(24),
-              // borderColor: Colors.textRed,
-              // borderWidth: 2,
             }}
           >
             <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import CustomDatePicker from "../CustomDatePicker";
 import { BackHandler, Platform, StyleSheet } from "react-native";
 import { scale } from "../../../helper";
+import moment from "moment";
 
 const CustomCalSheet = ({ datePickerRef, setDate }) => {
   const { dismiss } = useBottomSheetModal();
@@ -62,6 +63,7 @@ const CustomCalSheet = ({ datePickerRef, setDate }) => {
         initialDate={dateRange}
         onDateChange={(date) => handleCustomDateChange(date)}
         closeBottomSheet={() => datePickerRef.current?.dismiss()}
+        fromDate={moment().format("YYYY-MM-DD")}
       />
     </BottomSheetModal>
   );

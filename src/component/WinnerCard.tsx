@@ -10,7 +10,7 @@ import {
 import { scale } from "../../helper";
 import { Colors, fonts } from "../constant";
 import { Images } from "../assets/images";
-import { SCREENS } from "../constant/navigation.constants";
+import { APP_NAVIGATION, SCREENS } from "../constant/navigation.constants";
 import { useNavigation } from "@react-navigation/native";
 import Icons from "./Icons";
 import { ICONS } from "../constant/icons.constants";
@@ -24,6 +24,7 @@ const WinnerCard = ({
   setWinnerHeight,
   style,
 }) => {
+  const navigation = useNavigation();
   return (
     <>
       <ImageBackground
@@ -299,7 +300,7 @@ const WinnerCard = ({
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-              // setIsSelected(2);
+              navigation.navigate(APP_NAVIGATION.LEADERBOARD);
             }}
             style={{
               width: scale(255),
