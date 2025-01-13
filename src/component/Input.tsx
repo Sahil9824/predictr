@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     paddingVertical: Platform.OS === "ios" ? 15 : 10,
   },
   error: {
-    marginTop: 5,
+    marginTop: 4,
     color: Colors.errorRed,
     fontFamily: fonts.f400,
     fontSize: scale(12),
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
   right: {
     color: Colors.validGreen,
     fontFamily: fonts.f400,
-    //fontWeight: "400",
-    fontSize: 12,
+    fontSize: scale(12),
+    marginTop: 4,
   },
   iconPress: {
     height: 40,
@@ -166,9 +166,8 @@ const styles = StyleSheet.create({
   },
   extraText: {
     fontFamily: fonts.f400,
-    //fontWeight: "400",
-    fontSize: 12,
-    marginVertical: 4,
+    fontSize: scale(12),
+    marginTop: 4,
   },
   icon: {
     height: scale(16),

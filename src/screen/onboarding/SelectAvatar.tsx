@@ -275,22 +275,32 @@ const SelectAvatar: React.FC<any> = ({ navigation }) => {
             )}
           </View>
           <View style={styles.imageSelection}>
-            <Pressable
-              onPress={() => {
-                setShowModal(true);
-              }}
+            <View
               style={{
-                height: scale(54),
-                width: scale(56),
-                borderRadius: 12,
-                backgroundColor: Colors.lightGrey,
-                justifyContent: "center",
-                alignItems: "center",
+                flexDirection: "row",
+                backgroundColor: "white",
+                zIndex: 100,
+                paddingLeft: 15,
               }}
             >
-              <Image source={Images.cameraGrey} style={styles.camera} />
-            </Pressable>
-            <View style={styles.border} />
+              <Pressable
+                onPress={() => {
+                  setShowModal(true);
+                }}
+                style={{
+                  height: scale(54),
+                  width: scale(56),
+                  borderRadius: 12,
+                  backgroundColor: Colors.lightGrey,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 100,
+                }}
+              >
+                <Image source={Images.cameraGrey} style={styles.camera} />
+              </Pressable>
+              <View style={styles.border} />
+            </View>
             <FlatList
               data={Avatars}
               renderItem={renderItem}
@@ -339,6 +349,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: Colors.white,
     paddingVertical: scale(20),
+
     // paddingHorizontal: 16,
   },
   title: {
@@ -391,7 +402,8 @@ const styles = StyleSheet.create({
   imageSelection: {
     flexDirection: "row",
     marginBottom: scale(30),
-    marginLeft: scale(15),
+    // paddingLeft: scale(15),
+    backgroundColor: "white",
   },
   camera: {
     height: scale(24),

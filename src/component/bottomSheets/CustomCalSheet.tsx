@@ -49,7 +49,7 @@ const CustomCalSheet = ({ datePickerRef, setDate }) => {
       ref={datePickerRef}
       index={0}
       enablePanDownToClose
-      snapPoints={[Platform.OS === "ios" ? 600 : 500, 600]}
+      snapPoints={[700]}
       handleIndicatorStyle={{
         width: 65,
         height: 5,

@@ -23,12 +23,27 @@ import Button from "../../component/Button";
 import { SCREENS } from "../../constant/navigation.constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useToast } from "react-native-toast-notifications";
 
 // Feedback Component
 const GiveFeedback = ({ navigation }) => {
   const [isModal, setIsModal] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [selectedRating, setSelectedRating] = useState(null);
+
+  const resetForm = () => {
+    setFeedback("");
+    setSelectedRating(null);
+  };
+
+  const handlePress = () => {
+    setIsModal(true);
+
+    setTimeout(() => {
+      navigation.goBack();
+      setIsModal(false);
+    }, 2000);
+  };
 
   const ratings = [
     { label: "Very bad", emoji: Images.Ebad, id: 1 },
@@ -101,9 +116,7 @@ const GiveFeedback = ({ navigation }) => {
               />
 
               <Button
-                onPress={() => {
-                  setIsModal(true);
-                }}
+                onPress={handlePress}
                 inActive={!feedback || !selectedRating}
                 style={styles.submitButton}
                 text="Submit Feedback"
@@ -128,7 +141,9 @@ const GiveFeedback = ({ navigation }) => {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             paddingHorizontal: 24,
           }}
-          onPress={() => setIsModal(false)}
+          onPress={() => {
+            setIsModal(false);
+          }}
         >
           <View style={styles.modalBox}>
             <Icons type={ICONS.DONE} />

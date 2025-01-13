@@ -46,6 +46,9 @@ import PopClose from "./PopClose";
 import SearchLead from "./SearchLead";
 import CrossLead from "./CrossLead";
 import Cmnt from "./Cmnt";
+import GreenTick from "./GreenTick";
+import RedCross from "./RedCross";
+import BLine from "./BLine";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -98,4 +101,7 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.SEARCH_LEAD]: SearchLead,
   [ICONS.CLOSE_LEAD]: CrossLead,
   [ICONS.CMNT]: Cmnt,
+  [ICONS.RED_CROSS]: RedCross,
+  [ICONS.GREEN_TICK]: GreenTick,
+  [ICONS.B_LINE]: BLine,
 };

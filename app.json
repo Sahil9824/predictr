@@ -1,4 +1,7 @@
 {
   "name": "predictr",
-  "displayName": "predictr"
+  "displayName": "predictr",
+  "plugins": [
+    "expo-font"
+  ]
 }

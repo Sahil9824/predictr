@@ -372,7 +372,7 @@ const DashBoard = () => {
             />
 
             {(isSelected === 1 || isSelected === 0) &&
-              [1, 2, 3, 4].map((item) => (
+              [0, 1, 2, 3, 4].map((item) => (
                 <View style={{ paddingHorizontal: 8 }} key={item}>
                   <PredictionCard
                     isFollowBtn={isSelected === 1}

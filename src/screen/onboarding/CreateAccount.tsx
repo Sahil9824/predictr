@@ -139,6 +139,7 @@ const CreateAccount = ({ navigation }: any) => {
         <KeyboardAwareScrollView
           contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <Text style={styles.title}>{"Create Account"}</Text>
           <View style={styles.inputContainer}>

@@ -478,6 +478,7 @@ const styles = StyleSheet.create({
   search: {
     marginHorizontal: scale(10),
     width: "90%",
+    fontSize: scale(13),
   },
   followContainer: {
     flexDirection: "row",

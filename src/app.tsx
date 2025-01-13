@@ -12,6 +12,7 @@ const App = () => {
     display: "flex",
     flex: 1,
   };
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

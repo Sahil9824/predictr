@@ -18,6 +18,8 @@ export const Colors = {
   textGrey: "#717272",
   textRed: "#E33F3F",
   bgGreen: "#4BB54B",
+  liveGreen: "#009700",
+  liveGreenBg: "#BAEBAE",
 };
 
 export const TAB_ICON_COLORS = {

@@ -8,6 +8,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  KeyboardAvoidingView,
 } from "react-native";
 import Button from "../../component/Button";
 import AuthHeader from "../../component/AuthHeader";
@@ -21,6 +22,7 @@ import userStore from "../../user.store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icons from "../../component/Icons";
 import { ICONS } from "../../constant/icons.constants";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // interface Props {
 //   navigation: StackNavigationProp<any, "CreateAccount">;
@@ -83,57 +85,62 @@ const Login = ({ navigation }: any) => {
       style={{ flex: 1, backgroundColor: Colors.white }}
       edges={["top", "left", "right"]}
     >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-            <Icons type={ICONS.BACKARR} />
-          </TouchableWithoutFeedback>
-          <Pressable
-            onPress={() => navigation.navigate(SCREENS.CREATE_ACCOUNT)}
-          >
-            <Text style={styles.menuText}>Create Account</Text>
-          </Pressable>
-        </View>
-        <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
-        <Text style={styles.title}>{"Login"}</Text>
-        <View style={styles.inputContainer}>
-          <Input
-            label={"Email"}
-            error={emailErr}
-            ref={emailRef}
-            autoFocus={true}
-            onSubmitEditing={() => passwordRef?.current?.focus()}
-            blurOnSubmit={false}
-            onBlur={emailValidation}
-          />
-          <Input
-            label={"Password"}
-            // error={passwordErr}
-            ref={passwordRef}
-            onBlur={passwordValidation}
-            password
-          />
-          <View
-            style={{
-              width: "100%",
-              alignItems: "flex-end",
-            }}
-          >
-            <Text
-              style={styles.resetPassword}
-              onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flex: 1 }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+              <Icons type={ICONS.BACKARR} />
+            </TouchableWithoutFeedback>
+            <Pressable
+              onPress={() => navigation.navigate(SCREENS.CREATE_ACCOUNT)}
             >
-              {"Reset Password"}
-            </Text>
+              <Text style={styles.menuText}>Create Account</Text>
+            </Pressable>
           </View>
+          <StatusBar backgroundColor={Colors.white} barStyle={"dark-content"} />
+          <Text style={styles.title}>{"Login"}</Text>
+          <View style={styles.inputContainer}>
+            <Input
+              label={"Email"}
+              error={emailErr}
+              ref={emailRef}
+              autoFocus={true}
+              onSubmitEditing={() => passwordRef?.current?.focus()}
+              blurOnSubmit={false}
+              onBlur={emailValidation}
+            />
+            <Input
+              label={"Password"}
+              // error={passwordErr}
+              ref={passwordRef}
+              onBlur={passwordValidation}
+              password
+            />
+            <View
+              style={{
+                width: "100%",
+                alignItems: "flex-end",
+              }}
+            >
+              <Text
+                style={styles.resetPassword}
+                onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
+              >
+                {"Reset Password"}
+              </Text>
+            </View>
+          </View>
+          <Button
+            text={"Login"}
+            style={styles.button}
+            onPress={submit}
+            inActive={disabled}
+          />
         </View>
-        <Button
-          text={"Login"}
-          style={styles.button}
-          onPress={submit}
-          inActive={disabled}
-        />
-      </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
