@@ -60,7 +60,6 @@ const HeaderOptions = ({
       }}
     >
       <View style={{ flexDirection: "row", width: "75%" }}>
-        {/* My Feed Pressable */}
         <Pressable
           onPress={() => setIsSelected(0)}
           style={[
@@ -94,7 +93,6 @@ const HeaderOptions = ({
           </Text>
         </Pressable>
 
-        {/* Explore Pressable */}
         <Pressable
           onPress={() => setIsSelected(1)}
           style={[
@@ -128,38 +126,6 @@ const HeaderOptions = ({
             {"Explore"}
           </Text>
         </Pressable>
-
-        {/* <Pressable
-          onPress={() => setIsSelected(2)}
-          style={[
-            {
-              justifyContent: "center",
-              paddingHorizontal: 16,
-              paddingVertical: 12,
-            },
-            isSelected === 2 && {
-              borderBottomColor: Colors.primaryBlue,
-              borderBottomWidth: 3,
-            },
-          ]}
-        >
-          <Text
-            style={[
-              {
-                fontFamily: fonts.f400,
-                fontSize: scale(15),
-                lineHeight: scale(21),
-                textAlign: "center",
-              },
-              isSelected === 2 && {
-                fontFamily: fonts.f800,
-                color: Colors.primaryBlue,
-              },
-            ]}
-          >
-            {"Contests"}
-          </Text>
-        </Pressable> */}
       </View>
 
       {/* More Options Button to open the FilterScreen */}
@@ -190,13 +156,13 @@ const DashBoard = () => {
   const navigation = useNavigation();
   const scrollY = new Animated.Value(0);
   const stickyTop = scrollY.interpolate({
-    outputRange: [-55 * 3, 0],
-    inputRange: [150, 500],
+    outputRange: [scale(-55 * 3), 0],
+    inputRange: [scale(150), scale(500)],
     extrapolate: "clamp",
   });
   const animatedOpac = scrollY.interpolate({
     outputRange: [0, 1],
-    inputRange: [500, 500],
+    inputRange: [scale(500), scale(500)],
     extrapolate: "clamp",
   });
   const scrollViewRef = useRef(null);
