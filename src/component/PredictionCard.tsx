@@ -75,28 +75,28 @@ const PredictionCard = ({
 
   // Function to handle like
   const handleLike = () => {
-    // const options = {
-    //   enableVibrateFallback: true,
-    //   ignoreAndroidSystemSettings: false,
-    // };
-    // HapticFeedback.trigger("impactLight", options);
-    // setIsResult(true);
-    // setLikeCount(73);
-    // setLiked(true);
-    // setDisliked(false);
+    const options = {
+      enableVibrateFallback: true,
+      ignoreAndroidSystemSettings: false,
+    };
+    HapticFeedback.trigger("impactLight", options);
+    setIsResult(true);
+    setLikeCount(73);
+    setLiked(true);
+    setDisliked(false);
   };
 
   // Function to handle dislike
   const handleDislike = () => {
-    // const options = {
-    //   enableVibrateFallback: true,
-    //   ignoreAndroidSystemSettings: false,
-    // };
-    // HapticFeedback.trigger("impactLight", options);
-    // setIsResult(true);
-    // setDislikeCount(27);
-    // setLiked(false);
-    // setDisliked(true);
+    const options = {
+      enableVibrateFallback: true,
+      ignoreAndroidSystemSettings: false,
+    };
+    HapticFeedback.trigger("impactLight", options);
+    setIsResult(true);
+    setDislikeCount(27);
+    setLiked(false);
+    setDisliked(true);
   };
 
   return (
@@ -432,11 +432,11 @@ const PredictionCard = ({
                 style={{
                   flexDirection: "row",
                   width: "60%",
-                  height: scale(26),
+                  height: 25,
                   alignItems: "center",
                   justifyContent: "center",
+                  paddingRight: !isResult ? scale(20) : 0,
                   gap: 16,
-                  paddingRight: scale(20),
                 }}
               >
                 {!isResult ? (
@@ -497,22 +497,14 @@ const PredictionCard = ({
                   <View
                     style={{
                       width: "100%",
+                      height: "100%",
                       flexDirection: "row",
                       alignItems: "center",
                       alignSelf: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <Text
-                      style={{
-                        fontFamily: fonts.f700,
-                        fontSize: scale(13),
-                        color: liked ? "#151B26" : "#717272",
-                        marginRight: 4,
-                      }}
-                    >
-                      {likeCount}% {liked ? "You" : ""}
-                    </Text>
+                    <Icons type={ICONS.LIKE_THUMB} />
 
                     <View
                       style={{
@@ -521,8 +513,26 @@ const PredictionCard = ({
                         backgroundColor: "#4BB54B",
                         borderRadius: 4.5,
                         flex: 1,
+                        marginLeft: 4,
+                        alignSelf: "flex-end",
                       }}
-                    ></View>
+                    >
+                      <Text
+                        style={{
+                          position: "absolute",
+                          top: scale(-16),
+                          left: 0,
+                          fontFamily: fonts.f500,
+                          fontSize: scale(11),
+                          color: "#42AB3B",
+                          marginLeft: 4,
+                          minWidth: scale(75),
+                          textAlign: "left",
+                        }}
+                      >
+                        {liked ? "1/50% (You)" : "1/50%"}
+                      </Text>
+                    </View>
 
                     <View
                       style={{
@@ -532,18 +542,37 @@ const PredictionCard = ({
                         borderTopRightRadius: 4.5,
                         borderBottomRightRadius: 4.5,
                         marginLeft: -3,
-                      }}
-                    ></View>
-                    <Text
-                      style={{
-                        fontFamily: fonts.f700,
-                        fontSize: scale(13),
-                        color: disliked ? "#151B26" : "#717272",
-                        marginLeft: 4,
+                        alignSelf: "flex-end",
+                        position: "relative",
+
+                        overflow: "visible",
                       }}
                     >
-                      {dislikeCount}% {disliked ? "You" : ""}
-                    </Text>
+                      <Text
+                        style={{
+                          position: "absolute",
+                          top: scale(-16),
+                          right: 0,
+                          fontFamily: fonts.f500,
+                          fontSize: scale(11),
+                          color: "#DC0000",
+                          marginRight: 4,
+                          minWidth: scale(75),
+                          textAlign: "right",
+                        }}
+                      >
+                        {disliked ? "1/50% (You)" : "1/50%"}
+                      </Text>
+                    </View>
+
+                    <Icons
+                      type={ICONS.LIKE_THUMB}
+                      fill="#DC0000"
+                      style={{
+                        transform: [{ rotate: "180deg" }],
+                        marginLeft: 4,
+                      }}
+                    />
                   </View>
                 )}
               </View>
@@ -576,10 +605,11 @@ const PredictionCard = ({
             <View>
               <Text
                 style={{
-                  fontFamily: fonts.f400,
-                  fontSize: scale(12),
+                  fontFamily: fonts.f700,
+                  fontSize: scale(10),
                   color: Colors.textGrey,
                   lineHeight: scale(19),
+                  textTransform: "uppercase",
                   //fontWeight: "400",
                 }}
               >
@@ -628,10 +658,11 @@ const PredictionCard = ({
               </View>
               <Text
                 style={{
-                  fontFamily: fonts.f400,
-                  fontSize: scale(12),
+                  fontFamily: fonts.f600,
+                  fontSize: scale(10),
                   color: Colors.textGrey,
                   lineHeight: scale(19),
+                  textTransform: "uppercase",
                   //fontWeight: "400",
                 }}
               >
@@ -674,11 +705,11 @@ const PredictionCard = ({
             <View>
               <Text
                 style={{
-                  fontFamily: fonts.f400,
-                  fontSize: scale(12),
+                  fontFamily: fonts.f700,
+                  fontSize: scale(10),
                   color: Colors.textGrey,
                   lineHeight: scale(19),
-                  //fontWeight: "400",
+                  textTransform: "uppercase",
                 }}
               >
                 {"Last Updated"}
@@ -786,7 +817,7 @@ const PredictionCard = ({
                     //fontWeight: "700",
                   }}
                 >
-                  {"30 % Accuracy"}
+                  {"30% Accuracy"}
                 </Text>
                 <Text
                   style={{
@@ -925,7 +956,7 @@ const PredictionCard = ({
                 borderBottomStartRadius: scale(24),
               }}
             >
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   source={Images.checkMarkWhite}
                   style={{

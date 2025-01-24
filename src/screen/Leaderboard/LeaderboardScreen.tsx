@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -303,6 +303,14 @@ const LeaderboardScreen = () => {
     </TouchableWithoutFeedback>
   );
 
+  console.log(
+    selectedMonth,
+    selectedOption,
+
+    selectedMonth == dummyMonths[0]?.value &&
+      selectedOption == dummyDates[3]?.value
+  );
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white" }}
@@ -320,20 +328,19 @@ const LeaderboardScreen = () => {
         >
           <View style={styles.headerContainer}>
             <Text style={styles.headerText}>Leaderboard</Text>
-            {selectedMonth == dummyMonths[0]?.value &&
-              selectedOption == dummyDates[3]?.value && (
-                <View style={styles.rankLabel}>
-                  <View
-                    style={{
-                      height: 9,
-                      width: 9,
-                      borderRadius: 4.5,
-                      backgroundColor: "#E33F3F",
-                    }}
-                  ></View>
-                  <Text style={styles.rankText}>Live Contest</Text>
-                </View>
-              )}
+            {selectedMonth == 1 && selectedOption == 4 && (
+              <View style={styles.rankLabel}>
+                <View
+                  style={{
+                    height: 9,
+                    width: 9,
+                    borderRadius: 4.5,
+                    backgroundColor: "#E33F3F",
+                  }}
+                ></View>
+                <Text style={styles.rankText}>Live Contest</Text>
+              </View>
+            )}
           </View>
         </View>
         <View style={styles.topBox}>

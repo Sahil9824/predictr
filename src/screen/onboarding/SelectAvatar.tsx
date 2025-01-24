@@ -406,8 +406,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   camera: {
-    height: scale(24),
-    width: scale(26),
+    height: scale(32),
+    width: scale(32),
   },
   avatar: {
     height: scale(54),

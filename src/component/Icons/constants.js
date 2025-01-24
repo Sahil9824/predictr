@@ -49,6 +49,7 @@ import Cmnt from "./Cmnt";
 import GreenTick from "./GreenTick";
 import RedCross from "./RedCross";
 import BLine from "./BLine";
+import LikeThumb from "./LikeThumb";
 
 import { ICONS } from "../../constant/icons.constants";
 
@@ -104,4 +105,5 @@ export const ICON_NAME_VS_CMP = {
   [ICONS.RED_CROSS]: RedCross,
   [ICONS.GREEN_TICK]: GreenTick,
   [ICONS.B_LINE]: BLine,
+  [ICONS.LIKE_THUMB]: LikeThumb,
 };

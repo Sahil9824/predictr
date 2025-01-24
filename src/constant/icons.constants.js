@@ -50,4 +50,5 @@ export const ICONS = {
   GREEN_TICK: "GREEN_TICK",
   RED_CROSS: "RED_CROSS",
   B_LINE: "B_LINE",
+  LIKE_THUMB: "LIKE_THUMB",
 };

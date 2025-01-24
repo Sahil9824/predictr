@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#00000020",
     marginBottom: 34,
+    alignItems: "center",
   },
   menuText: {
     fontFamily: fonts.f600,
