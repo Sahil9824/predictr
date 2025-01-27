@@ -303,12 +303,17 @@ const LeaderboardScreen = () => {
     </TouchableWithoutFeedback>
   );
 
+  useEffect(() => {
+    // if (selectedOption !== 4) return;
+
+    setSelectedMonth(1);
+  }, [selectedOption]);
+
   console.log(
     selectedMonth,
     selectedOption,
 
-    selectedMonth == dummyMonths[0]?.value &&
-      selectedOption == dummyDates[3]?.value
+    selectedMonth == 1 && selectedOption == 4
   );
 
   return (

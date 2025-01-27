@@ -177,18 +177,6 @@ const PredictionCard = ({
                       {"Nikunj Maniya"}{" "}
                     </Text>
                   </TouchableWithoutFeedback>
-                  <Text
-                    style={{
-                      fontFamily: fonts.f500,
-                      //fontWeight: "400",
-
-                      fontSize: scale(12),
-                      lineHeight: scale(15),
-                      color: "#717272",
-                    }}
-                  >
-                    {"40.3%"}
-                  </Text>
                 </View>
                 <Text>{"2 hours ago"}</Text>
               </View>
@@ -431,7 +419,7 @@ const PredictionCard = ({
               <View
                 style={{
                   flexDirection: "row",
-                  width: "60%",
+                  width: "75%",
                   height: 25,
                   alignItems: "center",
                   justifyContent: "center",
@@ -710,6 +698,7 @@ const PredictionCard = ({
                   color: Colors.textGrey,
                   lineHeight: scale(19),
                   textTransform: "uppercase",
+                  textAlign: "right",
                 }}
               >
                 {"Last Updated"}
@@ -720,6 +709,8 @@ const PredictionCard = ({
                   fontSize: scale(15),
                   lineHeight: 19,
                   color: Colors.textBlack,
+                  textAlign: "right",
+
                   //fontWeight: "700",
                 }}
               >
@@ -730,6 +721,7 @@ const PredictionCard = ({
                   fontFamily: fonts.f400,
                   fontSize: scale(12),
                   color: Colors.textGrey,
+                  textAlign: "right",
                   //fontWeight: "400",
                 }}
               >
